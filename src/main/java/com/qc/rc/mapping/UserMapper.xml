@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qc.rc.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.qc.rc.entity.User">
+    <constructor>
+      <idArg column="USER_ID" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="USER_ACCOUNT" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="USER_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="USER_PASSWORD" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="USER_SEX" javaType="java.lang.Short" jdbcType="DECIMAL" />
+      <arg column="USER_AGE" javaType="java.lang.Short" jdbcType="DECIMAL" />
+      <arg column="CREATE_DATE" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="UPDATE_DATE" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="DETELET_FLAG" javaType="java.lang.Short" jdbcType="DECIMAL" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    USER_ID, USER_ACCOUNT, USER_NAME, USER_PASSWORD, USER_SEX, USER_AGE, CREATE_DATE, 
+    UPDATE_DATE, DETELET_FLAG
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from RM_USER
+    where USER_ID = #{userId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from RM_USER
+    where USER_ID = #{userId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.qc.rc.entity.User">
+    insert into RM_USER (USER_ID,USER_ACCOUNT, USER_NAME, 
+      USER_PASSWORD, USER_SEX, USER_AGE
+      )
+    values (USER_DEPART.Nextval,#{userAccount,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+			#{userPassword,jdbcType=VARCHAR}, #{userSex,jdbcType=DECIMAL}, #{userAge,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qc.rc.entity.User">
+    insert into RM_USER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="userAccount != null">
+        USER_ACCOUNT,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="userPassword != null">
+        USER_PASSWORD,
+      </if>
+      <if test="userSex != null">
+        USER_SEX,
+      </if>
+      <if test="userAge != null">
+        USER_AGE,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+      <if test="deteletFlag != null">
+        DETELET_FLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="userAccount != null">
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null">
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        #{userSex,jdbcType=DECIMAL},
+      </if>
+      <if test="userAge != null">
+        #{userAge,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="deteletFlag != null">
+        #{deteletFlag,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qc.rc.entity.User">
+    update RM_USER
+    <set>
+      <if test="userAccount != null">
+        USER_ACCOUNT = #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null">
+        USER_PASSWORD = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        USER_SEX = #{userSex,jdbcType=DECIMAL},
+      </if>
+      <if test="userAge != null">
+        USER_AGE = #{userAge,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=DATE},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="deteletFlag != null">
+        DETELET_FLAG = #{deteletFlag,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qc.rc.entity.User">
+    update RM_USER
+    set USER_ACCOUNT = #{userAccount,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      USER_PASSWORD = #{userPassword,jdbcType=VARCHAR},
+      USER_SEX = #{userSex,jdbcType=DECIMAL},
+      USER_AGE = #{userAge,jdbcType=DECIMAL},
+      CREATE_DATE = #{createDate,jdbcType=DATE},
+      UPDATE_DATE = #{updateDate,jdbcType=DATE},
+      DETELET_FLAG = #{deteletFlag,jdbcType=DECIMAL}
+    where USER_ID = #{userId,jdbcType=DECIMAL}
+  </update>
+  
+    <select id="login" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select * from RM_USER where USER_ACCOUNT=#{userAccount}
+ 	</select>
+</mapper>
