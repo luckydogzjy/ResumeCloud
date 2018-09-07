@@ -36,7 +36,7 @@
 				<td>${resume.resumeEducation }</td>
 				<td>${resume.resumeJobIntension }</td>
 				<td>${resume.resumeCreateTime }</td>
-				<td></td>
+				<td>还没有</td>
 				<td></td>
 			</tr>
 				
