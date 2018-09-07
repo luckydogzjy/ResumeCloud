@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qc.rc.dao.ResumeMapper">
+  <resultMap id="ResumeMap" type="com.qc.rc.entity.Resume">
+    <constructor>
+      <idArg column="RESUME_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="RESUME_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="RESUME_SEX" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="RESUME_BIRTHDAY" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="RESUME_PHONE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="RESUME_EMAIL" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="RESUME_ADDRESS" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="RESUME_GRADUATE_INSTITUTION" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="RESUME_EDUCATION" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="RESUME_JOB_INTENSION" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="RESUME_SELF_EVALUATION" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="RESUME_WORK_EXPERIENCE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="RESUME_WORK_YEARS" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="RESUME_PIC_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="RESUME_FILE_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="RESUME_CREATE_USER" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="RESUME_CREATE_TIME" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="RESUME_UPDATE_USER" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="RESUME_UPDATE_TIME" javaType="java.util.Date" jdbcType="DATE" /> 
+      <arg column="RESUME_DELETE_FLAG" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  <sql id="ResumeList">
+    RESUME_ID, RESUME_NAME, RESUME_SEX, RESUME_BIRTHDAY, RESUME_PHONE, RESUME_EMAIL, RESUME_ADDRESS, 
+    RESUME_GRADUATE_INSTITUTION, RESUME_EDUCATION
+  </sql>
+  
+  
+  
+    <select id="getAllResume" resultMap="ResumeMap" >
+    select * from RC_RESUME
+ 	</select>
+</mapper>
