@@ -1,5 +1,6 @@
 package com.qc.rc.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,24 +15,92 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.qc.rc.common.FormParameterUtil;
 import com.qc.rc.entity.Resume;
+import com.qc.rc.entity.pojo.ResumePojo;
 import com.qc.rc.service.ResumeService;
 
 @Controller
+
 public class ResumeController {
 
 	@Autowired 
 	private ResumeService resumeService;
 	
 	@RequestMapping("/resumeDisplay.do")
-	public ModelAndView ResumeDisplay(HttpServletRequest request,  HttpServletResponse response){
+	public ModelAndView resumeDisplay(HttpServletRequest request,  HttpServletResponse response){
 		
-		List<Resume> list = resumeService.getAllResume();
-		HttpSession session = request.getSession();
+		List<ResumePojo> list = resumeService.getAllResume();
+		//HttpSession session = request.getSession();
 		
-		session.setAttribute("resumeList", list);
+	//	session.setAttribute("resumeList", list);
 		Map<String,Object> model = new HashMap<String,Object>(); 
+		model.put("resumeList", list);
 		return new ModelAndView("resumeDisplay",model);
 		
 	}
+	
+	@RequestMapping("/getResumeListByCondition.do")
+	public ModelAndView getResumeListByCondition(HttpServletRequest request) {
+		
+
+		String resumeName = null;
+		String resumeJobIntension = null;
+		//性别
+		String resumeSexStr = request.getParameter("resumeSex");
+		Integer resumeSex = Integer.valueOf(resumeSexStr);
+		
+		String resumeEducationStr = request.getParameter("resumeEducation");
+		Integer resumeEducation = Integer.valueOf(resumeEducationStr);
+		
+		String resumeWorkYearsStr = request.getParameter("resumeWorkYears");
+		Integer resumeWorkYears = Integer.valueOf(resumeWorkYearsStr);
+		
+		String resumeGraduateInstitution = null;
+		
+		try {
+			resumeGraduateInstitution = FormParameterUtil.changeCode(request.getParameter("resumeGraduateInstitution"));
+			resumeName = FormParameterUtil.changeCode(request.getParameter("resumeName"));
+			resumeJobIntension = FormParameterUtil.changeCode(request.getParameter("resumeJobIntension"));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+		System.out.println(resumeName);
+		System.out.println(resumeJobIntension);
+		System.out.println(resumeSex);
+		System.out.println(resumeEducation);
+		System.out.println(resumeWorkYears);
+		System.out.println(resumeGraduateInstitution);
+		
+		List<ResumePojo> list = resumeService.getResumeListByCondition(resumeName, resumeJobIntension, resumeSex, resumeEducation, resumeWorkYears, resumeGraduateInstitution);
+		
+		System.out.println("getResumeListByCondition里得到的list长度为" + list.size());
+		
+		Map<String,Object> model = new HashMap<String,Object>(); 
+		model.put("resumeList", list);
+		
+		return new ModelAndView("resumeDisplay",model);
+		
+	}
+	
+	@RequestMapping("/resumeDetails.do")
+	public ModelAndView resumeDetails(HttpServletRequest request,  HttpServletResponse response){
+		
+		String resumeId = request.getParameter("ResumeId");
+				
+		System.out.println("1111");
+		
+		System.out.println(resumeId);
+		
+		System.out.println("2222");
+		
+		Map<String,Object> model = new HashMap<String,Object>(); 
+		return new ModelAndView("resumeDetails",model);
+		
+	}
+	
+	
 }

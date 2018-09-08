@@ -12,103 +12,17 @@ public class Resume {
 	private String resumeEmail;
 	private String resumeAddress;
 	private String resumeGraduateInstitution; 	//毕业院校
-	private String resumeEducation;			  	//学历
+	private Integer resumeEducation;			  	//学历
 	private String resumeJobIntension;		    //求职意向
 	private String resumeSelfEvaluation;		//自我评价
 	private String resumeWorkExperience;		//工作经验
-	private Integer resumeWorkYears;			//工作年限
-	
-	private Integer resumePicId;				//图片
-	private Integer resumeFileId;				//文件
-	
-	
+	private Integer resumeWorkYears;			//工作年
+		
 	private String resumeCreateUser;
 	private Date resumeCreateTime; 
 	private String resumeUpdateUser;
 	private Date resumeUpdateTime; 
 	private Integer resumeDeleteFlag;
-	
-	
-	
-	public String getResumeCreateUser() {
-		return resumeCreateUser;
-	}
-	public void setResumeCreateUser(String resumeCreateUser) {
-		this.resumeCreateUser = resumeCreateUser;
-	}
-	/**
-	 * @param resumeId
-	 * @param resumeName
-	 * @param resumeSex
-	 * @param resumeBirthday
-	 * @param resumePhone
-	 * @param resumeEmail
-	 * @param resumeAddress
-	 * @param resumeGraduateInstitution
-	 * @param resumeEducation
-	 * @param resumeJobIntension
-	 * @param resumeSelfEvaluation
-	 * @param resumeWorkExperience
-	 * @param resumeWorkYears
-	 * @param resumePicId
-	 * @param resumeFileId
-	 * @param resumeCreateUser
-	 * @param resumeCreateTime
-	 * @param resumeUpdateUser
-	 * @param resumeUpdateTime
-	 * @param resumeDeleteFlag
-	 */
-	public Resume(Integer resumeId, String resumeName, Integer resumeSex, Date resumeBirthday, String resumePhone,
-			String resumeEmail, String resumeAddress, String resumeGraduateInstitution, String resumeEducation,
-			String resumeJobIntension, String resumeSelfEvaluation, String resumeWorkExperience,
-			Integer resumeWorkYears, Integer resumePicId, Integer resumeFileId, String resumeCreateUser,
-			Date resumeCreateTime, String resumeUpdateUser, Date resumeUpdateTime, Integer resumeDeleteFlag) {
-		super();
-		this.resumeId = resumeId;
-		this.resumeName = resumeName;
-		this.resumeSex = resumeSex;
-		this.resumeBirthday = resumeBirthday;
-		this.resumePhone = resumePhone;
-		this.resumeEmail = resumeEmail;
-		this.resumeAddress = resumeAddress;
-		this.resumeGraduateInstitution = resumeGraduateInstitution;
-		this.resumeEducation = resumeEducation;
-		this.resumeJobIntension = resumeJobIntension;
-		this.resumeSelfEvaluation = resumeSelfEvaluation;
-		this.resumeWorkExperience = resumeWorkExperience;
-		this.resumeWorkYears = resumeWorkYears;
-		this.resumePicId = resumePicId;
-		this.resumeFileId = resumeFileId;
-		this.resumeCreateUser = resumeCreateUser;
-		this.resumeCreateTime = resumeCreateTime;
-		this.resumeUpdateUser = resumeUpdateUser;
-		this.resumeUpdateTime = resumeUpdateTime;
-		this.resumeDeleteFlag = resumeDeleteFlag;
-	}
-	public Date getResumeCreateTime() {
-		return resumeCreateTime;
-	}
-	public void setResumeCreateTime(Date resumeCreateTime) {
-		this.resumeCreateTime = resumeCreateTime;
-	}
-	public String getResumeUpdateUser() {
-		return resumeUpdateUser;
-	}
-	public void setResumeUpdateUser(String resumeUpdateUser) {
-		this.resumeUpdateUser = resumeUpdateUser;
-	}
-	public Date getResumeUpdateTime() {
-		return resumeUpdateTime;
-	}
-	public void setResumeUpdateTime(Date resumeUpdateTime) {
-		this.resumeUpdateTime = resumeUpdateTime;
-	}
-	public Integer getResumeDeleteFlag() {
-		return resumeDeleteFlag;
-	}
-	public void setResumeDeleteFlag(Integer resumeDeleteFlag) {
-		this.resumeDeleteFlag = resumeDeleteFlag;
-	}
 	public Integer getResumeId() {
 		return resumeId;
 	}
@@ -120,6 +34,12 @@ public class Resume {
 	}
 	public void setResumeName(String resumeName) {
 		this.resumeName = resumeName;
+	}
+	public Integer getResumeSex() {
+		return resumeSex;
+	}
+	public void setResumeSex(Integer resumeSex) {
+		this.resumeSex = resumeSex;
 	}
 	public Date getResumeBirthday() {
 		return resumeBirthday;
@@ -151,10 +71,10 @@ public class Resume {
 	public void setResumeGraduateInstitution(String resumeGraduateInstitution) {
 		this.resumeGraduateInstitution = resumeGraduateInstitution;
 	}
-	public String getResumeEducation() {
+	public Integer getResumeEducation() {
 		return resumeEducation;
 	}
-	public void setResumeEducation(String resumeEducation) {
+	public void setResumeEducation(Integer resumeEducation) {
 		this.resumeEducation = resumeEducation;
 	}
 	public String getResumeJobIntension() {
@@ -181,23 +101,86 @@ public class Resume {
 	public void setResumeWorkYears(Integer resumeWorkYears) {
 		this.resumeWorkYears = resumeWorkYears;
 	}
-	public Integer getResumePicId() {
-		return resumePicId;
+	
+	public String getResumeCreateUser() {
+		return resumeCreateUser;
 	}
-	public void setResumePicId(Integer resumePicId) {
-		this.resumePicId = resumePicId;
+	public void setResumeCreateUser(String resumeCreateUser) {
+		this.resumeCreateUser = resumeCreateUser;
 	}
-	public Integer getResumeFileId() {
-		return resumeFileId;
+	public Date getResumeCreateTime() {
+		return resumeCreateTime;
 	}
-	public void setResumeFileId(Integer resumeFileId) {
-		this.resumeFileId = resumeFileId;
+	public void setResumeCreateTime(Date resumeCreateTime) {
+		this.resumeCreateTime = resumeCreateTime;
 	}
-	public Integer getResumeSex() {
-		return resumeSex;
+	public String getResumeUpdateUser() {
+		return resumeUpdateUser;
 	}
-	public void setResumeSex(Integer resumeSex) {
+	public void setResumeUpdateUser(String resumeUpdateUser) {
+		this.resumeUpdateUser = resumeUpdateUser;
+	}
+	public Date getResumeUpdateTime() {
+		return resumeUpdateTime;
+	}
+	public void setResumeUpdateTime(Date resumeUpdateTime) {
+		this.resumeUpdateTime = resumeUpdateTime;
+	}
+	public Integer getResumeDeleteFlag() {
+		return resumeDeleteFlag;
+	}
+	public void setResumeDeleteFlag(Integer resumeDeleteFlag) {
+		this.resumeDeleteFlag = resumeDeleteFlag;
+	}
+
+	
+	/**
+	 * @param resumeId
+	 * @param resumeName
+	 * @param resumeSex
+	 * @param resumeBirthday
+	 * @param resumePhone
+	 * @param resumeEmail
+	 * @param resumeAddress
+	 * @param resumeGraduateInstitution
+	 * @param resumeEducation
+	 * @param resumeJobIntension
+	 * @param resumeSelfEvaluation
+	 * @param resumeWorkExperience
+	 * @param resumeWorkYears
+	 * @param resumeCreateUser
+	 * @param resumeCreateTime
+	 * @param resumeUpdateUser
+	 * @param resumeUpdateTime
+	 * @param resumeDeleteFlag
+	 */
+	public Resume(Integer resumeId, String resumeName, Integer resumeSex, Date resumeBirthday, String resumePhone,
+			String resumeEmail, String resumeAddress, String resumeGraduateInstitution, Integer resumeEducation,
+			String resumeJobIntension, String resumeSelfEvaluation, String resumeWorkExperience,
+			Integer resumeWorkYears, String resumeCreateUser, Date resumeCreateTime, String resumeUpdateUser,
+			Date resumeUpdateTime, Integer resumeDeleteFlag) {
+		super();
+		this.resumeId = resumeId;
+		this.resumeName = resumeName;
 		this.resumeSex = resumeSex;
+		this.resumeBirthday = resumeBirthday;
+		this.resumePhone = resumePhone;
+		this.resumeEmail = resumeEmail;
+		this.resumeAddress = resumeAddress;
+		this.resumeGraduateInstitution = resumeGraduateInstitution;
+		this.resumeEducation = resumeEducation;
+		this.resumeJobIntension = resumeJobIntension;
+		this.resumeSelfEvaluation = resumeSelfEvaluation;
+		this.resumeWorkExperience = resumeWorkExperience;
+		this.resumeWorkYears = resumeWorkYears;
+		this.resumeCreateUser = resumeCreateUser;
+		this.resumeCreateTime = resumeCreateTime;
+		this.resumeUpdateUser = resumeUpdateUser;
+		this.resumeUpdateTime = resumeUpdateTime;
+		this.resumeDeleteFlag = resumeDeleteFlag;
+	}
+	public Resume(){
+		super();
 	}
 	
 }

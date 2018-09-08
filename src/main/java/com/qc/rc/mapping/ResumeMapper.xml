@@ -1,38 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qc.rc.dao.ResumeMapper">
-  <resultMap id="ResumeMap" type="com.qc.rc.entity.Resume">
-    <constructor>
-      <idArg column="RESUME_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="RESUME_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="RESUME_SEX" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="RESUME_BIRTHDAY" javaType="java.util.Date" jdbcType="DATE" />
-      <arg column="RESUME_PHONE" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="RESUME_EMAIL" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="RESUME_ADDRESS" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="RESUME_GRADUATE_INSTITUTION" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="RESUME_EDUCATION" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="RESUME_JOB_INTENSION" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="RESUME_SELF_EVALUATION" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="RESUME_WORK_EXPERIENCE" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="RESUME_WORK_YEARS" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="RESUME_PIC_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="RESUME_FILE_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="RESUME_CREATE_USER" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="RESUME_CREATE_TIME" javaType="java.util.Date" jdbcType="DATE" />
-      <arg column="RESUME_UPDATE_USER" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="RESUME_UPDATE_TIME" javaType="java.util.Date" jdbcType="DATE" /> 
-      <arg column="RESUME_DELETE_FLAG" javaType="java.lang.Integer" jdbcType="INTEGER" />
-    </constructor>
-  </resultMap>
-  <sql id="ResumeList">
-    RESUME_ID, RESUME_NAME, RESUME_SEX, RESUME_BIRTHDAY, RESUME_PHONE, RESUME_EMAIL, RESUME_ADDRESS, 
-    RESUME_GRADUATE_INSTITUTION, RESUME_EDUCATION
-  </sql>
-  
-  
-  
-    <select id="getAllResume" resultMap="ResumeMap" >
-    select * from RC_RESUME
- 	</select>
+	<resultMap id="ResumeMap" type="com.qc.rc.entity.Resume">
+		<constructor>
+			<idArg column="RESUME_ID" javaType="java.lang.Integer"
+				jdbcType="INTEGER" />
+			<arg column="RESUME_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+			<arg column="RESUME_SEX" javaType="java.lang.Integer" jdbcType="INTEGER" />
+			<arg column="RESUME_BIRTHDAY" javaType="java.util.Date" jdbcType="DATE" />
+			<arg column="RESUME_PHONE" javaType="java.lang.String" jdbcType="VARCHAR" />
+			<arg column="RESUME_EMAIL" javaType="java.lang.String" jdbcType="VARCHAR" />
+			<arg column="RESUME_ADDRESS" javaType="java.lang.String"
+				jdbcType="VARCHAR" />
+			<arg column="RESUME_GRADUATE_INSTITUTION" javaType="java.lang.String"
+				jdbcType="VARCHAR" />
+			<arg column="RESUME_EDUCATION" javaType="java.lang.Integer"
+				jdbcType="INTEGER" />
+			<arg column="RESUME_JOB_INTENSION" javaType="java.lang.String"
+				jdbcType="VARCHAR" />
+			<arg column="RESUME_SELF_EVALUATION" javaType="java.lang.String"
+				jdbcType="VARCHAR" />
+			<arg column="RESUME_WORK_EXPERIENCE" javaType="java.lang.String"
+				jdbcType="VARCHAR" />
+			<arg column="RESUME_WORK_YEARS" javaType="java.lang.Integer"
+				jdbcType="INTEGER" />
+			<arg column="RESUME_PIC_ID" javaType="java.lang.Integer"
+				jdbcType="INTEGER" />
+			<arg column="RESUME_FILE_ID" javaType="java.lang.Integer"
+				jdbcType="INTEGER" />
+			<arg column="RESUME_CREATE_USER" javaType="java.lang.String"
+				jdbcType="VARCHAR" />
+			<arg column="RESUME_CREATE_TIME" javaType="java.util.Date"
+				jdbcType="DATE" />
+			<arg column="RESUME_UPDATE_USER" javaType="java.lang.String"
+				jdbcType="VARCHAR" />
+			<arg column="RESUME_UPDATE_TIME" javaType="java.util.Date"
+				jdbcType="DATE" />
+			<arg column="RESUME_DELETE_FLAG" javaType="java.lang.Integer"
+				jdbcType="INTEGER" />
+		</constructor>
+	</resultMap>
+	<sql id="ResumeList">
+		RESUME_ID, RESUME_NAME, RESUME_SEX, RESUME_BIRTHDAY, RESUME_PHONE, RESUME_EMAIL,
+		RESUME_ADDRESS,
+		RESUME_GRADUATE_INSTITUTION, RESUME_EDUCATION
+	</sql>
+
+
+	<resultMap type="com.qc.rc.entity.pojo.ResumePojo" id="getResumeList">
+
+		<id column="RESUME_ID" property="resumeId"></id>
+		<result column="RESUME_NAME" property="resumeName"></result>
+		<result column="RESUME_SEX" property="resumeSex"></result>
+		<result column="RESUME_PHONE" property="resumePhone"></result>
+		<result column="RESUME_WORK_YEARS" property="resumeWorkYears"></result>
+		<result column="RESUME_GRADUATE_INSTITUTION" property="resumeGraduateInstitution"></result>
+		<result column="RESUME_EDUCATION" property="resumeEducation"></result>
+		<result column="RESUME_JOB_INTENSION" property="resumeJobIntension"></result>
+		<result column="RESUME_CREATE_TIME" property="resumeCreateTime"></result>
+
+		<association property="interview" javaType="com.qc.rc.entity.Interview">
+			<id column="INTERVIEW_ID" property="interviewId"></id>
+			<result column="INTERVIEW_STATUS" property="interviewStatus"></result>
+		</association>
+		
+	</resultMap>
+	
+	<select id="getAllResume" resultMap="getResumeList">
+		SELECT
+		RESUME_ID,RESUME_NAME,RESUME_SEX,RESUME_PHONE,RESUME_WORK_YEARS,RESUME_GRADUATE_INSTITUTION,
+		RESUME_EDUCATION,RESUME_JOB_INTENSION,RESUME_CREATE_TIME,INTERVIEW_ID,INTERVIEW_STATUS
+		FROM RC_RESUME,RC_INTERVIEW
+		WHERE RC_RESUME.RESUME_ID = RC_INTERVIEW.INTERVIEW_RESUME_ID
+	</select>
+	
+	
+	
+	
+	<select id="getResumeListByCondition" resultMap="getResumeList">
+		SELECT
+		RESUME_ID,RESUME_NAME,RESUME_SEX,RESUME_PHONE,RESUME_WORK_YEARS,RESUME_GRADUATE_INSTITUTION,
+		RESUME_EDUCATION,RESUME_JOB_INTENSION,RESUME_CREATE_TIME,INTERVIEW_ID,INTERVIEW_STATUS
+		FROM RC_RESUME,RC_INTERVIEW
+		<where>
+			<if test="resumeName != null and  resumeName !='' ">
+				AND RESUME_NAME = #{resumeName}
+			</if>
+			<if test="resumeJobIntension != null and  resumeJobIntension != '' ">
+				AND RESUME_JOB_INTENSION = #{resumeJobIntension}
+			</if>
+			<if test="resumeSex != -1">
+				AND RESUME_SEX = #{resumeSex}
+			</if>
+			<if test="resumeEducation != -1">
+				AND RESUME_EDUCATION = #{resumeEducation}
+			</if>
+			
+			<if test="resumeWorkYears == 0">
+				AND RESUME_WORK_YEARS &gt;= 0 AND RESUME_WORK_YEARS &lt; 3
+			</if>
+			<if test="resumeWorkYears == 1">
+				AND RESUME_WORK_YEARS &gt;= 3 AND RESUME_WORK_YEARS &lt; 5
+			</if>
+			<if test="resumeWorkYears == 2">
+				AND RESUME_WORK_YEARS &gt;= 5 AND RESUME_WORK_YEARS &lt; 10
+			</if>
+			<if test="resumeWorkYears == 3">
+				AND RESUME_WORK_YEARS &gt;= 10
+			</if>
+			
+			<if test="resumeGraduateInstitution != null and  resumeGraduateInstitution != '' ">
+				AND RESUME_GRADUATE_INSTITUTION = #{resumeGraduateInstitution}
+			</if>
+			AND RC_RESUME.RESUME_ID = RC_INTERVIEW.INTERVIEW_RESUME_ID
+		</where>
+	</select>
+	
+
+		
+<!-- 	<select id="getResumeDetailsById" resultMap="">
+		SELECT
+		RESUME_ID,RESUME_NAME,RESUME_SEX,RESUME_PHONE,RESUME_WORK_YEARS,RESUME_GRADUATE_INSTITUTION,
+		RESUME_EDUCATION,RESUME_JOB_INTENSION,RESUME_CREATE_TIME,INTERVIEW_ID,INTERVIEW_STATUS
+		FROM RC_RESUME,RC_INTERVIEW
+		WHERE RESUME_ID = RC_INTERVIEW.INTERVIEW_RESUME_ID
+	</select> -->
 </mapper>
