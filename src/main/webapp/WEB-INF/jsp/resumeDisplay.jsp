@@ -115,14 +115,35 @@
 					<c:if test="${resume.interview.interviewStatus == 3}">
 						失败
 					</c:if>
+	<%-- 				<c:if test="${resume.interview.interviewStatus != 1 
+									&& resume.interview.interviewStatus != 2 
+										&& resume.interview.interviewStatus != 3}">
+						未安排面试
+					</c:if> --%>
+					
+					<c:if test="${resume.interview.interviewStatus == null}">
+						未安排面试
+					</c:if>
 					
 				</td>
 				
 				<td>
 					<input type="button" value="修改"/>
 					<input type="button" value="删除"/>
-					<input type="button" value="面试"/>
+					<!-- 如果面试情况为待面试，则面试按钮不可点 -->
+					<c:if test="${resume.interview.interviewStatus == 2}">
+						<input type="button" value="待面试" disabled="disabled"/>
+					</c:if>
+					<c:if test="${resume.interview.interviewStatus != 2}">
+						<input type="button" value="面试"/>
+					</c:if>
+					
+					<!-- 如果简历是自己录入的(0),并且没有没有被共享过(0) 则按钮为共享 -->
+					<c:if test="resume.">
+					
+					</c:if>
 					<input type="button" value="分享"/>
+					
 				</td>
 			</tr>
 				

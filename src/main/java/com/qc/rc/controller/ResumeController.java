@@ -27,13 +27,24 @@ public class ResumeController {
 	@Autowired 
 	private ResumeService resumeService;
 	
+	//正常应该在session里得到登录人的userId
+	//这里只做测试
+	public static Integer userId = 1;
+	
 	@RequestMapping("/resumeDisplay.do")
 	public ModelAndView resumeDisplay(HttpServletRequest request,  HttpServletResponse response){
 		
-		List<ResumePojo> list = resumeService.getAllResume();
+		
+		
+		List<ResumePojo> list = resumeService.getAllResume(userId);
 		//HttpSession session = request.getSession();
 		
 	//	session.setAttribute("resumeList", list);
+		
+//		for (ResumePojo resumePojo : list) {
+//			System.out.println(resumePojo.getInterview().getInterviewStatus());
+//		}
+		
 		Map<String,Object> model = new HashMap<String,Object>(); 
 		model.put("resumeList", list);
 		return new ModelAndView("resumeDisplay",model);
@@ -75,7 +86,7 @@ public class ResumeController {
 		System.out.println(resumeWorkYears);
 		System.out.println(resumeGraduateInstitution);
 		
-		List<ResumePojo> list = resumeService.getResumeListByCondition(resumeName, resumeJobIntension, resumeSex, resumeEducation, resumeWorkYears, resumeGraduateInstitution);
+		List<ResumePojo> list = resumeService.getResumeListByCondition(userId,resumeName, resumeJobIntension, resumeSex, resumeEducation, resumeWorkYears, resumeGraduateInstitution);
 		
 		System.out.println("getResumeListByCondition里得到的list长度为" + list.size());
 		
@@ -100,7 +111,6 @@ public class ResumeController {
 		Map<String,Object> model = new HashMap<String,Object>(); 
 		return new ModelAndView("resumeDetails",model);
 		
-	}
-	
+	}	
 	
 }

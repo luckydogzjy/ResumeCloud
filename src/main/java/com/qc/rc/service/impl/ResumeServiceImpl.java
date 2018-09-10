@@ -18,9 +18,9 @@ public class ResumeServiceImpl implements ResumeService {
 	private ResumeMapper resumeMapper;
 	
 	
-	public List<ResumePojo> getAllResume() {
+	public List<ResumePojo> getAllResume(Integer userId) {
 		
-		List<ResumePojo> list = resumeMapper.getAllResume();
+		List<ResumePojo> list = resumeMapper.getAllResume(userId);
 		
 		System.out.println("ResumeServiceImpl:::" + list.size());
 		
@@ -29,10 +29,10 @@ public class ResumeServiceImpl implements ResumeService {
 
 
 	
-	public List<ResumePojo> getResumeListByCondition(String resumeName, String resumeJobIntension, Integer resumeSex,
+	public List<ResumePojo> getResumeListByCondition(Integer userId,String resumeName, String resumeJobIntension, Integer resumeSex,
 			Integer resumeEducation, Integer resumeWorkYears, String resumeGraduateInstitution) {
 		
-		List<ResumePojo> list = resumeMapper.getResumeListByCondition(resumeName, resumeJobIntension, resumeSex, resumeEducation, resumeWorkYears, resumeGraduateInstitution);
+		List<ResumePojo> list = resumeMapper.getResumeListByCondition(userId,resumeName, resumeJobIntension, resumeSex, resumeEducation, resumeWorkYears, resumeGraduateInstitution);
 		
 		System.out.println("ResumeServiceImpl->getResumeListByCondition :::" + list.size());
 		

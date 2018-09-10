@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qc.rc.dao.ResumeMapper">
-	<resultMap id="ResumeMap" type="com.qc.rc.entity.Resume">
+<!-- 	<resultMap id="ResumeMap" type="com.qc.rc.entity.Resume">
 		<constructor>
 			<idArg column="RESUME_ID" javaType="java.lang.Integer"
 				jdbcType="INTEGER" />
@@ -44,7 +44,7 @@
 		RESUME_ID, RESUME_NAME, RESUME_SEX, RESUME_BIRTHDAY, RESUME_PHONE, RESUME_EMAIL,
 		RESUME_ADDRESS,
 		RESUME_GRADUATE_INSTITUTION, RESUME_EDUCATION
-	</sql>
+	</sql> -->
 
 
 	<resultMap type="com.qc.rc.entity.pojo.ResumePojo" id="getResumeList">
@@ -64,14 +64,27 @@
 			<result column="INTERVIEW_STATUS" property="interviewStatus"></result>
 		</association>
 		
+		<association property="userResume" javaType="com.qc.rc.entity.UserResume">
+			<id column="UR_ID" property="urId"></id>
+			<result column="UR_USER_ID" property="urUesrId"></result>			
+			<result column="UR_RESUME_ID" property="urResumeId"></result>
+			<result column="UR_RESUME_GETWAT" property="urResumeGetway"></result>
+			<result column="UR_RESUME_SHARE_FLAG" property="urResumeShareFlag"></result>
+		</association>
+		
 	</resultMap>
 	
 	<select id="getAllResume" resultMap="getResumeList">
 		SELECT
 		RESUME_ID,RESUME_NAME,RESUME_SEX,RESUME_PHONE,RESUME_WORK_YEARS,RESUME_GRADUATE_INSTITUTION,
 		RESUME_EDUCATION,RESUME_JOB_INTENSION,RESUME_CREATE_TIME,INTERVIEW_ID,INTERVIEW_STATUS
-		FROM RC_RESUME,RC_INTERVIEW
-		WHERE RC_RESUME.RESUME_ID = RC_INTERVIEW.INTERVIEW_RESUME_ID
+		UR_ID,UR_USER_ID,UR_RESUME_ID,UR_RESUME_GETWAT,UR_RESUME_SHARE_FLAG
+		FROM RC_RESUME LEFT JOIN RC_INTERVIEW 
+		ON RC_RESUME.RESUME_ID = RC_INTERVIEW.INTERVIEW_RESUME_ID,
+		RC_USER_RESUME
+		WHERE RC_RESUME.RESUME_ID = RC_USER_RESUME.UR_RESUME_ID 
+		AND RC_USER_RESUME.UR_USER_ID = #{userId }
+		AND RESUME_DELETE_FLAG = 0 		
 	</select>
 	
 	
@@ -81,7 +94,10 @@
 		SELECT
 		RESUME_ID,RESUME_NAME,RESUME_SEX,RESUME_PHONE,RESUME_WORK_YEARS,RESUME_GRADUATE_INSTITUTION,
 		RESUME_EDUCATION,RESUME_JOB_INTENSION,RESUME_CREATE_TIME,INTERVIEW_ID,INTERVIEW_STATUS
-		FROM RC_RESUME,RC_INTERVIEW
+		UR_ID,UR_USER_ID,UR_RESUME_ID,UR_RESUME_GETWAT,UR_RESUME_SHARE_FLAG
+		FROM RC_RESUME LEFT JOIN RC_INTERVIEW
+		ON RC_RESUME.RESUME_ID = RC_INTERVIEW.INTERVIEW_RESUME_ID,
+		RC_USER_RESUME
 		<where>
 			<if test="resumeName != null and  resumeName !='' ">
 				AND RESUME_NAME = #{resumeName}
@@ -112,7 +128,8 @@
 			<if test="resumeGraduateInstitution != null and  resumeGraduateInstitution != '' ">
 				AND RESUME_GRADUATE_INSTITUTION = #{resumeGraduateInstitution}
 			</if>
-			AND RC_RESUME.RESUME_ID = RC_INTERVIEW.INTERVIEW_RESUME_ID
+			AND RC_USER_RESUME.UR_USER_ID = #{userId }
+			AND RESUME_DELETE_FLAG = 0
 		</where>
 	</select>
 	

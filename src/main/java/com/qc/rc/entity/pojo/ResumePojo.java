@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.qc.rc.entity.Interview;
 import com.qc.rc.entity.Resume;
+import com.qc.rc.entity.UserResume;
 
 public class ResumePojo extends Resume {
 	
@@ -47,7 +48,7 @@ public class ResumePojo extends Resume {
 		
 	}
 	
-	public Interview interview;
+	private Interview interview;
 
 	public Interview getInterview() {
 		return interview;
@@ -57,6 +58,16 @@ public class ResumePojo extends Resume {
 		this.interview = interview;
 	}
 	
+	
+	private  UserResume userResume;
+	
+	public UserResume getUserResume() {
+		return userResume;
+	}
+
+	public void setUserResume(UserResume userResume) {
+		this.userResume = userResume;
+	}
 
 	
 
