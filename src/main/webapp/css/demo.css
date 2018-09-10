@@ -2,11 +2,13 @@ html,body {
     margin: 0;
     padding: 0;
 }
-header{
+#header{
 	width:1298px;
 	height: 127px;
 }
-#left{
+#lefter{
+	position: absolute;
+	top:127px;
 	height: 599px; 
 	width: 158px; 
 	float: left;

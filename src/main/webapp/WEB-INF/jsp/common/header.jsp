@@ -5,12 +5,12 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
-		<link rel="stylesheet" type="text/css" href="../css/header.css"/>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/header.css"/>
 	</head>
 	<body>
 		<div id="header_box">
-			<img id="headerbox_pic_logo"  src="../img/u7.png"/>
-			<img id="headerbox_pic_bottom" src="../img/u16.png"/>
+			<img id="headerbox_pic_logo"  src="${pageContext.request.contextPath}/img/u7.png"/>
+			<img id="headerbox_pic_bottom" src="${pageContext.request.contextPath}/img/u16.png"/>
 		</div>
 		
 	</body>

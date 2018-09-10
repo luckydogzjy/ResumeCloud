@@ -7,13 +7,14 @@
 		<title></title>
 	</head>
 	<link rel="stylesheet" type="text/css" href="css/demo.css"/>
-	<header>
-		<iframe src="common/header.jsp" width="1299px"; height="100%" frameborder="0" scrolling="no" name="headFrame"></iframe>		
-	</header>
 	<body>
-		<div id="left">
-			<iframe src="common/lefter.jsp" width="158px"; height="599px" frameborder="0" scrolling="no" name="headFrame"></iframe>	
+		<div id="header">
+		<jsp:include page="header.jsp" flush="true"/>
 		</div>
+		<div id="lefter">
+		<jsp:include page="lefter.jsp" flush="true"/>
+		</div>
+		
 		
 		<div id="right">
 			<div id="right-box">
