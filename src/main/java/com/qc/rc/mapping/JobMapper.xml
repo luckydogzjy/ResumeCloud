@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qc.rc.dao.JobMapper">
+ 	
+ 	<select id="jobGetAll" resultType="com.qc.rc.entity.Job">
+ 		select * from RC_JOB order by JOB_ID
+ 	</select>
+  	
+  	<insert id="jobAdd" parameterType="com.qc.rc.entity.Job">
+  		insert into RC_JOB(JOB_ID,JOB_USER_ID,JOB_NAME,JOB_COUNT,JOB_SALARY,JOB_INTRODUCTION,JOB_CONDITION,JOB_END_TIME) 
+  		values(JOB_ID.nextval,#{JOB_USER_ID},#{JOB_NAME},#{JOB_COUNT},#{JOB_SALARY},#{JOB_INTRODUCTION},#{JOB_CONDITION},#{JOB_END_TIME})
+  	</insert>
+  	
+  	<update id="jobUpdate" parameterType="com.qc.rc.entity.Job">
+  		update RC_JOB set JOB_COUNT = #{JOB_COUNT},JOB_SALARY = #{JOB_SALARY},JOB_END_TIME = #{JOB_END_TIME},
+  		JOB_INTRODUCTION = #{JOB_INTRODUCTION},JOB_CONDITION = #{JOB_CONDITION} 
+  		where JOB_ID = #{JOB_ID}
+  	</update>
+  	
+  	<delete id="jobDelete">
+  		delete from RC_JOB where JOB_ID = #{jobId}
+  	</delete>
+  	
+  	<update id="jobChangeStatus">
+  		update RC_JOB set JOB_STATUS = #{jobStatus} where JOB_ID = #{jobId}
+  	</update>
+  	
+  	<select id="jobGetByName" resultType="com.qc.rc.entity.Job">
+  		select * from RC_JOB where JOB_NAME like '%${name}%' order by JOB_ID
+  	</select>
+  	
+  	<select id="jobGetOne" resultType="com.qc.rc.entity.Job">
+  		select * from RC_JOB where JOB_ID = #{jobId}
+  	</select>
+</mapper>
