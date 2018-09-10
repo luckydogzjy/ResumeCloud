@@ -3,6 +3,8 @@ package com.qc.rc.dao;
 import com.qc.rc.entity.User;
 import java.math.BigDecimal;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface UserMapper {
     int deleteByPrimaryKey(BigDecimal userId);
 
@@ -16,5 +18,5 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
     
-    User login(String userAccount);
+    User login(@Param("userAccount") String userAccount);
 }
