@@ -1,0 +1,31 @@
+html,body {
+    margin: 0;
+    padding: 0;
+}
+header{
+	width:1298px;
+	height: 127px;
+}
+#left{
+	height: 599px; 
+	width: 158px; 
+	float: left;
+}
+#right{
+	position: absolute;
+	left: 158px;
+	width: 1140px;
+    height: 599px;
+	background-color: #99CCFF;
+}
+#right-box{
+	position: absolute;
+	left: 36px;
+	top: 30px;
+	width: 1067px;
+    height: 551px;
+    background: white;
+   	border: none;
+    border-radius: 26px;
+}
+

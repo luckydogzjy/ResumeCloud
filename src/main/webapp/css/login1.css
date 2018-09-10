@@ -1,0 +1,84 @@
+html{
+	height: 100%;
+}
+body{
+	height: 100%;
+}
+
+#header_box{
+	position: absolute;
+	background-color: rgba(0,153,203,1);
+	width: 1298px;
+	height: 79px;	
+	
+}
+#headerbox_pic_logo{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	height: 79px;
+}
+#headerbox_pic_bottom{
+	width: 100%;
+	position: absolute;
+	height: 48px;
+	left: 0px;
+	top: 79px;
+}
+#body_box{
+	position: absolute;
+	top: 121px;
+	width: 1280px;
+	height:70%;
+	background-color: rgba(25,158,216,1);
+}
+#body_left{
+	float: left;
+	width: 537px;
+	height: 299px ;
+}
+#body_left_pic{
+	position: absolute;
+	top: 25%;
+	left: 5%;
+	width: 537px;
+    height: 299px;
+}
+#body_right{
+	float: right;
+	width: 444px;
+	height: 408px;
+}
+#body_right_form{
+	background-color: rgba(67,67,67,1);
+	position: absolute;
+	top: 15%;
+	right: 5%;
+	width: 444px;
+	height: 408px;
+}
+#body_right_form_phoneNum{
+	position: absolute;
+	top: 60px;
+	left: 60px;
+	width: 309px;
+    height: 55px;
+}
+#body_right_form_pass{
+	position: absolute;
+	top: 140px;
+	left: 60px;
+	width: 309px;
+    height: 55px;
+}
+#body_right_form_submit{
+	border:0px;
+	background-color: rgb(22,155,213);
+	width: 309px;
+    height: 50px;
+    position: absolute;
+    top: 240px;
+    left: 63px;
+    font-size: 20px;
+    color: white;
+}
