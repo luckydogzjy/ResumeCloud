@@ -8,6 +8,7 @@ public interface JobService {
 	/**
 	 * @author qiancheng
 	 * 检索所有job
+	 * @param userId
 	 * @return
 	 */
 	public List<Job> jobGetAll(Integer userId);
@@ -38,6 +39,7 @@ public interface JobService {
 	public boolean jobChangeStatus(Integer jobId,Integer jobStatus);
 	/**
 	 * 模糊查询
+	 * @param userId
 	 * @param jobName
 	 * @return
 	 */
