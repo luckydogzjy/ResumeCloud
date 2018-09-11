@@ -5,41 +5,21 @@ import java.util.Date;
 import com.qc.rc.common.Util;
 
 public class Interview {
-	/*
-	 * (
-  INTERVIEW_ID NUMBER(6, 0) NOT NULL 
-, INTERVIEW_RESUME_ID NUMBER(6, 0) 
-, INTERVIEW_JOB VARCHAR2(20 BYTE) 
-, INTERVIEW_TIME DATE 
-, INTERVIEW_ASSOCIATE_USERNAME VARCHAR2(20 BYTE) 
-, INTERVIEW_ASSOCIATE_PHONE VARCHAR2(11 BYTE) 
-, INTERVIEW_ADDRESS VARCHAR2(100 BYTE) 
-, INTERVIEW_INFO VARCHAR2(200 BYTE) 
-, INTERVIEW_STATUS NUMBER(1, 0) 
-, INTERVIEW_RECODE_INFO VARCHAR2(200 BYTE) 
-, INTERVIEW_CREATE_USER VARCHAR2(20 BYTE) 
-, INTERVIEW_CREATE_TIME DATE DEFAULT sysdate NOT NULL 
-, INTERVIEW_UPDATE_USER VARCHAR2(20 BYTE) 
-, INTERVIEW_UPDATE_TIME DATE 
-, INTERVIEW_DELETE_FLAG NUMBER(1, 0) DEFAULT 0 NOT NULL 
-, INTERVIEW_USER_ID NUMBER(6, 0) NOT NULL 
-)
-	 */
 	private Integer interviewId;//id
-	private Integer interviewResumeId;//ÃæÊÔÈËid
-	private String interviewJob;//ÃæÊÔÖ°Î»
-	private Date interviewTime;//ÃæÊÔÊ±¼ä
-	private String interviewAssociateUsername;//ÁªÏµÈË
-	private String interviewAssociatePhone;//ÁªÏµÈËÁªÏµ·½Ê½
-	private String interviewAddress;//ÃæÊÔµØµã
-	private String interviewInfo;//±¸×¢ĞÅÏ¢
-	private Integer interviewStatus;//ÃæÊÔ½á¹û1³É¹¦2´ıÃæÊÔ3Ê§°Ü
-	private String interviewRecodeInfo;//ÃæÊÔ½á¹û¼ÇÂ¼
-	private String interviewCreateUser;//ÃæÊÔ
-	private Date interviewCreateTime;//ÃæÊÔ´´½¨Ê±¼ä
-	private String interviewUpdateUser;//ÃæÊÔ¸üĞÂÈË
-	private Date interviewUpdateTime;//ÃæÊÔ¸üĞÂÊ±¼ä
-	private Integer interviewDeleteFlag;//É¾³ı±êÖ¾
+	private Integer interviewResumeId;//é¢è¯•äººid
+	private String interviewJob;//é¢è¯•èŒä½
+	private Date interviewTime;//é¢è¯•æ—¶é—´
+	private String interviewAssociateUsername;//è”ç³»äºº
+	private String interviewAssociatePhone;//è”ç³»äººè”ç³»æ–¹å¼
+	private String interviewAddress;//é¢è¯•åœ°ç‚¹
+	private String interviewInfo;//å¤‡æ³¨ä¿¡æ¯
+	private Integer interviewStatus;//é¢è¯•ç»“æœ1æˆåŠŸ2å¾…é¢è¯•3å¤±è´¥
+	private String interviewRecodeInfo;//é¢è¯•ç»“æœè®°å½•
+	private String interviewCreateUser;//é¢è¯•
+	private Date interviewCreateTime;//é¢è¯•åˆ›å»ºæ—¶é—´
+	private String interviewUpdateUser;//é¢è¯•æ›´æ–°äºº
+	private Date interviewUpdateTime;//é¢è¯•æ›´æ–°æ—¶é—´
+	private Integer interviewDeleteFlag;//åˆ é™¤æ ‡å¿—
 	private Integer interviewUserId;//userid
 	
 	

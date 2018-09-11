@@ -46,7 +46,7 @@ public class InterviewController {
 		String overTime = request.getParameter("interviewTimeOver");
 		Date st= null;
 		Date ot = null;
-//		Èç¹û¸ñÊ½²»¶ÔÈ¡Ä¬ÈÏÊ±¼ä
+//		å¦‚æœæ ¼å¼ä¸å¯¹å–é»˜è®¤æ—¶é—´
 		if(Util.isValidTime(startTime)){
 			st=Util.strToDate(startTime);
 		}else {

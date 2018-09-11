@@ -3,11 +3,11 @@ package com.qc.rc.common;
 import java.util.List;
 
 public class PageBean<T> {
-	//Ìø¹ı¼¸ĞĞoffset
-    //È¡¼¸ĞĞpageSize
-	//pageNum µ±Ç°Ò³Êı	
-	//allPage ×ÜÒ³Êı
-	//allSize ×Ü×Ö¶ÎÊıÁ¿ count£¨*£©
+	//è·³è¿‡å‡ è¡Œoffset
+    //å–å‡ è¡ŒpageSize
+	//pageNum å½“å‰é¡µæ•°	
+	//allPage æ€»é¡µæ•°
+	//allSize æ€»å­—æ®µæ•°é‡ countï¼ˆ*ï¼‰
 
 	private Integer offset;
 	private Integer pageSize;

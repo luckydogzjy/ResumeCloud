@@ -23,18 +23,18 @@ public class InterviewServiceImpl implements InterviewService {
 	public PageBean<InterviewPojo> getAllInterviews(Integer userId) {
 		Integer size = interviewMapper.getAllInterviewsByUserId(userId);
 		PageBean<InterviewPojo> ipPageBean = new PageBean<>();
-//		²éÑ¯Âú×ãÌõ¼şµÄËùÓĞ×Ö¶ÎÊı
+//		æŸ¥è¯¢æ»¡è¶³æ¡ä»¶çš„æ‰€æœ‰å­—æ®µæ•°
 		ipPageBean.setAllSize(size);
-//		½øÈëÒ³ÃæÉèÖÃÒ³ÂëÊıÎª1
+//		è¿›å…¥é¡µé¢è®¾ç½®é¡µç æ•°ä¸º1
 		ipPageBean.setPageNum(1);
-//		ÉèÖÃÃ¿Ò³ÒªÏÔÊ¾µÄÊıÁ¿
+//		è®¾ç½®æ¯é¡µè¦æ˜¾ç¤ºçš„æ•°é‡
 		ipPageBean.setPageSize(PageMessage.interviewpageSize);
-//		ÉèÖÃÌø¹ıĞĞÊı
+//		è®¾ç½®è·³è¿‡è¡Œæ•°
 		ipPageBean.setOffset();
-//		¼ÆËãËùÓĞÒ³Êı
+//		è®¡ç®—æ‰€æœ‰é¡µæ•°
 		ipPageBean.setAllPage();
         RowBounds rb = new RowBounds(ipPageBean.getOffset(), ipPageBean.getPageSize());  
-//      ÔØÈëÊı¾İ
+//      è½½å…¥æ•°æ®
 		List<InterviewPojo> interviewPojos= interviewMapper.selectAllInterviewsByUserId(rb, userId);
 		ipPageBean.setDatalist(interviewPojos);
 		
@@ -46,18 +46,18 @@ public class InterviewServiceImpl implements InterviewService {
 		
 		Integer size = interviewMapper.getAllInterviewsByCondition(userId, startTime, overTime, interviewJob, interviewInfo);
 		PageBean<InterviewPojo> ipPageBean = new PageBean<>();
-//		²éÑ¯Âú×ãÌõ¼şµÄËùÓĞ×Ö¶ÎÊı
+//		æŸ¥è¯¢æ»¡è¶³æ¡ä»¶çš„æ‰€æœ‰å­—æ®µæ•°
 		ipPageBean.setAllSize(size);
-//		½øÈëÒ³ÃæÉèÖÃÒ³ÂëÊıÎª1
+//		è¿›å…¥é¡µé¢è®¾ç½®é¡µç æ•°ä¸º1
 		ipPageBean.setPageNum(pageNum);
-//		ÉèÖÃÃ¿Ò³ÒªÏÔÊ¾µÄÊıÁ¿
+//		è®¾ç½®æ¯é¡µè¦æ˜¾ç¤ºçš„æ•°é‡
 		ipPageBean.setPageSize(PageMessage.interviewpageSize);
-//		ÉèÖÃÌø¹ıĞĞÊı
+//		è®¾ç½®è·³è¿‡è¡Œæ•°
 		ipPageBean.setOffset();
-//		¼ÆËãËùÓĞÒ³Êı
+//		è®¡ç®—æ‰€æœ‰é¡µæ•°
 		ipPageBean.setAllPage();
         RowBounds rb = new RowBounds(ipPageBean.getOffset(), ipPageBean.getPageSize());  
-//      ÔØÈëÊı¾İ
+//      è½½å…¥æ•°æ®
 		List<InterviewPojo> interviewPojos= interviewMapper.selectByCondition(rb, userId, startTime, overTime, interviewJob, interviewInfo);
 		ipPageBean.setDatalist(interviewPojos);
 		

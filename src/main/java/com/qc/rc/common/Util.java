@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 
 public class Util {
 
-//	ÅĞ¶ÏÊÇ·ñÊÇÊı×Ö
+//	åˆ¤æ–­æ˜¯å¦æ˜¯æ•°å­—
 	public static boolean isNumber(String str) {
 
 		String regExp="[\\d]+";
@@ -27,7 +27,7 @@ public class Util {
 		
 	}
 	
-//	ÅĞ¶ÏÊÇ·ñÔÚÑ¡Ïî¼¯ºÏÄÚ
+//	åˆ¤æ–­æ˜¯å¦åœ¨é€‰é¡¹é›†åˆå†…
 	public static boolean isvalidChoose(ArrayList<Integer> chooses , String jobChoose) {
 		chooses.add(0);
 		String regExp="[\\d]+";
@@ -44,7 +44,7 @@ public class Util {
 
 
 	
-//	½«×Ö·û´®×ª»»ÎªÈÕÆÚ
+//	å°†å­—ç¬¦ä¸²è½¬æ¢ä¸ºæ—¥æœŸ
 	public static Date strToDate(String strDate) {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
@@ -58,14 +58,14 @@ public class Util {
 		return date;
 		
 	}
-//	ÈÕÆÚ×ª×Ö·û´®
+//	æ—¥æœŸè½¬å­—ç¬¦ä¸²
 	public static String dateToStr(Date date) {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
 		String dateStr = sdf.format(date);
 		return dateStr;
 	}
-//	ÈÕÆÚ¸ñÊ½»¯
+//	æ—¥æœŸæ ¼å¼åŒ–
 	public static Date dateFormat(Date date) {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
 	    String dateString = formatter.format(date);  
@@ -76,7 +76,7 @@ public class Util {
 	
 	
 	
-//	ÅĞ¶ÏÊÇ·ñÊÇÊ±·Ö	"2018.2.27 09:20:30"
+//	åˆ¤æ–­æ˜¯å¦æ˜¯æ—¶åˆ†	"2018.2.27 09:20:30"
 	public static boolean isValidTime(String str) {
 		String regExp="^((\\d{2}(([02468][048])|([13579][26]))[\\.]?((((0?[13578])|(1[02]))[\\.]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\\.]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\\.]?((0?[1-9])|([1-2][0-9])))))|(\\d{2}(([02468][1235679])|([13579][01345789]))[\\.]?((((0?[13578])|(1[02]))[\\.]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\\.]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\\.]?((0?[1-9])|(1[0-9])|(2[0-8]))))))"
 				+ "([ \t\n\\x0B\f\r])"
@@ -90,7 +90,7 @@ public class Util {
 		
 	}
 	
-//	ÅĞ¶ÏÊäÈëÈÕÆÚÊÇ·ñ´óÓÚµ±Ç°Ê±¼ä
+//	åˆ¤æ–­è¾“å…¥æ—¥æœŸæ˜¯å¦å¤§äºå½“å‰æ—¶é—´
 	public static boolean isGreaterThanNow(String dateGet) {
 		Date date = new Date();
 		if(strToDate(dateGet).after(date)){
@@ -100,18 +100,18 @@ public class Util {
 	}
 	
 
-//	Ê±¼ä±È½Ï²âÊÔ
+//	æ—¶é—´æ¯”è¾ƒæµ‹è¯•
 /*	public static void main(String args[]) {
 		String string ="2018.12.29 09:20:30";
 		System.out.println(isGreaterThanNow(strToDate(string)));
 	}*/
-//	´òÓ¡ArrayListĞÅÏ¢
+//	æ‰“å°ArrayListä¿¡æ¯
 //	public static void print(ArrayList arrayList) {
 //		for (Object object : arrayList) {
 //			System.out.println(object.toString());
 //		}
 //	}
-//	ÈÕÆÚ×ª»»²âÊÔ
+//	æ—¥æœŸè½¬æ¢æµ‹è¯•
 //	public static void main(String args[]) {
 //		Date date = new Date();
 //		System.out.println(dateToStr(date));
