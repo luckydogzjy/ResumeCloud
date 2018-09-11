@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.qc.rc.common.FormParameterUtil;
 import com.qc.rc.entity.Pic;
+import com.qc.rc.entity.SharingCenter;
 import com.qc.rc.entity.pojo.ResumePojo;
 import com.qc.rc.service.ResumeService;
 
@@ -26,6 +27,8 @@ public class ResumeController {
 	private ResumeService resumeService;
 	@Autowired 
 	private ResumePojo resumePojo;
+	@Autowired 
+	private SharingCenter sharingCenter;
 	
 	//正常应该在session里得到登录人的userId
 	//这里只做测试
@@ -131,6 +134,34 @@ public class ResumeController {
 		//根据id删除resume
 		resumeService.deleteResumeById(resumeId);
 		//删除之后根据刚才所输入的信息遍历resumeList
+		
+		return getResumeListByCondition(request);
+		
+	}
+	
+	@RequestMapping("/resumeShare.do")
+	public ModelAndView resumeShare(HttpServletRequest request,  HttpServletResponse response){
+		
+		String resumeIdStr = request.getParameter("resumeId_Share");
+		Integer resumeId = Integer.valueOf(resumeIdStr);
+		
+		String integralStr = request.getParameter("integral");
+		Integer integral = Integer.valueOf(integralStr);
+		
+		System.out.println(resumeId);
+		System.out.println(userId);
+		System.out.println(integral);
+		System.out.println("111");
+		
+		sharingCenter.setScUserId(userId);
+		sharingCenter.setScResumeId(resumeId);
+		sharingCenter.setScIntegral(integral);
+		
+		Integer integer = resumeService.shareResume(sharingCenter);	
+		
+		System.out.println("返回的主键为"+ sharingCenter.getScId());
+		
+		
 		
 		return getResumeListByCondition(request);
 		

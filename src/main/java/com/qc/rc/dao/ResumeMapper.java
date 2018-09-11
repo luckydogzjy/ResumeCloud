@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.qc.rc.entity.Resume;
+import com.qc.rc.entity.SharingCenter;
 import com.qc.rc.entity.pojo.ResumePojo;
 
 public interface ResumeMapper {
@@ -19,4 +20,6 @@ public interface ResumeMapper {
 	ResumePojo getResumeDetailsById(@Param("resumeId")Integer resumeId);
 	//根据id删除resume信息
 	void deleteResumeById(@Param("resumeId")Integer resumeId);
+	//点击共享按钮后将信息插入共享中心,返回主键
+	Integer shareResume(SharingCenter sharingCenter);
 }

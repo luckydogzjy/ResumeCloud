@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qc.rc.dao.ResumeMapper;
+import com.qc.rc.entity.SharingCenter;
 import com.qc.rc.entity.pojo.ResumePojo;
 import com.qc.rc.service.ResumeService;
 
@@ -53,5 +54,10 @@ public class ResumeServiceImpl implements ResumeService {
 		
 		resumeMapper.deleteResumeById(resumeId);
 	}
-
+	
+	//点击共享按钮后将信息插入共享中心
+	public Integer shareResume(SharingCenter sharingCenter){
+		
+		return resumeMapper.shareResume(sharingCenter);
+	}
 }

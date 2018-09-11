@@ -2,6 +2,8 @@ package com.qc.rc.entity;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Component;
+@Component
 public class UserResume {
 	
 		private Integer urId;

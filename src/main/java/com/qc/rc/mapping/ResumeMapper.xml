@@ -218,4 +218,27 @@
 		SET RESUME_DELETE_FLAG = 1
 		WHERE RESUME_ID = #{resumeId }
 	</update>
+	
+	<!--点击共享按钮后的操作 将信息插入共享中心表里、同时插入  
+		同时需要执行更新RC_USER_RESUME表，让其中的共享标志UR_RESUME_SHARE_FLAG设为1
+	-->
+	<insert id="shareResume" parameterType="com.qc.rc.entity.SharingCenter">
+
+		INSERT INTO RC_SHARING_CENTER
+		(SC_ID,SC_USER_ID,SC_RESUME_ID,SC_INTEGRAL,SC_DOWNLOAD_COUNT)
+		VALUES(
+		SHARING_CENTER_SEQUENCE.NEXTVAL,
+		#{scUserId,jdbcType=INTEGER },
+		#{scResumeId,jdbcType=INTEGER },
+		#{scIntegral,jdbcType=INTEGER },
+		0
+		)
+		<!--  -->
+		<selectKey keyProperty="scId" order="AFTER" resultType="java.lang.Integer">
+			SELECT
+			MAX(SC_ID) FROM RC_SHARING_CENTER
+			<!-- SHARING_CENTER_SEQUENCE.NEXTVAL-1 from dual -->
+		</selectKey>
+		
+	</insert>
 </mapper>
