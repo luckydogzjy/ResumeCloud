@@ -15,10 +15,10 @@ public class JobServiceImpl implements JobService {
 	JobMapper JobMapper;
 	
 	@Override
-	public List<Job> jobGetAll() {
+	public List<Job> jobGetAll(Integer userId) {
 		// TODO Auto-generated method stub
 		
-		return JobMapper.jobGetAll();
+		return JobMapper.jobGetAll(userId);
 	}
 
 	@Override
@@ -63,10 +63,10 @@ public class JobServiceImpl implements JobService {
 	}
 
 	@Override
-	public List<Job> jobGetByName(String jobName) {
+	public List<Job> jobGetByName(Integer userId,String jobName) {
 		// TODO Auto-generated method stub
 		
-		return JobMapper.jobGetByName(jobName);
+		return JobMapper.jobGetByName(userId,jobName);
 	}
 
 	@Override

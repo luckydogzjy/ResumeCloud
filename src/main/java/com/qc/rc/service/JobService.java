@@ -10,7 +10,7 @@ public interface JobService {
 	 * 检索所有job
 	 * @return
 	 */
-	public List<Job> jobGetAll();
+	public List<Job> jobGetAll(Integer userId);
 	/**
 	 * 添加一个job、
 	 * @param job
@@ -41,7 +41,7 @@ public interface JobService {
 	 * @param jobName
 	 * @return
 	 */
-	public List<Job> jobGetByName(String jobName);
+	public List<Job> jobGetByName(Integer userId,String jobName);
 	/**
 	 * 查看职位详情
 	 * @param jobId

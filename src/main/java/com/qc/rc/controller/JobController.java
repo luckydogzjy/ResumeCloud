@@ -23,12 +23,16 @@ public class JobController {
 	
 	@Autowired
 	private JobService jobService;
+	/**
+	 * userId from session
+	 */
+	private static Integer userId = 1 ;
 	
 	@RequestMapping("/JobManage.do")
 	public ModelAndView test(){
 			
 		Map<String,Object> model = new HashMap<>();
-		List<Job> job= jobService.jobGetAll();
+		List<Job> job= jobService.jobGetAll(userId);
 
 		model.put("job", job);
 		return new ModelAndView("JobManage/JobManage",model);
@@ -44,7 +48,7 @@ public class JobController {
 		
 		Job job = new Job();
 		
-		job.setJOB_USER_ID(1);
+		job.setJOB_USER_ID(userId);
 		job.setJOB_NAME(req.getParameter("name"));
 		job.setJOB_COUNT(Integer.valueOf(req.getParameter("count")));
 		job.setJOB_SALARY(Integer.valueOf(req.getParameter("salary")));
@@ -129,7 +133,7 @@ public class JobController {
 		
 		String jobName=req.getParameter("search");
 		Map<String,Object> model = new HashMap<>();
-		List<Job> job= jobService.jobGetByName(jobName);
+		List<Job> job= jobService.jobGetByName(userId,jobName);
 		model.put("job", job);
 		
 		return new ModelAndView("JobManage/JobManage",model);

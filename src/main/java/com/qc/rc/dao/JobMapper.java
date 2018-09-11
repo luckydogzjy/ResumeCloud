@@ -12,7 +12,7 @@ public interface JobMapper {
 	 * 检索所有job 
 	 * @return
 	 */
-	public List<Job>  jobGetAll();
+	public List<Job>  jobGetAll(Integer userId);
 	/**
 	 * 添加一条job信息 
 	 * @param job
@@ -43,7 +43,7 @@ public interface JobMapper {
 	 * @param name
 	 * @return
 	 */
-	public List<Job> jobGetByName(@Param("name")String name);
+	public List<Job> jobGetByName(@Param("userId")Integer userId,@Param("name")String name);
 	/**
 	 * 查看详情
 	 * @param jobId
