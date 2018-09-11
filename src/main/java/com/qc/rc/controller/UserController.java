@@ -33,10 +33,10 @@ public class UserController extends HttpServlet{
 			HttpSession session = request.getSession();
 			session.setAttribute("sessionId", user);
 			model.put("info", user.getMsg());
-			return new ModelAndView("denglu",model);
+			return new ModelAndView("login1",model);
 		}else{
 			model.put("info", user.getMsg());
-			return new ModelAndView("denglu",model);
+			return new ModelAndView("login1",model);
 		}	
 	}
 	
@@ -72,6 +72,6 @@ public class UserController extends HttpServlet{
 	@RequestMapping("/test2.do")
 	public ModelAndView test2(){
 		Map<String,Object> model = new HashMap<String,Object>(); 
-		return new ModelAndView("denglu",model);
+		return new ModelAndView("login1",model);
 	}
 }
