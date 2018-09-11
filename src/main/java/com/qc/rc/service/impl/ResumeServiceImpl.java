@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qc.rc.dao.ResumeMapper;
-import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.pojo.ResumePojo;
 import com.qc.rc.service.ResumeService;
 
@@ -16,6 +15,9 @@ public class ResumeServiceImpl implements ResumeService {
 	
 	@Autowired
 	private ResumeMapper resumeMapper;
+	
+	@Autowired
+	private ResumePojo resumePojo;
 	
 	
 	public List<ResumePojo> getAllResume(Integer userId) {
@@ -37,6 +39,19 @@ public class ResumeServiceImpl implements ResumeService {
 		System.out.println("ResumeServiceImpl->getResumeListByCondition :::" + list.size());
 		
 		return list;
+	}
+	
+	public ResumePojo getResumeDetailsById(Integer resumeId){
+		
+		resumePojo = resumeMapper.getResumeDetailsById(resumeId);
+		
+		return resumePojo;
+		
+	}
+	
+	public void deleteResumeById(Integer resumeId){
+		
+		resumeMapper.deleteResumeById(resumeId);
 	}
 
 }

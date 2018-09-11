@@ -16,5 +16,7 @@ public interface ResumeMapper {
 			@Param("resumeEducation")Integer resumeEducation,@Param("resumeWorkYears")Integer resumeWorkYears,@Param("resumeGraduateInstitution")String resumeGraduateInstitution);
 	
 	//根据id返回resume表的全部详细信息
-	Resume getResumeDetailsById(Integer resumeId);
+	ResumePojo getResumeDetailsById(@Param("resumeId")Integer resumeId);
+	//根据id删除resume信息
+	void deleteResumeById(@Param("resumeId")Integer resumeId);
 }

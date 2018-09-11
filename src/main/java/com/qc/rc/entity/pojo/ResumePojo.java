@@ -1,16 +1,20 @@
 package com.qc.rc.entity.pojo;
 
+import java.io.File;
 import java.util.Date;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
 
 import com.qc.rc.entity.Interview;
+import com.qc.rc.entity.Pic;
 import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.UserResume;
-
+@Component
 public class ResumePojo extends Resume {
 	
 
 
-	
 	/**
 	 * @param resumeId
 	 * @param resumeName
@@ -31,21 +35,28 @@ public class ResumePojo extends Resume {
 	 * @param resumeUpdateTime
 	 * @param resumeDeleteFlag
 	 * @param interview
+	 * @param userResume
+	 * @param lPics
+	 * @param lFiles
 	 */
 	public ResumePojo(Integer resumeId, String resumeName, Integer resumeSex, Date resumeBirthday, String resumePhone,
 			String resumeEmail, String resumeAddress, String resumeGraduateInstitution, Integer resumeEducation,
 			String resumeJobIntension, String resumeSelfEvaluation, String resumeWorkExperience,
 			Integer resumeWorkYears, String resumeCreateUser, Date resumeCreateTime, String resumeUpdateUser,
-			Date resumeUpdateTime, Integer resumeDeleteFlag, Interview interview) {
+			Date resumeUpdateTime, Integer resumeDeleteFlag, Interview interview, UserResume userResume,
+			List<Pic> lPics, List<File> lFiles) {
 		super(resumeId, resumeName, resumeSex, resumeBirthday, resumePhone, resumeEmail, resumeAddress,
 				resumeGraduateInstitution, resumeEducation, resumeJobIntension, resumeSelfEvaluation,
 				resumeWorkExperience, resumeWorkYears, resumeCreateUser, resumeCreateTime, resumeUpdateUser,
 				resumeUpdateTime, resumeDeleteFlag);
 		this.interview = interview;
+		this.userResume = userResume;
+		this.lPics = lPics;
+		this.lFiles = lFiles;
 	}
 
 	public ResumePojo(){
-		
+		super();
 	}
 	
 	private Interview interview;
@@ -57,8 +68,7 @@ public class ResumePojo extends Resume {
 	public void setInterview(Interview interview) {
 		this.interview = interview;
 	}
-	
-	
+		
 	private  UserResume userResume;
 	
 	public UserResume getUserResume() {
@@ -68,7 +78,26 @@ public class ResumePojo extends Resume {
 	public void setUserResume(UserResume userResume) {
 		this.userResume = userResume;
 	}
-
 	
+
+	//查询详情的图片和文件 一对多
+	private	List<Pic> lPics;
+	private List<File> lFiles;
+	
+	public List<File> getlFiles() {
+		return lFiles;
+	}
+
+	public void setlFiles(List<File> lFiles) {
+		this.lFiles = lFiles;
+	}
+
+	public List<Pic> getlPics() {
+		return lPics;
+	}
+
+	public void setlPics(List<Pic> lPics) {
+		this.lPics = lPics;
+	}
 
 }
