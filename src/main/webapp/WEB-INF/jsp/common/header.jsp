@@ -11,6 +11,7 @@
 		<div id="header_box">
 			<img id="headerbox_pic_logo"  src="${pageContext.request.contextPath}/img/u7.png"/>
 			<img id="headerbox_pic_bottom" src="${pageContext.request.contextPath}/img/u16.png"/>
+			<p id="header_box-jifen">积分:1500</p>
 		</div>
 		
 	</body>

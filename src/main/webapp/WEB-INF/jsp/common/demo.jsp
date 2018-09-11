@@ -8,18 +8,22 @@
 	</head>
 	<link rel="stylesheet" type="text/css" href="css/demo.css"/>
 	<body>
-		<div id="header">
-		<jsp:include page="header.jsp" flush="true"/>
-		</div>
-		<div id="lefter">
-		<jsp:include page="lefter.jsp" flush="true"/>
-		</div>
+		<div id="box">
 		
-		
-		<div id="right">
-			<div id="right-box">
-				<h1>hello world111</h1>
+			<div id="header">
+			<jsp:include page="header.jsp" flush="true"/>
+			</div>
+			<div id="lefter">
+			<jsp:include page="lefter.jsp" flush="true"/>
+			</div>
+			
+			
+			<div id="right">
+				<div id="right-box">
+					<h1>hello world111</h1>
+				</div>
 			</div>
 		</div>
+		
 	</body>
 </html>

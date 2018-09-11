@@ -23,7 +23,11 @@ html,body {
 	left: 0px;
 	top: 79px;
 }
-
+#header_box-jifen{
+	position: absolute;
+	top: 75px;
+	left: 1150px;
+}
 #left{
 	background: #0099cb; 
 	height: 599px; 
