@@ -5,5 +5,6 @@
 <body>
 <a href="${pageContext.request.contextPath}/test.do"><input type="button" value="注册"/></a>
 <a href="${pageContext.request.contextPath}/test2.do"><input type="button" value="登录"/></a>
+<a href="${pageContext.request.contextPath}/resumeDisplay.do"><input type="button" value="查找全部简历测试"/></a>
 </body>
 </html>
