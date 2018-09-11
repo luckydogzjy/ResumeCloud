@@ -2,6 +2,7 @@ package com.qc.rc.entity;
 
 import java.util.Date;
 
+import com.qc.rc.common.Util;
 
 public class Interview {
 	/*
@@ -25,21 +26,21 @@ public class Interview {
 )
 	 */
 	private Integer interviewId;//id
-	private Integer interviewResumeId;
-	private String interviewJob;
-	private Date interviewTime;
-	private String interviewAssociateUsername;
-	private String interviewAssociatePhone;
-	private String interviewAddress;
-	private String interviewInfo;
-	private Integer interviewStatus;
-	private String interviewRecodeInfo;
-	private String interviewCreateUser;
-	private Date interviewCreateTime;
-	private String interviewUpdateUser;
-	private Date interviewUpdateTime;
-	private Integer interviewDeleteFlag;
-	private Integer interviewUserId;
+	private Integer interviewResumeId;//面试人id
+	private String interviewJob;//面试职位
+	private Date interviewTime;//面试时间
+	private String interviewAssociateUsername;//联系人
+	private String interviewAssociatePhone;//联系人联系方式
+	private String interviewAddress;//面试地点
+	private String interviewInfo;//备注信息
+	private Integer interviewStatus;//面试结果1成功2待面试3失败
+	private String interviewRecodeInfo;//面试结果记录
+	private String interviewCreateUser;//面试
+	private Date interviewCreateTime;//面试创建时间
+	private String interviewUpdateUser;//面试更新人
+	private Date interviewUpdateTime;//面试更新时间
+	private Integer interviewDeleteFlag;//删除标志
+	private Integer interviewUserId;//userid
 	
 	
 	public Integer getInterviewId() {

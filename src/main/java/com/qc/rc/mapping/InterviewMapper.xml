@@ -51,30 +51,80 @@
 	private Date interviewUpdateTime;//面试更新时间
 	private Integer interviewDeleteFlag;//删除标志
 	private Integer interviewUserId;//userid -->
-	<resultMap id="resumeAndInterviewMap" type="com.qc.rc.entity.pojo.InterviewPojo">
-		<!-- &lt;!&ndash;一般主键y用id&ndash;&gt; -->
-		
+	<resultMap id="resumeAndInterviewMap" type="com.qc.rc.entity.pojo.InterviewPojo">		
 		<id column="INTERVIEW_ID" property="interviewId"></id>
 		<result column="INTERVIEW_JOB" property="interviewJob"></result>
 		<result column="INTERVIEW_ADDRESS" property="interviewAddress"></result>
 		<result column="INTERVIEW_TIME" property="interviewTime"></result>
 		<result column="INTERVIEW_STATUS" property="interviewStatus"></result>
-
-		<!-- &lt;!&ndash;映射包装类中user属性&ndash;&gt;
-		&lt;!&ndash;一对一映射用association&ndash;&gt; -->
+		<result column="INTERVIEW_INFO" property="interviewInfo"></result>
 		<association property="resume" javaType="com.qc.rc.entity.Resume">
 			<id column="RESUME_ID" property="resumeId"></id>
 			<result column="RESUME_NAME" property="resumeName"></result>
 			<result column="RESUME_PHONE" property="resumePhone"></result>
 		</association>
 	</resultMap>
+	
  	<select id="selectAllInterviewsByUserId" resultMap="resumeAndInterviewMap">
     select 
-	RC_INTERVIEW.INTERVIEW_ID,RC_INTERVIEW.INTERVIEW_JOB,RC_INTERVIEW.INTERVIEW_TIME,RC_INTERVIEW.INTERVIEW_STATUS,
+	RC_INTERVIEW.INTERVIEW_ID,RC_INTERVIEW.INTERVIEW_JOB,RC_INTERVIEW.INTERVIEW_ADDRESS,RC_INTERVIEW.INTERVIEW_TIME,RC_INTERVIEW.INTERVIEW_STATUS,
 	RC_RESUME.RESUME_ID,RC_RESUME.RESUME_NAME,RC_RESUME.RESUME_PHONE
     from RC_INTERVIEW,RC_RESUME
     where INTERVIEW_USER_ID = #{userId,jdbcType=INTEGER}
     and RC_INTERVIEW.INTERVIEW_RESUME_ID = RC_RESUME.RESUME_ID
     and RC_INTERVIEW.INTERVIEW_DELETE_FLAG = 0
-  </select>
+  	</select>
+  	
+  	<select id="selectByCondition" resultMap="resumeAndInterviewMap">
+    select 
+	RC_INTERVIEW.INTERVIEW_ID,RC_INTERVIEW.INTERVIEW_JOB,RC_INTERVIEW.INTERVIEW_ADDRESS,RC_INTERVIEW.INTERVIEW_TIME,RC_INTERVIEW.INTERVIEW_STATUS,
+	RC_RESUME.RESUME_ID,RC_RESUME.RESUME_NAME,RC_RESUME.RESUME_PHONE
+    from RC_INTERVIEW,RC_RESUME
+   	 <where>
+    		INTERVIEW_USER_ID = #{userId,jdbcType=INTEGER}
+		    and RC_INTERVIEW.INTERVIEW_RESUME_ID = RC_RESUME.RESUME_ID
+		    and RC_INTERVIEW.INTERVIEW_DELETE_FLAG = 0
+		    <!-- and RC_INTERVIEW.INTERVIEW_TIME > #{startTime,jdbcType=DATE}
+		    and RC_INTERVIEW.INTERVIEW_TIME < #{overTime,jdbcType=DATE} -->
+    		<if test="interviewJob != null and interviewJob !=''">
+				AND RC_INTERVIEW.INTERVIEW_JOB LIKE '%${interviewJob}%'
+			</if>
+			<if test="interviewInfo != null and interviewInfo !=''">
+				AND RC_RESUME.RESUME_NAME LIKE '%${interviewInfo}%'
+				OR RC_INTERVIEW.INTERVIEW_ADDRESS LIKE '%${interviewInfo}%'
+				OR RC_INTERVIEW.INTERVIEW_INFO LIKE '%${interviewInfo}%'
+			</if>
+			
+			
+   	 </where> 
+  	</select>
+  	
+  	<select id="getAllInterviewsByUserId" resultType="java.lang.Integer">
+    select 
+	count(*)
+    from RC_INTERVIEW
+    where INTERVIEW_USER_ID = #{userId,jdbcType=INTEGER}
+    and INTERVIEW_DELETE_FLAG = 0
+  	</select>
+  	
+  	<select id="getAllInterviewsByCondition" resultType="java.lang.Integer">
+    select 
+	count(*)
+	from RC_INTERVIEW,RC_RESUME
+   	 <where>
+    		INTERVIEW_USER_ID = #{userId,jdbcType=INTEGER}
+		    and RC_INTERVIEW.INTERVIEW_RESUME_ID = RC_RESUME.RESUME_ID
+		    and RC_INTERVIEW.INTERVIEW_DELETE_FLAG = 0
+    		<if test="interviewJob != null and interviewJob !=''">
+				AND RC_INTERVIEW.INTERVIEW_JOB LIKE '%${interviewJob}%'
+			</if>
+			<if test="interviewInfo != null and interviewInfo !=''">
+				AND RC_RESUME.RESUME_NAME LIKE '%${interviewInfo}%'
+				OR RC_INTERVIEW.INTERVIEW_ADDRESS LIKE '%${interviewInfo}%'
+				OR RC_INTERVIEW.INTERVIEW_INFO LIKE '%${interviewInfo}%'
+			</if>
+			
+   	 </where> 
+  	</select>
+  	
 </mapper>
