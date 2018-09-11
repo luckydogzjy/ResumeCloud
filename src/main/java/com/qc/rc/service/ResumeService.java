@@ -2,6 +2,8 @@ package com.qc.rc.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.pojo.ResumePojo;
 
@@ -11,4 +13,9 @@ public interface ResumeService {
 	//条件查询返回简历list
 	public List<ResumePojo> getResumeListByCondition(Integer userId,String resumeName,String resumeJobIntension,Integer resumeSex,
 			Integer resumeEducation,Integer resumeWorkYears,String resumeGraduateInstitution);
+	
+	//根据id返回resume表的全部详细信息
+	public ResumePojo getResumeDetailsById(Integer resumeId);
+	//根据id删除resume信息
+	public void deleteResumeById(Integer resumeId);
 }

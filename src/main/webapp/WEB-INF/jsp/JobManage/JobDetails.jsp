@@ -3,13 +3,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-		<table>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<link rel="stylesheet" type="text/css" href="css/demo.css"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<body>
+		<div id="header">
+		<jsp:include page="header.jsp" flush="true"/>
+		</div>
+		<div id="lefter">
+		<jsp:include page="lefter.jsp" flush="true"/>
+		</div>
+		
+		
+		<div id="right">
+			<div id="right-box">
+				
+<table>
 					<tr>
 					 <th>职位名称:</th>
 					 <td>${job.JOB_NAME}</td>
@@ -48,5 +62,7 @@
 				
 			
 			</table>
-</body>
+			</div>
+		</div>
+	</body>
 </html>

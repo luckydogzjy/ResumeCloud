@@ -2,6 +2,8 @@ package com.qc.rc.entity;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Component;
+@Component
 public class Pic {
 	
 	private Integer pId;
@@ -15,6 +17,12 @@ public class Pic {
 	private Date pDeleteFlag;
 	
 	
+	@Override
+	public String toString() {
+		return "Pic [pId=" + pId + ", pResumeId=" + pResumeId + ", pPic=" + pPic + ", pCreateUser=" + pCreateUser
+				+ ", pCreateTime=" + pCreateTime + ", pUpdateUser=" + pUpdateUser + ", pUpdateTime=" + pUpdateTime
+				+ ", pDeleteFlag=" + pDeleteFlag + "]";
+	}
 	public Integer getpId() {
 		return pId;
 	}

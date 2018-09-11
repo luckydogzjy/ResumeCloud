@@ -46,7 +46,7 @@
 		RESUME_GRADUATE_INSTITUTION, RESUME_EDUCATION
 	</sql> -->
 
-
+	<!--一条简历有一个面试结果，有一个获取方式  -->
 	<resultMap type="com.qc.rc.entity.pojo.ResumePojo" id="getResumeList">
 
 		<id column="RESUME_ID" property="resumeId"></id>
@@ -72,12 +72,43 @@
 			<result column="UR_RESUME_SHARE_FLAG" property="urResumeShareFlag"></result>
 		</association>
 		
-	</resultMap>
+	</resultMap> 
+<!-- 	
+	<resultMap type="com.qc.rc.entity.pojo.UserResumePojo" id="getResumeList">
+		
+		<id column="UR_ID" property="urId"></id>
+		<result column="UR_USER_ID" property="urUesrId"></result>			
+		<result column="UR_RESUME_ID" property="urResumeId"></result>
+		<result column="UR_RESUME_GETWAT" property="urResumeGetway"></result>
+		<result column="UR_RESUME_SHARE_FLAG" property="urResumeShareFlag"></result>
+		
+		<collection property="resumePojos" ofType="com.qc.rc.entity.pojo.ResumePojo" >
+			
+			<id column="RESUME_ID" property="resumeId"></id>
+			<result column="RESUME_NAME" property="resumeName"></result>
+			<result column="RESUME_SEX" property="resumeSex"></result>
+			<result column="RESUME_PHONE" property="resumePhone"></result>
+			<result column="RESUME_WORK_YEARS" property="resumeWorkYears"></result>
+			<result column="RESUME_GRADUATE_INSTITUTION" property="resumeGraduateInstitution"></result>
+			<result column="RESUME_EDUCATION" property="resumeEducation"></result>
+			<result column="RESUME_JOB_INTENSION" property="resumeJobIntension"></result>
+			<result column="RESUME_CREATE_TIME" property="resumeCreateTime"></result>
+			
+			<association property="interview" javaType="com.qc.rc.entity.Interview">
+				<id column="INTERVIEW_ID" property="interviewId"></id>
+				<result column="INTERVIEW_STATUS" property="interviewStatus"></result>
+			</association>
+	
+		</collection>
+		
+		
+		
+	</resultMap> -->
 	
 	<select id="getAllResume" resultMap="getResumeList">
 		SELECT
 		RESUME_ID,RESUME_NAME,RESUME_SEX,RESUME_PHONE,RESUME_WORK_YEARS,RESUME_GRADUATE_INSTITUTION,
-		RESUME_EDUCATION,RESUME_JOB_INTENSION,RESUME_CREATE_TIME,INTERVIEW_ID,INTERVIEW_STATUS
+		RESUME_EDUCATION,RESUME_JOB_INTENSION,RESUME_CREATE_TIME,INTERVIEW_ID,INTERVIEW_STATUS,
 		UR_ID,UR_USER_ID,UR_RESUME_ID,UR_RESUME_GETWAT,UR_RESUME_SHARE_FLAG
 		FROM RC_RESUME LEFT JOIN RC_INTERVIEW 
 		ON RC_RESUME.RESUME_ID = RC_INTERVIEW.INTERVIEW_RESUME_ID,
@@ -93,7 +124,7 @@
 	<select id="getResumeListByCondition" resultMap="getResumeList">
 		SELECT
 		RESUME_ID,RESUME_NAME,RESUME_SEX,RESUME_PHONE,RESUME_WORK_YEARS,RESUME_GRADUATE_INSTITUTION,
-		RESUME_EDUCATION,RESUME_JOB_INTENSION,RESUME_CREATE_TIME,INTERVIEW_ID,INTERVIEW_STATUS
+		RESUME_EDUCATION,RESUME_JOB_INTENSION,RESUME_CREATE_TIME,INTERVIEW_ID,INTERVIEW_STATUS,
 		UR_ID,UR_USER_ID,UR_RESUME_ID,UR_RESUME_GETWAT,UR_RESUME_SHARE_FLAG
 		FROM RC_RESUME LEFT JOIN RC_INTERVIEW
 		ON RC_RESUME.RESUME_ID = RC_INTERVIEW.INTERVIEW_RESUME_ID,
@@ -130,16 +161,61 @@
 			</if>
 			AND RC_USER_RESUME.UR_USER_ID = #{userId }
 			AND RESUME_DELETE_FLAG = 0
+			AND RC_RESUME.RESUME_ID = RC_USER_RESUME.UR_RESUME_ID 
 		</where>
 	</select>
 	
 
+	<!--一条简历有多个图片，有多个文件  -->
+	<resultMap type="com.qc.rc.entity.pojo.ResumePojo" id="getResumeById">
+
+		<id column="RESUMEID" property="resumeId"></id>
+		<result column="RESUME_NAME" property="resumeName"></result>
+		<result column="RESUME_SEX" property="resumeSex"></result>
+		<result column="RESUME_BIRTHDAY" property="resumeBirthday"></result>
+		<result column="RESUME_PHONE" property="resumePhone"></result>
+		<result column="RESUME_EMAIL" property="resumeEmail"></result>
+		<result column="RESUME_ADDRESS" property="resumeAddress"></result>
 		
-<!-- 	<select id="getResumeDetailsById" resultMap="">
+		<result column="RESUME_GRADUATE_INSTITUTION" property="resumeGraduateInstitution"></result>
+		<result column="RESUME_EDUCATION" property="resumeEducation"></result>
+		<result column="RESUME_JOB_INTENSION" property="resumeJobIntension"></result>
+		<result column="RESUME_SELF_EVALUATION" property="resumeSelfEvaluation"></result>
+		<result column="RESUME_WORK_EXPERIENCE" property="resumeWorkExperience"></result>
+		<result column="RESUME_WORK_YEARS" property="resumeWorkYears"></result>
+		
+		<result column="RESUME_CREATE_TIME" property="resumeCreateTime"></result>
+
+		<collection property="lPics" ofType="com.qc.rc.entity.Pic">
+			<id column="PID" property="pId"></id>
+			<result column="P_RESUME_ID" property="pResumeId"></result>
+			<result column="P_PIC" property="pPic"></result>
+		</collection>
+		
+		<collection property="lFiles" ofType="com.qc.rc.entity.File">
+			<id column="FID" property="fId"></id>
+			<result column="F_RESUME_ID" property="fResumeId"></result>			
+			<result column="F_FILE" property="fFile"></result>
+		</collection>
+		
+	</resultMap> 
+		
+ 	<select id="getResumeDetailsById" resultMap="getResumeById">
 		SELECT
-		RESUME_ID,RESUME_NAME,RESUME_SEX,RESUME_PHONE,RESUME_WORK_YEARS,RESUME_GRADUATE_INSTITUTION,
-		RESUME_EDUCATION,RESUME_JOB_INTENSION,RESUME_CREATE_TIME,INTERVIEW_ID,INTERVIEW_STATUS
-		FROM RC_RESUME,RC_INTERVIEW
-		WHERE RESUME_ID = RC_INTERVIEW.INTERVIEW_RESUME_ID
-	</select> -->
+		RESUME_ID RESUMEID,RESUME_NAME,RESUME_SEX,RESUME_BIRTHDAY,RESUME_PHONE,RESUME_EMAIL,RESUME_ADDRESS,
+		RESUME_GRADUATE_INSTITUTION,RESUME_EDUCATION,RESUME_JOB_INTENSION,RESUME_SELF_EVALUATION,
+		RESUME_WORK_EXPERIENCE,RESUME_WORK_YEARS,
+		P_ID PID,P_RESUME_ID,P_PIC,
+		F_ID FID,F_RESUME_ID,F_FILE
+		FROM RC_RESUME 
+    	LEFT JOIN  RC_PIC  ON RC_RESUME.RESUME_ID = RC_PIC.P_RESUME_ID
+    	LEFT JOIN  RC_FILE ON RC_RESUME.RESUME_ID = RC_FILE.F_RESUME_ID
+		WHERE RESUME_ID = #{resumeId }
+	</select> 
+	<!-- 删除操作是将deleteFlag赋值为1 -->
+	<update id="deleteResumeById" >
+		UPDATE RC_RESUME
+		SET RESUME_DELETE_FLAG = 1
+		WHERE RESUME_ID = #{resumeId }
+	</update>
 </mapper>
