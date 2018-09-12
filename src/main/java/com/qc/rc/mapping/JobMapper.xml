@@ -3,7 +3,7 @@
 <mapper namespace="com.qc.rc.dao.JobMapper">
  	
  	<select id="jobGetAll" resultType="com.qc.rc.entity.Job">
- 		select * from RC_JOB order by JOB_ID
+ 		select * from RC_JOB where JOB_USER_ID = #{userId} order by JOB_ID
  	</select>
   	
   	<insert id="jobAdd" parameterType="com.qc.rc.entity.Job">
@@ -26,7 +26,7 @@
   	</update>
   	
   	<select id="jobGetByName" resultType="com.qc.rc.entity.Job">
-  		select * from RC_JOB where JOB_NAME like '%${name}%' order by JOB_ID
+  		select * from RC_JOB where JOB_USER_ID = #{userId} and JOB_NAME like '%${name}%' order by JOB_ID
   	</select>
   	
   	<select id="jobGetOne" resultType="com.qc.rc.entity.Job">
