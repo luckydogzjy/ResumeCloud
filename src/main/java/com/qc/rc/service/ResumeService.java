@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.SharingCenter;
+import com.qc.rc.entity.UserResume;
 import com.qc.rc.entity.pojo.ResumePojo;
 
 public interface ResumeService {
@@ -22,4 +23,21 @@ public interface ResumeService {
 	
 	//点击共享按钮后将信息插入共享中心,返回主键
 	Integer shareResume(SharingCenter sharingCenter);
+	
+	
+	
+	
+	/*   zhang   */
+	
+	
+	public int resumeAdd(Resume resume);
+
+	public int resumeUpdate(Resume resume);
+
+	public Resume resumeUpdateSelect(String resume_id);
+
+	public int selectResumeBestId();
+
+	public int resumeAddResumeUser(UserResume userresume);
+	
 }
