@@ -21,7 +21,17 @@
 		
 		<div id="right">
 			<div id="right-box">
-				
+				<form action="${pageContext.request.contextPath}/jobAdd.do" method="POST">
+			
+			职位名称:<input type="text"  name="name" value="${job.JOB_NAME}"><br>
+			职位数量:<input type="number" name="count" min="0" value="${job.JOB_COUNT}"><br>
+			职位薪资:<input type="number" name="salary" min="0" value="${job.JOB_SALARY}"><br>
+			截止时间:<input type="date" name="endTime" value="<fmt:formatDate value="${job.JOB_END_TIME}" pattern="yyyy-MM-dd" />"><br>
+			职位介绍:<textarea name="introduciton" >${job.JOB_INTRODUCTION}</textarea><br>
+			任职要求:<textarea name="condition" >${job.JOB_CONDITION}</textarea><br>
+			<input type="submit" value="提交">
+		
+		</form>
 			</div>
 		</div>
 	</body>

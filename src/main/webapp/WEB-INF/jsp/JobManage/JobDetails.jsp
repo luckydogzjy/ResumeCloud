@@ -23,7 +23,45 @@
 		<div id="right">
 			<div id="right-box">
 				
-
+<table>
+					<tr>
+					 <th>职位名称:</th>
+					 <td>${job.JOB_NAME}</td>
+				    </tr>
+				    <tr>
+					 <th>职位数量:</th>
+					  <td>${job.JOB_COUNT}</td>
+				    </tr>
+				    <tr>
+					 <th>职位状态:</th>
+					  <td>${job.JOB_STATUS}</td>
+				    </tr>
+				    <tr>
+					 <th>薪资:</th>
+					  <td>${job.JOB_SALARY}</td>
+				    </tr>
+				    <tr>
+					 <th>创建时间:</th>
+					  <td><fmt:formatDate value="${job.JOB_CREATE_TIME}" pattern="yyyy年MM月dd日" /></td>
+				    </tr>
+				    <tr>
+					 <th>截止时间:</th>
+					  <td><fmt:formatDate value="${job.JOB_END_TIME}" pattern="yyyy年MM月dd日" /></td>
+				    </tr>
+				    <tr>
+					 <th>职位介绍:</th>
+					  <td>${job.JOB_INTRODUCTION}</td>
+				    </tr>
+				    <tr>
+					 <th>任职要求:</th>
+					  <td>${job.JOB_CONDITION}</td>
+				    </tr>
+					
+				   
+				    
+				
+			
+			</table>
 			</div>
 		</div>
 	</body>
