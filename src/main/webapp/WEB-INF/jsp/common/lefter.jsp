@@ -23,7 +23,7 @@
 				<div id="left-item-resume" class="left-item" >
 					<div class="left-item-box">
 					<img class="left-item-pic" src="${pageContext.request.contextPath}/img/u13.png" />
-					<a class="left-item-a" href="#">简历管理</a>
+					<a class="left-item-a" href="resumeDisplay.do">简历管理</a>
 					</div>
 				</div>
 
