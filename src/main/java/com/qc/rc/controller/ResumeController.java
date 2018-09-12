@@ -226,10 +226,6 @@ public class ResumeController {
 		//需要从session中取
 		resume.setResumeCreateUser("zhang");	
 		
-		
-		
-		
-		
 		Map<String,Object> model = new HashMap<String,Object>();
 		//增加到resume表中
 		int resultCount = resumeService.resumeAdd(resume);
@@ -312,6 +308,10 @@ public class ResumeController {
 		String resume_work_years =request.getParameter( "resume_work_years");
 		String resume_self_evaluation = request.getParameter("resume_self_evaluation");
 		String resume_work_experience = request.getParameter("resume_work_experience");
+		
+		String wenjian = request.getParameter("wenjian");
+		
+		System.out.println("文件传过来的值" + wenjian);
 		
 		//需要更改
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");//小写的mm表示的是分钟

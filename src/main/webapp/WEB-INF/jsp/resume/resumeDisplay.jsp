@@ -196,15 +196,24 @@
 						未安排面试
 					</c:if></td>
 
-							<td><input type="button" value="修改" /> <input type="button"
-								value="删除" onclick="resumeDelete(${resume.resumeId })" /> <!-- 如果面试情况为待面试，则面试按钮不可点 -->
+							<td>
+						
+							
+							
+							<a href="${pageContext.request.contextPath}/resume_update_show.do?resume_id=${resume.resumeId }">
+							<input type="button" value="修改"/>
+							</a>
+							
+							
+							
+							<input type="button" value="删除" onclick="resumeDelete(${resume.resumeId })" /> <!-- 如果面试情况为待面试，则面试按钮不可点 -->
+							
 								<c:if test="${resume.interview.interviewStatus == 2}">
 									<input type="button" value="待面试" disabled="disabled" />
 								</c:if> <c:if test="${resume.interview.interviewStatus != 2}">
 									<input type="button" value="面试" />
-								</c:if> <!-- 如果简历是自己录入的(0),并且没有没有被共享过(0) 则按钮为共享 --> <c:if
-									test="${resume.userResume.urResumeGetway == 0 
-									&&  resume.userResume.urResumeShareFlag == 0}">
+								</c:if> <!--如果简历是自己录入的(0),并且没没有被共享过(0) 则按钮为共享 -->
+								 <c:if test="${resume.userResume.urResumeGetway == 0 &&  resume.userResume.urResumeShareFlag == 0}">
 									<input type="button" value="共享" onclick="resumeShare(${resume.resumeId })"/>
 								</c:if> <!-- 如果简历是自己录入的(0),并且已经被共享过(1) 则按钮为已共享 --> <c:if
 									test="${resume.userResume.urResumeGetway == 0 
@@ -214,12 +223,14 @@
 									test="${resume.userResume.urResumeGetway != 0 
 									&&  resume.userResume.urResumeShareFlag == 1}">
 									<input type="button" value="不可共享" disabled="disabled" />
-								</c:if></td>
+								</c:if>
+							</td>
 						</tr>
 
 					</c:forEach>
 				</tbody>
 			</table>
+			 <a href="${pageContext.request.contextPath}/tiaozhuan_add.do"><input type="button" value="新增"/></a>
 		</div>
 	</div>
 </body>
