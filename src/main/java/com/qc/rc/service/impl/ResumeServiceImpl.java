@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qc.rc.dao.ResumeMapper;
+import com.qc.rc.entity.DownloadRecord;
 import com.qc.rc.entity.Pic;
 import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.SharingCenter;
 import com.qc.rc.entity.UserResume;
 import com.qc.rc.entity.pojo.ResumePojo;
+import com.qc.rc.entity.pojo.SharingCenterPojo;
 import com.qc.rc.service.ResumeService;
 
 
@@ -66,7 +68,20 @@ public class ResumeServiceImpl implements ResumeService {
 		
 		return resumeMapper.shareResume(sharingCenter);
 	}
-	
+	public void  updateUserResume(Integer resumeId){
+		
+		resumeMapper.updateUserResume(resumeId);
+	}
+	//显示共享中心页面，取到全部信息
+	public List<SharingCenterPojo> getAllSharingResume(){
+		
+		return resumeMapper.getAllSharingResume();
+	}
+	//显示当前用户所兑换过的简历列表
+	public List<DownloadRecord> getDownloadRecordById(Integer userId){
+		
+		return resumeMapper.getDownloadRecordById(userId);
+	}
 	
 	
 /*    zhang   */

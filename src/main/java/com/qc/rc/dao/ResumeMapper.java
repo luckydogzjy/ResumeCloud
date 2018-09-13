@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.qc.rc.entity.DownloadRecord;
 import com.qc.rc.entity.Pic;
 import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.SharingCenter;
 import com.qc.rc.entity.UserResume;
 import com.qc.rc.entity.pojo.ResumePojo;
+import com.qc.rc.entity.pojo.SharingCenterPojo;
 
 public interface ResumeMapper {
 	
@@ -24,6 +26,12 @@ public interface ResumeMapper {
 	void deleteResumeById(@Param("resumeId")Integer resumeId);
 	//点击共享按钮后将信息插入共享中心,返回主键
 	Integer shareResume(SharingCenter sharingCenter);
+	//执行完插入共享中心的操作后，继续执行更新RC_USER_RESUME表，让其中的共享标志UR_RESUME_SHARE_FLAG设为1
+	void  updateUserResume(@Param("resumeId")Integer resumeId);
+	//显示共享中心页面，取到全部信息
+	List<SharingCenterPojo> getAllSharingResume();
+	//显示当前用户所兑换过的简历列表
+	List<DownloadRecord> getDownloadRecordById(@Param("userId")Integer userId);
 	
 	
 	

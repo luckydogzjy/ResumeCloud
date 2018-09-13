@@ -22,11 +22,13 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.qc.rc.common.FormParameterUtil;
+import com.qc.rc.entity.DownloadRecord;
 import com.qc.rc.entity.Pic;
 import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.SharingCenter;
 import com.qc.rc.entity.UserResume;
 import com.qc.rc.entity.pojo.ResumePojo;
+import com.qc.rc.entity.pojo.SharingCenterPojo;
 import com.qc.rc.service.ResumeService;
 
 @Controller
@@ -48,7 +50,7 @@ public class ResumeController {
 	
 	//正常应该在session里得到登录人的userId
 	//这里只做测试
-	public static Integer userId = 1;
+	public static Integer userId = 2;
 	
 	@RequestMapping("/resumeDisplay.do")
 	public ModelAndView resumeDisplay(HttpServletRequest request,  HttpServletResponse response){
@@ -175,7 +177,10 @@ public class ResumeController {
 		
 		Integer integer = resumeService.shareResume(sharingCenter);	
 		
+		//返回主键 ，暂时没用
 		System.out.println("返回的主键为"+ sharingCenter.getScId());
+		//执行完插入后，要将RC_USER_RESUME表更新		
+		resumeService.updateUserResume(resumeId);
 		
 		
 		
@@ -183,7 +188,36 @@ public class ResumeController {
 		
 	}
 	
-	
+	@RequestMapping("/resumeSharingCenter.do")
+	public ModelAndView resumeSharingCenter(){
+		
+		List<SharingCenterPojo> list = resumeService.getAllSharingResume();
+		//取到全部信息后，取当前用户所兑换过的简历列表
+		List<DownloadRecord> downloadRecords = resumeService.getDownloadRecordById(userId);
+		
+		System.out.println(list.size());
+		System.out.println(downloadRecords.size());
+		
+		for(int i = 0; i < downloadRecords.size(); i++){
+			for(int j = 0; j < list.size(); j++){
+				if (downloadRecords.get(i).getDrSharingCenterId() == list.get(j).getScId()) {
+					//将当前用户兑换过的简历信息，在list里将标志位赋值为1，意思为当前用户已经兑换过，
+					//在前台显示 已兑换 按钮
+					
+					list.get(j).setFlag(1);
+				}
+			}
+		}
+		
+//		for (SharingCenterPojo sharingCenterPojo : list) {
+//			System.out.println(sharingCenterPojo.getScId()+ "---------"+ sharingCenterPojo.getFalg());
+//		}
+		
+		Map<String,Object> model = new HashMap<String,Object>(); 
+		model.put("sharingList", list);
+		
+		return new ModelAndView("resume/resumeSharingCenter",model);	
+	}
 	
 	
 	
