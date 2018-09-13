@@ -47,7 +47,7 @@ public class Util {
 //	将字符串转换为日期
 	public static Date strToDate(String strDate) {
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		Date date = null;
 		try {
 			date = sdf.parse(strDate);
@@ -61,7 +61,7 @@ public class Util {
 //	日期转字符串
 	public static String dateToStr(Date date) {
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String dateStr = sdf.format(date);
 		return dateStr;
 	}

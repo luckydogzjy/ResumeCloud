@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="css/demo.css"/>
 	<link rel="stylesheet" type="text/css" href="css/interviewCss/IVxiangqing.css"/>
 	<body>
+	
 		<div id="box">
 			<div id="header">
 			<jsp:include page="../common/header.jsp" flush="true"/>
@@ -68,6 +69,8 @@
 					<div id="right-box-button">
 						<input id="right-box-button-xiugai" type="button" value="修改" />
 						<input id="right-box-button-shanchu" type="button" value="删除" />
+						
+						
 					</div>
 				</div>
 			</div>

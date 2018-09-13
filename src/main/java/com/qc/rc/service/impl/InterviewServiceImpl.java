@@ -2,6 +2,7 @@ package com.qc.rc.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,5 +64,12 @@ public class InterviewServiceImpl implements InterviewService {
 		
 		return ipPageBean;
 	}
+	
+	public void addInterview(InterviewPojo interviewPojo) {
+		interviewMapper.addInterview(interviewPojo);
+	}
 
+	public void deleteInterview(Integer interviewId){
+		interviewMapper.deleteInterview(interviewId);
+	}
 }

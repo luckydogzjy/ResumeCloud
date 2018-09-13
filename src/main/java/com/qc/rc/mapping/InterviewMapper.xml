@@ -84,8 +84,8 @@
     		INTERVIEW_USER_ID = #{userId,jdbcType=INTEGER}
 		    and RC_INTERVIEW.INTERVIEW_RESUME_ID = RC_RESUME.RESUME_ID
 		    and RC_INTERVIEW.INTERVIEW_DELETE_FLAG = 0
-		    <!-- and RC_INTERVIEW.INTERVIEW_TIME > #{startTime,jdbcType=DATE}
-		    and RC_INTERVIEW.INTERVIEW_TIME < #{overTime,jdbcType=DATE} -->
+		    and RC_INTERVIEW.INTERVIEW_TIME &gt;= #{startTime}
+		    and RC_INTERVIEW.INTERVIEW_TIME &lt;= #{overTime} 
     		<if test="interviewJob != null and interviewJob !=''">
 				AND RC_INTERVIEW.INTERVIEW_JOB LIKE '%${interviewJob}%'
 			</if>
@@ -127,4 +127,21 @@
    	 </where> 
   	</select>
   	
+  	
+  	<insert id="addInterview" parameterType="com.qc.rc.entity.pojo.InterviewPojo">
+  	insert into RC_INTERVIEW(INTERVIEW_ID,INTERVIEW_RESUME_ID,INTERVIEW_JOB,INTERVIEW_TIME,INTERVIEW_ASSOCIATE_USERNAME
+  	,INTERVIEW_ASSOCIATE_PHONE,INTERVIEW_ADDRESS,INTERVIEW_INFO,INTERVIEW_STATUS,INTERVIEW_CREATE_USER,INTERVIEW_CREATE_TIME
+  	,INTERVIEW_DELETE_FLAG,INTERVIEW_USER_ID) 
+  		values(RC_INTERVIEW_SEQUENCE.nextval,#{interviewResumeId},#{interviewJob},#{interviewTime},#{interviewAssociateUsername},
+  		#{interviewAssociatePhone},#{interviewAddress},#{interviewInfo},#{interviewStatus},#{interviewCreateUser},
+  		#{interviewCreateTime},#{interviewDeleteFlag},#{interviewUserId})
+  		
+  		<!-- <selectKey keyProperty="interviewId" order="AFTER" resultType="java.lang.Integer">
+  		
+  		</selectKey> -->
+  	</insert>
+
+	<update id="deleteInterview" parameterType="java.lang.Integer">
+	update RC_INTERVIEW set INTERVIEW_DELETE_FLAG = 1 where INTERVIEW_ID = #{interviewId,jdbcType=INTEGER}
+	</update>
 </mapper>

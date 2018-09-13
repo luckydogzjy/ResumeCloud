@@ -184,5 +184,16 @@ public class Resume {
 	public Resume(){
 		super();
 	}
+	@Override
+	public String toString() {
+		return "Resume [resumeId=" + resumeId + ", resumeName=" + resumeName + ", resumeSex=" + resumeSex
+				+ ", resumeBirthday=" + resumeBirthday + ", resumePhone=" + resumePhone + ", resumeEmail=" + resumeEmail
+				+ ", resumeAddress=" + resumeAddress + ", resumeGraduateInstitution=" + resumeGraduateInstitution
+				+ ", resumeEducation=" + resumeEducation + ", resumeJobIntension=" + resumeJobIntension
+				+ ", resumeSelfEvaluation=" + resumeSelfEvaluation + ", resumeWorkExperience=" + resumeWorkExperience
+				+ ", resumeWorkYears=" + resumeWorkYears + ", resumeCreateUser=" + resumeCreateUser
+				+ ", resumeCreateTime=" + resumeCreateTime + ", resumeUpdateUser=" + resumeUpdateUser
+				+ ", resumeUpdateTime=" + resumeUpdateTime + ", resumeDeleteFlag=" + resumeDeleteFlag + "]";
+	}
 	
 }

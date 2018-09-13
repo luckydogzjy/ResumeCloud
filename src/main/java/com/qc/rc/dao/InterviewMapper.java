@@ -20,8 +20,12 @@ public interface InterviewMapper {
 	List<InterviewPojo> selectAllInterviewsByUserId(RowBounds rb,@Param("userId")Integer userId); 
 	
 	//根据条件和userid查找当前用户所有的interview 分页
-	List<InterviewPojo> selectByCondition(RowBounds rb,@Param("userId")Integer userId, Date startTime,
-			Date overTime, @Param("interviewJob")String interviewJob, @Param("interviewInfo")String interviewInfo);
+	List<InterviewPojo> selectByCondition(RowBounds rb,@Param("userId")Integer userId, @Param("startTime")Date startTime,
+			@Param("overTime")Date overTime, @Param("interviewJob")String interviewJob, @Param("interviewInfo")String interviewInfo);
 
+	//插入interviewPojo	
+	void addInterview(InterviewPojo interviewPojo);
 
+	//删除
+	void deleteInterview(@Param("interviewId")Integer interviewId);
 }

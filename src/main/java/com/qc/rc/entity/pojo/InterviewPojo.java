@@ -33,6 +33,21 @@ public class InterviewPojo extends Interview {
 	public InterviewPojo() {
 
 	}
+
+	@Override
+	public String toString() {
+		return "InterviewPojo [getInterviewId()="
+				+ getInterviewId() + ", getInterviewResumeId()=" + getInterviewResumeId() + ", getInterviewJob()="
+				+ getInterviewJob() + ", getInterviewTime()=" + getInterviewTime()
+				+ ", getInterviewAssociateUsername()=" + getInterviewAssociateUsername()
+				+ ", getInterviewAssociatePhone()=" + getInterviewAssociatePhone() + ", getInterviewAddress()="
+				+ getInterviewAddress() + ", getInterviewInfo()=" + getInterviewInfo() + ", getInterviewStatus()="
+				+ getInterviewStatus() + ", getInterviewRecodeInfo()=" + getInterviewRecodeInfo()
+				+ ", getInterviewCreateUser()=" + getInterviewCreateUser() + ", getInterviewCreateTime()="
+				+ getInterviewCreateTime() + ", getInterviewUpdateUser()=" + getInterviewUpdateUser()
+				+ ", getInterviewUpdateTime()=" + getInterviewUpdateTime() + ", getInterviewDeleteFlag()="
+				+ getInterviewDeleteFlag() + ", getInterviewUserId()=" + getInterviewUserId();
+	}
 	
 	
 }
