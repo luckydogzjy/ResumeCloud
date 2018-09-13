@@ -1,9 +1,12 @@
 package com.qc.rc.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.qc.rc.common.FormParameterUtil;
@@ -37,6 +43,8 @@ public class ResumeController {
 	private Resume resume;
 	@Autowired
 	private UserResume userresume;
+	@Autowired
+	private Pic pic;
 	
 	//正常应该在session里得到登录人的userId
 	//这里只做测试
@@ -187,7 +195,7 @@ public class ResumeController {
 			String resume_email, String resume_education ,String resume_address ,String resume_birthday,
 			String resume_job_intension,String resume_graduate_institution,String resume_work_years,
 			String resume_self_evaluation,String resume_work_experience){*/
-		String resume_name = request.getParameter("resume_name");
+/*		String resume_name = request.getParameter("resume_name");
 		String resume_sex = request.getParameter("resume_sex");
 		String resume_phone = request.getParameter("resume_phone");
 		String resume_email = request.getParameter("resume_email");
@@ -255,7 +263,161 @@ public class ResumeController {
 		}else {
 			model.put("info", "增加简历信息失败");
 			return new ModelAndView("resume/resume_add",model);
+		}*/
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		long startTime = System.currentTimeMillis();
+		
+		String resume_name = request.getParameter("resume_name");
+		String resume_sex = request.getParameter("resume_sex");
+		String resume_phone = request.getParameter("resume_phone");
+		String resume_email = request.getParameter("resume_email");
+		String resume_education =request.getParameter("resume_education");
+		String resume_address = request.getParameter("resume_address");
+		String resume_birthday = request.getParameter("resume_birthday");
+		String resume_job_intension =request.getParameter("resume_job_intension");
+		String resume_graduate_institution = request.getParameter("resume_graduate_institution");
+		String resume_work_years =request.getParameter( "resume_work_years");
+		String resume_self_evaluation = request.getParameter("resume_self_evaluation");
+		String resume_work_experience = request.getParameter("resume_work_experience");			
+
+		//需要更改	
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");//小写的mm表示的是分钟
+		java.util.Date date_Birthday;
+		try {
+			date_Birthday = sdf.parse(resume_birthday);
+		} catch (Exception e) {
+		
+			date_Birthday = new Date();
+			e.printStackTrace();
 		}
+
+		resume.setResumeName(resume_name);
+		resume.setResumeSex(Integer.valueOf(resume_sex) );
+		resume.setResumePhone(resume_phone);
+		resume.setResumeEmail(resume_email);
+		resume.setResumeEducation(Integer.valueOf(resume_education));
+		resume.setResumeAddress(resume_address);
+		resume.setResumeBirthday(date_Birthday);
+		resume.setResumeJobIntension(resume_job_intension);
+		resume.setResumeGraduateInstitution(resume_graduate_institution);
+		resume.setResumeWorkYears(Integer.valueOf(resume_work_years));
+		resume.setResumeSelfEvaluation(resume_self_evaluation);
+		resume.setResumeWorkExperience(resume_work_experience);
+		//需要从session中取
+		resume.setResumeCreateUser("zhang");	
+		
+		
+		
+		Map<String,Object> model = new HashMap<String,Object>();
+		//增加到resume表中
+		int resultCount = resumeService.resumeAdd(resume);
+		System.out.println("新增的id："  +  resume.getResumeId());
+		int bestid = resume.getResumeId();
+		if(resultCount != 0){
+//			int bestid = resumeService.selectResumeBestId();
+			System.out.println("最大值id：" + bestid);
+			
+			
+			//需要从session中取
+			int urUesrId = 1;
+			userresume.setUrUesrId(urUesrId);
+			userresume.setUrResumeId(bestid);
+			int result = resumeService.resumeAddResumeUser(userresume);
+			
+			if( result == 1){
+				
+				
+				 //将当前上下文初始化给 CommonsMutipartResolver (多部分解析器)
+			    CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+			    //检查form中是否有enctype="multipart/form-data"
+			    if(multipartResolver.isMultipart(request))
+			    {
+			        //将request变成多request
+			        MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest)request;
+			        //获取multiRequest中所有的文件名
+			        Iterator iter = multiRequest.getFileNames();
+
+			        while(iter.hasNext()){
+			            //一次遍历所有的文件
+			            MultipartFile files = multiRequest.getFile(iter.next().toString());
+			            if(files!=null && !("".equals(files.getOriginalFilename())) && files.getOriginalFilename() != null){
+			            	System.out.println(files.getOriginalFilename());
+			            	
+			                String path = "D:/tupian/resume"+ resume.getResumeId()+resume.getResumeName() + files.getOriginalFilename();
+			                System.out.println(path);
+			                //上传
+			                try {
+								files.transferTo(new File(path));
+							} catch (Exception e) {
+								e.printStackTrace();
+								System.out.println("文件上传到文件夹出错");
+								model.put("info", "新增简历信息添加文件时出错");
+			        			return new ModelAndView("resume/resume_add",model);
+							} 
+			                //添加到数据库
+			                pic.setpResumeId(resume.getResumeId());
+			                pic.setpCreateUser("zhang");
+			                pic.setpPic(path);
+			                
+			                int addpicresult = resumeService.resumeAddPic(pic);
+			                
+			                if(addpicresult == 0){
+			                	//wenjia添加失败
+			                	System.out.println("文件插入数据库时出错");
+			                	model.put("info", "新增简历信息添加文件时出错");
+			        			return new ModelAndView("resume/resume_add",model);
+			                }
+			                
+			                
+			                
+			            }
+			        }
+			    }
+			    long endTime = System.currentTimeMillis();
+			    System.out.println("图片上传运行时间："+String.valueOf(endTime-startTime)+"ms");
+				
+				model.put("info", "增加简历信息成功");
+				return new ModelAndView("resume/resume_add",model);
+				
+			} else {
+				//resumeuser表添加失败
+				model.put("info", "增加简历信息失败");
+				return new ModelAndView("resume/resume_add",model);
+			}
+			
+		}else {
+			//resume表添加失败
+			model.put("info", "增加简历信息失败");
+			return new ModelAndView("resume/resume_add",model);
+		}
+		
 	}
 	
 	
@@ -264,11 +426,13 @@ public class ResumeController {
 	@RequestMapping("/resume_update_show.do")
 	public ModelAndView resumeUpdateShow(HttpServletRequest request){	
 
-		String id = request.getParameter("resume_id");
+		String idstr = request.getParameter("resume_id");
 		
 		//假数据  需要前端传进来
 //		id = "22";
+		int id = Integer.valueOf(idstr);
 		System.out.println(id);
+		
 		
 		resume  = resumeService.resumeUpdateSelect(id);
 		
@@ -293,7 +457,7 @@ public class ResumeController {
 	
 	@RequestMapping("/resume_update.do")
 	public ModelAndView resumeUpdate(HttpServletRequest request){
-		
+		 long startTime = System.currentTimeMillis();
 		
 		String resume_id = request.getParameter("resume_id");
 		String resume_name = request.getParameter("resume_name");
@@ -308,10 +472,7 @@ public class ResumeController {
 		String resume_work_years =request.getParameter( "resume_work_years");
 		String resume_self_evaluation = request.getParameter("resume_self_evaluation");
 		String resume_work_experience = request.getParameter("resume_work_experience");
-		
-		String wenjian = request.getParameter("wenjian");
-		
-		System.out.println("文件传过来的值" + wenjian);
+	
 		
 		//需要更改
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");//小写的mm表示的是分钟
@@ -326,7 +487,7 @@ public class ResumeController {
 		
 		resume.setResumeId(Integer.valueOf(resume_id));
 		resume.setResumeName(resume_name);
-		resume.setResumeSex(Integer.valueOf(resume_sex) );
+		resume.setResumeSex(Integer.valueOf(resume_sex));
 		resume.setResumePhone(resume_phone);
 		resume.setResumeEmail(resume_email);
 		resume.setResumeEducation(Integer.valueOf(resume_education));
@@ -345,18 +506,72 @@ public class ResumeController {
 		Map<String,Object> model = new HashMap<String,Object>();
 		
 		if(result == 1){
-			System.out.println("更改成功");	
-			model.put("info", "成功");
-			return new ModelAndView("resume/resume_update",model);
+		
+			
+			 //将当前上下文初始化给 CommonsMutipartResolver (多部分解析器)
+		    CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+		    //检查form中是否有enctype="multipart/form-data"
+		    if(multipartResolver.isMultipart(request))
+		    {
+		        //将request变成多request
+		        MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest)request;
+		        //获取multiRequest中所有的文件名
+		        Iterator iter = multiRequest.getFileNames();
+
+		        while(iter.hasNext()){
+		            //一次遍历所有的文件
+		            MultipartFile files = multiRequest.getFile(iter.next().toString());
+		            if(files!=null && !("".equals(files.getOriginalFilename())) && files.getOriginalFilename() != null){
+		            	System.out.println(files.getOriginalFilename());
+		            	
+		                String path = "D:/tupian/resume"+ resume.getResumeId()+resume.getResumeName() +"update"+ files.getOriginalFilename();
+		                System.out.println(path);
+		                //上传
+		                try {
+							files.transferTo(new File(path));
+						} catch (Exception e) {
+							e.printStackTrace();
+							
+							System.out.println("上传文件时出错");	
+							model.put("info", "上传简历文件时出错");
+							return new ModelAndView("resume/resume_update",model);
+						} 
+		                
+		                //修改到数据库
+		                pic.setpResumeId(resume.getResumeId());
+		                pic.setpUpdateUser("zhang");
+		                pic.setpPic(path);
+		                
+		                int addpicresult = resumeService.resumeUpdatePic(pic);
+		                
+		                if(addpicresult == 0){
+		                	//文件修改失败
+		                	System.out.println("修改文件路径出错(数据库)");
+		                	model.put("info", "修改简历信息修改文件时出错");
+		        			return new ModelAndView("resume/resume_update",model);
+		                }            
+		            }
+		        }
+		    
+		    }
+		    long endTime = System.currentTimeMillis();
+		    System.out.println("文件上传运行时间："+String.valueOf(endTime-startTime)+"ms");
+			
+			model.put("info", "修改简历成功");
+		    return new ModelAndView("resume/resume_update",model);
+
 		}else {
 			
-			System.out.println("更改时出错");	
+			System.out.println("更改时出错(resume表修改)");	
 			model.put("info", "出错");
 			return new ModelAndView("resume/resume_update",model);
 		}
-	
+		
+		
 		
 	}
+	
+	
 	
 	@RequestMapping("/tiaozhuan_add.do")
 	public ModelAndView tiaozhuan_add(){

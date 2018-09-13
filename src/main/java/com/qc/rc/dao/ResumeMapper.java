@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.qc.rc.entity.Pic;
 import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.SharingCenter;
 import com.qc.rc.entity.UserResume;
@@ -36,6 +37,10 @@ public interface ResumeMapper {
 	int selectResumeBestId();
 
 	int resumeAddResumeUser(UserResume userresume);
+	
+	int resumeAddPic(Pic pic);
+	
+	int resumeUpdatePic(Pic pic);
 	
 	
 	

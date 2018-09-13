@@ -62,12 +62,12 @@
 			<HR size="4" width="" noshade>
 			
 	<%-- 	<form method="post" action="${pageContext.request.contextPath }/resume_add.do">  --%>
-		<form method="post" action="${pageContext.request.contextPath }/upload_spring.do" enctype="multipart/form-data"> 
+		<form method="post" action="${pageContext.request.contextPath }/resume_add.do" enctype="multipart/form-data"> 
 		
 		<table border="0" height="50">
 			<tr>
 				<td height="35"><span >姓名</span></td>
-				<td width="250"><input name="resume_name" id="resume_name" type="text"/></br></td>
+				<td width="250"><input name="resume_name" id="resume_name" type="text"/></td>
 				<td><span >自我评价</span></td>
 			</tr>
 		
@@ -122,7 +122,7 @@
      		
   				</textarea></td>
 			</tr>
-			</tr>
+			
 			<tr>
 				<td height="35"><span >求职意向</span></td>
 				<td><input name="resume_job_intension" id="resume_job_intension" type="text"/></td>
@@ -153,7 +153,9 @@
 			</tr>		-->
 		</table>
 		
-		
+		<FONT id="right_fujia" size="6" color="#FF0000">附加信息</FONT>
+		<HR id="hengxian"	size="4" width="300" noshade>
+	   	<input id="wenjian" type="file" name="file_03" />
 		
 		
 
@@ -166,9 +168,7 @@
 		
 	</form>
 	
-		<FONT id="right_fujia" size="6" color="#FF0000">附加消息</FONT>
-		<HR id="hengxian"	size="4" width="300" noshade>
-	   	<input id="wenjian" type="file" name="file_03" />
+		
 		
 			
 			</div>

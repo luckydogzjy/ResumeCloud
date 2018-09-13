@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qc.rc.dao.ResumeMapper;
+import com.qc.rc.entity.Pic;
 import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.SharingCenter;
 import com.qc.rc.entity.UserResume;
@@ -85,11 +86,8 @@ public class ResumeServiceImpl implements ResumeService {
 	}
 
 	
-	public Resume resumeUpdateSelect(String resume_Id) {
+	public Resume resumeUpdateSelect(Integer resumeId) {
 		
-		
-		Integer resumeId = Integer.valueOf(resume_Id);
-		System.out.println(resumeId);
 		resume = resumeMapper.selectResumeById(resumeId);
 		return resume;
 		
@@ -108,6 +106,22 @@ public class ResumeServiceImpl implements ResumeService {
 
 	public int resumeAddResumeUser(UserResume userresume) {
 		int result = resumeMapper.resumeAddResumeUser(userresume);
+		return result;
+	}
+
+
+
+	@Override
+	public int resumeAddPic(Pic pic) {
+		int result = resumeMapper.resumeAddPic(pic);
+		return result;
+	}
+
+
+
+	@Override
+	public int resumeUpdatePic(Pic pic) {
+		int result = resumeMapper.resumeUpdatePic(pic);
 		return result;
 	}
 	

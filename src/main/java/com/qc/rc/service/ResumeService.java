@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.qc.rc.entity.Pic;
 import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.SharingCenter;
 import com.qc.rc.entity.UserResume;
@@ -34,10 +35,14 @@ public interface ResumeService {
 
 	public int resumeUpdate(Resume resume);
 
-	public Resume resumeUpdateSelect(String resume_id);
+	public Resume resumeUpdateSelect(Integer resume_id);
 
 	public int selectResumeBestId();
 
 	public int resumeAddResumeUser(UserResume userresume);
+	
+	public int resumeAddPic(Pic pic);
+	
+	public int resumeUpdatePic(Pic pic);
 	
 }

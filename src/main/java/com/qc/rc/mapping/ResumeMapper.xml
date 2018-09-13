@@ -366,6 +366,16 @@
 	
 	
 	
+	<update id="resumeUpdatePic" parameterType="com.qc.rc.entity.Pic">
+    	update RC_PIC set  
+   	 	P_PIC = #{pPic},
+      P_UPDATE_USER = #{pUpdateUser},
+      P_UPDATE_TIME = sysdate
+        
+      where P_RESUME_ID = #{pResumeId}      
+   	  <!-- where P_ID = #{pId} -->
+  </update>
+  
 	
 	
 	<update id="updateResume" parameterType="com.qc.rc.entity.Resume">
@@ -416,13 +426,27 @@
  	 </insert>
 	
 	
-		 <select id="selectResumeBestId" resultType="Integer">
-  
+	 <select id="selectResumeBestId" resultType="Integer">
    		 select max(RESUME_ID) from RC_RESUME
-   
  	</select> 
 	
 	
+	 <insert id="resumeAddPic" parameterType="com.qc.rc.entity.Pic">
+ 	  insert into RC_PIC 
+ 	  (P_ID,
+ 	  P_RESUME_ID,
+ 	  P_PIC,
+ 	  P_CREATE_USER,
+ 	  P_CREATE_TIME,
+ 	  P_DELETE_FLAG)
+ 	  values (RC_PIC_SEQUENCE.nextval,
+ 	   #{pResumeId},
+ 	   #{pPic},
+ 	   #{pCreateUser},
+ 	   sysdate,
+ 	   0
+ 	  )
+ 	 </insert>
 	
 	
 	
