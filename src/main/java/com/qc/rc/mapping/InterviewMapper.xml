@@ -1,56 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qc.rc.dao.InterviewMapper">
- <!--  <resultMap id="BaseResultMap" type="com.qc.rc.entity.Interview">
-    <constructor>
- 
-      <idArg column="INTERVIEW_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="INTERVIEW_RESUME_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="INTERVIEW_JOB" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="INTERVIEW_TIME" javaType="java.util.Date" jdbcType="DATE" />
-      <arg column="INTERVIEW_ASSOCIATE_USERNAME" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="INTERVIEW_ASSOCIATE_PHONE" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="INTERVIEW_ADDRESS" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="INTERVIEW_INFO" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="INTERVIEW_STATUS" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="INTERVIEW_RECODE_INFO" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="INTERVIEW_CREATE_USER" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="INTERVIEW_CREATE_TIME" javaType="java.util.Date" jdbcType="DATE" />
-      <arg column="INTERVIEW_UPDATE_USER" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="INTERVIEW_UPDATE_TIME" javaType="java.util.Date" jdbcType="DATE" />
-      <arg column="INTERVIEW_DELETE_FLAG" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="INTERVIEW_USER_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List">
-    INTERVIEW_ID, INTERVIEW_RESUME_ID, INTERVIEW_JOB, INTERVIEW_TIME, INTERVIEW_ASSOCIATE_USERNAME,
-    INTERVIEW_ASSOCIATE_PHONE,INTERVIEW_ADDRESS,INTERVIEW_INFO,INTERVIEW_STATUS,INTERVIEW_RECODE_INFO,
-    INTERVIEW_CREATE_USER,INTERVIEW_CREATE_TIME,INTERVIEW_UPDATE_USER,INTERVIEW_UPDATE_TIME,
-    INTERVIEW_DELETE_FLAG,INTERVIEW_USER_ID
-  </sql>
-  <select id="selectAllInterviewsByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from RC_INTERVIEW
-    where INTERVIEW_USER_ID = #{userId,jdbcType=INTEGER}
-  </select> -->
-  	<!-- private Integer interviewId;//id
-	private Integer interviewResumeId;//面试人id
-	private String interviewJob;//面试职位
-	private Date interviewTime;//面试时间
-	private String interviewAssociateUsername;//联系人
-	private String interviewAssociatePhone;//联系人联系方式
-	private String interviewAddress;//面试地点
-	private String interviewInfo;//备注信息
-	private Integer interviewStatus;//面试结果1成功2待面试3失败
-	private String interviewRecodeInfo;//面试结果记录
-	private String interviewCreateUser;//面试
-	private Date interviewCreateTime;//面试创建时间
-	private String interviewUpdateUser;//面试更新人
-	private Date interviewUpdateTime;//面试更新时间
-	private Integer interviewDeleteFlag;//删除标志
-	private Integer interviewUserId;//userid -->
 	<resultMap id="resumeAndInterviewMap" type="com.qc.rc.entity.pojo.InterviewPojo">		
 		<id column="INTERVIEW_ID" property="interviewId"></id>
 		<result column="INTERVIEW_JOB" property="interviewJob"></result>
@@ -58,6 +8,22 @@
 		<result column="INTERVIEW_TIME" property="interviewTime"></result>
 		<result column="INTERVIEW_STATUS" property="interviewStatus"></result>
 		<result column="INTERVIEW_INFO" property="interviewInfo"></result>
+		<association property="resume" javaType="com.qc.rc.entity.Resume">
+			<id column="RESUME_ID" property="resumeId"></id>
+			<result column="RESUME_NAME" property="resumeName"></result>
+			<result column="RESUME_PHONE" property="resumePhone"></result>
+		</association>
+	</resultMap>
+	
+		<resultMap id="resumeAndInterviewMap2" type="com.qc.rc.entity.pojo.InterviewPojo">		
+		<id column="INTERVIEW_ID" property="interviewId"></id>
+		<result column="INTERVIEW_JOB" property="interviewJob"></result>
+		<result column="INTERVIEW_ADDRESS" property="interviewAddress"></result>
+		<result column="INTERVIEW_TIME" property="interviewTime"></result>
+		<result column="INTERVIEW_STATUS" property="interviewStatus"></result>
+		<result column="INTERVIEW_INFO" property="interviewInfo"></result>
+		<result column="INTERVIEW_ASSOCIATE_USERNAME" property="interviewAssociateUsername"></result>
+		<result column="INTERVIEW_ASSOCIATE_PHONE" property="interviewAssociatePhone"></result>
 		<association property="resume" javaType="com.qc.rc.entity.Resume">
 			<id column="RESUME_ID" property="resumeId"></id>
 			<result column="RESUME_NAME" property="resumeName"></result>
@@ -84,8 +50,8 @@
     		INTERVIEW_USER_ID = #{userId,jdbcType=INTEGER}
 		    and RC_INTERVIEW.INTERVIEW_RESUME_ID = RC_RESUME.RESUME_ID
 		    and RC_INTERVIEW.INTERVIEW_DELETE_FLAG = 0
-		    <!-- and RC_INTERVIEW.INTERVIEW_TIME > #{startTime,jdbcType=DATE}
-		    and RC_INTERVIEW.INTERVIEW_TIME < #{overTime,jdbcType=DATE} -->
+		    and RC_INTERVIEW.INTERVIEW_TIME &gt;= #{startTime}
+		    and RC_INTERVIEW.INTERVIEW_TIME &lt;= #{overTime} 
     		<if test="interviewJob != null and interviewJob !=''">
 				AND RC_INTERVIEW.INTERVIEW_JOB LIKE '%${interviewJob}%'
 			</if>
@@ -127,4 +93,30 @@
    	 </where> 
   	</select>
   	
+  	
+  	<insert id="addInterview" parameterType="com.qc.rc.entity.pojo.InterviewPojo">
+  	insert into RC_INTERVIEW(INTERVIEW_ID,INTERVIEW_RESUME_ID,INTERVIEW_JOB,INTERVIEW_TIME,INTERVIEW_ASSOCIATE_USERNAME
+  	,INTERVIEW_ASSOCIATE_PHONE,INTERVIEW_ADDRESS,INTERVIEW_INFO,INTERVIEW_STATUS,INTERVIEW_CREATE_USER,INTERVIEW_CREATE_TIME
+  	,INTERVIEW_DELETE_FLAG,INTERVIEW_USER_ID) 
+  		values(RC_INTERVIEW_SEQUENCE.nextval,#{interviewResumeId},#{interviewJob},#{interviewTime},#{interviewAssociateUsername},
+  		#{interviewAssociatePhone},#{interviewAddress},#{interviewInfo},#{interviewStatus},#{interviewCreateUser},
+  		#{interviewCreateTime},#{interviewDeleteFlag},#{interviewUserId})
+  		
+  		<!-- <selectKey keyProperty="interviewId" order="AFTER" resultType="java.lang.Integer">
+  		
+  		</selectKey> -->
+  	</insert>
+
+	<update id="deleteInterview" parameterType="java.lang.Integer">
+	update RC_INTERVIEW set INTERVIEW_DELETE_FLAG = 1 where INTERVIEW_ID = #{interviewId,jdbcType=INTEGER}
+	</update>
+	
+	<select id="selectAllInterviewsByResumeId" resultMap="resumeAndInterviewMap2">
+    select 
+	RC_INTERVIEW.INTERVIEW_ID,RC_INTERVIEW.INTERVIEW_INFO,RC_INTERVIEW.INTERVIEW_JOB,RC_INTERVIEW.INTERVIEW_ADDRESS,RC_INTERVIEW.INTERVIEW_TIME,RC_INTERVIEW.INTERVIEW_STATUS,RC_INTERVIEW.INTERVIEW_ASSOCIATE_USERNAME,RC_INTERVIEW.INTERVIEW_ASSOCIATE_PHONE,
+	RC_RESUME.RESUME_ID,RC_RESUME.RESUME_NAME,RC_RESUME.RESUME_PHONE
+    from RC_INTERVIEW,RC_RESUME
+    where RC_RESUME.RESUME_ID = #{ResumeId,jdbcType=INTEGER}
+    and RC_INTERVIEW.INTERVIEW_RESUME_ID = RC_RESUME.RESUME_ID
+  	</select>
 </mapper>

@@ -43,24 +43,26 @@
 	width: 1000px;
 }
 #right-box-text1{
+	text-align:right;
 	position: absolute;
-	top: 150px;
+	top: 110px;
 	left: 70px;	
 }
 #right-box-text2{
 	position: absolute;
-	top: 150px;
+	top: 110px;
 	left: 200px;
 }
 #right-box-text3{
+	text-align:right;
 	position: absolute;
-	top: 150px;
+	top: 110px;
 	left: 430px;
 }
 
 #right-box-text4{
 	position: absolute;
-	top: 150px;
+	top: 110px;
 	left: 600px;
 }
 #right-box-text5{

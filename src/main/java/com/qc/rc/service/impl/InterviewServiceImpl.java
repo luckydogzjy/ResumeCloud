@@ -2,12 +2,14 @@ package com.qc.rc.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qc.rc.common.PageBean;
 import com.qc.rc.common.PageMessage;
+import com.qc.rc.common.ServerResponse;
 import com.qc.rc.common.Util;
 import com.qc.rc.dao.InterviewMapper;
 import com.qc.rc.entity.Interview;
@@ -62,6 +64,27 @@ public class InterviewServiceImpl implements InterviewService {
 		ipPageBean.setDatalist(interviewPojos);
 		
 		return ipPageBean;
+	}
+	
+	public void addInterview(InterviewPojo interviewPojo) {
+		interviewMapper.addInterview(interviewPojo);
+	}
+
+	public void deleteInterview(Integer interviewId){
+		interviewMapper.deleteInterview(interviewId);
+	}
+	
+
+
+	public ServerResponse<InterviewPojo> getInterviewByResumeId(Integer ResumeId) {
+		
+		InterviewPojo interviewPojo = interviewMapper.selectAllInterviewsByResumeId(ResumeId);
+		
+		if(interviewPojo==null){
+			return ServerResponse.createByErrorMessage("参数错误");
+		}
+		return ServerResponse.createBySuccess(interviewPojo);
+
 	}
 
 }

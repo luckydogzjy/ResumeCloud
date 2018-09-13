@@ -1,22 +1,15 @@
 package com.qc.rc.dao;
 
-import com.qc.rc.entity.User;
-import java.math.BigDecimal;
+import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
+import com.qc.rc.entity.RechargeRecord;
+import com.qc.rc.entity.User;
+
 
 public interface UserMapper {
-    int deleteByPrimaryKey(BigDecimal userId);
 
-    int insert(User record);
-
-    int insertSelective(User record);
-
-    User selectByPrimaryKey(BigDecimal userId);
-
-    int updateByPrimaryKeySelective(User record);
-
-    int updateByPrimaryKey(User record);
-    
-    User login(@Param("userAccount") String userAccount);
+	User findUserByPhone(String userPhone);
+	List<RechargeRecord> findRecord();
+	void deleteRecharge(Integer rrId);
+	int insertNewUser(User user);
 }

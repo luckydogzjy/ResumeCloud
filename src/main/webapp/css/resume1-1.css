@@ -1,0 +1,122 @@
+#right_add{
+	position: absolute;
+	left: 70px;
+	top: 20px;
+}
+#experiencetext{
+	height: 100px;
+	Columns="10" 
+  	TextMode="MultiLine" 
+	
+}
+#selfevaluation{
+	height: 100px;
+}
+#right_update{
+	position: absolute;
+	left: 70px;
+	top: 20px;
+}
+#resumeuodate{
+	background-color: cornflowerblue;
+}
+#right_fujia{
+	position: absolute;
+	left: 650px;
+	top: 0px;
+	width: 200px;
+}
+
+#hengxian{
+	position: absolute;
+	left: 650px;
+	top: 37px;
+}
+#wenjian{
+	position: absolute;
+	left: 650px;
+	top: 120px;
+	width: 300px;
+}
+
+
+#addbutton_div {
+  border-width:0px;
+  position:absolute;
+  left:80px;
+  top:450px;
+  width:100px;
+  height:39px;
+  background:inherit;
+  background-color:rgba(51, 153, 204, 1);
+  border:none;
+  border-radius:5px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  font-family:'Arial Negreta', 'Arial Normal', 'Arial';
+  font-weight:700;
+  font-style:normal;
+  color:#FFFFFF;
+}
+#addbutton_div2{
+	border-width:0px;
+ 	position:absolute;
+  	left:350px;
+  	top:450px;
+  	width:100px;
+  	height:39px;
+  	background:inherit;
+  	background-color:rgba(51, 153, 204, 1);
+  	border:none;
+  	border-radius:5px;
+  	-moz-box-shadow:none;
+  	-webkit-box-shadow:none;
+  	box-shadow:none;
+  	font-family:'Arial Negreta', 'Arial Normal', 'Arial';
+  	font-weight:700;
+  	font-style:normal;
+  	color:#FFFFFF;
+}
+#updatebutton_div{
+	border-width:0px;
+ 	position:absolute;
+  	left:120px;
+  	top:470px;
+  	width:100px;
+  	height:39px;
+  	background:inherit;
+  	background-color:rgba(51, 153, 204, 1);
+  	border:none;
+  	border-radius:5px;
+  	-moz-box-shadow:none;
+  	-webkit-box-shadow:none;
+  	box-shadow:none;
+  	font-family:'Arial Negreta', 'Arial Normal', 'Arial';
+  	font-weight:700;
+  	font-style:normal;
+  	color:#FFFFFF;
+}
+
+#updatebutton_div2{
+	border-width:0px;
+ 	position:absolute;
+  	left:370px;
+  	top:470px;
+  	width:100px;
+  	height:39px;
+  	background:inherit;
+  	background-color:rgba(51, 153, 204, 1);
+  	border:none;
+  	border-radius:5px;
+  	-moz-box-shadow:none;
+  	-webkit-box-shadow:none;
+  	box-shadow:none;
+  	font-family:'Arial Negreta', 'Arial Normal', 'Arial';
+  	font-weight:700;
+  	font-style:normal;
+  	color:#FFFFFF;
+}
+
+
+

@@ -18,6 +18,7 @@ html,body {
 	width: 158px;
 }
 #right{
+	text-align:left;
 	position: absolute;
 	left:158px ;
 	width: 1140px;

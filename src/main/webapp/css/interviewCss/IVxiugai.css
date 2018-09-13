@@ -1,0 +1,97 @@
+p{
+	display: inline-block;
+	margin: 0;
+	width: 150px;
+}
+input{
+	width: 240px;
+	height: 23px;
+}
+select{
+	width: 94px;
+    height: 21px;
+}
+span{
+	color: red;
+}
+#right-box-title{
+	position: absolute;
+    left: 70px;
+    top: 45px;
+}
+.right-box-title-font{
+	color: #0099CB;
+}
+#right-box-font1{
+	float: left;
+}
+#right-box-font2{
+	position: relative;
+	left: 20px;
+	float: left;
+}
+#right-box-font3{
+	position: relative;
+	left: 50px;
+	float: left;
+}
+#right-box-img{
+	position: absolute;
+	left: 900px;
+}
+#right-box-hr1{
+	position: absolute;
+	top: 90px;
+	left: 33px;
+	size: 1;
+	width: 1000px;
+}
+#right-box-text{
+	position: absolute;
+	top: 110px;
+	left: 100px;	
+}
+#right-box-text-jieguo{
+	width: 90px;
+}
+.right-box-text-item{
+	width: 600px;
+	margin-top: 18px;
+}
+.right-box-item{
+	font-size: 18px;
+	text-align: right;
+}
+
+#right-box-button{
+	position: absolute;
+	top: 470px;
+}
+#right-box-button-xiugai{
+	position: absolute;
+	left: 600px;
+	border-radius: 5px;
+	border: 0px;
+	width: 89px;
+    height: 38px;
+	background-color: #0099FF;
+	font-family: 'Microsoft YaHei Negreta', 'Microsoft YaHei Normal', 'Microsoft YaHei';
+    font-weight: 700;
+    font-style: normal;
+    font-size: 14px;
+    color: #FFFFFF;
+}
+#right-box-button-shanchu{
+	position: absolute;
+	left: 750px;
+	border-radius: 5px;
+	border: 0px;
+	width: 89px;
+    height: 38px;
+	background-color: #FF0033;
+	font-family: 'Microsoft YaHei Negreta', 'Microsoft YaHei Normal', 'Microsoft YaHei';
+    font-weight: 700;
+    font-style: normal;
+    font-size: 14px;
+    color: #FFFFFF;
+}

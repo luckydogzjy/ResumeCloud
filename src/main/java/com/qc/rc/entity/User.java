@@ -1,112 +1,126 @@
 package com.qc.rc.entity;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
+
+
+
+/*CREATE TABLE "RC_USER" 
+(	"USER_ID" NUMBER(6,0), 
+	"USER_PHONE" VARCHAR2(11 BYTE), 
+	"USER_PASSWORD" VARCHAR2(20 BYTE), 
+	"USER_NAME" VARCHAR2(20 BYTE), 
+	"USER_SEX" NUMBER(1,0), 
+	"USER_COMPANY" VARCHAR2(50 BYTE), 
+	"USER_BIRTHDAY" DATE, 
+	"USER_PIC" BLOB, 
+	"USER_INTEGRAL" NUMBER(10,0), 
+	"CREATE_TIME" DATE DEFAULT sysdate, 
+	"UPDATE_TIME" DATE, 
+	"USER_STATUS" NUMBER(1,0) DEFAULT 0*/
+
+
 public class User {
-    private BigDecimal userId;
+	
+	public User(Integer userId, String userPhone, String userPassword, String userName, Integer userSex,
+			String userCompany, Date userBirthday, String userPic, Integer userIntegral, Date createTime,
+			Date updateTime) {
+		super();
+		this.userId = userId;
+		this.userPhone = userPhone;
+		this.userPassword = userPassword;
+		this.userName = userName;
+		this.userSex = userSex;
+		this.userCompany = userCompany;
+		this.userBirthday = userBirthday;
+		this.userPic = userPic;
+		this.userIntegral = userIntegral;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+	}
 
-    private String userAccount;
-
-    private String userName;
-
-    private String userPassword;
-
-    private Short userSex;
-
-    private Short userAge;
-
-    private Date createDate;
-
-    private Date updateDate;
-
-    private Short deteletFlag;
-
-    public User(BigDecimal userId, String userAccount, String userName, String userPassword, Short userSex, Short userAge, Date createDate, Date updateDate, Short deteletFlag) {
-        this.userId = userId;
-        this.userAccount = userAccount;
-        this.userName = userName;
-        this.userPassword = userPassword;
-        this.userSex = userSex;
-        this.userAge = userAge;
-        this.createDate = createDate;
-        this.updateDate = updateDate;
-        this.deteletFlag = deteletFlag;
-    }
-
-    public User() {
+	public User() {
         super();
+        // TODO Auto-generated constructor stub
     }
+	private Integer userId;
+	private String userPhone;
+	private String userPassword;
+	private String userName;
+	private Integer userSex;
+	private String userCompany;
+	private Date userBirthday;
+	private String userPic;
+	private Integer userIntegral;
+	private Date createTime;
+	private Date updateTime;	
+	
+	public Integer getUserId() {
+		return userId;
+	}
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+	public String getUserPhone() {
+		return userPhone;
+	}
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
+	}
+	public String getUserPassword() {
+		return userPassword;
+	}
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public Integer getUserSex() {
+		return userSex;
+	}
+	public void setUserSex(Integer userSex) {
+		this.userSex = userSex;
+	}
+	public String getUserCompany() {
+		return userCompany;
+	}
+	public void setUserCompany(String userCompany) {
+		this.userCompany = userCompany;
+	}
+	public Date getUserBirthday() {
+		return userBirthday;
+	}
+	public void setUserBirthday(Date userBirthday) {
+		this.userBirthday = userBirthday;
+	}
+	public String getUserPic() {
+		return userPic;
+	}
+	public void setUserPic(String userPic) {
+		this.userPic = userPic;
+	}
+	public Integer getUserIntegral() {
+		return userIntegral;
+	}
+	public void setUserIntegral(Integer userIntegral) {
+		this.userIntegral = userIntegral;
+	}
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+		
 
-    public BigDecimal getUserId() {
-        return userId;
-    }
-
-    public void setUserId(BigDecimal userId) {
-        this.userId = userId;
-    }
-
-    public String getUserAccount() {
-        return userAccount;
-    }
-
-    public void setUserAccount(String userAccount) {
-        this.userAccount = userAccount == null ? null : userAccount.trim();
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
-    }
-
-    public String getUserPassword() {
-        return userPassword;
-    }
-
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword == null ? null : userPassword.trim();
-    }
-
-    public Short getUserSex() {
-        return userSex;
-    }
-
-    public void setUserSex(Short userSex) {
-        this.userSex = userSex;
-    }
-
-    public Short getUserAge() {
-        return userAge;
-    }
-
-    public void setUserAge(Short userAge) {
-        this.userAge = userAge;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public Date getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
-    }
-
-    public Short getDeteletFlag() {
-        return deteletFlag;
-    }
-
-    public void setDeteletFlag(Short deteletFlag) {
-        this.deteletFlag = deteletFlag;
-    }
 }
