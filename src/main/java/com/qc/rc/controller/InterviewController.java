@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.qc.rc.common.FormParameterUtil;
 import com.qc.rc.common.PageBean;
+import com.qc.rc.common.ServerResponse;
 import com.qc.rc.common.Util;
 import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.User;
@@ -24,7 +25,7 @@ import com.qc.rc.service.InterviewService;
 import com.qc.rc.service.ResumeService;
 
 @Controller
-@RequestMapping("Interview")
+@RequestMapping("Interview/")
 public class InterviewController {
 		
 	@Autowired  
@@ -33,7 +34,7 @@ public class InterviewController {
 	@Autowired 
 	private ResumeService resumeService;
 	
-	@RequestMapping("/showAllInterviews.do")
+	@RequestMapping("showAllInterviews.do")
 	public ModelAndView showAllInterviews(Integer userId,HttpServletRequest request){
 		Map<String,Object> model = new HashMap<String,Object>();
 		PageBean<InterviewPojo> iPageBean = iInterviewService.getAllInterviews(userId);
@@ -44,7 +45,7 @@ public class InterviewController {
 		return new ModelAndView("interviewJsps/showAllInterviews",model);
 	}
 	
-	@RequestMapping("/selectByCondition.do")
+	@RequestMapping("selectByCondition.do")
 	public ModelAndView selectByCondition(HttpServletRequest request) throws UnsupportedEncodingException{
 		
 		Integer userId = 1001;
@@ -84,7 +85,7 @@ public class InterviewController {
 		
 	}
 	
-	@RequestMapping("/addNewInterview.do")
+	@RequestMapping("addNewInterview.do")
 	public ModelAndView addNewInterview(Integer resumeId,HttpServletRequest request){
 		Resume resume = resumeService.getResumeDetailsById(resumeId);
 		Map<String,Object> model = new HashMap<String,Object>();
@@ -92,7 +93,7 @@ public class InterviewController {
 		return new ModelAndView("interviewJsps/addnewinterview",model);
 	}
 	
-	@RequestMapping("/newInterview.do")
+	@RequestMapping("newInterview.do")
 	public ModelAndView newInterview(Integer userId,HttpServletRequest request) throws UnsupportedEncodingException{
 		userId = 1001;
 		Integer resumeId = Integer.valueOf(request.getParameter("resumeId"));
@@ -142,4 +143,12 @@ public class InterviewController {
 
 	}
 	
+	@RequestMapping("showInterviewDetail.do")
+	public ModelAndView getInterviewByResumeId(Integer ResumeId){
+		
+		Map<String,Object> model = new HashMap<String,Object>();
+		ServerResponse<InterviewPojo> interviewPojo = iInterviewService.getInterviewByResumeId(ResumeId);
+		model.put("interviewPojo", interviewPojo.getData());
+		return new ModelAndView("interviewJsps/IVxiangqing",model);	
+	}
 }

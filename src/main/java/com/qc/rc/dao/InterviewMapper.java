@@ -28,4 +28,7 @@ public interface InterviewMapper {
 
 	//删除
 	void deleteInterview(@Param("interviewId")Integer interviewId);
+	
+	//根据ResumeId查询简历
+	InterviewPojo selectAllInterviewsByResumeId(@Param("ResumeId")Integer ResumeId);
 }
