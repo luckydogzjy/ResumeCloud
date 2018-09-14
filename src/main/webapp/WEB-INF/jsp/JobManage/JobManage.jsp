@@ -32,7 +32,7 @@
 		<a href="${pageContext.request.contextPath}/jobAddView.do">添加</a><br> 
 		****************************************************************************<br> 
 		
-		<form id="search" action="${pageContext.request.contextPath}/jobGetByName.do" method="POST">
+		<form id="search" action="${pageContext.request.contextPath}/JobManage.do" method="POST">
 			<input type="text"  name="search"><input type="submit" value="搜索">
 		</form>
 		
