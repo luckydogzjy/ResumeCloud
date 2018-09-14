@@ -64,7 +64,8 @@
 				<HR size="4" width="" noshade>
 
     	
-				<form method="post" action="${pageContext.request.contextPath }/resume_update.do"> 
+<%-- 				<form method="post" action="${pageContext.request.contextPath }/resume_update.do"> 
+ --%>			<form method="post" action="${pageContext.request.contextPath }/resume_update.do" enctype="multipart/form-data">
 				
 				<table border="0">
 					
@@ -124,7 +125,7 @@
 					<option value="5">博士</option>
 					<option value="6">博士以上</option>                                                                                                                                                                                                      
 					
-			</select></br>
+			</select>
 				</tr>
 			
 				<tr>
@@ -168,14 +169,18 @@
 			 <tr><input name="resume_id" id="resume_id" type="hidden"  value="${resume.resumeId}" /></tr>
 			
 		</table>
+		
+		<FONT id="right_fujia" size="6" color="#FF0000">附加信息</FONT>
+		<HR id="hengxian"	size="4" width="300" noshade>
+	   	<input id="wenjian"  name="wenjian" type="file" />
+	   	
+	   	
 			<input id="updatebutton_div" type="submit" value="修改" onclick="return check()" />
 			<a href="javascript:history.back();"><input id="updatebutton_div2" type="button" value="返回" onclick="return check()" /></a>
 		
 		</form>
 		
-		<FONT id="right_fujia" size="6" color="#FF0000">附加消息</FONT>
-		<HR id="hengxian"	size="4" width="300" noshade>
-	   	<input id="wenjian"  name="wenjian" type="file" />
+		
 		
 	
     	</div> 
