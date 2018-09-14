@@ -36,8 +36,7 @@
 						</form>
 		
 					<div id="job-add">
-						<%-- <a id="job-add-a" href="${pageContext.request.contextPath}/jobAddView.do">添加职位</a> --%>
-						<a id="job-add-a" href="${pageContext.request.contextPath}/insertJob.do">添加职位</a>
+						<a id="job-add-button" href="${pageContext.request.contextPath}/jobAddView.do">添加职位</a>
 						<img id="job-add-img" src="${pageContext.request.contextPath}/img/u603.png" />
 					</div>
 					</div>
@@ -63,9 +62,9 @@
 							<a id="a-status" href="${pageContext.request.contextPath}/jobChangeStatus.do?jobId=${job.JOB_ID}&jobStatus=${job.JOB_STATUS}">${job.JOB_STATUS}</a>
 						</td>
 						<td>
-						 	<a id="a-modify" href="${pageContext.request.contextPath}/jobUpdateView.do?jobId=${job.JOB_ID}">修改</a>
-						 	<a id="a-delete" href="${pageContext.request.contextPath}/jobDelete.do?jobId=${job.JOB_ID}">删除</a>
-						 	<a id="a-template" href="${pageContext.request.contextPath}/jobTemplateView.do?jobId=${job.JOB_ID}">生成模板</a>
+						 	<a id="button-modify" href="${pageContext.request.contextPath}/jobUpdateView.do?jobId=${job.JOB_ID}">修改</a>
+						 	<a id="button-delete" href="${pageContext.request.contextPath}/jobDelete.do?jobId=${job.JOB_ID}">删除</a>
+						 	<a id="button-template" href="${pageContext.request.contextPath}/jobTemplateView.do?jobId=${job.JOB_ID}">生成模板</a>
 						</td>
 					</tr>	
 					</c:forEach>
@@ -78,9 +77,9 @@
 				<span>当前第${page.pageNum}页，一共${page.pages}页</span>
 				<span>
 					<a href="${pageContext.request.contextPath}/JobManage.do?page=${page.firstPage}">首页</a>
-        <a href="${pageContext.request.contextPath}/JobManage.do?page=${page.prePage}">上一页</a>
-        <a href="${pageContext.request.contextPath}/JobManage.do?page=${page.nextPage}">下一页</a>
-        <a href="${pageContext.request.contextPath}/JobManage.do?page=${page.lastPage}">尾页</a>			 
+			        <a href="${pageContext.request.contextPath}/JobManage.do?page=${page.prePage}">上一页</a>
+			        <a href="${pageContext.request.contextPath}/JobManage.do?page=${page.nextPage}">下一页</a>
+			        <a href="${pageContext.request.contextPath}/JobManage.do?page=${page.lastPage}">尾页</a>			 
            </span>
 				
 		</div>
