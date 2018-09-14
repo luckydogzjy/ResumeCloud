@@ -46,7 +46,7 @@ public class JobController {
 		
 		model.put("job", job);
 		model.put("page", pageJob);
-		return new ModelAndView("JobManage/JobManageTest",model);
+		return new ModelAndView("JobManage/JobManage",model);
 			
 	}
 	
@@ -62,7 +62,7 @@ public class JobController {
 		
 		model.put("job", job);
 		model.put("page", pageJob);
-		return new ModelAndView("JobManage/JobManageTest",model);
+		return new ModelAndView("JobManage/JobManage",model);
 			
 	}
 	

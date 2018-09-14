@@ -9,11 +9,6 @@ import com.qc.rc.entity.Job;
 public interface JobMapper {
 	
 	/**
-	 * 检索所有job 
-	 * @return
-	 */
-	public List<Job>  jobGetAll(Integer userId);
-	/**
 	 * 添加一条job信息 
 	 * @param job
 	 * @return
@@ -50,8 +45,4 @@ public interface JobMapper {
 	 * @return
 	 */
 	public Job jobGetOne(Integer jobId);
-	
-	
-	//以下都是实验版，不提交
-	public int insertJob(Job job);
 }

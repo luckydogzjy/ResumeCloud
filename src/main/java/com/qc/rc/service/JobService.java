@@ -6,13 +6,6 @@ import com.qc.rc.entity.Job;
 
 public interface JobService {
 	/**
-	 * @author qiancheng
-	 * 检索所有job
-	 * @param userId
-	 * @return
-	 */
-	public List<Job> jobGetAll(Integer userId);
-	/**
 	 * 添加一个job、
 	 * @param job
 	 * @return
@@ -51,6 +44,4 @@ public interface JobService {
 	 */
 	public Job jobGetOne(Integer jobId);
 	
-	/////////////////////////////////////////
-	public int insertJob(Job job);
 }
