@@ -23,7 +23,7 @@
 		</div>
 		<div id="lefter">
 		<jsp:include page="lefter.jsp" flush="true"/>
-		</div>
+		</div> 
 		
 		<div id="right">
 					<div id="right-box">
