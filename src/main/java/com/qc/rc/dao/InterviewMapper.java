@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
+import com.qc.rc.entity.Interview;
 import com.qc.rc.entity.pojo.InterviewPojo;
 
 public interface InterviewMapper {
@@ -30,5 +31,8 @@ public interface InterviewMapper {
 	void deleteInterview(@Param("interviewId")Integer interviewId);
 	
 	//根据ResumeId查询简历
-	InterviewPojo selectAllInterviewsByResumeId(@Param("ResumeId")Integer ResumeId);
+	InterviewPojo selectInterviewsByResumeId(@Param("ResumeId")Integer ResumeId);
+	
+	//根据ResumeId查询简历
+	int updateInterviewsByResumeId(InterviewPojo interviewPojo);
 }

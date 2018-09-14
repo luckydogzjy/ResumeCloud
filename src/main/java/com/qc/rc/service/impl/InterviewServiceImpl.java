@@ -78,13 +78,11 @@ public class InterviewServiceImpl implements InterviewService {
 
 	public ServerResponse<InterviewPojo> getInterviewByResumeId(Integer ResumeId) {
 		
-		InterviewPojo interviewPojo = interviewMapper.selectAllInterviewsByResumeId(ResumeId);
+		InterviewPojo interviewPojo = interviewMapper.selectInterviewsByResumeId(ResumeId);
 		
 		if(interviewPojo==null){
 			return ServerResponse.createByErrorMessage("参数错误");
 		}
 		return ServerResponse.createBySuccess(interviewPojo);
-
-	}
-
+	}	
 }

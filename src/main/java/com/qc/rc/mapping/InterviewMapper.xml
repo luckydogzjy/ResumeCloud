@@ -111,12 +111,25 @@
 	update RC_INTERVIEW set INTERVIEW_DELETE_FLAG = 1 where INTERVIEW_ID = #{interviewId,jdbcType=INTEGER}
 	</update>
 	
-	<select id="selectAllInterviewsByResumeId" resultMap="resumeAndInterviewMap2">
-    select 
-	RC_INTERVIEW.INTERVIEW_ID,RC_INTERVIEW.INTERVIEW_INFO,RC_INTERVIEW.INTERVIEW_JOB,RC_INTERVIEW.INTERVIEW_ADDRESS,RC_INTERVIEW.INTERVIEW_TIME,RC_INTERVIEW.INTERVIEW_STATUS,RC_INTERVIEW.INTERVIEW_ASSOCIATE_USERNAME,RC_INTERVIEW.INTERVIEW_ASSOCIATE_PHONE,
-	RC_RESUME.RESUME_ID,RC_RESUME.RESUME_NAME,RC_RESUME.RESUME_PHONE
-    from RC_INTERVIEW,RC_RESUME
-    where RC_RESUME.RESUME_ID = #{ResumeId,jdbcType=INTEGER}
-    and RC_INTERVIEW.INTERVIEW_RESUME_ID = RC_RESUME.RESUME_ID
+	<select id="selectInterviewsByResumeId" resultMap="resumeAndInterviewMap2">
+	select 
+	  i.INTERVIEW_ID,i.INTERVIEW_INFO,i.INTERVIEW_JOB,i.INTERVIEW_ADDRESS,i.INTERVIEW_TIME,i.INTERVIEW_STATUS,i.INTERVIEW_ASSOCIATE_USERNAME,i.INTERVIEW_ASSOCIATE_PHONE,
+	  r.RESUME_ID,r.RESUME_NAME,r.RESUME_PHONE
+    from  RC_INTERVIEW i join RC_RESUME r 
+    on i.INTERVIEW_RESUME_ID = r.RESUME_ID
+    where r.RESUME_ID = #{ResumeId,jdbcType=INTEGER}
   	</select>
+  	
+  	<update id="updateInterviewsByResumeId" parameterType="com.qc.rc.entity.pojo.InterviewPojo">
+  		update RC_INTERVIEW i
+		set i.INTERVIEW_JOB = #{interviewJob},
+		    i.INTERVIEW_TIME = #{interviewTime},
+		    i.INTERVIEW_ADDRESS = #{interviewAddress},
+		    i.INTERVIEW_ASSOCIATE_USERNAME = #{interviewAssociateUsername},
+		    i.INTERVIEW_ASSOCIATE_PHONE = #{interviewAssociatePhone},
+		    i.INTERVIEW_INFO = #{interviewInfo},
+		    i.INTERVIEW_UPDATE_TIME = sysdate,
+		    i.INTERVIEW_UPDATE_USER = 'jayne'
+		where i.INTERVIEW_RESUME_ID = #{interviewResumeId};
+  	</update>
 </mapper>
