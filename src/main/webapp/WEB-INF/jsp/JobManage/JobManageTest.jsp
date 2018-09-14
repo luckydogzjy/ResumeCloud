@@ -21,7 +21,7 @@
 		<div id="header">
 		<jsp:include page="header.jsp" flush="true"/>
 		</div>
-		<div id="lefter">
+		<div id="lefter"> 
 		<jsp:include page="lefter.jsp" flush="true"/>
 		</div> 
 		

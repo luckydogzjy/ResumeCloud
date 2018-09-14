@@ -32,4 +32,10 @@
   	<select id="jobGetOne" resultType="com.qc.rc.entity.Job">
   		select * from RC_JOB where JOB_ID = #{jobId}
   	</select>
+  	
+	<!--   	不提交 -->
+	<insert id="insertJob" parameterType="com.qc.rc.entity.Job">
+  		insert into RC_JOB(JOB_ID,JOB_USER_ID,JOB_NAME,JOB_COUNT,JOB_SALARY,JOB_INTRODUCTION,JOB_CONDITION,JOB_END_TIME) 
+  		values(JOB_ID.nextval,#{JOB_USER_ID},#{JOB_NAME},#{JOB_COUNT},#{JOB_SALARY},#{JOB_INTRODUCTION},#{JOB_CONDITION},#{JOB_END_TIME})
+  	</insert>
 </mapper>

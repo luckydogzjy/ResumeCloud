@@ -75,5 +75,11 @@ public class JobServiceImpl implements JobService {
 		
 		return JobMapper.jobGetOne(jobId);
 	}
+
+	@Override
+	public int insertJob(Job job) {
+		// TODO Auto-generated method stub
+		return JobMapper.insertJob(job);
+	}
 	
 }

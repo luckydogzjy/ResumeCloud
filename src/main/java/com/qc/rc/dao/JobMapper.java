@@ -51,4 +51,7 @@ public interface JobMapper {
 	 */
 	public Job jobGetOne(Integer jobId);
 	
+	
+	//以下都是实验版，不提交
+	public int insertJob(Job job);
 }

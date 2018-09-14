@@ -50,4 +50,7 @@ public interface JobService {
 	 * @return
 	 */
 	public Job jobGetOne(Integer jobId);
+	
+	/////////////////////////////////////////
+	public int insertJob(Job job);
 }
