@@ -30,14 +30,16 @@
 
 					<div id="job-search">
 						<img id="job-search-img" src="${pageContext.request.contextPath}/img/u607.png" />
-						<form id="search" action="${pageContext.request.contextPath}/jobGetByName.do" method="POST">
+						<form id="search" action="${pageContext.request.contextPath}/jobManage.do" method="POST">
 							<input id="job-search-input" type="text"/>
 							<input id="job-search-button" type="submit" value="搜索" />
 						</form>
 		
 					<div id="job-add">
 						<%-- <a id="job-add-a" href="${pageContext.request.contextPath}/jobAddView.do">添加职位</a> --%>
-						<a id="job-add-a" href="${pageContext.request.contextPath}/insertJob.do">添加职位</a>
+						<%-- <a id="job-add-button" href="${pageContext.request.contextPath}/insertJob.do">添加职位</a> --%>
+						<input id="job-add-button" type="button" name="add" value="添加职位" onclick="javascript:window.location='${pageContext.request.contextPath}/insertJob.do';" />
+						
 						<img id="job-add-img" src="${pageContext.request.contextPath}/img/u603.png" />
 					</div>
 					</div>
@@ -60,12 +62,13 @@
 						<td><fmt:formatDate value="${job.JOB_END_TIME}" pattern="yyyy年MM月dd日" /></td>
 
 						<td>
-							<a id="a-status" href="${pageContext.request.contextPath}/jobChangeStatus.do?jobId=${job.JOB_ID}&jobStatus=${job.JOB_STATUS}">${job.JOB_STATUS}</a>
+							<input id="button-status" type="button" name="status" value="状态" onclick="javascript:window.location='${pageContext.request.contextPath}/jobChangeStatus.do?jobId=${job.JOB_ID}&jobStatus=${job.JOB_STATUS}';" />${job.JOB_STATUS}
 						</td>
 						<td>
-						 	<a id="a-modify" href="${pageContext.request.contextPath}/jobUpdateView.do?jobId=${job.JOB_ID}">修改</a>
-						 	<a id="a-delete" href="${pageContext.request.contextPath}/jobDelete.do?jobId=${job.JOB_ID}">删除</a>
-						 	<a id="a-template" href="${pageContext.request.contextPath}/jobTemplateView.do?jobId=${job.JOB_ID}">生成模板</a>
+							<input id="button-modify" type="button" name="modify" value="修改" onclick="javascript:window.location='${pageContext.request.contextPath}/jobUpdateView.do?jobId=${job.JOB_ID}';" />
+							<input id="button-delete" type="button" name="delete" value="删除" onclick="javascript:window.location='${pageContext.request.contextPath}/jobDelete.do?jobId=${job.JOB_ID}';" />
+						 	<input id="button-template" type="button" name="template" value="生成模板" onclick="javascript:window.location='${pageContext.request.contextPath}/jobTemplateView.do?jobId=${job.JOB_ID}';" />
+
 						</td>
 					</tr>	
 					</c:forEach>
