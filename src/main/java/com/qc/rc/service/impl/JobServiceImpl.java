@@ -15,13 +15,6 @@ public class JobServiceImpl implements JobService {
 	private JobMapper JobMapper;
 	
 	@Override
-	public List<Job> jobGetAll(Integer userId) {
-		// TODO Auto-generated method stub
-		
-		return JobMapper.jobGetAll(userId);
-	}
-
-	@Override
 	public boolean jobAdd(Job job) {
 		// TODO Auto-generated method stub
 	
@@ -76,10 +69,5 @@ public class JobServiceImpl implements JobService {
 		return JobMapper.jobGetOne(jobId);
 	}
 
-	@Override
-	public int insertJob(Job job) {
-		// TODO Auto-generated method stub
-		return JobMapper.insertJob(job);
-	}
 	
 }
