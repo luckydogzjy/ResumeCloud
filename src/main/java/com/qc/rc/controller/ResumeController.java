@@ -254,9 +254,6 @@ public class ResumeController {
 			String resume_job_intension,String resume_graduate_institution,String resume_work_years,
 			String resume_self_evaluation,String resume_work_experience){*/
 	
-
-		
-		
 		long startTime = System.currentTimeMillis();
 		
 		String resume_name = request.getParameter("resume_name");
@@ -328,14 +325,13 @@ public class ResumeController {
 			        MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest)request;
 			        //获取multiRequest中所有的文件名
 			        Iterator iter = multiRequest.getFileNames();
-
 			        while(iter.hasNext()){
 			            //一次遍历所有的文件
 			            MultipartFile files = multiRequest.getFile(iter.next().toString());
 			            if(files!=null && !("".equals(files.getOriginalFilename())) && files.getOriginalFilename() != null){
 			            	System.out.println(files.getOriginalFilename());
 			            	
-			                String path = "D:/tupian/resume"+ resume.getResumeId()+resume.getResumeName() + files.getOriginalFilename();
+			                String path = "D:/Resumepicture/R"+ resume.getResumeId()+resume.getResumeName() + files.getOriginalFilename();
 			                System.out.println(path);
 			                //上传
 			                try {
@@ -365,6 +361,7 @@ public class ResumeController {
 			            }
 			        }
 			    }
+			    
 			    long endTime = System.currentTimeMillis();
 			    System.out.println("图片上传运行时间："+String.valueOf(endTime-startTime)+"ms");
 				
@@ -463,11 +460,14 @@ public class ResumeController {
 	
 	@RequestMapping("/resume_update.do")
 	public ModelAndView resumeUpdate(HttpServletRequest request){
+		
+		
 		//取到页数
 		String pageStr = request.getParameter("page");
 		Integer page = Integer.valueOf(pageStr);
-		
-		 long startTime = System.currentTimeMillis();
+		//.............
+				
+		long startTime = System.currentTimeMillis();
 		
 		String resume_id = request.getParameter("resume_id");
 		String resume_name = request.getParameter("resume_name");
@@ -527,14 +527,15 @@ public class ResumeController {
 		        MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest)request;
 		        //获取multiRequest中所有的文件名
 		        Iterator iter = multiRequest.getFileNames();
-
+		        System.out.println(iter);
 		        while(iter.hasNext()){
 		            //一次遍历所有的文件
 		            MultipartFile files = multiRequest.getFile(iter.next().toString());
+		            System.out.println(files);
 		            if(files!=null && !("".equals(files.getOriginalFilename())) && files.getOriginalFilename() != null){
 		            	System.out.println(files.getOriginalFilename());
 		            	
-		                String path = "D:/tupian/resume"+ resume.getResumeId()+resume.getResumeName() +"update"+ files.getOriginalFilename();
+		                String path = "D:/Resumepicture/RU"+ resume.getResumeId()+resume.getResumeName() + files.getOriginalFilename();
 		                System.out.println(path);
 		                //上传
 		                try {
@@ -564,6 +565,7 @@ public class ResumeController {
 		        }
 		    
 		    }
+		    
 		    long endTime = System.currentTimeMillis();
 		    System.out.println("文件上传运行时间："+String.valueOf(endTime-startTime)+"ms");
 			

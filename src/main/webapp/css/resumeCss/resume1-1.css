@@ -51,6 +51,18 @@
 #addhengxian{
 	width: 550px;
 }
+#s9{
+	position:absolute;
+  	left:650px;
+  	top:160px;
+  	width: 400px;
+}
+#s10{
+	position:absolute;
+  	left:650px;
+  	top:180px;
+  	width: 400px;
+}
 
 
 #addbutton_div {
