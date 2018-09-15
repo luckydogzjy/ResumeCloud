@@ -53,7 +53,7 @@ public class ResumeController {
 	public static Integer userId = 1;
 	
 	@RequestMapping("/resumeDisplay.do")
-	public ModelAndView resumeDisplay(HttpServletRequest request,  HttpServletResponse response){
+	public ModelAndView resumeDisplay(HttpServletRequest request){
 		
 		
 		
@@ -219,6 +219,10 @@ public class ResumeController {
 	}
 	
 	
+
+	
+	
+	
 	
 	
 /*      zhang      */
@@ -345,7 +349,9 @@ public class ResumeController {
 			    System.out.println("图片上传运行时间："+String.valueOf(endTime-startTime)+"ms");
 				
 				model.put("info", "增加简历信息成功");
-				return new ModelAndView("resume/resume_add",model);
+				return  resumeDisplay(request);
+				
+			/*	return new ModelAndView("resume/resume_add",model);*/
 				
 			} else {
 				//resumeuser表添加失败
@@ -499,7 +505,8 @@ public class ResumeController {
 		    System.out.println("文件上传运行时间："+String.valueOf(endTime-startTime)+"ms");
 			
 			model.put("info", "修改简历成功");
-		    return new ModelAndView("resume/resume_update",model);
+			return  resumeDisplay(request);
+		  /*  return new ModelAndView("resume/resume_update",model);*/
 
 		}else {
 			

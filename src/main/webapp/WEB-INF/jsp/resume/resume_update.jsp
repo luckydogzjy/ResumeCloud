@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+     <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,13 +12,11 @@
  <script src="js/resume-1-1.js"></script>
 </head>
 
-
-
 <body>
 
 
-
-			<div id="header">
+		<div id="box">
+		<div id="header">
 		<jsp:include page="../common/header.jsp" flush="true"/>
 		</div>
 		<div id="lefter">
@@ -51,7 +50,7 @@
 					<td><select name = "resume_sex" id="resume_sex" >
 			
 		
-					<option value="${resume.resumeSex}"> <c:if test="${resume.resumeSex == 1}">男</c:if>     <c:if test="${resume.resumeSex == 0}">女</c:if></option>
+					<option value="${resume.resumeSex}"> <c:if test="${resume.resumeSex == 1}">男</c:if>  <c:if test="${resume.resumeSex == 0}">女</c:if></option>
 					<option value="1">男</option>
 					<option value="0">女</option>
 			</select></td>
@@ -114,7 +113,7 @@
 			
 				<tr>
 					<td height="35"><span >出生年月</span></td>
-					<td><input name="resume_birthday" id="resume_birthday" type="date" value="${resume.resumeBirthday}" onblur="checkbir();"/></td>
+					<td><input name="resume_birthday" id="resume_birthday" type="date" value="<fmt:formatDate  value="${resume.resumeBirthday}" pattern="yyyy-MM-dd" />" onblur="checkbir();"/></td>
 					<td><font id="s5" size="2" color="red"></font></td>
 				</tr>
 			
@@ -159,7 +158,7 @@
 		
 	   	<input id="wenjian" type="file" />
 		
-	
+		</div>
     	</div> 
     </div> 
    </div> 

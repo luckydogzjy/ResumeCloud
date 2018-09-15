@@ -17,9 +17,8 @@
 
 
 <body>
-
-
-			<div id="header">
+		<div id="box">
+		<div id="header">
 		<jsp:include page="../common/header.jsp" flush="true"/>
 		</div>
 		<div id="lefter">
@@ -84,7 +83,7 @@
 			</tr>			
 			<tr>
 				<td height="35"><span >出生年月</span></td>
-				<td><input name="resume_birthday" id="resume_birthday"  type="date" onblur="IsDate();"/></td>
+				<td><input name="resume_birthday" id="resume_birthday"  type="date" onblur="checkbir();"/></td>
 				<td><font id="s5" size="2" color="red"></font></td>
 			</tr>
 			
@@ -145,7 +144,7 @@
 	
 		
 		
-			
+		</div>	
 	</div>
 	</div>
 	</div>

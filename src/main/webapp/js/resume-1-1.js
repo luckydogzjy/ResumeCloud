@@ -1,3 +1,4 @@
+
 	function checkname(){
   		var strname =document.getElementById('resume_name').value;
   		if(strname.length>6){
@@ -10,9 +11,12 @@
 		}
   	}
 	
+	
+	
 	function checkphone(){
 		var strphone = document.getElementById('resume_phone').value;
-		var phone = /^0*(13|15)\d{9}$/;
+		/*var phone = /^0*(1)\d{10}$/;*/
+		var phone = /^1[1234567890]{10}$/;
   		if(!phone.exec(strphone)){
   			document.getElementById("s2").innerHTML="电话输入不正确";
   		}else{
@@ -87,11 +91,9 @@
   	}
 		
 		
-		function checkbir(){
-			var strbir = document.getElementById('resume_birthday').value;
-		}
 		
-		  function IsDate() {
+		
+		  function checkbir() {
             var date = document.getElementById("resume_birthday").value;
             if (date == "") {
                 document.getElementById("s5").innerHTML="日期输入不正确"; 
