@@ -20,6 +20,7 @@ import com.qc.rc.common.PageBean;
 import com.qc.rc.common.ServerResponse;
 import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.User;
+import com.qc.rc.entity.UserResume;
 import com.qc.rc.entity.pojo.InterviewPojo;
 
 import com.qc.rc.service.InterviewService;
@@ -29,7 +30,7 @@ import com.qc.rc.utils.InterviewDateUtil;
 @Controller
 @RequestMapping("Interview/")
 public class InterviewController {
-		
+	static Integer userId = 1001;	
 	@Autowired  
 	private InterviewService iInterviewService;
 	
@@ -43,7 +44,7 @@ public class InterviewController {
 //			user.setUserId(1001);
 //		}
 		Map<String,Object> model = new HashMap<String,Object>();
-		PageBean<InterviewPojo> iPageBean = iInterviewService.getAllInterviews(1001);
+		PageBean<InterviewPojo> iPageBean = iInterviewService.getAllInterviews(userId);
 		model.put("iPageBean", iPageBean);
 		return new ModelAndView("interviewJsps/showAllInterviews",model);
 	}
@@ -73,7 +74,7 @@ public class InterviewController {
 			pNum = Integer.valueOf(pageNum);
 		}
 		
-		PageBean<InterviewPojo> iPageBean = iInterviewService.selectByCondition(pNum, 1001,st,ot, interviewJob, interviewInfo);
+		PageBean<InterviewPojo> iPageBean = iInterviewService.selectByCondition(pNum, userId,st,ot, interviewJob, interviewInfo);
 		
 		model.put("interviewTimeStart", startTime);
 		model.put("interviewTimeOver", overTime);
@@ -83,7 +84,7 @@ public class InterviewController {
 		return new ModelAndView("interviewJsps/showAllInterviews",model);
 		
 	}
-	
+//	页面跳转
 	@RequestMapping("addNewInterview.do")
 	public ModelAndView addNewInterview(Integer resumeId,HttpServletRequest request){
 		Resume resume = resumeService.getResumeDetailsById(resumeId);
@@ -94,8 +95,8 @@ public class InterviewController {
 	
 //	为简历库中存在的简历安排面试
 	@RequestMapping("newInterview.do")
-	public String newInterview(Integer userId,HttpServletRequest request) throws UnsupportedEncodingException{
-		userId = 1001;
+	public ModelAndView newInterview(HttpServletRequest request) throws UnsupportedEncodingException{
+		Map<String,Object> model = new HashMap<String,Object>();
 		Integer resumeId = Integer.valueOf(request.getParameter("resumeId"));
 		String resumePhone = request.getParameter("resumePhone");
 		String interviewJob = FormParameterUtil.changeCode(request.getParameter("interviewJob"));
@@ -137,14 +138,37 @@ public class InterviewController {
 		iPojo.setInterviewCreateUser("LING");
 		
 		System.out.println(iPojo);
-//		iInterviewService.addInterview(iPojo);
-		Map<String,Object> model = new HashMap<String,Object>();
-		
-		if(!resumePhone.equals(resume.getResumePhone())){
-//			更新简历库中resume的phone
+		Integer result = iInterviewService.addInterview(iPojo);
+		if(result==0){
+			model.put("resume", resume);
+			model.put("message","添加面试失败");
+			return new ModelAndView("interviewJsps/addnewinterview",model);
+		}else {
+
+			if(!resumePhone.equals(resume.getResumePhone())){
+//				更新简历库中resume的phone
+				Integer res = resumeService.resumeUpdate(resume);
+				if(res!=0){
+					return new ModelAndView("interviewJsps/addnewinterview",model);
+					//return new ModelAndView("redirect:/Interview/showAllInterviews.do",model);
+				}else {
+					model.put("resume", resume);
+					model.put("message","更新手机号失败");
+					return new ModelAndView("interviewJsps/addnewinterview",model);
+				}
+			}else {
+				model.put("resume", resume);
+				model.put("message","添加成功");
+				System.out.println(iPojo.getInterviewId());
+				return new ModelAndView("redirect:/Interview/showAllInterviews.do",model);
+//				转发到详情页面
+//				return new ModelAndView("redirect:/Interview/showInterviewDetail.do?interviewId="+iPojo.getInterviewId(),model);
+			}
+			
+			
 		}
 		
-		return "redirect:/Interview/showAllInterviews.do";
+		
 
 	}
 	
@@ -152,8 +176,9 @@ public class InterviewController {
 	
 //	为简历库中不存在的简历安排面试
 	@RequestMapping("newResumeInterview.do")
-	public ModelAndView newResumeInterview(Integer userId,HttpServletRequest request) throws UnsupportedEncodingException{
-		userId = 1001;
+	public ModelAndView newResumeInterview(HttpServletRequest request) throws UnsupportedEncodingException{
+		Map<String,Object> model = new HashMap<String,Object>();
+		
 		String resumeName = FormParameterUtil.changeCode(request.getParameter("resumeName"));
 		String resumePhone = request.getParameter("resumePhone");
 		String interviewJob = FormParameterUtil.changeCode(request.getParameter("interviewJob"));
@@ -162,49 +187,52 @@ public class InterviewController {
 		resume.setResumeName(resumeName);
 		resume.setResumePhone(resumePhone);
 		resume.setResumeJobIntension(interviewJob);
-		resume.setResumeCreateTime(new Date());
 
+		int resultCount = resumeService.resumeAdd(resume);
 //		创建UserResume对象	插入数据库
-		
-//		创建interviewPojo对象 插入数据库
-		
-		Date interviewTime =InterviewDateUtil.strToDate(request.getParameter("interviewTime"));
-		String interviewAddress = FormParameterUtil.changeCode(request.getParameter("interviewAddress"));
-		String interviewAssociateUsername = FormParameterUtil.changeCode(request.getParameter("interviewAssociateUsername"));
-		String interviewAssociatePhone = FormParameterUtil.changeCode(request.getParameter("interviewAssociatePhone"));
-		String interviewInfo = FormParameterUtil.changeCode(request.getParameter("interviewInfo"));
-
-//		Resume resume = resumeService.getResumeDetailsById(resumeId);
-	
-		InterviewPojo iPojo = new InterviewPojo();
-		iPojo.setResume(resume);
-//		iPojo.setInterviewResumeId(resumeId);
-		iPojo.setInterviewJob(interviewJob);
-		iPojo.setInterviewTime(interviewTime);
-		
-		iPojo.setInterviewAddress(interviewAddress);
-		iPojo.setInterviewAssociatePhone(interviewAssociatePhone);
-		iPojo.setInterviewAssociateUsername(interviewAssociateUsername);
-		iPojo.setInterviewInfo(interviewInfo);
-		iPojo.setInterviewCreateTime(new Date());
-//		新建时设置状态为待面试
-		iPojo.setInterviewStatus(2);
-//		设置deleteflag为0
-		iPojo.setInterviewDeleteFlag(0);
-		iPojo.setInterviewUserId(userId);
-//		应从缓存中获取username
-		iPojo.setInterviewCreateUser("LING");
-		
-		System.out.println(iPojo);
-		iInterviewService.addInterview(iPojo);
-		Map<String,Object> model = new HashMap<String,Object>();
-		model.put("message", "添加成功");
-		
-		if(!resumePhone.equals(resume.getResumePhone())){
-//			更新简历库中resume的phone
+		if(resultCount != 0){
+			UserResume ur = new UserResume();
+			ur.setUrResumeId(resume.getResumeId());
+			ur.setUrUesrId(userId);
+			int result = resumeService.resumeAddResumeUser(ur);
+			if(result !=0){
+//				创建interviewPojo对象 插入数据库
+				
+				Date interviewTime =InterviewDateUtil.strToDate(request.getParameter("interviewTime"));
+				String interviewAddress = FormParameterUtil.changeCode(request.getParameter("interviewAddress"));
+				String interviewAssociateUsername = FormParameterUtil.changeCode(request.getParameter("interviewAssociateUsername"));
+				String interviewAssociatePhone = FormParameterUtil.changeCode(request.getParameter("interviewAssociatePhone"));
+				String interviewInfo = FormParameterUtil.changeCode(request.getParameter("interviewInfo"));
+			
+				InterviewPojo iPojo = new InterviewPojo();
+				iPojo.setResume(resume);
+				iPojo.setInterviewResumeId(resume.getResumeId());
+				iPojo.setInterviewJob(interviewJob);
+				iPojo.setInterviewTime(interviewTime);
+				
+				iPojo.setInterviewAddress(interviewAddress);
+				iPojo.setInterviewAssociatePhone(interviewAssociatePhone);
+				iPojo.setInterviewAssociateUsername(interviewAssociateUsername);
+				iPojo.setInterviewInfo(interviewInfo);
+				iPojo.setInterviewCreateTime(new Date());
+//				新建时设置状态为待面试
+				iPojo.setInterviewStatus(2);
+//				设置deleteflag为0
+				iPojo.setInterviewDeleteFlag(0);
+				iPojo.setInterviewUserId(userId);
+//				应从缓存中获取username
+				iPojo.setInterviewCreateUser("LING");
+				
+				System.out.println(iPojo);
+				iInterviewService.addInterview(iPojo);
+				
+			}else {
+				model.put("message", "新增用户简历失败");
+			}
+		}else {
+			model.put("message", "新增简历失败");
 		}
-		
-		return new ModelAndView("interviewJsps/addnewinterview",model);
+		return new ModelAndView("redirect:/Interview/showAllInterviews.do",model);
 
 	}
 	@RequestMapping("deleteById.do")
@@ -217,7 +245,7 @@ public class InterviewController {
 	}
 	
 	
-	
+//	interviewId
 	@RequestMapping("showInterviewDetail.do")
 	public ModelAndView getInterviewByResumeId(Integer ResumeId){
 		

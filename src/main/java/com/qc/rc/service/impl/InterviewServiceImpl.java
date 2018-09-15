@@ -65,8 +65,8 @@ public class InterviewServiceImpl implements InterviewService {
 		return ipPageBean;
 	}
 	
-	public void addInterview(InterviewPojo interviewPojo) {
-		interviewMapper.addInterview(interviewPojo);
+	public Integer addInterview(InterviewPojo interviewPojo) {
+		return	interviewMapper.addInterview(interviewPojo);
 	}
 
 	public void deleteInterview(InterviewPojo interviewPojo){

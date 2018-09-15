@@ -1,131 +1,132 @@
 input[type="text"] {
-				width: 250px;
-			}
-			
-			.info {
-				height: 80px;
-			}
-			
-			.left {
-				text-align: right;
-			}
-			
-			#textarea {
-				width: 250px;
-				height: 60px;
-			}
-			
-			#right-box-title {
-				position: absolute;
-				left: 70px;
-				top: 45px;
-			}
-			
-			.right-box-title-font {
-				color: #0099CB;
-			}
-			
-			#right-box-font1 {
-				float: left;
-			}
-			
-			#right-box-font2 {
-				position: relative;
-				left: 20px;
-				float: left;
-			}
-			
-			#right-box-font3 {
-				position: relative;
-				left: 50px;
-				float: left;
-			}
-			
-			#right-box-img {
-				position: absolute;
-				left: 900px;
-			}
-			
-			#right-box-hr1 {
-				position: absolute;
-				top: 110px;
-				left: 33px;
-				size: 1;
-				width: 1000px;
-			}
-			
-			#right-box-hr2 {
-				position: absolute;
-				top: 450px;
-				left: 33px;
-				size: 1;
-				width: 1000px;
-			}
-			
-			#body {
-				left: 126px;
-				top: 128px;
-				position: absolute;
-			}
-			
-			#table {
-				BORDER-RIGHT: lightblue 1px solid;
-				BORDER-TOP: lightblue 1px solid;
-				BORDER-LEFT: lightblue 1px solid;
-				BORDER-BOTTOM: lightblue 1px solid;
-				height: 380px;
-				left: 50px;
-				top: 110px;
-				position: absolute;
-			}
-			
-			#right-box-button-tijiao {
-				position: absolute;
-				left: 0px;
-				top: 360px;
-				border-radius: 5px;
-				border: 0px;
-				width: 109px;
-				height: 38px;
-				background-color: #0099FF;
-				font-family: 'Microsoft YaHei Negreta', 'Microsoft YaHei Normal', 'Microsoft YaHei';
-				font-weight: 700;
-				font-style: normal;
-				font-size: 14px;
-				color: #FFFFFF;
-			}
-			
-			#right-box-button-quxiao {
-				position: absolute;
-				left: 160px;
-				top: 360px;
-				border-radius: 5px;
-				border: 0px;
-				width: 109px;
-				height: 38px;
-				background-color: #FF0033;
-				font-family: 'Microsoft YaHei Negreta', 'Microsoft YaHei Normal', 'Microsoft YaHei';
-				font-weight: 700;
-				font-style: normal;
-				font-size: 14px;
-				color: #FFFFFF;
-			}
-			#msg{  
-			    left: 600px;
-			    top: 80px;
-			    width: 250px;
-			    height: 110px;
-			    position: absolute;
-			   
-			}
-			#jscopy{
-				left: 600px;
-    			top: 210px;
-			    position: absolute;
-			}
-			#sendbox{
-				left: 5px;
-				top: 335px;
-				position: absolute;
-				
-			}
+	width: 250px;
+}
+
+.info {
+	height: 80px;
+}
+
+.left {
+	text-align: right;
+}
+
+#textarea {
+	width: 250px;
+	height: 60px;
+}
+
+#right-box-title {
+	position: absolute;
+	left: 70px;
+	top: 45px;
+}
+
+.right-box-title-font {
+	color: #0099CB;
+}
+
+#right-box-font1 {
+	float: left;
+}
+
+#right-box-font2 {
+	position: relative;
+	left: 20px;
+	float: left;
+}
+
+#right-box-font3 {
+	position: relative;
+	left: 50px;
+	float: left;
+}
+
+#right-box-img {
+	position: absolute;
+	left: 900px;
+}
+
+#right-box-hr1 {
+	position: absolute;
+	top: 110px;
+	left: 33px;
+	size: 1;
+	width: 1000px;
+}
+
+#right-box-hr2 {
+	position: absolute;
+	top: 450px;
+	left: 33px;
+	size: 1;
+	width: 1000px;
+}
+
+#body {
+	left: 126px;
+	top: 128px;
+	position: absolute;
+}
+
+#table {
+	BORDER-RIGHT: lightblue 1px solid;
+	BORDER-TOP: lightblue 1px solid;
+	BORDER-LEFT: lightblue 1px solid;
+	BORDER-BOTTOM: lightblue 1px solid;
+	height: 380px;
+	left: 50px;
+	top: 110px;
+	position: absolute;
+}
+
+#right-box-button-tijiao {
+	position: absolute;
+	left: 0px;
+	top: 360px;
+	border-radius: 5px;
+	border: 0px;
+	width: 109px;
+	height: 38px;
+	background-color: #0099FF;
+	font-family: 'Microsoft YaHei Negreta', 'Microsoft YaHei Normal', 'Microsoft YaHei';
+	font-weight: 700;
+	font-style: normal;
+	font-size: 14px;
+	color: #FFFFFF;
+}
+
+#right-box-button-quxiao {
+	position: absolute;
+	left: 160px;
+	top: 360px;
+	border-radius: 5px;
+	border: 0px;
+	width: 109px;
+	height: 38px;
+	background-color: #FF0033;
+	font-family: 'Microsoft YaHei Negreta', 'Microsoft YaHei Normal', 'Microsoft YaHei';
+	font-weight: 700;
+	font-style: normal;
+	font-size: 14px;
+	color: #FFFFFF;
+}
+
+#msg {
+	left: 600px;
+	top: 80px;
+	width: 250px;
+	height: 110px;
+	position: absolute;
+}
+
+#jscopy {
+	left: 600px;
+	top: 210px;
+	position: absolute;
+}
+
+#sendbox {
+	left: 5px;
+	top: 335px;
+	position: absolute;
+}

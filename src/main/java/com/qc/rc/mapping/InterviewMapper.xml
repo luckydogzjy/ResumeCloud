@@ -117,9 +117,9 @@
   		#{interviewAssociatePhone},#{interviewAddress},#{interviewInfo},#{interviewStatus},#{interviewCreateUser},
   		#{interviewCreateTime},#{interviewDeleteFlag},#{interviewUserId})
   		
-  		<!-- <selectKey keyProperty="interviewId" order="AFTER" resultType="java.lang.Integer">
-  		
-  		</selectKey> -->
+  		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="interviewId">
+             select max(INTERVIEW_ID) from RC_INTERVIEW
+        </selectKey> 
   	</insert>
 
 	<update id="deleteInterview" parameterType="com.qc.rc.entity.pojo.InterviewPojo">

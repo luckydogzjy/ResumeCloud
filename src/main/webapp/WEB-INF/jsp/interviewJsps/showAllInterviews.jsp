@@ -73,7 +73,7 @@
 								<input type="search" name="interviewJob" id="" value="${interviewJob}" placeholder="请输入面试职位" />
 							</div>
 							<div id="addnewInterview">
-								<a href="${pageContext.request.contextPath}/Interview/addNewInterview.do?userId=1001&resumeId=3"><input type="button" id="addbutton" value="添加新的面试" /></a>
+								<a href="${pageContext.request.contextPath}/Interview/addNewInterview.do?resumeId=3"><input type="button" id="addbutton" value="添加新的面试" /></a>
 							</div>
 							<div id="interview_name_address_info">
 								<input type="search" name="interviewInfo" id="interviewInfo" value="${interviewInfo}" placeholder="请输入姓名，面试地点，面试信息等相关信息" />
@@ -142,9 +142,9 @@
 												</font>
 											</td>
 											<td class="right">
-												<a href="updateById.do?id=${interview.interviewId}"><input type="button" value="修改" id="addBtn" /></a>
+												<a href="updateById.do?id=${interview.interviewId}"><input type="button" value="修改" id="updateBtn" /></a>
 												<a href="${pageContext.request.contextPath}/Interview/deleteById.do?id=${interview.interviewId}"><input type="button" value="删除" id="deleteBtn"  /></a>
-												<a href=""><input type="button" value="面试结果" id="deleteBtn" /></a>
+												<a href=""><input type="button" value="面试结果" id="interviewBtn" /></a>
 											</td>
 										</tr>
 

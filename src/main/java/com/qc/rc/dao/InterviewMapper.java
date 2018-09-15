@@ -25,7 +25,7 @@ public interface InterviewMapper {
 			@Param("overTime")Date overTime, @Param("interviewJob")String interviewJob, @Param("interviewInfo")String interviewInfo);
 
 	//插入interviewPojo	
-	void addInterview(InterviewPojo interviewPojo);
+	Integer addInterview(InterviewPojo interviewPojo);
 
 	//删除
 	void deleteInterview(InterviewPojo interviewPojo);

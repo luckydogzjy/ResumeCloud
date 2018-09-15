@@ -18,6 +18,10 @@
 	<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../js/interviewJs/addInterview.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
+		function check(value,id){
+		document.getElementById(id).value = value;
+	}
+	
 	window.onload = function() {
 		new Vue({
 			el: "#div0", //绑定标签

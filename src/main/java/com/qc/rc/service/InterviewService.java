@@ -20,7 +20,7 @@ public interface InterviewService {
 	public PageBean<InterviewPojo> selectByCondition(Integer pageNum,Integer userId,
 					Date startTime,Date overTime,String interviewJob,String interviewInfo);
 //	添加面试
-	public void addInterview(InterviewPojo interviewPojo);
+	public Integer addInterview(InterviewPojo interviewPojo);
 //	删除面试
 	public void deleteInterview(InterviewPojo interviewPojo);
 	
