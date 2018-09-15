@@ -1,0 +1,135 @@
+hr{
+	width: 1000px;
+}
+h1{
+	margin-left:80px;
+}
+#right-box-east{
+	float: left;
+	margin-left: 150px;
+	margin-top:23px;
+}
+#right-box-west{
+	float: right;
+	margin-right: 150px;
+	margin-top:16px;
+}
+#salary{
+	width: 156px;
+	height: 16px;
+	margin-left: 3px;
+}
+#btn{
+	float: right;
+	margin-right: 200px;
+}
+#font{
+	margin-top:20px;
+	width:100px;
+	height:100px;
+}
+#input{
+	margin-top:20px;
+	width:100px;
+	height:100px;
+}
+#jobName{
+	margin-top:20px;
+}
+#jobCount{
+	margin-top:20px;
+}
+#jobStatus{
+	margin-top:20px;
+}
+#jobCreate{
+	margin-top:20px;
+}
+#jobSalary{
+	margin-top:20px;
+}
+#jobDate{
+	margin-top:20px;
+}
+#cutBtn{
+	margin-top:40px;
+}
+#adjBtn{
+	background:#00ccff;
+	width:120px;
+	height:40px;
+	border-radius:10px;
+	margin-left:111px;
+}
+input{
+	width:170px;
+	height:27px;
+}
+font{
+	font-size:20px;
+}
+#intro{
+	display:block;
+	white-space:pre-wrap;
+}
+#con{
+	display:block;
+	white-space:pre-wrap;
+}
+#jobCondition{
+	margin-top:60px;
+}
+textarea{
+	width:300px;
+	height:80px;
+}
+#submit{
+	background:#00ccff;
+	width:120px;
+	height:40px;
+	border-radius:10px;
+}
+#cancel{
+	background:#00ccff;
+	width:120px;
+	height:40px;
+	border-radius:10px;
+}
+#detail-left{
+	float:left;
+	width:300px;
+	height:80px;
+}
+#details-right{
+	float:right;
+	width:300px;
+	height:80px;
+}
+#name{
+	margin-top:20px;
+}
+#count{
+	margin-top:20px;
+}
+#status{
+	margin-top:20px;
+}
+#salary{
+	margin-top:20px;
+}
+#create{
+	margin-top:25px;
+}
+#end{
+	margin-top:20px;
+}
+#intr{
+	margin-top:-245px;
+	height:200px;
+	
+}
+#condi{
+	margin-top:20px;
+	margin-top:-90px;
+	
+}

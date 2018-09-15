@@ -6,148 +6,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<link rel="stylesheet" type="text/css" href="../css/demo.css" />
-
+<script src="../My97DatePicker/WdatePicker.js" type="text/javascript"></script>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>显示interviews</title>
-		<style type="text/css">
-			th {
-				width: 150px;
-				BORDER-RIGHT: lightblue 1px dashed;
-				BORDER-TOP: lightblue 1px dashed;
-				BORDER-LEFT: lightblue 1px dashed;
-				BORDER-BOTTOM: lightblue 1p dashed;
-				background-color: lightblue;
-			}
-			
-			button.hover {
-				cursor: pointer;
-			}
-			
-			#normal {
-				width: 120px;
-			}
-			
-			#right {
-				width: 180px;
-			}
-			
-			#interview_time {
-				left: 50px;
-				;
-				top: 20px;
-				position: absolute;
-				width: 400px;
-			}
-			
-			#interview_Job {
-				left: 460px;
-				top: 20px;
-				position: absolute;
-				width: 250px;
-			}
-			
-			#addnewInterview {
-				left: 830px;
-				top: 20px;
-				position: absolute;
-				width: 130px;
-				height: 30px;
-			}
-			
-			#addbutton {
-				width: 100%;
-				height: 100%;
-				border-radius: 5px;
-				border: 0px;
-				background-color: rgba(0, 204, 204, 1);
-				font-family: 'Microsoft YaHei Negreta', 'Microsoft YaHei Normal', 'Microsoft YaHei';
-				font-weight: 700;
-				font-style: normal;
-				font-size: 14px;
-				color: white;
-			}
-			
-			#interview_name_address_info {
-				left: 55px;
-				top: 60px;
-				position: absolute;
-				width: 300px;
-				width: 650px;
-				height: 30px;
-				font: "微软雅黑";
-			}
-			
-			#interviewInfo {
-				width: 100%;
-				height: 100%;
-			}
-			
-			#s {
-				left: 720px;
-				top: 60px;
-				width: 117px;
-				height: 30px;
-				position: absolute;
-			}
-			
-			#r {
-				left: 850px;
-				top: 60px;
-				width: 110px;
-				height: 30px;
-				position: absolute;
-			}
-			
-			#search_button {
-				width: 100%;
-				height: 100%;
-				border-radius: 5px;
-				border: 0px;
-				background-color: rgba(255, 102, 0, 1);
-				font-family: 'Microsoft YaHei Negreta', 'Microsoft YaHei Normal', 'Microsoft YaHei';
-				font-weight: 700;
-				font-style: normal;
-				font-size: 14px;
-				color: white;
-			}
-			
-			#reset_button {
-				width: 100%;
-				height: 100%;
-				border-radius: 5px;
-				border: 0px;
-				background-color: rgba(0, 204, 204, 1);
-				font-family: 'Microsoft YaHei Negreta', 'Microsoft YaHei Normal', 'Microsoft YaHei';
-				font-weight: 700;
-				font-style: normal;
-				font-size: 14px;
-				color: white;
-			}
-			
-			#table {
-				BORDER-RIGHT: lightblue 1px solid;
-				BORDER-TOP: lightblue 1px solid;
-				BORDER-LEFT: lightblue 1px solid;
-				BORDER-BOTTOM: lightblue 1px solid;
-				height: 380px;
-				left: 50px;
-				top: 110px;
-				position: absolute;
-			}
-			
-			#pageChange {
-				left: 50px;
-				top: 500px;
-				position: absolute;
-			}
-			
-			#message {
-				left: 880px;
-				top: 500px;
-				position: absolute;
-			}
-		</style>
+		<link rel="stylesheet" type="text/css" href="../css/interviewCss/selectinterview.css"/>
 
 	</head>
 	<script src="../My97DatePicker/WdatePicker.js" type="text/javascript"></script>
@@ -195,10 +58,13 @@
 
 							<div id="interview_time">
 								<span id="">
-							面试时间
+							面试时间 
+								
 							</span>
-								<input type="date" name="interviewTimeStart" id="" value="${interviewTimeStart}" placeholder="请输入起始时间" /> ~
-								<input type="date" name="interviewTimeOver" id="" value="${interviewTimeOver}" placeholder="请输入终止时间" />
+							<input class="Wdate" name="interviewTimeStart" type="search" value="${interviewTimeStart}" placeholder="选择起始时间" onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" /> 
+							~
+							<input class="Wdate" name="interviewTimeOver"  id="" value="${interviewTimeOver}"  placeholder="选择终止时间" type="search" onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" /> 
+							
 							</div>
 							<div id="interview_Job">
 								<span id="">
@@ -234,9 +100,20 @@
 										</th>
 										<th>
 											<font size="2">面试时间</font>
+											<select name="timeOrder">
+												<option value="default">默认</option>
+												<option value="up">↑</option>
+												<option value="down">↓</option>
+											</select>
 										</th>
 										<th>
 											<font size="2">面试结果</font>
+											<select name="interviewResult">
+												<option value="0">所有</option>
+												<option value="1">成功</option>
+												<option value="2">待面试</option>
+												<option value="3">失败</option>
+											</select>
 										</th>
 										<th colspan="2">操作</th>
 									</tr>
@@ -266,7 +143,7 @@
 											</td>
 											<td class="right">
 												<a href="updateById.do?id=${interview.interviewId}"><input type="button" value="修改" id="addBtn" /></a>
-												<a href="${pageContext.request.contextPath}/Interview/deleteById.do?id=${interview.interviewId}"><input type="button" value="删除" id="deleteBtn" /></a>
+												<a href="${pageContext.request.contextPath}/Interview/deleteById.do?id=${interview.interviewId}"><input type="button" value="删除" id="deleteBtn"  /></a>
 												<a href=""><input type="button" value="面试结果" id="deleteBtn" /></a>
 											</td>
 										</tr>
@@ -276,11 +153,15 @@
 								</table>
 							</div>
 
+								
+							
 							<div id="message">
 								<span class="color :lightblue">
-							共检索到${iPageBean.allSize}条数据
-						</span>
+								共检索到${iPageBean.allSize}条数据
+								</span>
 							</div>
+							
+							<c:if test="${iPageBean.allSize>0}">
 							<div id="pageChange">
 
 								<input type="button" name="" id="lastpage" value="上一页" onclick="lastchangepage()" />
@@ -288,11 +169,11 @@
 								<input type="hidden" name="pageNum" id="pageNum" value="${iPageBean.pageNum}" />
 								<input type="hidden" id="allNum" value="${iPageBean.allPage}" />
 								<span>
-							第${iPageBean.pageNum}页 &nbsp;	共${iPageBean.allPage}页 
-						</span>
+								第${iPageBean.pageNum}页 &nbsp;	共${iPageBean.allPage}页 
+								</span>
 
 							</div>
-
+							</c:if>
 						</form>
 					</div>
 

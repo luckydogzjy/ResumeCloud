@@ -156,14 +156,14 @@
 					
 							<td>
 								<!-- 如果该条简历不是自己共享的并且用户还未兑换过显示 兑换按钮 -->
-								<c:if test="${sharing.flag == 0 && sharing.scUserId != 2}">
+								<c:if test="${sharing.flag == 0 && sharing.scUserId != 1}">
 									<input type="button" value="兑换"/>
 								</c:if> 
 								<!-- 如果该条简历不是自己共享的但是用户已经兑换过显示 已兑换 按钮 -->
-								<c:if test="${sharing.flag == 1 && sharing.scUserId != 2}">
+								<c:if test="${sharing.flag == 1 && sharing.scUserId != 1}">
 									<input type="button" value="已兑换" disabled="disabled"/>
 								</c:if> 
-								<c:if test="${sharing.scUserId == 2}">
+								<c:if test="${sharing.scUserId == 1}">
 									<input type="button" value="取消共享" />
 								</c:if>
 						</tr>

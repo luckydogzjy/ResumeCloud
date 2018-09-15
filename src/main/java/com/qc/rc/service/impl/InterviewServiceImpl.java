@@ -24,6 +24,8 @@ public class InterviewServiceImpl implements InterviewService {
 		
 	public PageBean<InterviewPojo> getAllInterviews(Integer userId) {
 		Integer size = interviewMapper.getAllInterviewsByUserId(userId);
+		
+		
 		PageBean<InterviewPojo> ipPageBean = new PageBean<>();
 //		查询满足条件的所有字段数
 		ipPageBean.setAllSize(size);
@@ -31,13 +33,13 @@ public class InterviewServiceImpl implements InterviewService {
 		ipPageBean.setPageNum(1);
 //		设置每页要显示的数量
 		ipPageBean.setPageSize(PageMessage.interviewpageSize);
-//		设置跳过行数
-		ipPageBean.setOffset();
 //		计算所有页数
 		ipPageBean.setAllPage();
-        RowBounds rb = new RowBounds(ipPageBean.getOffset(), ipPageBean.getPageSize());  
+        RowBounds rb = new RowBounds(ipPageBean.getPageNum(),ipPageBean.getPageSize());  
 //      载入数据
 		List<InterviewPojo> interviewPojos= interviewMapper.selectAllInterviewsByUserId(rb, userId);
+		
+		
 		ipPageBean.setDatalist(interviewPojos);
 		
 		return ipPageBean;
@@ -54,15 +56,12 @@ public class InterviewServiceImpl implements InterviewService {
 		ipPageBean.setPageNum(pageNum);
 //		设置每页要显示的数量
 		ipPageBean.setPageSize(PageMessage.interviewpageSize);
-//		设置跳过行数
-		ipPageBean.setOffset();
 //		计算所有页数
 		ipPageBean.setAllPage();
-        RowBounds rb = new RowBounds(ipPageBean.getOffset(), ipPageBean.getPageSize());  
+        RowBounds rb = new RowBounds(ipPageBean.getPageNum(),ipPageBean.getPageSize());   
 //      载入数据
 		List<InterviewPojo> interviewPojos= interviewMapper.selectByCondition(rb, userId, startTime, overTime, interviewJob, interviewInfo);
 		ipPageBean.setDatalist(interviewPojos);
-		
 		return ipPageBean;
 	}
 	
@@ -70,8 +69,8 @@ public class InterviewServiceImpl implements InterviewService {
 		interviewMapper.addInterview(interviewPojo);
 	}
 
-	public void deleteInterview(Integer interviewId){
-		interviewMapper.deleteInterview(interviewId);
+	public void deleteInterview(InterviewPojo interviewPojo){
+		interviewMapper.deleteInterview(interviewPojo);
 	}
 	
 

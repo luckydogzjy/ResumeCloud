@@ -8,12 +8,20 @@
 		<meta charset="UTF-8">
 		<title>JobManage</title>
 		
-		<script type="text/javascript">
-			
-		
-		</script>
 		<link rel="stylesheet" type="text/css" href="css/demo.css"/>
 		<link rel="stylesheet" type="text/css" href="css/jobCss/job.css">
+		
+		<style type="text/css" >
+		
+		a{
+		 	text-decoration:none; 
+		  	color:#333
+		  	}
+	
+		
+		</style>
+		
+		
 	</head>
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -31,7 +39,7 @@
 					<div id="job-search">
 						<img id="job-search-img" src="${pageContext.request.contextPath}/img/u607.png" />
 						<form id="search" action="${pageContext.request.contextPath}/JobManage.do" method="POST">
-							<input id="job-search-input" type="text" name="search"/>
+							<input id="job-search-input" type="text" name="search" value="${search}"/>
 							<input id="job-search-button" type="submit" value="搜索" />
 						</form>
 		
@@ -54,12 +62,18 @@
 					
 					<c:forEach items="${job}" var="job">
 					<tr>
-						<td><a href="${pageContext.request.contextPath}/jobDetails.do?jobId=${job.JOB_ID}">${job.JOB_NAME}</a></td>
+						<td><a style="text-decoration:none;color:blue" href="${pageContext.request.contextPath}/jobDetails.do?jobId=${job.JOB_ID}">${job.JOB_NAME}</a></td>
 						<td>${job.JOB_COUNT}</td>
 						<td><fmt:formatDate value="${job.JOB_END_TIME}" pattern="yyyy年MM月dd日" /></td>
 
 						<td>
-							<a id="a-status" href="${pageContext.request.contextPath}/jobChangeStatus.do?jobId=${job.JOB_ID}&jobStatus=${job.JOB_STATUS}">${job.JOB_STATUS}</a>
+							<c:if test="${job.JOB_STATUS==1}">
+							<a id="button-status1" href="${pageContext.request.contextPath}/jobChangeStatus.do?jobId=${job.JOB_ID}&jobStatus=${job.JOB_STATUS}">开启</a>
+							</c:if>
+							<c:if test="${job.JOB_STATUS==0}">
+							<a id="button-status0" href="${pageContext.request.contextPath}/jobChangeStatus.do?jobId=${job.JOB_ID}&jobStatus=${job.JOB_STATUS}">关闭</a>
+							</c:if>
+							
 						</td>
 						<td>
 						 	<a id="button-modify" href="${pageContext.request.contextPath}/jobUpdateView.do?jobId=${job.JOB_ID}">修改</a>

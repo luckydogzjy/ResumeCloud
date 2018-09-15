@@ -39,6 +39,7 @@
     where INTERVIEW_USER_ID = #{userId,jdbcType=INTEGER}
     and RC_INTERVIEW.INTERVIEW_RESUME_ID = RC_RESUME.RESUME_ID
     and RC_INTERVIEW.INTERVIEW_DELETE_FLAG = 0
+    order by INTERVIEW_CREATE_TIME desc
   	</select>
   	
   	<select id="selectByCondition" resultMap="resumeAndInterviewMap">
@@ -50,8 +51,13 @@
     		INTERVIEW_USER_ID = #{userId,jdbcType=INTEGER}
 		    and RC_INTERVIEW.INTERVIEW_RESUME_ID = RC_RESUME.RESUME_ID
 		    and RC_INTERVIEW.INTERVIEW_DELETE_FLAG = 0
-		    and RC_INTERVIEW.INTERVIEW_TIME &gt;= #{startTime}
-		    and RC_INTERVIEW.INTERVIEW_TIME &lt;= #{overTime} 
+		    
+		    <if test="startTime != null and startTime !=''">
+				AND RC_INTERVIEW.INTERVIEW_TIME &gt;= #{startTime}
+			</if>
+		    <if test="overTime != null and overTime !=''">
+				AND RC_INTERVIEW.INTERVIEW_TIME &lt;= #{overTime} 
+			</if>
     		<if test="interviewJob != null and interviewJob !=''">
 				AND RC_INTERVIEW.INTERVIEW_JOB LIKE '%${interviewJob}%'
 			</if>
@@ -62,7 +68,8 @@
 			</if>
 			
 			
-   	 </where> 
+   	 </where>
+   	 order by INTERVIEW_CREATE_TIME desc
   	</select>
   	
   	<select id="getAllInterviewsByUserId" resultType="java.lang.Integer">
@@ -81,6 +88,13 @@
     		INTERVIEW_USER_ID = #{userId,jdbcType=INTEGER}
 		    and RC_INTERVIEW.INTERVIEW_RESUME_ID = RC_RESUME.RESUME_ID
 		    and RC_INTERVIEW.INTERVIEW_DELETE_FLAG = 0
+		    
+		    <if test="startTime != null and startTime !=''">
+				AND RC_INTERVIEW.INTERVIEW_TIME &gt;= #{startTime}
+			</if>
+		    <if test="overTime != null and overTime !=''">
+				AND RC_INTERVIEW.INTERVIEW_TIME &lt;= #{overTime} 
+			</if>
     		<if test="interviewJob != null and interviewJob !=''">
 				AND RC_INTERVIEW.INTERVIEW_JOB LIKE '%${interviewJob}%'
 			</if>
@@ -90,7 +104,8 @@
 				OR RC_INTERVIEW.INTERVIEW_INFO LIKE '%${interviewInfo}%'
 			</if>
 			
-   	 </where> 
+			
+   	 </where>
   	</select>
   	
   	
@@ -107,8 +122,12 @@
   		</selectKey> -->
   	</insert>
 
-	<update id="deleteInterview" parameterType="java.lang.Integer">
-	update RC_INTERVIEW set INTERVIEW_DELETE_FLAG = 1 where INTERVIEW_ID = #{interviewId,jdbcType=INTEGER}
+	<update id="deleteInterview" parameterType="com.qc.rc.entity.pojo.InterviewPojo">
+	update RC_INTERVIEW 
+	set INTERVIEW_DELETE_FLAG = 1,
+		INTERVIEW_UPDATE_TIME = sysdate,
+		INTERVIEW_UPDATE_USER = #{interviewUpdateUser}
+	 where INTERVIEW_ID = #{interviewId,jdbcType=INTEGER}
 	</update>
 	
 	<select id="selectInterviewsByResumeId" resultMap="resumeAndInterviewMap2">
