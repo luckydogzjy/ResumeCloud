@@ -39,7 +39,7 @@
 					<div id="job-search">
 						<img id="job-search-img" src="${pageContext.request.contextPath}/img/u607.png" />
 						<form id="search" action="${pageContext.request.contextPath}/JobManage.do" method="POST">
-							<input id="job-search-input" type="text" name="search"/>
+							<input id="job-search-input" type="text" name="search" value="${search}"/>
 							<input id="job-search-button" type="submit" value="搜索" />
 						</form>
 		
