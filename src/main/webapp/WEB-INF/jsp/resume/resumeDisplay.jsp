@@ -53,10 +53,17 @@
 			return false;
 		}
 	}
+	function resumeUpdate (resumeId){
+		
+		var url = "${pageContext.request.contextPath}/resume_update_show.do?resume_id=" + resumeId;
+			
+		location.href = url; 		
+	}
 </script>
 </head>
 <link rel="stylesheet" type="text/css" href="css/demo.css" />
 <body>
+  <div id="box">
 	<div id="header">
 		<jsp:include page="../common/header.jsp" flush="true" />
 	</div>
@@ -150,81 +157,88 @@
 					<c:forEach items="${resumeList }" var="resume">
 
 						<tr>
-							<td><a
-								href="<%=request.getContextPath() %>/resumeDetails.do?resumeId_Details=${resume.resumeId }">${resume.resumeName }</a></td>
-							<td><c:if test="${resume.resumeSex == 1}">
-						男
-					</c:if> <c:if test="${resume.resumeSex == 0}">
-						女
-					</c:if></td>
+							<td>
+								<a href="<%=request.getContextPath() %>/resumeDetails.do?resumeId_Details=${resume.resumeId }">${resume.resumeName }</a></td>
+							<td>
+								<c:if test="${resume.resumeSex == 1}">
+									男
+								</c:if> <c:if test="${resume.resumeSex == 0}">
+									女
+								</c:if>
+							</td>
 							<td>${resume.resumePhone }</td>
 							<td>${resume.resumeWorkYears }</td>
 							<td>${resume.resumeGraduateInstitution }</td>
 
-							<td><c:if test="${resume.resumeEducation == 0}">
-						高中及高中以下
-					</c:if> <c:if test="${resume.resumeEducation == 1}">
-						专科
-					</c:if> <c:if test="${resume.resumeEducation == 2}">
-						本科
-					</c:if> <c:if test="${resume.resumeEducation == 3}">
-						研究生
-					</c:if> <c:if test="${resume.resumeEducation == 4}">
-						硕士
-					</c:if> <c:if test="${resume.resumeEducation == 5}">
-						博士
-					</c:if> <c:if test="${resume.resumeEducation == 6}">
-						博士以上
-					</c:if></td>
-
-							<td>${resume.resumeJobIntension }</td>
-							<td><fmt:formatDate value="${resume.resumeCreateTime }"
-									pattern="yyyy-MM-dd HH:mm" /></td>
-
-							<td><c:if test="${resume.interview.interviewStatus == 1}">
-						成功
-					</c:if> <c:if test="${resume.interview.interviewStatus == 2}">
-						待面试
-					</c:if> <c:if test="${resume.interview.interviewStatus == 3}">
-						失败
-					</c:if> <%-- 				<c:if test="${resume.interview.interviewStatus != 1 
-									&& resume.interview.interviewStatus != 2 
-										&& resume.interview.interviewStatus != 3}">
-						未安排面试
-					</c:if> --%> <c:if
-									test="${resume.interview.interviewStatus == null}">
-						未安排面试
-					</c:if></td>
-
 							<td>
-						
-							
-							
-							<a href="${pageContext.request.contextPath}/resume_update_show.do?resume_id=${resume.resumeId }">
-							<input type="button" value="修改"/>
-							</a>
-							
-							
-							
-							<input type="button" value="删除" onclick="resumeDelete(${resume.resumeId })" /> <!-- 如果面试情况为待面试，则面试按钮不可点 -->
-							
-								<c:if test="${resume.interview.interviewStatus == 2}">
-									<input type="button" value="待面试" disabled="disabled" />
-								</c:if> <c:if test="${resume.interview.interviewStatus != 2}">
-									<input type="button" value="面试" />
-								</c:if> <!--如果简历是自己录入的(0),并且没没有被共享过(0) 则按钮为共享 -->
-								 <c:if test="${resume.userResume.urResumeGetway == 0 &&  resume.userResume.urResumeShareFlag == 0}">
-									<input type="button" value="共享" onclick="resumeShare(${resume.resumeId })"/>
-								</c:if> <!-- 如果简历是自己录入的(0),并且已经被共享过(1) 则按钮为已共享 --> <c:if
-									test="${resume.userResume.urResumeGetway == 0 
-									&&  resume.userResume.urResumeShareFlag == 1}">
-									<input type="button" value="已共享" disabled="disabled" />
-								</c:if> <!-- 如果简历是在共享中心兑换的(1), 则按钮为不可共享 --> <c:if
-									test="${resume.userResume.urResumeGetway != 0 
-									&&  resume.userResume.urResumeShareFlag == 1}">
-									<input type="button" value="不可共享" disabled="disabled" />
+								<c:if test="${resume.resumeEducation == 0}">
+									高中及高中以下
+								</c:if> 
+								<c:if test="${resume.resumeEducation == 1}">
+									专科
+								</c:if> 
+								<c:if test="${resume.resumeEducation == 2}">
+									本科
+								</c:if>
+								<c:if test="${resume.resumeEducation == 3}">
+									研究生
+								</c:if> <c:if test="${resume.resumeEducation == 4}">
+									硕士
+								</c:if> 
+								<c:if test="${resume.resumeEducation == 5}">
+									博士
+								</c:if> 
+								<c:if test="${resume.resumeEducation == 6}">
+									博士以上
 								</c:if>
 							</td>
+
+							<td>${resume.resumeJobIntension }</td>
+							<td>
+								<fmt:formatDate value="${resume.resumeCreateTime }"
+									pattern="yyyy-MM-dd HH:mm" />
+							</td>
+
+							<td>
+								<c:if test="${resume.interview.interviewStatus == 1}">
+									成功
+								</c:if> 
+								<c:if test="${resume.interview.interviewStatus == 2}">
+									待面试
+								</c:if> 
+								<c:if test="${resume.interview.interviewStatus == 3}">
+									失败
+								</c:if> 
+								<c:if test="${resume.interview.interviewStatus == null}">
+									未安排面试
+								</c:if>
+							</td>
+
+							<td>
+								<input type="button" value="修改" onclick="resumeUpdate(${resume.resumeId })"/>
+						
+								<input type="button" value="删除" onclick="resumeDelete(${resume.resumeId })" />
+							
+								 <!-- 如果面试情况为待面试，则面试按钮不可点 -->
+								<c:if test="${resume.interview.interviewStatus == 2}">
+									<input type="button" value="待面试" disabled="disabled" />
+								</c:if> 
+								<c:if test="${resume.interview.interviewStatus != 2}">
+										<input type="button" value="面试" />
+								</c:if> 
+								<!--如果简历是自己录入的(0),并且没没有被共享过(0) 则按钮为共享 -->
+								<c:if test="${resume.userResume.urResumeGetway == 0 &&  resume.userResume.urResumeShareFlag == 0}">
+									<input type="button" value="共享" onclick="resumeShare(${resume.resumeId })"/>
+								</c:if> 
+								<!-- 如果简历是自己录入的(0),并且已经被共享过(1) 则按钮为已共享 -->
+								<c:if test="${resume.userResume.urResumeGetway == 0 &&  resume.userResume.urResumeShareFlag == 1}">
+									<input type="button" value="已共享" disabled="disabled" />
+								</c:if>
+								<!-- 如果简历是在共享中心兑换的(1), 则按钮为不可共享 --> 
+								<c:if test="${resume.userResume.urResumeGetway != 0 &&  resume.userResume.urResumeShareFlag == 1}">
+									<input type="button" value="不可共享" disabled="disabled" />
+								</c:if>
+						    </td>
 						</tr>
 
 					</c:forEach>
@@ -233,6 +247,7 @@
 			 <a href="${pageContext.request.contextPath}/tiaozhuan_add.do"><input type="button" value="新增"/></a>
 		</div>
 	</div>
+  </div>
 </body>
 </html>
 

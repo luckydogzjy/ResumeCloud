@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.qc.rc.common.PageBean;
+import com.qc.rc.common.ServerResponse;
 import com.qc.rc.entity.Interview;
 import com.qc.rc.entity.pojo.InterviewPojo;
 
@@ -21,5 +22,8 @@ public interface InterviewService {
 //	添加面试
 	public void addInterview(InterviewPojo interviewPojo);
 //	删除面试
-	public void deleteInterview(Integer interviewId);
+	public void deleteInterview(InterviewPojo interviewPojo);
+	
+	//根据ResumeId查询详细信息
+	public ServerResponse<InterviewPojo> getInterviewByResumeId(Integer ResumeId);
 }

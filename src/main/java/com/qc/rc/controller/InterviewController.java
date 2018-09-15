@@ -5,7 +5,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.jws.soap.SOAPBinding.Use;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,16 +17,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.qc.rc.common.FormParameterUtil;
 import com.qc.rc.common.PageBean;
-import com.qc.rc.common.Util;
+import com.qc.rc.common.ServerResponse;
 import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.User;
 import com.qc.rc.entity.pojo.InterviewPojo;
 
 import com.qc.rc.service.InterviewService;
 import com.qc.rc.service.ResumeService;
+import com.qc.rc.utils.InterviewDateUtil;
 
 @Controller
-@RequestMapping("Interview")
+@RequestMapping("Interview/")
 public class InterviewController {
 		
 	@Autowired  
@@ -33,47 +36,44 @@ public class InterviewController {
 	@Autowired 
 	private ResumeService resumeService;
 	
-	@RequestMapping("/showAllInterviews.do")
-	public ModelAndView showAllInterviews(Integer userId,HttpServletRequest request){
+	@RequestMapping("showAllInterviews.do")
+	public ModelAndView showAllInterviews(HttpServletRequest request,HttpSession session){
+//		User user = (User)session.getAttribute("user");
+//		if(user==null){
+//			user.setUserId(1001);
+//		}
 		Map<String,Object> model = new HashMap<String,Object>();
-		PageBean<InterviewPojo> iPageBean = iInterviewService.getAllInterviews(userId);
-		
-		
-		
+		PageBean<InterviewPojo> iPageBean = iInterviewService.getAllInterviews(1001);
 		model.put("iPageBean", iPageBean);
 		return new ModelAndView("interviewJsps/showAllInterviews",model);
 	}
 	
-	@RequestMapping("/selectByCondition.do")
-	public ModelAndView selectByCondition(HttpServletRequest request) throws UnsupportedEncodingException{
-		
-		Integer userId = 1001;
+	@RequestMapping("selectByCondition.do")
+	public ModelAndView selectByCondition(HttpServletRequest request,HttpSession session) throws UnsupportedEncodingException{
+//		User user = (User)session.getAttribute("user");
+//		if(user==null){
+//			user.setUserId(1001);
+//		}
 		Map<String,Object> model = new HashMap<String,Object>();
 		String startTime =request.getParameter("interviewTimeStart");
 		String overTime = request.getParameter("interviewTimeOver");
-		System.out.println(startTime);
-		System.out.println(overTime);
 		Date st= null;
 		Date ot = null;
-
-		if("".equals(startTime)){
-			startTime="2018-01-01";
+		if(!"".equals(startTime)){
+			st=InterviewDateUtil.strToDate(startTime);
 		}
-		st=Util.strToDate(startTime+" 00:00:00");
-
-		
-		if("".equals(overTime)){
-			overTime="2018-12-31";
+		if(!"".equals(overTime)){
+		ot=InterviewDateUtil.strToDate(overTime);
 		}
-		ot=Util.strToDate(overTime+" 23:59:59");
-
-		System.out.println(st);
-		System.out.println(ot);
 		String interviewJob = FormParameterUtil.changeCode(request.getParameter("interviewJob"));
 		String interviewInfo = FormParameterUtil.changeCode(request.getParameter("interviewInfo"));
-		Integer pageNum = Integer.valueOf(request.getParameter("pageNum"));
+		String pageNum = request.getParameter("pageNum");
+		Integer pNum=1;
+		if(!"".equals(pageNum) && pageNum!=null){
+			pNum = Integer.valueOf(pageNum);
+		}
 		
-		PageBean<InterviewPojo> iPageBean = iInterviewService.selectByCondition(pageNum, 1001,st,ot, interviewJob, interviewInfo);
+		PageBean<InterviewPojo> iPageBean = iInterviewService.selectByCondition(pNum, 1001,st,ot, interviewJob, interviewInfo);
 		
 		model.put("interviewTimeStart", startTime);
 		model.put("interviewTimeOver", overTime);
@@ -84,7 +84,7 @@ public class InterviewController {
 		
 	}
 	
-	@RequestMapping("/addNewInterview.do")
+	@RequestMapping("addNewInterview.do")
 	public ModelAndView addNewInterview(Integer resumeId,HttpServletRequest request){
 		Resume resume = resumeService.getResumeDetailsById(resumeId);
 		Map<String,Object> model = new HashMap<String,Object>();
@@ -92,27 +92,93 @@ public class InterviewController {
 		return new ModelAndView("interviewJsps/addnewinterview",model);
 	}
 	
-	@RequestMapping("/newInterview.do")
-	public ModelAndView newInterview(Integer userId,HttpServletRequest request) throws UnsupportedEncodingException{
+//	为简历库中存在的简历安排面试
+	@RequestMapping("newInterview.do")
+	public String newInterview(Integer userId,HttpServletRequest request) throws UnsupportedEncodingException{
 		userId = 1001;
 		Integer resumeId = Integer.valueOf(request.getParameter("resumeId"));
 		String resumePhone = request.getParameter("resumePhone");
 		String interviewJob = FormParameterUtil.changeCode(request.getParameter("interviewJob"));
-		Date interviewTime =Util.strToDate(request.getParameter("interviewTime"));
+		Date interviewTime =InterviewDateUtil.strToDate(request.getParameter("interviewTime"));
 		String interviewAddress = FormParameterUtil.changeCode(request.getParameter("interviewAddress"));
 		String interviewAssociateUsername = FormParameterUtil.changeCode(request.getParameter("interviewAssociateUsername"));
 		String interviewAssociatePhone = FormParameterUtil.changeCode(request.getParameter("interviewAssociatePhone"));
 		String interviewInfo = FormParameterUtil.changeCode(request.getParameter("interviewInfo"));
 		
-		System.out.println(interviewTime);
+		String ism = request.getParameter("isSendMsg");
+		if("sendMessage".equals(ism)){
+//			发送短信interviewMessage
+			String interviewMessage = FormParameterUtil.changeCode(request.getParameter("interviewMessage"));
+			System.out.println("发送短信到"+resumePhone);
+			System.out.println(interviewMessage);
+		}
 		Resume resume = resumeService.getResumeDetailsById(resumeId);
 	
 		InterviewPojo iPojo = new InterviewPojo();
+		System.out.println();
+		
+		
 		iPojo.setResume(resume);
-	/*	INTERVIEW_ID,INTERVIEW_RESUME_ID,INTERVIEW_JOB,INTERVIEW_TIME,INTERVIEW_ASSOCIATE_USERNAME
-	  	,INTERVIEW_ASSOCIATE_PHONE,INTERVIEW_ADDRESS,INTERVIEW_INFO,INTERVIEW_STATUS,INTERVIEW_RECODE_INFO,INTERVIEW_CREATE_USER,INTERVIEW_CREATE_TIME
-	  	,INTERVIEW_DELETE_FLAG,INTERVIEW_USER_ID*/
 		iPojo.setInterviewResumeId(resumeId);
+		iPojo.setInterviewJob(interviewJob);
+		iPojo.setInterviewTime(interviewTime);
+		
+		iPojo.setInterviewAddress(interviewAddress);
+		iPojo.setInterviewAssociatePhone(interviewAssociatePhone);
+		iPojo.setInterviewAssociateUsername(interviewAssociateUsername);
+		iPojo.setInterviewInfo(interviewInfo);
+		iPojo.setInterviewCreateTime(new Date());
+//		新建时设置状态为待面试
+		iPojo.setInterviewStatus(2);
+//		设置deleteflag为0
+		iPojo.setInterviewDeleteFlag(0);
+		iPojo.setInterviewUserId(userId);
+//		应从缓存中获取username
+		iPojo.setInterviewCreateUser("LING");
+		
+		System.out.println(iPojo);
+//		iInterviewService.addInterview(iPojo);
+		Map<String,Object> model = new HashMap<String,Object>();
+		
+		if(!resumePhone.equals(resume.getResumePhone())){
+//			更新简历库中resume的phone
+		}
+		
+		return "redirect:/Interview/showAllInterviews.do";
+
+	}
+	
+	
+	
+//	为简历库中不存在的简历安排面试
+	@RequestMapping("newResumeInterview.do")
+	public ModelAndView newResumeInterview(Integer userId,HttpServletRequest request) throws UnsupportedEncodingException{
+		userId = 1001;
+		String resumeName = FormParameterUtil.changeCode(request.getParameter("resumeName"));
+		String resumePhone = request.getParameter("resumePhone");
+		String interviewJob = FormParameterUtil.changeCode(request.getParameter("interviewJob"));
+//		封装数据成resume 在数据库中插入返回resumeid
+		Resume resume = new Resume();
+		resume.setResumeName(resumeName);
+		resume.setResumePhone(resumePhone);
+		resume.setResumeJobIntension(interviewJob);
+		resume.setResumeCreateTime(new Date());
+
+//		创建UserResume对象	插入数据库
+		
+//		创建interviewPojo对象 插入数据库
+		
+		Date interviewTime =InterviewDateUtil.strToDate(request.getParameter("interviewTime"));
+		String interviewAddress = FormParameterUtil.changeCode(request.getParameter("interviewAddress"));
+		String interviewAssociateUsername = FormParameterUtil.changeCode(request.getParameter("interviewAssociateUsername"));
+		String interviewAssociatePhone = FormParameterUtil.changeCode(request.getParameter("interviewAssociatePhone"));
+		String interviewInfo = FormParameterUtil.changeCode(request.getParameter("interviewInfo"));
+
+//		Resume resume = resumeService.getResumeDetailsById(resumeId);
+	
+		InterviewPojo iPojo = new InterviewPojo();
+		iPojo.setResume(resume);
+//		iPojo.setInterviewResumeId(resumeId);
 		iPojo.setInterviewJob(interviewJob);
 		iPojo.setInterviewTime(interviewTime);
 		
@@ -141,5 +207,23 @@ public class InterviewController {
 		return new ModelAndView("interviewJsps/addnewinterview",model);
 
 	}
+	@RequestMapping("deleteById.do")
+	public String deleteById(Integer interviewId){
+		InterviewPojo iPojo = new InterviewPojo();
+		iPojo.setInterviewId(interviewId);
+		iPojo.setInterviewUpdateUser("LING");
+		iInterviewService.deleteInterview(iPojo);
+		return "redirect:/Interview/showAllInterviews.do";
+	}
 	
+	
+	
+	@RequestMapping("showInterviewDetail.do")
+	public ModelAndView getInterviewByResumeId(Integer ResumeId){
+		
+		Map<String,Object> model = new HashMap<String,Object>();
+		ServerResponse<InterviewPojo> interviewPojo = iInterviewService.getInterviewByResumeId(ResumeId);
+		model.put("interviewPojo", interviewPojo.getData());
+		return new ModelAndView("interviewJsps/IVxiangqing",model);	
+	}
 }

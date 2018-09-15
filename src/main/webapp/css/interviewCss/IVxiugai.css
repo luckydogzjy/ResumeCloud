@@ -1,3 +1,19 @@
+p{
+	display: inline-block;
+	margin: 0;
+	width: 150px;
+}
+input{
+	width: 240px;
+	height: 23px;
+}
+select{
+	width: 94px;
+    height: 21px;
+}
+span{
+	color: red;
+}
 #right-box-title{
 	position: absolute;
     left: 70px;
@@ -30,63 +46,30 @@
 	size: 1;
 	width: 1000px;
 }
-#right-box-title2{
-	position: absolute;
-    left: 70px;
-    top: 90px;
-}
-#right-box-hr2{
-	position: absolute;
-	top: 135px;
-	left: 33px;
-	size: 1;
-	width: 1000px;
-}
-#right-box-text1{
-	text-align:right;
+#right-box-text{
 	position: absolute;
 	top: 110px;
-	left: 70px;	
+	left: 100px;	
 }
-#right-box-text2{
-	position: absolute;
-	top: 110px;
-	left: 200px;
+#right-box-text-jieguo{
+	width: 90px;
 }
-#right-box-text3{
-	text-align:right;
-	position: absolute;
-	top: 110px;
-	left: 430px;
-}
-
-#right-box-text4{
-	position: absolute;
-	top: 110px;
-	left: 600px;
-}
-#right-box-text5{
-	position: absolute;
-	top: 400px;
-	left: 90px;
+.right-box-text-item{
+	width: 600px;
+	margin-top: 18px;
 }
 .right-box-item{
-	font-size: 20px;
+	font-size: 18px;
+	text-align: right;
 }
-#right-box-hr3{
-	position: absolute;
-	top: 430px;
-	left: 33px;
-	size: 1;
-	width: 1000px;
-}
+
 #right-box-button{
 	position: absolute;
 	top: 470px;
 }
 #right-box-button-xiugai{
 	position: absolute;
-	left: 90px;
+	left: 600px;
 	border-radius: 5px;
 	border: 0px;
 	width: 89px;
@@ -100,7 +83,7 @@
 }
 #right-box-button-shanchu{
 	position: absolute;
-	left: 250px;
+	left: 750px;
 	border-radius: 5px;
 	border: 0px;
 	width: 89px;
