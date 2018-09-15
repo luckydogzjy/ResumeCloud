@@ -34,7 +34,7 @@ import com.qc.rc.entity.pojo.SharingCenterPojo;
 import com.qc.rc.service.ResumeService;
 
 @Controller
-
+@RequestMapping("Resume")
 public class ResumeController {
 
 	@Autowired 
@@ -53,13 +53,13 @@ public class ResumeController {
 	//正常应该在session里得到登录人的userId
 	//这里只做测试
 	public static Integer userId = 1;
-	
+	public static Integer pageShow = 5;  //一页显示几条数据
 	@RequestMapping("/resumeDisplay.do")
 	public ModelAndView resumeDisplay(HttpServletRequest request,@RequestParam(required=true,defaultValue="1") Integer page){
 		
 		//引入分页查询，使用PageHelper分页功能
         //在查询之前传入当前页，然后多少记录
-		PageHelper.startPage(page,3);
+		PageHelper.startPage(page,pageShow);
 		
 		List<ResumePojo> list = resumeService.getAllResume(userId);
 				
@@ -77,7 +77,7 @@ public class ResumeController {
 	public ModelAndView getResumeListByCondition(HttpServletRequest request,@RequestParam(required=true,defaultValue="1") Integer page) {
 		//引入分页查询，使用PageHelper分页功能
         //在查询之前传入当前页，然后多少记录
-		PageHelper.startPage(page,3);
+		PageHelper.startPage(page,pageShow);
 
 		String resumeName = null;
 		String resumeJobIntension = null;

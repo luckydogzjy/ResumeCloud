@@ -16,14 +16,14 @@
 				<div id="left-item-share" class="left-item" >
 					<div class="left-item-box">
 						<img class="left-item-pic"  src="${pageContext.request.contextPath}/img/u21.png" />
-						<a class="left-item-a" href="resumeSharingCenter.do">共享中心</a>
+						<a class="left-item-a" href="${pageContext.request.contextPath}/Resume/resumeSharingCenter.do">共享中心</a>
 					</div>
 				</div>
 
 				<div id="left-item-resume" class="left-item" >
 					<div class="left-item-box">
 					<img class="left-item-pic" src="${pageContext.request.contextPath}/img/u13.png" />
-					<a class="left-item-a" href="resumeDisplay.do">简历管理</a>
+					<a class="left-item-a" href="${pageContext.request.contextPath}/Resume/resumeDisplay.do">简历管理</a>
 					</div>
 				</div>
 

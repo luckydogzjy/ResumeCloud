@@ -9,7 +9,7 @@
 		<meta charset="UTF-8">
 		<title></title>
 	</head>
-	<link rel="stylesheet" type="text/css" href="css/demo.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/demo.css"/>
 	<body>
 		<div id="box">
 		
@@ -23,7 +23,7 @@
 			
 			<div id="right">
 				<div id="right-box">
-					<form action="getSharingListByCondition.do">
+					<form action="${pageContext.request.contextPath }/Resume/getSharingListByCondition.do">
 						<table border="1" width="1000px">
 							<tr>
 							

@@ -7,8 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>简历修改</title>
-<link rel="stylesheet" type="text/css" href="css/demo.css"/>
-<link rel="stylesheet" type="text/css" href="css/resumeCss/resume1-1.css"/>
+<link rel="stylesheet" type="text/css" href="../css/demo.css"/>
+<link rel="stylesheet" type="text/css" href="../css/resumeCss/resume1-1.css"/>
  <script src="js/resume-1-1.js"></script>
 </head>
 
@@ -37,7 +37,7 @@
 				<%-- <form method="post" action="${pageContext.request.contextPath }/resume_update.do" enctype="multipart/form-data">  --%>
 				
 				
-				<form method="post" action="${pageContext.request.contextPath }/resume_update.do?page=${page}&resumeName=${resumeName}
+				<form method="post" action="${pageContext.request.contextPath }/Resume/resume_update.do?page=${page}&resumeName=${resumeName}
 										&resumeJobIntension=${resumeJobIntension}&resumeSex=${resumeSex}&resumeEducation=${resumeEducation}
 										&resumeWorkYears=${resumeWorkYears}&resumeGraduateInstitution=${resumeGraduateInstitution}" enctype="multipart/form-data"> 
 				

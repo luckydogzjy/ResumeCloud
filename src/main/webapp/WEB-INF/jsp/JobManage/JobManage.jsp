@@ -6,10 +6,11 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>JobManage</title>
-		
+		<title>ResumeCloud</title>
+					
 		<link rel="stylesheet" type="text/css" href="css/demo.css"/>
 		<link rel="stylesheet" type="text/css" href="css/jobCss/job.css">
+		
 		
 		<!-- <style type="text/css" >
 		
@@ -17,7 +18,7 @@
 		 	text-decoration:none; 
 		  	color:#333;
 		  	}
-	
+	z
 		
 		</style> -->
 		

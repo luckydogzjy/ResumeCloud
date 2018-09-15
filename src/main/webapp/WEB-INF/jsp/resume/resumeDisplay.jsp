@@ -9,13 +9,14 @@
 <meta charset="UTF-8">
 <title></title>
 
-<link rel="stylesheet" type="text/css" href="css/resumeCss/resume-ww.css"/>
-<link rel="stylesheet" type="text/css" href="css/demo.css"/>
+<link rel="stylesheet" type="text/css" href="../css/resumeCss/resume-ww.css"/>
+<link rel="stylesheet" type="text/css" href="../css/demo.css"/>
 
 <script type="text/javascript">
 
 	
 	function pageChange(page){
+		
 		var resumeName = document.getElementsByName("resumeName")[0].value;
 		var resumeJobIntension = document.getElementsByName("resumeJobIntension")[0].value;
 		var resumeSex = document.getElementsByName("resumeSex")[0].value;
@@ -24,14 +25,13 @@
 		var resumeGraduateInstitution = document.getElementsByName("resumeGraduateInstitution")[0].value;
 		
 		var str = "&resumeName=" + resumeName+ "&resumeJobIntension=" + resumeJobIntension + "&resumeSex=" + resumeSex + "&resumeEducation=" + resumeEducation + "&resumeWorkYears=" + resumeWorkYears + "&resumeGraduateInstitution=" + resumeGraduateInstitution;
-		var url = "<%=request.getContextPath()%>/getResumeListByCondition.do?page=" + page;
+		var url = "<%=request.getContextPath()%>/Resume/getResumeListByCondition.do?page=" + page;
 		var urlEnd = url + str;
 		location.href = urlEnd; 
 		
 	}
 	
 	function resumeDelete(resumeId,pageN){
-		alert(pageN)
 		
 		var resumeName = document.getElementsByName("resumeName")[0].value;
 		var resumeJobIntension = document.getElementsByName("resumeJobIntension")[0].value;
@@ -43,7 +43,7 @@
 		
 		if (confirm(msg) == true) 
 		{
-			var url = "<%=request.getContextPath()%>/resumeDelete.do?page=" + pageN + "&resumeId_Delete=" + resumeId +  "&resumeName=" + resumeName+ "&resumeJobIntension=" + resumeJobIntension + "&resumeSex=" + resumeSex + "&resumeEducation=" + resumeEducation + "&resumeWorkYears=" + resumeWorkYears + "&resumeGraduateInstitution=" + resumeGraduateInstitution; 
+			var url = "<%=request.getContextPath()%>/Resume/resumeDelete.do?page=" + pageN + "&resumeId_Delete=" + resumeId +  "&resumeName=" + resumeName+ "&resumeJobIntension=" + resumeJobIntension + "&resumeSex=" + resumeSex + "&resumeEducation=" + resumeEducation + "&resumeWorkYears=" + resumeWorkYears + "&resumeGraduateInstitution=" + resumeGraduateInstitution; 
         	location.href = url; 
 			return true;
 		}
@@ -64,7 +64,7 @@
 		var msg = "请输入可以兑换积分";
 		integral = prompt(msg)
 		if(integral){
-			var url = "<%=request.getContextPath()%>/resumeShare.do?page=" + pageN + "&resumeId_Share=" + resumeId +  "&integral=" + integral + "&resumeName=" + resumeName+ "&resumeJobIntension=" + resumeJobIntension + "&resumeSex=" + resumeSex + "&resumeEducation=" + resumeEducation + "&resumeWorkYears=" + resumeWorkYears + "&resumeGraduateInstitution=" + resumeGraduateInstitution;
+			var url = "<%=request.getContextPath()%>/Resume/resumeShare.do?page=" + pageN + "&resumeId_Share=" + resumeId +  "&integral=" + integral + "&resumeName=" + resumeName+ "&resumeJobIntension=" + resumeJobIntension + "&resumeSex=" + resumeSex + "&resumeEducation=" + resumeEducation + "&resumeWorkYears=" + resumeWorkYears + "&resumeGraduateInstitution=" + resumeGraduateInstitution;
         	location.href = url; 
 			return true;
 		}
@@ -83,7 +83,7 @@
 		
 		var str = "&resumeName=" + resumeName+ "&resumeJobIntension=" + resumeJobIntension + "&resumeSex=" + resumeSex + "&resumeEducation=" + resumeEducation + "&resumeWorkYears=" + resumeWorkYears + "&resumeGraduateInstitution=" + resumeGraduateInstitution;
 		
-		var url = "${pageContext.request.contextPath}/resume_update_show.do?resume_id=" + resumeId + "&page=" + pageN;
+		var url = "${pageContext.request.contextPath}/Resume/resume_update_show.do?resume_id=" + resumeId + "&page=" + pageN;
 			
 		var urlEnd = url + str;
 		location.href = urlEnd; 		
@@ -110,17 +110,17 @@
 					
 					<div id="selectByName">
 						<span>姓名</span>
-						<input type="search" name="resumeName" value="${resumeName }" />
+						<input type="search" name="resumeName" value="${resumeName }" placeholder="请输入姓名"/>
 					</div>
 
 					<div id="selectByJob">
 						<span>求职意向</span>
-						<input type="search" name="resumeJobIntension" value="${resumeJobIntension }" />
+						<input type="search" name="resumeJobIntension" value="${resumeJobIntension }" placeholder="请输入求职意向"/>
 					</div>
 
 					<div id="selectBySex">
 						<span>性别</span>
-						 <select name="resumeSex">
+						 <select name="resumeSex" >
 								<option value="-1" <c:if test="${'-1' eq resumeSex}">selected="selected"</c:if>>全部</option>
 								<option value="1" <c:if test="${'1' eq resumeSex}">selected="selected"</c:if>>男</option>
 								<option value="0" <c:if test="${'0' eq resumeSex}">selected="selected"</c:if>>女</option>
@@ -167,14 +167,14 @@
 
 					<div id="selectByGradu">
 						<span>毕业院校</span>
-						<input type="search" name="resumeGraduateInstitution" value="${resumeGraduateInstitution }" style="width: 483px" />
+						<input type="search" name="resumeGraduateInstitution" value="${resumeGraduateInstitution }" style="width: 483px" placeholder="请输入毕业院校"/>
 					</div>
 
 					<div id="searchBtn">
 						<input type="submit" id="search_button" value="搜索" />
 					</div>
 					<div id="addBtn">
-						<a href="${pageContext.request.contextPath}/tiaozhuan_add.do"><input type="button" id="add_button" value="新增"/></a>
+						<a href="${pageContext.request.contextPath}/Resume/tiaozhuan_add.do"><input type="button" id="add_button" value="新增"/></a>
 					</div>
 					
 					<div id="table">
@@ -200,7 +200,7 @@
 
 									<tr>
 										<td title="${resume.resumeName }">
-											<a href="<%=request.getContextPath() %>/resumeDetails.do?resumeId_Details=${resume.resumeId }">${resume.resumeName }</a>
+											<a href="<%=request.getContextPath() %>/Resume/resumeDetails.do?resumeId_Details=${resume.resumeId }">${resume.resumeName }</a>
 										</td>
 										<td>
 											<c:if test="${resume.resumeSex == 1}">
@@ -234,9 +234,12 @@
 											<c:if test="${resume.resumeEducation == 6}">
 												<td title="博士以上">博士以上</td>
 											</c:if>
+											<c:if test="${resume.resumeEducation == null}">
+												<td></td>
+											</c:if>
 										
 
-										<td>${resume.resumeJobIntension }</td>
+										<td title="${resume.resumeJobIntension }">${resume.resumeJobIntension }</td>
 										<td>
 											<fmt:formatDate value="${resume.resumeCreateTime }"
 												pattern="yyyy-MM-dd" />
@@ -291,8 +294,10 @@
 							</tbody>
 						</table>
 						
-						<div id="page">
+						<div id="pageDetail">
 							<span>当前第${page.pageNum}页，一共${page.pages}页</span>
+						</div>
+						<div id="page">
 							<span>
 							<%-- 	<a href="${pageContext.request.contextPath}/resumeDisplay.do?page=${page.firstPage}">首页</a>
 			       				<a href="${pageContext.request.contextPath}/resumeDisplay.do?page=${page.prePage}">上一页</a>
@@ -300,10 +305,10 @@
 			       				<a href="${pageContext.request.contextPath}/resumeDisplay.do?page=${page.lastPage}">尾页</a>	 --%>	
 			       				
 			       				
-			       				<input type="button" value="首页" onclick="pageChange(${page.firstPage})"/>
+			       				<input type="button" value="首页" onclick="pageChange('1')"/>
 			       				<input type="button" value="上一页" onclick="pageChange(${page.prePage})"/>
 			       				<input type="button" value="下一页" onclick="pageChange(${page.nextPage})"/>
-			       				<input type="button" value="尾页" onclick="pageChange(${page.lastPage})"/>
+			       				<input type="button" value="尾页" onclick="pageChange(${page.pages})"/>
 			       					 
           		 			</span>			
 						</div>
