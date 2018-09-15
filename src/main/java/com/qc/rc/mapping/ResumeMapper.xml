@@ -132,16 +132,16 @@
 		RC_USER_RESUME
 		<where>
 			<if test="resumeName != null and  resumeName !='' ">
-				AND RESUME_NAME = #{resumeName}
+				AND RESUME_NAME LIKE '%${resumeName}%'
 			</if>
 			<if test="resumeJobIntension != null and  resumeJobIntension != '' ">
-				AND RESUME_JOB_INTENSION = #{resumeJobIntension}
+				AND RESUME_JOB_INTENSION LIKE '%${resumeJobIntension}%' 
 			</if>
 			<if test="resumeSex != -1">
-				AND RESUME_SEX = #{resumeSex}
+				AND RESUME_SEX LIKE '%${resumeSex}%'  
 			</if>
 			<if test="resumeEducation != -1">
-				AND RESUME_EDUCATION = #{resumeEducation}
+				AND RESUME_EDUCATION LIKE '%${resumeEducation}%'
 			</if>
 			
 			<if test="resumeWorkYears == 0">
@@ -158,7 +158,7 @@
 			</if>
 			
 			<if test="resumeGraduateInstitution != null and  resumeGraduateInstitution != '' ">
-				AND RESUME_GRADUATE_INSTITUTION = #{resumeGraduateInstitution}
+				AND RESUME_GRADUATE_INSTITUTION LIKE '%${resumeGraduateInstitution}%' 
 			</if>
 			AND RC_USER_RESUME.UR_USER_ID = #{userId }
 			AND RESUME_DELETE_FLAG = 0

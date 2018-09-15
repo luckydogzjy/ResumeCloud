@@ -34,7 +34,9 @@
 				<HR size="4" width="590" noshade>
 
     	
-				<form method="post" action="${pageContext.request.contextPath }/resume_update.do"> 
+				<form method="post" action="${pageContext.request.contextPath }/resume_update.do?page=${page}&resumeName=${resumeName}
+										&resumeJobIntension=${resumeJobIntension}&resumeSex=${resumeSex}&resumeEducation=${resumeEducation}
+										&resumeWorkYears=${resumeWorkYears}&resumeGraduateInstitution=${resumeGraduateInstitution}"> 
 				
 				<table border="0">
 					

@@ -1,7 +1,6 @@
 package com.qc.rc.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,11 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.qc.rc.common.FormParameterUtil;
 import com.qc.rc.entity.DownloadRecord;
 import com.qc.rc.entity.Pic;
@@ -53,21 +55,29 @@ public class ResumeController {
 	public static Integer userId = 1;
 	
 	@RequestMapping("/resumeDisplay.do")
-	public ModelAndView resumeDisplay(HttpServletRequest request){
+	public ModelAndView resumeDisplay(HttpServletRequest request,@RequestParam(required=true,defaultValue="1") Integer page){
 		
-		
+		//引入分页查询，使用PageHelper分页功能
+        //在查询之前传入当前页，然后多少记录
+		PageHelper.startPage(page,3);
 		
 		List<ResumePojo> list = resumeService.getAllResume(userId);
 				
 		Map<String,Object> model = new HashMap<String,Object>(); 
+		
+		PageInfo<ResumePojo> pageResumePojo = new PageInfo<ResumePojo>(list);
+		
 		model.put("resumeList", list);
+		model.put("page", pageResumePojo);
 		return new ModelAndView("resume/resumeDisplay",model);
 		
 	}
 	
 	@RequestMapping("/getResumeListByCondition.do")
-	public ModelAndView getResumeListByCondition(HttpServletRequest request) {
-		
+	public ModelAndView getResumeListByCondition(HttpServletRequest request,@RequestParam(required=true,defaultValue="1") Integer page) {
+		//引入分页查询，使用PageHelper分页功能
+        //在查询之前传入当前页，然后多少记录
+		PageHelper.startPage(page,3);
 
 		String resumeName = null;
 		String resumeJobIntension = null;
@@ -105,6 +115,10 @@ public class ResumeController {
 		System.out.println("getResumeListByCondition里得到的list长度为" + list.size());
 		
 		Map<String,Object> model = new HashMap<String,Object>(); 
+		
+		PageInfo<ResumePojo> pageResumePojo = new PageInfo<ResumePojo>(list);
+		model.put("page", pageResumePojo);
+		
 		model.put("resumeList", list);
 		
 		model.put("resumeName", resumeName);
@@ -146,6 +160,9 @@ public class ResumeController {
 		String resumeIdStr = request.getParameter("resumeId_Delete");
 		Integer resumeId = Integer.valueOf(resumeIdStr);
 		
+		String pageStr = request.getParameter("page");
+		Integer page = Integer.valueOf(pageStr);
+		
 		System.out.println(resumeId);
 		System.out.println("111");
 //		System.out.println();
@@ -153,7 +170,7 @@ public class ResumeController {
 		resumeService.deleteResumeById(resumeId);
 		//删除之后根据刚才所输入的信息遍历resumeList
 		
-		return getResumeListByCondition(request);
+		return getResumeListByCondition(request,page);
 		
 	}
 	
@@ -162,6 +179,9 @@ public class ResumeController {
 		
 		String resumeIdStr = request.getParameter("resumeId_Share");
 		Integer resumeId = Integer.valueOf(resumeIdStr);
+		
+		String pageStr = request.getParameter("page");
+		Integer page = Integer.valueOf(pageStr);
 		
 		String integralStr = request.getParameter("integral");
 		Integer integral = Integer.valueOf(integralStr);
@@ -183,7 +203,7 @@ public class ResumeController {
 		resumeService.updateUserResume(resumeId);
 		
 		
-		return getResumeListByCondition(request);
+		return getResumeListByCondition(request,page);
 		
 	}
 	
@@ -349,7 +369,7 @@ public class ResumeController {
 			    System.out.println("图片上传运行时间："+String.valueOf(endTime-startTime)+"ms");
 				
 				model.put("info", "增加简历信息成功");
-				return  resumeDisplay(request);
+				return  resumeDisplay(request,1);
 				
 			/*	return new ModelAndView("resume/resume_add",model);*/
 				
@@ -372,7 +392,37 @@ public class ResumeController {
 	
 	@RequestMapping("/resume_update_show.do")
 	public ModelAndView resumeUpdateShow(HttpServletRequest request){	
-
+	/////以下ww 添加的	
+		//取到页数
+		String pageStr = request.getParameter("page");
+		//取到输入的判断条件
+		String resumeName = null;
+		String resumeJobIntension = null;
+		//性别
+		String resumeSexStr = request.getParameter("resumeSex");
+		Integer resumeSex = Integer.valueOf(resumeSexStr);
+		
+		String resumeEducationStr = request.getParameter("resumeEducation");
+		Integer resumeEducation = Integer.valueOf(resumeEducationStr);
+		
+		String resumeWorkYearsStr = request.getParameter("resumeWorkYears");
+		Integer resumeWorkYears = Integer.valueOf(resumeWorkYearsStr);
+		
+		String resumeGraduateInstitution = null;
+		
+		try {
+			resumeGraduateInstitution = FormParameterUtil.changeCode(request.getParameter("resumeGraduateInstitution"));
+			resumeName = FormParameterUtil.changeCode(request.getParameter("resumeName"));
+			resumeJobIntension = FormParameterUtil.changeCode(request.getParameter("resumeJobIntension"));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	
+	////以上ww 添加的
+		
+		
 		String idstr = request.getParameter("resume_id");
 		
 		//假数据  需要前端传进来
@@ -388,7 +438,16 @@ public class ResumeController {
 		if(resume != null){
 
 			System.out.println("有");
-			model.put("resume",resume);				
+			model.put("resume",resume);	
+			//以下ww 添加的
+			model.put("page",pageStr);	
+			model.put("resumeName", resumeName);
+			model.put("resumeJobIntension", resumeJobIntension);
+			model.put("resumeSex", resumeSex);
+			model.put("resumeEducation", resumeEducation);
+			model.put("resumeWorkYears", resumeWorkYears);
+			model.put("resumeGraduateInstitution", resumeGraduateInstitution);
+			//以上
 			return new ModelAndView("resume/resume_update",model);
 		}else {
 			
@@ -404,6 +463,10 @@ public class ResumeController {
 	
 	@RequestMapping("/resume_update.do")
 	public ModelAndView resumeUpdate(HttpServletRequest request){
+		//取到页数
+		String pageStr = request.getParameter("page");
+		Integer page = Integer.valueOf(pageStr);
+		
 		 long startTime = System.currentTimeMillis();
 		
 		String resume_id = request.getParameter("resume_id");
@@ -505,7 +568,7 @@ public class ResumeController {
 		    System.out.println("文件上传运行时间："+String.valueOf(endTime-startTime)+"ms");
 			
 			model.put("info", "修改简历成功");
-			return  resumeDisplay(request);
+			return getResumeListByCondition(request,page);
 		  /*  return new ModelAndView("resume/resume_update",model);*/
 
 		}else {

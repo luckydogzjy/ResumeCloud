@@ -22,6 +22,7 @@
   position: absolute;
   left: 650px;
   top: 58px;
+  width:300px;
 }
 
 #backbtn{
@@ -58,7 +59,7 @@
   left: 300px;  
   top: 20px;
   position: absolute;
-  width: 230px;
+  width: 250px;
 }
 #selectBySex{
   left: 570px;  
@@ -157,4 +158,111 @@
 th{
 	background-color: rgba(51, 153, 204, 1);
 }
+
+
+#page{
+	position: absolute;
+	left: 636px;
+ 	top: 400px;
+}
+
+
+#updateBtn {
+  border-width:0px;
+  width:47px;
+  height:25px;
+  background:inherit;
+  background-color:rgba(22, 155, 213, 1);
+  border:none;
+  border-radius:5px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  font-family:'Arial Negreta', 'Arial Normal', 'Arial';
+  font-weight:700;
+  font-style:normal;
+  color:#FFFFFF;
+}
+
+
+#deleteBtn {
+    border-width: 0px;
+    width:47px;
+    height:25px;
+    background: inherit;
+    background-color: rgba(255, 0, 0, 1);
+    border: none;
+    border-radius: 5px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    font-family: 'Arial Negreta', 'Arial Normal', 'Arial';
+    font-weight: 700;
+    font-style: normal;
+    color:#FFFFFF;
+}
+
+#interviewBtn {
+  border-width:0px;
+  width:47px;
+  height:25px;
+  background:inherit;
+  background-color:rgba(255, 102, 0, 1);
+  border:none;
+  border-radius:5px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  font-family:'Arial Negreta', 'Arial Normal', 'Arial';
+  font-weight:700;
+  font-style:normal;
+  color:#FFFFFF;
+}
+
+#sharingBtn {
+  border-width:0px;
+  width:63px;
+  height:25px;
+  background:inherit;
+  background-color:rgba(0, 153, 0, 1);
+  border:none;
+  border-radius:5px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  font-family:'Arial Negreta', 'Arial Normal', 'Arial';
+  font-weight:700;
+  font-style:normal;
+  color:#FFFFFF;
+}
+
+
+#NoBtn {
+  border-width:0px;
+  width:63px;
+  height:25px;
+  background:inherit;
+  background-color:rgba(134, 134, 134, 1);
+  border:none;
+  border-radius:5px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  font-family:'Arial Negreta', 'Arial Normal', 'Arial';
+  font-weight:700;
+  font-style:normal;
+  color:#FFFFFF;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
