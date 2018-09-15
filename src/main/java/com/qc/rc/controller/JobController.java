@@ -46,6 +46,7 @@ public class JobController {
 		
 		model.put("job", job);
 		model.put("page", pageJob);
+		model.put("search", searchName);
 		return new ModelAndView("JobManage/JobManage",model);
 			
 	}
@@ -62,6 +63,7 @@ public class JobController {
 		
 		model.put("job", job);
 		model.put("page", pageJob);
+		model.put("search", searchName);
 		return new ModelAndView("JobManage/JobManage",model);
 			
 	}
