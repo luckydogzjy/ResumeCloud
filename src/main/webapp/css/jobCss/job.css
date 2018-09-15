@@ -41,18 +41,18 @@
 	position:relative;
 	margin-top: 8px;
 }
-#job-add-a{
+#job-add-button{
 	width: 73px;
-	height: 19px;
+	height: 25px;
 	margin-left: 10px;
-	margin-top: 10px;
+	margin-top: 5px;
 	position: absolute;
-	background: #d7d7d7;
+	background: #ffff80;
 }
 #job-add-img{
 	width: 30px;
 	height: 27px;
-	margin-top: 6px;
+	margin-top: 4px;
 	margin-left: 90px;
 
 }
@@ -113,14 +113,20 @@ tr:nth-child(2n){background:#d7d7d7;}
 	height: 20px;
 }
 
-#a-status{
+#button-status1{
 	background: #009900;
 	width: 72px;
 	height: 20px;
 	border-radius:5px;
 }
+#button-status0{
+	background: red;
+	width: 72px;
+	height: 20px;
+	border-radius:5px;
+}
 
-#a-modify{
+#button-modify{
 	background: #169bd5;
 	width: 52px;
 	height: 20px;
@@ -128,7 +134,7 @@ tr:nth-child(2n){background:#d7d7d7;}
 	
 }
 
-#a-delete{
+#button-delete{
 	background: #ff0000;
 	width: 52px;
 	height: 20px;
@@ -136,7 +142,7 @@ tr:nth-child(2n){background:#d7d7d7;}
 	position: absolute;
 }
 
-#a-template{
+#button-template{
 	background: #ff6600;
 	width: 75px;
 	height: 20px;
@@ -144,6 +150,3 @@ tr:nth-child(2n){background:#d7d7d7;}
 	margin-left: 55px;
 }
 
-#right-box{
-	
-}

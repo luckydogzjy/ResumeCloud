@@ -1,0 +1,268 @@
+#right_fujia{
+  position: absolute;
+  left: 650px;
+  top: 0px;
+  width: 200px;
+}
+
+#right_jiben{
+  position: absolute;
+  left: 70px;
+  top: 20px;
+  width: 640px;
+}
+
+#hengxian{
+  position: absolute;
+  left: 650px;
+  top: 37px;
+}
+
+#table_pic_file{
+  position: absolute;
+  left: 650px;
+  top: 58px;
+  width:300px;
+}
+
+#backbtn{
+  border-width:0px;
+  position:absolute;
+    left:2px;
+    top:470px;
+    width:100px;
+    height:39px;
+    background:inherit;
+    background-color:rgba(51, 153, 204, 1);
+    border:none;
+    border-radius:5px;
+    -moz-box-shadow:none;
+    -webkit-box-shadow:none;
+    box-shadow:none;
+    font-family:'Arial Negreta', 'Arial Normal', 'Arial';
+    font-weight:700;
+    font-style:normal;
+    color:#FFFFFF;
+}
+
+
+
+
+#selectByName{
+  left: 34px;  
+  top: 20px;
+  position: absolute;
+  width: 230px;
+}
+
+#selectByJob{
+  left: 300px;  
+  top: 20px;
+  position: absolute;
+  width: 250px;
+}
+#selectBySex{
+  left: 570px;  
+  top: 20px;
+  position: absolute;
+  width: 230px;
+}
+#selectByEdu{
+  left: 700px;  
+  top: 20px;
+  position: absolute;
+  width: 230px;
+}
+#selectByWorkYears{
+  left: 34px;  
+  top: 60px;
+  position: absolute;
+  width: 230px;
+}
+
+#selectByGradu{
+  left: 300px;  
+  top: 60px;
+  position: absolute;
+  width: 590px;
+}
+
+#searchBtn{
+
+  left: 947px;  
+  top: 56px;
+  position: absolute;
+  width: 90px;
+  height: 30px;
+}
+
+#search_button{
+
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    border: 0px;
+    background-color: rgba(51, 153, 204, 1);
+    font-family: 'Microsoft YaHei Negreta', 'Microsoft YaHei Normal', 'Microsoft YaHei';
+    font-weight: 700;
+    font-style: normal;
+    font-size: 14px;
+    color: #FFFFFF;
+}
+
+#addBtn{
+
+  left: 947px;  
+  top: 16px;
+  position: absolute;
+  width: 90px;
+  height: 30px;
+}
+
+
+#add_button{
+
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    border: 0px;
+    background-color: rgba(51, 153, 204, 1);
+    font-family: 'Microsoft YaHei Negreta', 'Microsoft YaHei Normal', 'Microsoft YaHei';
+    font-weight: 700;
+    font-style: normal;
+    font-size: 14px;
+    color: #FFFFFF;
+}
+
+#table {
+  BORDER-RIGHT: lightblue 1px solid;
+  BORDER-TOP: lightblue 1px solid;
+  BORDER-LEFT: lightblue 1px solid;
+  BORDER-BOTTOM: lightblue 1px solid;
+  height: 380px;
+  left: 34px;
+  top: 110px;
+  width: 1000px;
+  position: absolute;
+}
+
+.displayTable{
+	table-layout:fixed;
+}
+.displayTable tr td{
+	text-overflow: ellipsis; /* for IE */  
+   -moz-text-overflow: ellipsis; /* for Firefox,mozilla */  
+    overflow: hidden;  
+    white-space: nowrap;   
+}
+th{
+	background-color: rgba(51, 153, 204, 1);
+}
+
+
+#page{
+	position: absolute;
+	left: 636px;
+ 	top: 400px;
+}
+
+
+#updateBtn {
+  border-width:0px;
+  width:47px;
+  height:25px;
+  background:inherit;
+  background-color:rgba(22, 155, 213, 1);
+  border:none;
+  border-radius:5px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  font-family:'Arial Negreta', 'Arial Normal', 'Arial';
+  font-weight:700;
+  font-style:normal;
+  color:#FFFFFF;
+}
+
+
+#deleteBtn {
+    border-width: 0px;
+    width:47px;
+    height:25px;
+    background: inherit;
+    background-color: rgba(255, 0, 0, 1);
+    border: none;
+    border-radius: 5px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    font-family: 'Arial Negreta', 'Arial Normal', 'Arial';
+    font-weight: 700;
+    font-style: normal;
+    color:#FFFFFF;
+}
+
+#interviewBtn {
+  border-width:0px;
+  width:47px;
+  height:25px;
+  background:inherit;
+  background-color:rgba(255, 102, 0, 1);
+  border:none;
+  border-radius:5px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  font-family:'Arial Negreta', 'Arial Normal', 'Arial';
+  font-weight:700;
+  font-style:normal;
+  color:#FFFFFF;
+}
+
+#sharingBtn {
+  border-width:0px;
+  width:63px;
+  height:25px;
+  background:inherit;
+  background-color:rgba(0, 153, 0, 1);
+  border:none;
+  border-radius:5px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  font-family:'Arial Negreta', 'Arial Normal', 'Arial';
+  font-weight:700;
+  font-style:normal;
+  color:#FFFFFF;
+}
+
+
+#NoBtn {
+  border-width:0px;
+  width:63px;
+  height:25px;
+  background:inherit;
+  background-color:rgba(134, 134, 134, 1);
+  border:none;
+  border-radius:5px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  font-family:'Arial Negreta', 'Arial Normal', 'Arial';
+  font-weight:700;
+  font-style:normal;
+  color:#FFFFFF;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

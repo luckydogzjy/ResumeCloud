@@ -1,6 +1,6 @@
 #right_add{
 	position: absolute;
-	left: 70px;
+	left: 40px;
 	top: 20px;
 }
 #experiencetext{
@@ -37,6 +37,19 @@
 	left: 650px;
 	top: 120px;
 	width: 300px;
+}
+#right_wenbenyu{
+	position:absolute;
+  	left:360px;
+  	top:60px;
+}
+#updateright_wenbenyu{
+	position:absolute;
+  	left:380px;
+  	top:60px;
+}
+#addhengxian{
+	width: 550px;
 }
 
 
@@ -117,6 +130,7 @@
   	font-style:normal;
   	color:#FFFFFF;
 }
+
 
 
 

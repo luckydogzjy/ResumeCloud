@@ -1,51 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+     <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>简历修改</title>
 <link rel="stylesheet" type="text/css" href="css/demo.css"/>
-<link rel="stylesheet" type="text/css" href="css/resume1-1.css"/>
+<link rel="stylesheet" type="text/css" href="css/resumeCss/resume1-1.css"/>
+ <script src="js/resume-1-1.js"></script>
 </head>
-
-
-
-
-<script type="text/javascript">
-  String.prototype.getLength = function(){   
-  //得到字符串的真实长度   
-      var l=this.length;   
-      var n=l   
-      for (var i=0;i<l;i++){   
-        if (this.charCodeAt(i)<0||this.charCodeAt(i)>255) 
-  n++   
-      }   
-      return  n   
-  }   
-    
-  function check(obj){   
-    var   max=200;   
-    if(obj.value.getLength()>max){   
-    alert("最多可输入"+max/2+"字，请重新输入！");   
-    obj.focus();   
-    obj.select();   
-    }   
-  }  
-
-</script>
-
-
-
-
 
 <body>
 
 
-
-
-		
+		<div id="box">
 		<div id="header">
 		<jsp:include page="../common/header.jsp" flush="true"/>
 		</div>
@@ -61,18 +31,20 @@
 					
 				<FONT  size="6" color="#FF0000">基本信息</FONT>
 
-				<HR size="4" width="" noshade>
+				<HR size="4" width="590" noshade>
 
     	
-<%-- 				<form method="post" action="${pageContext.request.contextPath }/resume_update.do"> 
- --%>			<form method="post" action="${pageContext.request.contextPath }/resume_update.do" enctype="multipart/form-data">
+				<form method="post" action="${pageContext.request.contextPath }/resume_update.do?page=${page}&resumeName=${resumeName}
+										&resumeJobIntension=${resumeJobIntension}&resumeSex=${resumeSex}&resumeEducation=${resumeEducation}
+										&resumeWorkYears=${resumeWorkYears}&resumeGraduateInstitution=${resumeGraduateInstitution}"> 
 				
 				<table border="0">
 					
+				 <tr><input name="resume_id" id="resume_id" type="hidden"  value="${resume.resumeId}" /></tr>
 				<tr>
 				<td height="35" width="80"><span >姓名</span></td>
-				<td width="240"><input name="resume_name" id="resume_name" type="text" value="${resume.resumeName}" /></td>
-				<td><span >自我评价</span></td>
+				<td><input name="resume_name" id="resume_name" type="text" value="${resume.resumeName}" onblur="checkname();"/></td>
+				<td><font id="s1" size="2" color="red"></font></td>
 				</tr>
 				
 				<tr>
@@ -80,23 +52,27 @@
 					<td><select name = "resume_sex" id="resume_sex" >
 			
 		
-					<option value="${resume.resumeSex}"> <c:if test="${resume.resumeSex == 1}">男</c:if>     <c:if test="${resume.resumeSex == 0}">女</c:if></option>
+					<option value="${resume.resumeSex}"> <c:if test="${resume.resumeSex == 1}">男</c:if>  <c:if test="${resume.resumeSex == 0}">女</c:if></option>
 					<option value="1">男</option>
 					<option value="0">女</option>
 			</select></td>
-			<td rowspan="4"><textarea  id="selfevaluation" name="resume_self_evaluation"  style="width: 200px;" onkeyup="check(this);" onchange="check(this);" >${resume.resumeSelfEvaluation}
-  				</textarea></td>
 				</tr>
+				
+						
+				
+				
 				
 				<tr>
 					<td height="35"><span >电话</span></td>
-					<td><input name="resume_phone" id="resume_phone" type="text"  value="${resume.resumePhone}"/></td>
+					<td><input name="resume_phone" id="resume_phone" type="text"  value="${resume.resumePhone}" onblur="checkphone();"/></td>
+					<td><font id="s2" size="2" color="red"></font></td>
 				</tr>
 			
 			
 				<tr>
 					<td height="35"><span >邮箱</span></td>
-					<td><input name="resume_email" id="resume_email" type="text" value="${resume.resumeEmail}"/></td>
+					<td><input name="resume_email" id="resume_email" type="text" value="${resume.resumeEmail}" onblur="checkemail();"/></td>
+					<td><font id="s3" size="2" color="red"></font></td>
 				</tr>
 			
 			
@@ -130,8 +106,8 @@
 			
 				<tr>
 					<td height="35"><span >地址</span></td>
-					<td><input name="resume_address" id="resume_address" type="text" value="${resume.resumeAddress}"/></td>
-					<td><span >工作经验</span></td>
+					<td><input name="resume_address" id="resume_address" type="text" value="${resume.resumeAddress}" onblur="checkaddress();"></td>
+					<td><font id="s4" size="2" color="red"></font></td>
 				</tr>
 			
 			
@@ -139,54 +115,55 @@
 			
 				<tr>
 					<td height="35"><span >出生年月</span></td>
-					<td><input name="resume_birthday" id="resume_birthday" type="date" value="${resume.resumeBirthday}"/></td>
-					
-					<%-- <textarea  id="experiencetext" name="resume_work_experience"  style="width: 200px;" onkeyup="check(this);" onchange="check(this); >
-     		
-  				</textarea></td> --%>
-  				<td rowspan="4"><textarea  id="experiencetext" name="resume_work_experience"  style="width: 200px;" onkeyup="check(this);" onchange="check(this);" >${resume.resumeWorkExperience}
-  				</textarea></td>
+					<td><input name="resume_birthday" id="resume_birthday" type="date" value="<fmt:formatDate  value="${resume.resumeBirthday}" pattern="yyyy-MM-dd" />" onblur="checkbir();"/></td>
+					<td><font id="s5" size="2" color="red"></font></td>
 				</tr>
 			
 			
 				<tr>
 					<td height="35"><span >求职意向</span></td>
-					<td><input name="resume_job_intension" id="resume_job_intension" type="text" value="${resume.resumeJobIntension}"/></td>
+					<td><input name="resume_job_intension" id="resume_job_intension" type="text" value="${resume.resumeJobIntension}" onblur="checkjob();"/></td>
+					<td><font id="s6" size="2" color="red"></font></td>
 				</tr>
 			
 			
 			
 				<tr>
 					<td height="35"><span >毕业院校</span></td>
-					<td><input name="resume_graduate_institution" id="resume_graduate_institution" type="text" value="${resume.resumeGraduateInstitution}"/></td>
+					<td><input name="resume_graduate_institution" id="resume_graduate_institution" type="text" value="${resume.resumeGraduateInstitution}" onblur="checkschool();"/></td>
+					<td><font id="s7" size="2" color="red"></font></td>
 				</tr>
 				<tr>
 					<td height="35"><span >工作年限</span></td>
-					<td><input name="resume_work_years" id="resume_work_years" type="text" value="${resume.resumeWorkYears}"/></td>
+					<td><input name="resume_work_years" id="resume_work_years" type="text" value="${resume.resumeWorkYears}" onblur="checkyears();"/></td>
+					<td><font id="s8" size="2" color="red"></font></td>
 				</tr>
 			
+			<table id="updateright_wenbenyu">
+				<tr><td><span >自我评价</span></td></tr>
+				<tr><td><textarea  id="selfevaluation" name="resume_self_evaluation"  style="width: 200px;" onkeyup="check(this);" onchange="check(this);" >${resume.resumeSelfEvaluation}
+  				</textarea></td></tr>
+				<tr><td><span >工作经验</span></td></tr>
+				<tr><td><textarea  id="experiencetext" name="resume_work_experience"  style="width: 200px;" onkeyup="check(this);" onchange="check(this);" >${resume.resumeWorkExperience}
+  				</textarea></td></tr>
+			</table>
 			
-			 <tr><input name="resume_id" id="resume_id" type="hidden"  value="${resume.resumeId}" /></tr>
 			
 		</table>
-		
-		<FONT id="right_fujia" size="6" color="#FF0000">附加信息</FONT>
-		<HR id="hengxian"	size="4" width="300" noshade>
-	   	<input id="wenjian"  name="wenjian" type="file" />
-	   	
-	   	
-			<input id="updatebutton_div" type="submit" value="修改" onclick="return check()" />
-			<a href="javascript:history.back();"><input id="updatebutton_div2" type="button" value="返回" onclick="return check()" /></a>
+			<input id="updatebutton_div" type="submit" value="修改" onclick="return checkinput()" />
+			<a href="javascript:history.back();"><input id="updatebutton_div2" type="button" value="返回"/></a>
 		
 		</form>
 		
+		<FONT id="right_fujia" size="6" color="#FF0000">附加消息</FONT>
+		<HR id="hengxian"	size="4" width="300" noshade>
 		
+	   	<input id="wenjian" type="file" />
 		
-	
+		</div>
     	</div> 
     </div> 
    </div> 
-		
 
   
 

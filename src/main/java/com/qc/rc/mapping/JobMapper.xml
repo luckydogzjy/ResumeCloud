@@ -2,11 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qc.rc.dao.JobMapper">
  	
- 	<select id="jobGetAll" resultType="com.qc.rc.entity.Job">
- 		select * from RC_JOB where JOB_USER_ID = #{userId} order by JOB_ID
- 	</select>
-  	
-  	<insert id="jobAdd" parameterType="com.qc.rc.entity.Job">
+ 	<insert id="jobAdd" parameterType="com.qc.rc.entity.Job">
   		insert into RC_JOB(JOB_ID,JOB_USER_ID,JOB_NAME,JOB_COUNT,JOB_SALARY,JOB_INTRODUCTION,JOB_CONDITION,JOB_END_TIME) 
   		values(JOB_ID.nextval,#{JOB_USER_ID},#{JOB_NAME},#{JOB_COUNT},#{JOB_SALARY},#{JOB_INTRODUCTION},#{JOB_CONDITION},#{JOB_END_TIME})
   	</insert>
