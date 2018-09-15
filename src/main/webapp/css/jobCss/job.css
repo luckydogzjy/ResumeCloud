@@ -47,7 +47,7 @@
 	margin-left: 10px;
 	margin-top: 5px;
 	position: absolute;
-	background: #d7d7d7;
+	background: #ffff80;
 }
 #job-add-img{
 	width: 30px;
@@ -113,8 +113,14 @@ tr:nth-child(2n){background:#d7d7d7;}
 	height: 20px;
 }
 
-#button-status{
+#button-status1{
 	background: #009900;
+	width: 72px;
+	height: 20px;
+	border-radius:5px;
+}
+#button-status0{
+	background: red;
 	width: 72px;
 	height: 20px;
 	border-radius:5px;

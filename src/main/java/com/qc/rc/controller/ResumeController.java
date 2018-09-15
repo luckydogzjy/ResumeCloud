@@ -50,7 +50,7 @@ public class ResumeController {
 	
 	//正常应该在session里得到登录人的userId
 	//这里只做测试
-	public static Integer userId = 2;
+	public static Integer userId = 1;
 	
 	@RequestMapping("/resumeDisplay.do")
 	public ModelAndView resumeDisplay(HttpServletRequest request,  HttpServletResponse response){
@@ -183,7 +183,6 @@ public class ResumeController {
 		resumeService.updateUserResume(resumeId);
 		
 		
-		
 		return getResumeListByCondition(request);
 		
 	}
@@ -221,6 +220,7 @@ public class ResumeController {
 	
 	
 	
+	
 /*      zhang      */
 	
 	@RequestMapping("/resume_add.do")
@@ -229,101 +229,8 @@ public class ResumeController {
 			String resume_email, String resume_education ,String resume_address ,String resume_birthday,
 			String resume_job_intension,String resume_graduate_institution,String resume_work_years,
 			String resume_self_evaluation,String resume_work_experience){*/
-/*		String resume_name = request.getParameter("resume_name");
-		String resume_sex = request.getParameter("resume_sex");
-		String resume_phone = request.getParameter("resume_phone");
-		String resume_email = request.getParameter("resume_email");
-		String resume_education =request.getParameter("resume_education");
-		String resume_address = request.getParameter("resume_address");
-		String resume_birthday = request.getParameter("resume_birthday");
-		String resume_job_intension =request.getParameter("resume_job_intension");
-		String resume_graduate_institution = request.getParameter("resume_graduate_institution");
-		String resume_work_years =request.getParameter( "resume_work_years");
-		String resume_self_evaluation = request.getParameter("resume_self_evaluation");
-		String resume_work_experience = request.getParameter("resume_work_experience");			
 	
-		//需要更改	
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");//小写的mm表示的是分钟
-		java.util.Date date_Birthday;
-		try {
-			date_Birthday = sdf.parse(resume_birthday);
-		} catch (Exception e) {
-		
-			date_Birthday = new Date();
-			e.printStackTrace();
-		}
-	
-		resume.setResumeName(resume_name);
-		resume.setResumeSex(Integer.valueOf(resume_sex) );
-		resume.setResumePhone(resume_phone);
-		resume.setResumeEmail(resume_email);
-		resume.setResumeEducation(Integer.valueOf(resume_education));
-		resume.setResumeAddress(resume_address);
-		resume.setResumeBirthday(date_Birthday);
-		resume.setResumeJobIntension(resume_job_intension);
-		resume.setResumeGraduateInstitution(resume_graduate_institution);
-		resume.setResumeWorkYears(Integer.valueOf(resume_work_years));
-		resume.setResumeSelfEvaluation(resume_self_evaluation);
-		resume.setResumeWorkExperience(resume_work_experience);
-		//需要从session中取
-		resume.setResumeCreateUser("zhang");	
-		
-		Map<String,Object> model = new HashMap<String,Object>();
-		//增加到resume表中
-		int resultCount = resumeService.resumeAdd(resume);
-		System.out.println("新增的id："  +  resume.getResumeId());
-		int bestid = resume.getResumeId();
-		if(resultCount != 0){
-//			int bestid = resumeService.selectResumeBestId();
-			System.out.println("最大值id：" + bestid);
-			
-			
-			//需要从session中取
-			int urUesrId = 1;
-			userresume.setUrUesrId(urUesrId);
-			userresume.setUrResumeId(bestid);
-			int result = resumeService.resumeAddResumeUser(userresume);
-			
-			if( result == 1){
-				
-				model.put("info", "增加简历信息成功");
-				return new ModelAndView("resume/resume_add",model);
-				
-			} else {
-				model.put("info", "增加简历信息失败");
-				return new ModelAndView("resume/resume_add",model);
-			}
-			
-		}else {
-			model.put("info", "增加简历信息失败");
-			return new ModelAndView("resume/resume_add",model);
-		}*/
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		
 		
 		long startTime = System.currentTimeMillis();
