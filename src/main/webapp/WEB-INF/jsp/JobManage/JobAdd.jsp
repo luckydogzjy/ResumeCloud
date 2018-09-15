@@ -54,6 +54,14 @@
 		<title></title>
 		<link rel="stylesheet" type="text/css" href="css/demo.css"/>
 		<link rel="stylesheet" type="text/css" href="css/jobCss/add.css">
+		
+		<script type="text/javascript">
+		
+				function backout(){
+					location.href="${pageContext.request.contextPath}/JobManage.do"
+				}
+		
+		</script>
 	</head>
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -127,7 +135,7 @@
 				<br/>
 				<div id="btn">
 					<input id="submit" type="submit" value="提交">
-					<input id="cancel" type="button" value="取消" />
+					<input id="cancel" type="button" value="取消" onclick="backout()" />
 				</div>
 			</form>
 			</div>

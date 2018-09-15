@@ -28,6 +28,10 @@
 	          	alert('复制成功!\n'+oInput.value);
 	        					
 			}
+			
+			function backout(){
+				location.href="${pageContext.request.contextPath}/JobManage.do"
+			}
 		</script>
 		
 		<link rel="stylesheet" type="text/css" href="css/jobCss/details.css"/>
@@ -125,6 +129,7 @@
 			</div>  
 			<div style="position: absolute;left:50%;top:90%;margin-left:-140px; margin-top:-30px;">
 			<input onclick="copy()" type="button" value="复制到剪切板">
+			<input onclick="backout()" type="button" value="返回">
 			</div>
 			
 			</div>
