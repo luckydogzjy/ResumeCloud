@@ -7,10 +7,9 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>简历详情</title>
-		<link rel="stylesheet" type="text/css" href="css/resumeCss/resume-ww.css"/>
-		<link rel="stylesheet" type="text/css" href="css/demo.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/resumeCss/resume-ww.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/demo.css"/>
 	</head>
-	<link rel="stylesheet" type="text/css" href="css/demo.css"/>
 	<body>
 		<div id="box">
 		

@@ -7,8 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>简历新增页面</title>
 
-<link rel="stylesheet" type="text/css" href="css/demo.css"/>
- <link rel="stylesheet" type="text/css" href="css/resumeCss/resume1-1.css"/>
+<link rel="stylesheet" type="text/css" href="../css/demo.css"/>
+ <link rel="stylesheet" type="text/css" href="../css/resumeCss/resume1-1.css"/>
  <script src="js/resume-1-1.js"></script>
 </head>
 
@@ -36,7 +36,7 @@
 			<HR size="4" id="addhengxian" width="" noshade>
 			
 	
-		<form name="form1" method="post" action="${pageContext.request.contextPath }/resume_add.do" enctype="multipart/form-data"> 
+		<form name="form1" method="post" action="${pageContext.request.contextPath }/Resume/resume_add.do" enctype="multipart/form-data"> 
 		
 		<table border="0" height="50">
 			<tr>
