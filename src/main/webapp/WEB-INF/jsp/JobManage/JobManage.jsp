@@ -11,15 +11,15 @@
 		<link rel="stylesheet" type="text/css" href="css/demo.css"/>
 		<link rel="stylesheet" type="text/css" href="css/jobCss/job.css">
 		
-		<style type="text/css" >
+		<!-- <style type="text/css" >
 		
 		a{
 		 	text-decoration:none; 
-		  	color:#333
+		  	color:#333;
 		  	}
 	
 		
-		</style>
+		</style> -->
 		
 		
 	</head>
@@ -44,7 +44,7 @@
 						</form>
 		
 					<div id="job-add">
-						<a id="job-add-button" href="${pageContext.request.contextPath}/jobAddView.do">添加职位</a>
+						<input id="job-add-button" type="button" value="添加职位" onClick="location.href='${pageContext.request.contextPath}/jobAddView.do'"/> 
 						<img id="job-add-img" src="${pageContext.request.contextPath}/img/u603.png" />
 					</div>
 					</div>
@@ -62,23 +62,25 @@
 					
 					<c:forEach items="${job}" var="job">
 					<tr>
-						<td><a style="text-decoration:none;color:blue" href="${pageContext.request.contextPath}/jobDetails.do?jobId=${job.JOB_ID}">${job.JOB_NAME}</a></td>
+						<td><a href="${pageContext.request.contextPath}/jobDetails.do?jobId=${job.JOB_ID}">${job.JOB_NAME}</a></td>
 						<td>${job.JOB_COUNT}</td>
 						<td><fmt:formatDate value="${job.JOB_END_TIME}" pattern="yyyy年MM月dd日" /></td>
 
 						<td>
 							<c:if test="${job.JOB_STATUS==1}">
-							<a id="button-status1" href="${pageContext.request.contextPath}/jobChangeStatus.do?jobId=${job.JOB_ID}&jobStatus=${job.JOB_STATUS}">开启</a>
+<%-- 							<a id="button-status1" href="${pageContext.request.contextPath}/jobChangeStatus.do?jobId=${job.JOB_ID}&jobStatus=${job.JOB_STATUS}">开启</a>
+ --%>							<input id="button-status1" type="button" value="开启" onClick="location.href='${pageContext.request.contextPath}/jobChangeStatus.do?jobId=${job.JOB_ID}&jobStatus=${job.JOB_STATUS}'"/>
 							</c:if>
 							<c:if test="${job.JOB_STATUS==0}">
-							<a id="button-status0" href="${pageContext.request.contextPath}/jobChangeStatus.do?jobId=${job.JOB_ID}&jobStatus=${job.JOB_STATUS}">关闭</a>
+								
+								<input id="button-status0" type="button" value="关闭" onClick="location.href='${pageContext.request.contextPath}/jobChangeStatus.do?jobId=${job.JOB_ID}&jobStatus=${job.JOB_STATUS}'"/>
 							</c:if>
 							
 						</td>
 						<td>
-						 	<a id="button-modify" href="${pageContext.request.contextPath}/jobUpdateView.do?jobId=${job.JOB_ID}">修改</a>
-						 	<a id="button-delete" href="${pageContext.request.contextPath}/jobDelete.do?jobId=${job.JOB_ID}">删除</a>
-						 	<a id="button-template" href="${pageContext.request.contextPath}/jobTemplateView.do?jobId=${job.JOB_ID}">生成模板</a>
+						 	<input id="button-modify" type="button" value="修改" onClick="location.href='${pageContext.request.contextPath}/jobUpdateView.do?jobId=${job.JOB_ID}'"/>
+						 	<input id="button-delete" type="button" value="删除" onClick="location.href='${pageContext.request.contextPath}/jobDelete.do?jobId=${job.JOB_ID}'"/>
+						 	<input id="button-template" type="button" value="生成模板" onClick="location.href='${pageContext.request.contextPath}/jobTemplateView.do?jobId=${job.JOB_ID}'"/>	
 						</td>
 					</tr>	
 					</c:forEach>

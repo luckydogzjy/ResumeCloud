@@ -30,6 +30,8 @@
 	margin-left: 5px;
 	margin-right: 5px;
 	background: #d7d7d7;
+	border-radius:15px;
+	outline：none;
 }
 #job-add{
 	top:-38px;
@@ -48,6 +50,8 @@
 	margin-top: 5px;
 	position: absolute;
 	background: #ffff80;
+	border-radius:15px;
+	outline：none;
 }
 #job-add-img{
 	width: 30px;
@@ -67,7 +71,7 @@
 	height: 120px;
 	margin-top: 30px;
 	text-align: center;
-	
+
 }
 td,th{
 	width: 228px;
@@ -115,38 +119,45 @@ tr:nth-child(2n){background:#d7d7d7;}
 
 #button-status1{
 	background: #009900;
-	width: 72px;
-	height: 20px;
+	width: 52px;
+	height: 25px;
 	border-radius:5px;
+	outline：none;
 }
 #button-status0{
 	background: red;
-	width: 72px;
-	height: 20px;
+	width: 52px;
+	height: 25px;
 	border-radius:5px;
+	outline：none;
 }
 
 #button-modify{
 	background: #169bd5;
 	width: 52px;
-	height: 20px;
+	height: 25px;
 	border-radius:5px;
-	
+	outline：none;
 }
 
 #button-delete{
 	background: #ff0000;
 	width: 52px;
-	height: 20px;
+	height: 25px;
 	border-radius:5px;
 	position: absolute;
+	outline：none;
 }
 
 #button-template{
 	background: #ff6600;
 	width: 75px;
-	height: 20px;
+	height: 25px;
 	border-radius:5px;
 	margin-left: 55px;
+	outline：none;
 }
-
+a{
+	text-decoration:none; 
+	color:blue;
+}

@@ -128,8 +128,8 @@
 			
 			</div>  
 			<div style="position: absolute;left:50%;top:90%;margin-left:-140px; margin-top:-30px;">
-			<input onclick="copy()" type="button" value="复制到剪切板">
-			<input onclick="backout()" type="button" value="返回">
+			<input id="upbtn" onclick="copy()" type="button" value="复制到剪切板">
+			<input id="backbtn" onclick="backout()" type="button" value="返回">
 			</div>
 			
 			</div>

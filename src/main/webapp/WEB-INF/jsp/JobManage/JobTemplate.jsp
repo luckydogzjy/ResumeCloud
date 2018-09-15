@@ -63,30 +63,7 @@
 					</div>
 					
 				</div>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
+				
 				<div id="btn">
 					<input id="submit" type="submit" value="提交">
 					<input id="cancel" type="button" value="取消" onclick="backout()" />

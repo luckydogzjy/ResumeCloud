@@ -133,3 +133,15 @@ textarea{
 	margin-top:-90px;
 	
 }
+#upbtn{
+	background:#00ccff;
+	width:130px;
+	height:40px;
+	border-radius:10px;
+}
+#backbtn{
+	background:#00ccff;
+	width:130px;
+	height:40px;
+	border-radius:10px;
+}
