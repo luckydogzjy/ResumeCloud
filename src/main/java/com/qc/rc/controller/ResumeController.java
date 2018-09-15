@@ -50,7 +50,7 @@ public class ResumeController {
 	
 	//正常应该在session里得到登录人的userId
 	//这里只做测试
-	public static Integer userId = 2;
+	public static Integer userId = 1;
 	
 	@RequestMapping("/resumeDisplay.do")
 	public ModelAndView resumeDisplay(HttpServletRequest request,  HttpServletResponse response){
@@ -181,7 +181,6 @@ public class ResumeController {
 		System.out.println("返回的主键为"+ sharingCenter.getScId());
 		//执行完插入后，要将RC_USER_RESUME表更新		
 		resumeService.updateUserResume(resumeId);
-		
 		
 		
 		return getResumeListByCondition(request);
