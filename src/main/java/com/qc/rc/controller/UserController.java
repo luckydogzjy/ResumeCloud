@@ -32,7 +32,7 @@ public class UserController {
 		if(user != null){
 			session.setAttribute("user", user);
 			model.addAttribute("msg", "登录成功！");
-			return "user/success";
+			return "interviewJsps/IVxiangqing";
 		}
 		else{
 			model.addAttribute("msg","账号或密码错误");

@@ -34,7 +34,15 @@
 				<HR size="4" width="590" noshade>
 
     	
-				<form method="post" action="${pageContext.request.contextPath }/resume_update.do"> 
+				<%-- <form method="post" action="${pageContext.request.contextPath }/resume_update.do" enctype="multipart/form-data">  --%>
+				
+				
+				<form method="post" action="${pageContext.request.contextPath }/resume_update.do?page=${page}&resumeName=${resumeName}
+										&resumeJobIntension=${resumeJobIntension}&resumeSex=${resumeSex}&resumeEducation=${resumeEducation}
+										&resumeWorkYears=${resumeWorkYears}&resumeGraduateInstitution=${resumeGraduateInstitution}" enctype="multipart/form-data"> 
+				
+				
+				
 				
 				<table border="0">
 					
@@ -148,15 +156,26 @@
 			
 			
 		</table>
+		
+		<FONT id="right_fujia" size="6" color="#FF0000">附加信息</FONT>
+		<HR id="hengxian"	size="4" width="300" noshade>
+		
+	   
+	   	 <input id="wenjian" type="file" name="file_03" onchange="promote();"/>
+		<font id="s9" size="2" color="red"></font>
+		<font id="s10" size="2" color="red"></font>
+		
+		
 			<input id="updatebutton_div" type="submit" value="修改" onclick="return checkinput()" />
 			<a href="javascript:history.back();"><input id="updatebutton_div2" type="button" value="返回"/></a>
 		
+		
+
+		
+		
 		</form>
 		
-		<FONT id="right_fujia" size="6" color="#FF0000">附加消息</FONT>
-		<HR id="hengxian"	size="4" width="300" noshade>
 		
-	   	<input id="wenjian" type="file" />
 		
 		</div>
     	</div> 

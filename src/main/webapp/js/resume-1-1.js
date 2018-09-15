@@ -124,58 +124,79 @@
 		}
 		}
   	}
-			
+		
+		
+		
+		
+		function promote()
+		{	
+			var pic = document.getElementById('wenjian').value;
+			var patn = /\.jpg$|\.jpeg$|\.png$|\.gif$/i;
+			var wenjian = /\.doc$|\.docx$|\.xls$|\.xlsx$|\.txt$/;
+			if (!patn.test(pic)||!wenjian.test(pic)) 
+			{
+			   document.getElementById("s9").innerHTML="图片仅支持jpg、png、gif、jpeg格式";
+			   document.getElementById("s10").innerHTML="文件仅支持dox、xls、txt格式";
+			}
+			if(patn.test(pic)||wenjian.test(pic)){
+				document.getElementById("s9").innerHTML="";
+				document.getElementById("s10").innerHTML="";
+			}
+		}
 	
 		
 		function checkinput(){
-			checkname();
-			checkaddress();
-			checkemail();
-			checkphone();
-			checkbir();
-			checkjob();
-			checkschool();
-			checkyears();
-			
-			var s1 = document.getElementById('s1').innerHTML;
-			var s2 = document.getElementById('s2').innerHTML;			
-			var s3 = document.getElementById('s3').innerHTML;		
-			var s4 = document.getElementById('s4').innerHTML;			
-			var s5 = document.getElementById('s5').innerHTML;		
-			var s6 = document.getElementById('s6').innerHTML;
-			var s7 = document.getElementById('s7').innerHTML;
-			var s8 = document.getElementById('s8').innerHTML;
-			
-			
-			if(s1.length!=0){
-				return false;
+				checkname();
+				checkaddress();
+				checkemail();
+				checkphone();
+				checkbir();
+				checkjob();
+				checkschool();
+				checkyears();
+				
+				var s1 = document.getElementById('s1').innerHTML;
+				var s2 = document.getElementById('s2').innerHTML;			
+				var s3 = document.getElementById('s3').innerHTML;		
+				var s4 = document.getElementById('s4').innerHTML;			
+				var s5 = document.getElementById('s5').innerHTML;		
+				var s6 = document.getElementById('s6').innerHTML;
+				var s7 = document.getElementById('s7').innerHTML;
+				var s8 = document.getElementById('s8').innerHTML;
+				var s9 = document.getElementById('s9').innerHTML;
+				
+				
+				if(s1.length!=0){
+					return false;
+				}
+				if(s2.length!=0){
+					return false;
+				}
+				if(s3.length!=0){
+					return false;
+				}
+				if(s4.length!=0){
+					return false;
+				}
+				if(s5.length!=0){
+					return false;
+				}
+				if(s6.length!=0){
+					return false;
+				}
+				if(s7.length!=0){
+					return false;
+				}
+				if(s8.length!=0){
+					return false;
+				}
+				if(s9.length!=0){
+					return false;
+				}
+				
+		
+				
 			}
-			if(s2.length!=0){
-				return false;
-			}
-			if(s3.length!=0){
-				return false;
-			}
-			if(s4.length!=0){
-				return false;
-			}
-			if(s5.length!=0){
-				return false;
-			}
-			if(s6.length!=0){
-				return false;
-			}
-			if(s7.length!=0){
-				return false;
-			}
-			if(s8.length!=0){
-				return false;
-			}
-			
-	
-			
-		}
-	
 
 
 

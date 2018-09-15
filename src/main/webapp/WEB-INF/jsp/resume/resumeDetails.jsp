@@ -125,8 +125,7 @@
 					 	<table id="table_pic_file" border="0">
 			
 					 		<tr>
-							 	<td height="35">图片地址</td>
-						 		<td ></td>
+							 	<td height="35" colspan="2">图片地址</td>
 						 	</tr>
 						 	<c:forEach items="${resume.lPics }" var="resumePic">
 							 	<tr>
@@ -136,8 +135,7 @@
 							 </c:forEach>
 
 						 	<tr>
-								 <td height="35">文件地址</td>
-							 	<td ></td>
+								 <td height="35" colspan="2">文件地址</td>
 							 </tr>
 
 							 <c:forEach items="${resume.lFiles }" var="resumeFile">

@@ -17,6 +17,7 @@
 
 
 <body>
+
 		<div id="box">
 		<div id="header">
 		<jsp:include page="../common/header.jsp" flush="true"/>
@@ -24,7 +25,6 @@
 		<div id="lefter">
 		<jsp:include page="../common/lefter.jsp" flush="true"/>
 		</div>
-
 
 
 		<div id="right">
@@ -131,8 +131,9 @@
 		
 		<FONT id="right_fujia" size="6" color="#FF0000">附加信息</FONT>
 		<HR id="hengxian"	size="4" width="300" noshade>
-	   	<input id="wenjian" type="file" name="file_03" />
-		
+		 <input id="wenjian" type="file" name="file_03" onchange="promote();"/>
+		<font id="s9" size="2" color="red"></font>
+		<font id="s10" size="2" color="red"></font>
 		
 
 			<input id="addbutton_div" type="submit" value="添加"  onclick="return checkinput()" />			
