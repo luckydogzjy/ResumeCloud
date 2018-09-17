@@ -1,0 +1,60 @@
+#modal-header{
+	position: absolute;
+	top: 26px;
+}
+
+#other {
+	position: absolute;
+	height: 300px;
+	width: 45%;
+	margin: 100px;	
+	top: -80px;
+	left: 504px;
+}
+
+#upInfo {
+	position: absolute;
+	height: 200px;
+	width: 220 px;
+	top: 80px;
+	margin: 30px;
+	left:  80px;
+}
+#Info {
+	
+	height: 20px;
+	width: 220 px;
+	margin: 30px;
+}
+
+#button {
+	height: 40px;
+	width: 220 px;
+	margin: 30px;
+	top: 100px;
+}
+#butten {
+	position: absolute;
+	top: 100px;
+}
+
+#buts {
+	height: 25px;
+	width: 220 px;
+	margin: 30px;
+}
+
+#but {
+	text-align: center;
+	width: 80px;
+	height: 30px;
+}
+#u1836{
+	position: absolute;
+	top: 72px;
+}
+#u1837{
+	position: absolute;
+	top: 50px;
+	
+}

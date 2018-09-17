@@ -16,18 +16,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.User;
+import com.qc.rc.entity.UserResume;
 import com.qc.rc.entity.pojo.ResumePojo;
+import com.qc.rc.entity.pojo.UserExchangeResumePojo;
 import com.qc.rc.service.PersonalService;
 
 @Controller
-
 public class PersonalController {
 	
 	@Autowired
 	private PersonalService personalService;
 	@Autowired
 	private User user;
+
 	
 	public static String userPhone="15542431051";
 	public static Integer userId = 1;
@@ -161,5 +164,23 @@ public class PersonalController {
 		}
 	}
 	
+	
+	/**
+	 * 显示hr兑换的简历
+	 * @return
+	 */
+	@RequestMapping("/getHrExchangeResume.do")
+	public ModelAndView resumeExchangShow(){
+		
+		//根据登录的hr的Id的到他兑换的简历
+		List<UserExchangeResumePojo> list =personalService.getAllExchangResume(userId);
+		
+		Map<String,Object> model = new HashMap<String,Object>(); 
+		
+		model.put("resumeList", list);
+		
+		return new ModelAndView("personal/ur_resume_exchange",model);
+		
+	}
 	
 }

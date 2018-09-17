@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.qc.rc.dao.PersonalMapper;
 import com.qc.rc.entity.User;
 import com.qc.rc.entity.pojo.ResumePojo;
+import com.qc.rc.entity.pojo.UserExchangeResumePojo;
 import com.qc.rc.service.PersonalService;
 
 @Service("PersonalService")
@@ -56,6 +57,15 @@ public class PersonalServiceImpl implements PersonalService {
 			int result = personalMapper.updateUser(user);
 			return result;
 			
+		}
+		
+		
+		//获取积分兑换的简历
+		public List<UserExchangeResumePojo> getAllExchangResume(Integer userId){
+			
+			List<UserExchangeResumePojo> exchangeResumeList= personalMapper.getAllExchangResume(userId);
+			
+			return exchangeResumeList;
 		}
 
 }

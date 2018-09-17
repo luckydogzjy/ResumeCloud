@@ -68,26 +68,52 @@
 	
 	<!-- 简历兑换查询 -->
 	
-	<resultMap type="com.qc.rc.entity.UserResume" id="userExResume">
+	<resultMap type="com.qc.rc.entity.pojo.UserExchangeResumePojo" id="userExResume">
 
-		<id column="UR_ID" property="userId"></id>
-		<result column="UR_USER_ID" property="userName"></result>
-		<result column="UR_RESUME_ID" property="userPhone"></result>
-		<result column="UR_RESUME_GETWAT" property="userCompany"></result>
-		<result column="USER_BIRTHDAY" property="userBirthday"></result>
-		<result column="USER_BIRTHDAY" property="userBirthday"></result>
-		<result column="USER_BIRTHDAY" property="userBirthday"></result>
-		<result column="USER_BIRTHDAY" property="userBirthday"></result>
-		<result column="USER_BIRTHDAY" property="userBirthday"></result>		
+		<id column="RESUME_ID" property="resumeId"></id>
+		<result column="RESUME_NAME" property="resumeName"></result>
+		<result column="RESUME_SEX" property="resumeSex"></result>
+		<result column="RESUME_WORK_YEARS" property="resumeWorkYears"></result>
+		<result column="RESUME_GRADUATE_INSTITUTION" property="resumeGraduateInstitution"></result>
+		<result column="RESUME_EDUCATION" property="resumeEducation"></result>
+		<result column="RESUME_JOB_INTENSION" property="resumeJobIntension"></result>	
+		<result column="RESUME_CREATE_TIME" property="resumeCreateTime"></result>
 		
+			
+		
+		
+		<association property="userresume" javaType="com.qc.rc.entity.UserResume">
+		
+			<result column="UR_USER_ID" property="urUesrId"></result>
+			<result column="UR_RESUME_ID" property="urResumeId"></result>
+			<result column="RESUME_CREATE_TIME" property="urCreateTime"></result>
+			<result column="UR_RESUME_GETWAT" property="urResumeGetway"></result>		
+		
+		</association>
 	</resultMap>
 	
-	<select id="userExchangeResume" parameterType="java.lang.Integer" resultMap="userExResume">
-		select
-		 RESUME_NAME,RESUME_SEX,RESUME_WORK_YEARS,RESUME_GRADUATE_INSTITUTION,
-		 RESUME_EDUCATION,RESUME_JOB_INTENSION,RESUME_CREATE_TIME
-		from RC_RESUME,RC_USER_RESUME 
-		where UR_RESUME_GETWAT=#{urResumeGetway=1}
+	<select id="getAllExchangResume" resultMap="userExResume" parameterType="java.lang.Integer" >
+		
+   <!--   SELECT RR.RESUME_ID,RR.RESUME_NAME,RR.RESUME_SEX,RR.RESUME_WORK_YEARS,
+          RR.RESUME_GRADUATE_INSTITUTION,RR.RESUME_EDUCATION,
+          RR.RESUME_JOB_INTENSION,RR.RESUME_CREATE_TIME
+     FROM RC_RESUME RR INNER JOIN RC_USER_RESUME RUR    
+     ON(RR.RESUME_ID=RUR.UR_RESUME_ID AND RUR.UR_RESUME_GETWAT!=0 AND RUR.UR_DELETE_FLAG!=1)
+     INNER JOIN RC_USER RU
+     ON (RU.user_id = RUR.UR_user_id)
+     WHERE RU.USER_ID =#{userId} and RR.REsume_ID = RUR.UR_RESume_id
+      ORDER BY RR.RESUME_CREATE_TIME DESC -->
+      
+      
+       SELECT RR.RESUME_ID,RR.RESUME_NAME,RR.RESUME_SEX,RR.RESUME_WORK_YEARS,
+          RR.RESUME_GRADUATE_INSTITUTION,RR.RESUME_EDUCATION,
+          RR.RESUME_JOB_INTENSION,RR.RESUME_CREATE_TIME
+     FROM RC_RESUME RR INNER JOIN RC_USER_RESUME RUR    
+     ON(RR.RESUME_ID=RUR.UR_RESUME_ID AND RUR.UR_RESUME_GETWAT!=0 AND RUR.UR_DELETE_FLAG!=1)
+     INNER JOIN RC_USER RU
+     ON (RU.user_id = RUR.UR_user_id)
+     WHERE RU.USER_ID =#{userId} and RR.REsume_ID = RUR.UR_RESume_id
+      ORDER BY RR.RESUME_CREATE_TIME DESC
 		
 	
 		
