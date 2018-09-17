@@ -39,15 +39,15 @@ public class ResumeController {
 
 	@Autowired 
 	private ResumeService resumeService;
-	@Autowired 
+	
 	private ResumePojo resumePojo;
-	@Autowired 
+	
 	private SharingCenter sharingCenter;
-	@Autowired
+	
 	private Resume resume;
-	@Autowired
+	
 	private UserResume userresume;
-	@Autowired
+	
 	private Pic pic;
 	
 	//正常应该在session里得到登录人的userId
@@ -69,6 +69,7 @@ public class ResumeController {
 		
 		model.put("resumeList", list);
 		model.put("page", pageResumePojo);
+		
 		return new ModelAndView("resume/resumeDisplay",model);
 		
 	}

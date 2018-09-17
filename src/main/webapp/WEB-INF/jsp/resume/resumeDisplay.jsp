@@ -270,7 +270,7 @@
 												<input type="button" id="NoBtn" value="待面试" disabled="disabled" />
 											</c:if> 
 											<c:if test="${resume.interview.interviewStatus != 2}">
-													<input type="button" id="interviewBtn" value="面试" />
+													<a href="${pageContext.request.contextPath}/Interview/addNewInterview.do?resumeId=${resume.resumeId }"><input type="button" id="interviewBtn" value="面试" /></a>
 											</c:if> 
 										
 										

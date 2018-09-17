@@ -22,10 +22,10 @@ public class ResumeServiceImpl implements ResumeService {
 	@Autowired
 	private ResumeMapper resumeMapper;
 	
-	@Autowired
+	
 	private ResumePojo resumePojo;
 	
-	@Autowired
+	
 	private Resume resume;
 	
 	
