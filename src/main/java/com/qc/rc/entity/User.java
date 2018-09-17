@@ -1,6 +1,9 @@
 package com.qc.rc.entity;
 
+
 import java.util.Date;
+
+import org.springframework.stereotype.Component;
 
 
 
@@ -19,7 +22,7 @@ import java.util.Date;
 	"UPDATE_TIME" DATE, 
 	"USER_STATUS" NUMBER(1,0) DEFAULT 0*/
 
-
+@Component
 public class User {
 	
 	public User(Integer userId, String userPhone, String userPassword, String userName, Integer userSex,
