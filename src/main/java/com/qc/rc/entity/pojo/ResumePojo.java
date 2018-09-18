@@ -4,13 +4,12 @@ import java.io.File;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
 
 import com.qc.rc.entity.Interview;
 import com.qc.rc.entity.Pic;
 import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.UserResume;
-@Component
+
 public class ResumePojo extends Resume {
 	
 
