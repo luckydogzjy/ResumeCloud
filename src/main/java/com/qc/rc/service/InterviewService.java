@@ -24,6 +24,11 @@ public interface InterviewService {
 //	删除面试
 	public void deleteInterview(InterviewPojo interviewPojo);
 	
+	//Liu
 	//根据ResumeId查询详细信息
 	public ServerResponse<InterviewPojo> getInterviewByResumeId(Integer ResumeId);
+		
+	//根据ResumeId更新面试信息
+	public ServerResponse updateInterviewsByResumeId(InterviewPojo interviewPojo,Integer ResumeId,String resumePhone);
+		
 }

@@ -30,9 +30,10 @@ public interface InterviewMapper {
 	//删除
 	void deleteInterview(InterviewPojo interviewPojo);
 	
+	//Liu
 	//根据ResumeId查询简历
 	InterviewPojo selectInterviewsByResumeId(@Param("ResumeId")Integer ResumeId);
 	
-	//根据ResumeId查询简历
+	//根据ResumeId更新简历
 	int updateInterviewsByResumeId(InterviewPojo interviewPojo);
 }
