@@ -99,7 +99,6 @@ public class ResumeController {
 			resumeName = FormParameterUtil.changeCode(request.getParameter("resumeName"));
 			resumeJobIntension = FormParameterUtil.changeCode(request.getParameter("resumeJobIntension"));
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -132,6 +131,9 @@ public class ResumeController {
 		return new ModelAndView("resume/resumeDisplay",model);
 		
 	}
+	
+	
+	
 	
 	@RequestMapping("/resumeDetails.do")
 	public ModelAndView resumeDetails(HttpServletRequest request,  HttpServletResponse response){
