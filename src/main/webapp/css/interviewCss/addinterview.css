@@ -115,13 +115,13 @@ input[type="text"] {
 	left: 600px;
 	top: 80px;
 	width: 250px;
-	height: 110px;
+	height: 150px;
 	position: absolute;
 }
 
 #jscopy {
 	left: 600px;
-	top: 210px;
+	top: 250px;
 	position: absolute;
 }
 

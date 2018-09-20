@@ -39,15 +39,15 @@ public class ResumeController {
 
 	@Autowired 
 	private ResumeService resumeService;
-	
+
 	private ResumePojo resumePojo;
-	
+
 	private SharingCenter sharingCenter;
-	
+
 	private Resume resume;
-	
+
 	private UserResume userresume;
-	
+
 	private Pic pic;
 	
 	//正常应该在session里得到登录人的userId
@@ -60,7 +60,7 @@ public class ResumeController {
 		//引入分页查询，使用PageHelper分页功能
         //在查询之前传入当前页，然后多少记录
 		PageHelper.startPage(page,pageShow);
-		
+	
 		List<ResumePojo> list = resumeService.getAllResume(userId);
 				
 		Map<String,Object> model = new HashMap<String,Object>(); 
@@ -69,7 +69,6 @@ public class ResumeController {
 		
 		model.put("resumeList", list);
 		model.put("page", pageResumePojo);
-		
 		return new ModelAndView("resume/resumeDisplay",model);
 		
 	}

@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!-- 引入格式化日期标签  -->
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<link rel="stylesheet" type="text/css" href="../css/demo.css" />
@@ -14,31 +15,30 @@
 
 	</head>
 	<script src="../My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+	<script src="../js/jquery-2.1.1.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
-		function lastchangepage() {
-			var p = document.getElementById("pageNum").value;
-			if(p == 1) {
-				alert("已经是第一页了c");
-
-			} else {
-				p = p - 1;
-				document.getElementById("pageNum").value = p;
-				document.getElementById("actionform").submit();
-			}
+		function pageChange(p) {
+			$("#pageNum").val(p);
+			$("#actionform").submit();
 		}
-
-		function nextchangepage() {
-			var p = document.getElementById("pageNum").value;
-			var sum = document.getElementById("allNum").value;
-			if(p < sum) {
-				p = Number(p) + 1;
-				document.getElementById("pageNum").value = p;
-
-				document.getElementById("actionform").submit();
-			} else {
-				alert("已经是最后一页了c");
-			}
+		function resert(){
+			$("#startTime").val();
+			$("#overTime").val();
+			$("#interviewJob").val();
+			$("#interviewInfo").val();
+			$("#actionform").submit();
 		}
+		
+		function del(interviewId){
+		var user = data[userIndex];
+		$.ajax({
+			type:"get",
+			url:"${pageContext.request.contextPath}/Interview/deleteById.do?id="+interviewId,
+			success:function(data){
+				alert(data);
+			}
+		});
+	}
 	</script>
 
 	<body>
@@ -61,19 +61,19 @@
 							面试时间 
 								
 							</span>
-							<input class="Wdate" name="interviewTimeStart" type="search" value="${interviewTimeStart}" placeholder="选择起始时间" onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" /> 
+							<input class="Wdate" id="startTime" name="startTime" type="search" value="${startTime}" placeholder="选择起始时间" onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" /> 
 							~
-							<input class="Wdate" name="interviewTimeOver"  id="" value="${interviewTimeOver}"  placeholder="选择终止时间" type="search" onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" /> 
+							<input class="Wdate" id="overTime" name="overTime"  value="${overTime}"  placeholder="选择终止时间" type="search" onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" /> 
 							
 							</div>
 							<div id="interview_Job">
 								<span id="">
 							面试职位
 							</span>
-								<input type="search" name="interviewJob" id="" value="${interviewJob}" placeholder="请输入面试职位" />
+								<input type="search" name="interviewJob" id="interviewJob" value="${interviewJob}" placeholder="请输入面试职位" />
 							</div>
 							<div id="addnewInterview">
-								<a href="${pageContext.request.contextPath}/Interview/addNewInterview.do?resumeId=3"><input type="button" id="addbutton" value="添加新的面试" /></a>
+								<a href="${pageContext.request.contextPath}/WEB-INF/jsp/interviewJsps/addnewTempinterview.jsp"><input type="button" id="addbutton" value="添加新的面试" /></a>
 							</div>
 							<div id="interview_name_address_info">
 								<input type="search" name="interviewInfo" id="interviewInfo" value="${interviewInfo}" placeholder="请输入姓名，面试地点，面试信息等相关信息" />
@@ -83,7 +83,7 @@
 
 							</div>
 							<div id="r">
-								<input type="reset" id="reset_button" value="重置" />
+								<input type="button" id="reset_button" value="重置" />
 							</div>
 
 							<div id="table">
@@ -100,7 +100,7 @@
 										</th>
 										<th>
 											<font size="2">面试时间</font>
-											<select name="timeOrder">
+											<select name="sort">
 												<option value="default">默认</option>
 												<option value="up">↑</option>
 												<option value="down">↓</option>
@@ -117,7 +117,7 @@
 										</th>
 										<th colspan="2">操作</th>
 									</tr>
-									<c:forEach items="${iPageBean.datalist}" var="interview">
+									<c:forEach items="${pageInfo.list}" var="interview">
 										<tr>
 											<td class="normal">
 												<font size="2">
@@ -143,7 +143,7 @@
 											</td>
 											<td class="right">
 												<a href="updateById.do?id=${interview.interviewId}"><input type="button" value="修改" id="updateBtn" /></a>
-												<a href="${pageContext.request.contextPath}/Interview/deleteById.do?id=${interview.interviewId}"><input type="button" value="删除" id="deleteBtn"  /></a>
+												<input type="button" value="删除" id="deleteBtn" onclick="del(${interview.interviewId})" />
 												<a href=""><input type="button" value="面试结果" id="interviewBtn" /></a>
 											</td>
 										</tr>
@@ -157,19 +157,21 @@
 							
 							<div id="message">
 								<span class="color :lightblue">
-								共检索到${iPageBean.allSize}条数据
+								共检索到${pageInfo.total}条数据
 								</span>
 							</div>
-							
-							<c:if test="${iPageBean.allSize>0}">
+							<c:if test="${pageInfo.total<=0}">
+							<input type="hidden" name="pageNum" id="pageNum" value="1" />
+							</c:if>
+							<c:if test="${pageInfo.total>0}">
 							<div id="pageChange">
-
-								<input type="button" name="" id="lastpage" value="上一页" onclick="lastchangepage()" />
-								<input type="button" name="" id="nextpage" value="下一页" onclick="nextchangepage()" />
-								<input type="hidden" name="pageNum" id="pageNum" value="${iPageBean.pageNum}" />
-								<input type="hidden" id="allNum" value="${iPageBean.allPage}" />
+								<input type="hidden" name="pageNum" id="pageNum" value="" />
+								<input type="button" value="首页" onclick="pageChange('1')"/>
+			       				<input type="button" value="上一页" onclick="pageChange(${pageInfo.prePage})"/>
+			       				<input type="button" value="下一页" onclick="pageChange(${pageInfo.nextPage})"/>
+			       				<input type="button" value="尾页" onclick="pageChange(${pageInfo.pages})"/>
 								<span>
-								第${iPageBean.pageNum}页 &nbsp;	共${iPageBean.allPage}页 
+								第${pageInfo.pageNum}页 &nbsp;	共${pageInfo.pages}页 
 								</span>
 
 							</div>

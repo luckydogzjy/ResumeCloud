@@ -12,16 +12,10 @@ public class InterviewDateUtil {
 	//interview用
 		
 //		将字符串转换为日期
-		public static Date strToDate(String strDate) {
+		public static Date strToDate(String strDate) throws ParseException {
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-			Date date = null;
-			try {
-				date = sdf.parse(strDate);
-			} catch (ParseException e) {
-
-				e.printStackTrace();
-			}
+			Date date = sdf.parse(strDate);
 			return date;
 			
 		}

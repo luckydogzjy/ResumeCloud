@@ -22,12 +22,9 @@ public class ResumeServiceImpl implements ResumeService {
 	@Autowired
 	private ResumeMapper resumeMapper;
 	
-	
 	private ResumePojo resumePojo;
 	
-	
 	private Resume resume;
-	
 	
 	public List<ResumePojo> getAllResume(Integer userId) {
 		
