@@ -25,61 +25,9 @@ public class InterviewServiceImpl implements InterviewService {
 	
 	@Autowired
 	private ResumeMapper resumeMapper;
-		
-	public PageBean<InterviewPojo> getAllInterviews(Integer userId) {
-		Integer size = interviewMapper.getAllInterviewsByUserId(userId);
-		
-		
-		PageBean<InterviewPojo> ipPageBean = new PageBean<>();
-//		查询满足条件的所有字段数
-		ipPageBean.setAllSize(size);
-//		进入页面设置页码数为1
-		ipPageBean.setPageNum(1);
-//		设置每页要显示的数量
-		ipPageBean.setPageSize(PageMessage.interviewpageSize);
-//		计算所有页数
-		ipPageBean.setAllPage();
-        RowBounds rb = new RowBounds(ipPageBean.getPageNum(),ipPageBean.getPageSize());  
-//      载入数据
-		List<InterviewPojo> interviewPojos= interviewMapper.selectAllInterviewsByUserId(rb, userId);
-		
-		
-		ipPageBean.setDatalist(interviewPojos);
-		
-		return ipPageBean;
-	}
-	
-	public PageBean<InterviewPojo> selectByCondition(Integer pageNum, Integer userId, Date startTime,
-			Date overTime, String interviewJob, String interviewInfo) {
-		
-		Integer size = interviewMapper.getAllInterviewsByCondition(userId, startTime, overTime, interviewJob, interviewInfo);
-		PageBean<InterviewPojo> ipPageBean = new PageBean<>();
-//		查询满足条件的所有字段数
-		ipPageBean.setAllSize(size);
-//		进入页面设置页码数为1
-		ipPageBean.setPageNum(pageNum);
-//		设置每页要显示的数量
-		ipPageBean.setPageSize(PageMessage.interviewpageSize);
-//		计算所有页数
-		ipPageBean.setAllPage();
-        RowBounds rb = new RowBounds(ipPageBean.getPageNum(),ipPageBean.getPageSize());   
-//      载入数据
-		List<InterviewPojo> interviewPojos= interviewMapper.selectByCondition(rb, userId, startTime, overTime, interviewJob, interviewInfo);
-		ipPageBean.setDatalist(interviewPojos);
-		return ipPageBean;
-	}
-	
-	public Integer addInterview(InterviewPojo interviewPojo) {
-		return	interviewMapper.addInterview(interviewPojo);
-	}
-
-	public void deleteInterview(InterviewPojo interviewPojo){
-		interviewMapper.deleteInterview(interviewPojo);
-	}
-	
 
 
-public ServerResponse<InterviewPojo> getInterviewByResumeId(Integer ResumeId) {
+	public ServerResponse<InterviewPojo> getInterviewByResumeId(Integer ResumeId) {
 		
 		InterviewPojo interviewPojo = interviewMapper.selectInterviewsByResumeId(ResumeId);
 		
