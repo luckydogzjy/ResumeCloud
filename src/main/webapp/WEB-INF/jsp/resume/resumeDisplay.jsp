@@ -174,7 +174,7 @@
 						<input type="submit" id="search_button" value="搜索" />
 					</div>
 					<div id="addBtn">
-						<a href="${pageContext.request.contextPath}/Resume/tiaozhuan_add.do"><input type="button" id="add_button" value="新增"/></a>
+						<a  href="${pageContext.request.contextPath}/Resume/tiaozhuan_add.do"><input type="button" id="add_button" value="新增"/></a>
 					</div>
 					
 					<div id="table">

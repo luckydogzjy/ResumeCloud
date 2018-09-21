@@ -389,50 +389,30 @@
 	</resultMap>
 	
 	
-	<insert id="insertResume" parameterType="com.qc.rc.entity.Resume" >
- 	 
- <!-- 	   <selectKey resultType="java.lang.Integer" keyProperty="resumeId" order="AFTER" >
- 	         select max(RESUME_ID) from RC_RESUME 
-      SELECT @@IDENTITY
-  </selectKey> -->
-  
-    insert into RC_RESUME (RESUME_ID,RESUME_NAME, RESUME_SEX, 
+	<insert id="insertResume" parameterType="com.qc.rc.entity.Resume" >  
+    	insert into RC_RESUME (RESUME_ID,RESUME_NAME, RESUME_SEX, 
       RESUME_BIRTHDAY, RESUME_PHONE, RESUME_EMAIL,RESUME_ADDRESS,RESUME_GRADUATE_INSTITUTION,
       RESUME_EDUCATION,RESUME_JOB_INTENSION,RESUME_SELF_EVALUATION,RESUME_WORK_EXPERIENCE,
-      RESUME_WORK_YEARS,RESUME_CREATE_USER,RESUME_CREATE_TIME,
-     <!--  RESUME_UPDATE_USER,
-      RESUME_UPDATE_TIME, -->
-      RESUME_DELETE_FLAG
+      RESUME_WORK_YEARS,RESUME_CREATE_USER,RESUME_CREATE_TIME, RESUME_DELETE_FLAG
       )
-    values (RESUME_SEQUENCE.nextval,
-    #{resumeName,jdbcType=VARCHAR}, 
-    #{resumeSex,jdbcType=DECIMAL}, 			
-	#{resumeBirthday,jdbcType=DATE}, 
-	#{resumePhone,jdbcType=DECIMAL}, 
-	#{resumeEmail,jdbcType=DECIMAL},
-	#{resumeAddress,jdbcType=VARCHAR}, 
-	#{resumeGraduateInstitution,jdbcType=VARCHAR}, 
-	#{resumeEducation,jdbcType=VARCHAR}, 
-	#{resumeJobIntension,jdbcType=VARCHAR}, 
-	#{resumeSelfEvaluation,jdbcType=VARCHAR}, 
-	#{resumeWorkExperience,jdbcType=VARCHAR}, 
-	#{resumeWorkYears,jdbcType=DECIMAL},
-	#{resumeCreateUser,jdbcType=VARCHAR},
+    values (
+    #{resumeId},    
+    #{resumeName}, 
+    #{resumeSex}, 			
+	#{resumeBirthday}, 
+	#{resumePhone}, 
+	#{resumeEmail},
+	#{resumeAddress}, 
+	#{resumeGraduateInstitution}, 
+	#{resumeEducation}, 
+	#{resumeJobIntension}, 
+	#{resumeSelfEvaluation}, 
+	#{resumeWorkExperience}, 
+	#{resumeWorkYears},
+	#{resumeCreateUser},
 	sysdate,
-	<!-- now(), -->
-	 <!-- #{resumeCreateTime,jdbcType=DATE}, -->
-	 <!-- #{resumeUpdateUser,jdbcType=VARCHAR}, -->
-	 <!-- #{resumeUpdateTime,jdbcType=DATE}, -->
-	 <!-- #{resumeDeleteFlag,jdbcType=DECIMAL}, -->
 	 0
       )
-   <!--    <selectKey resultType="java.lang.Integer">
-      select max(RESUME_ID) from RC_RESUME
-      </selectKey> -->
-  <!--     select @@IDENTITY -->
-      <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="resumeId">
-             select max(RESUME_ID) from RC_RESUME
-        </selectKey> 
   </insert>
 	
 	
@@ -485,48 +465,48 @@
  	</select> 
 	
 	
-	 <insert id="resumeAddResumeUser" parameterType="com.qc.rc.entity.UserResume">
+	 <insert id="resumeAddResumeUser" >
+ 	  insert into RC_USER_RESUME (UR_ID,UR_USER_ID,UR_RESUME_ID,UR_RESUME_GETWAT,UR_RESUME_SHARE_FLAG,UR_DELETE_FLAG,UR_CREATE_TIME)
+ 	  values (
+ 	   	  #{userResumeId},
+ 	 	  #{userId},
+ 	  	  #{resumeId},
+ 	 	  0,
+ 	 	  0,
+ 	 	  0,
+ 	   sysdate
+ 	  )
+ 	 </insert>
+ 	 
+ 	 
+ 	 <insert id="SharingInsertUserResume" parameterType="com.qc.rc.entity.UserResume">
  	  insert into RC_USER_RESUME (UR_ID,UR_USER_ID,UR_RESUME_ID,UR_RESUME_GETWAT,UR_RESUME_SHARE_FLAG,UR_DELETE_FLAG,UR_CREATE_TIME)
  	  values (USER_RESUME_SEQUENCE.nextval,
  	   #{urUesrId},
  	   #{urResumeId},
- 	   0,
- 	   0,
+ 	   #{urResumeGetway},
+ 	   #{urResumeShareFlag},
  	   0,
  	   sysdate
  	  )
  	 </insert>
+ 	 
+ 	 
+ 	 
 	
-	
-	 <select id="selectResumeBestId" resultType="Integer">
-   		 select max(RESUME_ID) from RC_RESUME
- 	</select> 
-	
-	
-	 <insert id="resumeAddPic" parameterType="com.qc.rc.entity.Pic">
+	 <insert id="resumeAddPic" >
  	  insert into RC_PIC 
- 	  (P_ID,
- 	  P_RESUME_ID,
- 	  P_PIC,
- 	  P_CREATE_USER,
- 	  P_CREATE_TIME,
- 	  P_DELETE_FLAG)
- 	  values (RC_PIC_SEQUENCE.nextval,
- 	   #{pResumeId},
- 	   #{pPic},
- 	   #{pCreateUser},
+ 	  (P_ID, P_RESUME_ID, P_PIC, P_CREATE_USER, P_CREATE_TIME, P_DELETE_FLAG)
+ 	  values (
+ 	   #{picId},
+ 	   #{resumeId},
+ 	   #{fileway},
+ 	   #{piccresteuser},
  	   sysdate,
  	   0
  	  )
  	 </insert>
-	
-	
-	
-	
-	
-	
-	
-	
+		
 	
 	
 </mapper>

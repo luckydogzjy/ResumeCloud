@@ -38,8 +38,6 @@ public interface ResumeService {
 	
 	
 	/*   zhang   */
-	
-	
 	public int resumeAdd(Resume resume);
 
 	public int resumeUpdate(Resume resume);
@@ -47,11 +45,11 @@ public interface ResumeService {
 	public Resume resumeUpdateSelect(Integer resume_id);
 
 	public int selectResumeBestId();
-
-	public int resumeAddResumeUser(UserResume userresume);
-	
-	public int resumeAddPic(Pic pic);
 	
 	public int resumeUpdatePic(Pic pic);
+	
+	public int resumeAddResumeUser(int userResumeId, int userId, int resumeId);
+	
+	public int resumeAddPic(int picId, int resumeId, String piccresteuser, String fileway);
 	
 }

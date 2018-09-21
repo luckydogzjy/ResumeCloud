@@ -24,16 +24,12 @@ public class ResumeServiceImpl implements ResumeService {
 	
 	
 	private ResumePojo resumePojo;
-	
-	
-	private Resume resume;
-	
+
 	
 	public List<ResumePojo> getAllResume(Integer userId) {
 		
 		List<ResumePojo> list = resumeMapper.getAllResume(userId);
 		
-		System.out.println("ResumeServiceImpl:::" + list.size());
 		
 		return list;
 	}
@@ -84,29 +80,23 @@ public class ResumeServiceImpl implements ResumeService {
 	}
 	
 	
-/*    zhang   */
 	
-	public int resumeAdd(Resume resume) {
-		
+/*    zhang   */	
+	public int resumeAdd(Resume resume) {	
 		Integer resultcount = resumeMapper.insertResume(resume);
-		return resultcount;
-		
+		return resultcount;	
 	}
 
 	
-	public int resumeUpdate(Resume resume) {
-		
+	public int resumeUpdate(Resume resume) {	
 		int resultcount = resumeMapper.updateResume(resume);
 		return resultcount;
 	}
 
 	
-	public Resume resumeUpdateSelect(Integer resumeId) {
-		
-		resume = resumeMapper.selectResumeById(resumeId);
-		return resume;
-		
-		
+	public Resume resumeUpdateSelect(Integer resumeId) {	
+		Resume resume = resumeMapper.selectResumeById(resumeId);
+		return resume;			
 	}
 
 
@@ -119,24 +109,21 @@ public class ResumeServiceImpl implements ResumeService {
 
 
 
-	public int resumeAddResumeUser(UserResume userresume) {
-		int result = resumeMapper.resumeAddResumeUser(userresume);
-		return result;
-	}
-
-
-
-	@Override
-	public int resumeAddPic(Pic pic) {
-		int result = resumeMapper.resumeAddPic(pic);
-		return result;
-	}
-
-
-
-	@Override
 	public int resumeUpdatePic(Pic pic) {
 		int result = resumeMapper.resumeUpdatePic(pic);
+		return result;
+	}
+
+
+
+	public int resumeAddResumeUser(int userResumeId, int userId, int resumeId) {
+		int result = resumeMapper.resumeAddResumeUser(userResumeId,userId,resumeId);
+		return result;
+	}
+
+
+	public int resumeAddPic(int picId, int resumeId, String piccresteuser, String fileway) {
+		int result = resumeMapper.resumeAddPic(picId,resumeId,piccresteuser,fileway);
 		return result;
 	}
 	
