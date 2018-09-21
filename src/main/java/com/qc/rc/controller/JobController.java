@@ -3,10 +3,7 @@ package com.qc.rc.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.qc.rc.entity.Job;
 import com.qc.rc.service.JobService;
 
@@ -28,24 +23,20 @@ public class JobController {
 	/**
 	 * userId from session
 	 */
-	private static Integer userId = 1 ;
+	private Integer userId = 1 ;
 	
 	private static String searchName = null;
 	
 	@RequestMapping(value="/JobManage.do",method=RequestMethod.POST)
-	public ModelAndView ManageViewPost(HttpServletRequest req,@RequestParam(required=true,defaultValue="1") Integer page){
+	public ModelAndView ManageViewPost(String search,@RequestParam(required=true,defaultValue="1") Integer page){
 		
-		searchName = req.getParameter("search");
-		
-		PageHelper.startPage(page, 6);
+		searchName = search;
 		
 		Map<String,Object> model = new HashMap<>();
-		List<Job> job= jobService.jobGetByName(userId,searchName);
+		Map<String,Object> map= jobService.jobGetByName(userId,searchName,page);		
 		
-		PageInfo<Job> pageJob = new PageInfo<Job>(job);	
-		
-		model.put("job", job);
-		model.put("page", pageJob);
+		model.put("job", map.get("job"));
+		model.put("page", map.get("page"));
 		model.put("search", searchName);
 		return new ModelAndView("JobManage/JobManage",model);
 			
@@ -54,15 +45,11 @@ public class JobController {
 	@RequestMapping(value="/JobManage.do",method=RequestMethod.GET)
 	public ModelAndView ManageViewGet(@RequestParam(required=true,defaultValue="1") Integer page){
 		
-		PageHelper.startPage(page, 6);
-		
 		Map<String,Object> model = new HashMap<>();
-		List<Job> job= jobService.jobGetByName(userId,searchName);
+		Map<String,Object> map= jobService.jobGetByName(userId,searchName,page);		
 		
-		PageInfo<Job> pageJob = new PageInfo<Job>(job);	
-		
-		model.put("job", job);
-		model.put("page", pageJob);
+		model.put("job", map.get("job"));
+		model.put("page", map.get("page"));
 		model.put("search", searchName);
 		return new ModelAndView("JobManage/JobManage",model);
 			
@@ -74,22 +61,21 @@ public class JobController {
 	}
 	
 	@RequestMapping("/jobAdd.do")
-	public ModelAndView jobAdd(HttpServletRequest req){;
+	public ModelAndView jobAdd(String name,Integer count,Integer salary,String introduction,String condition,String endTime){;
 		
 		Job job = new Job();
-		
-		job.setJOB_USER_ID(userId);
-		job.setJOB_NAME(req.getParameter("name"));
-		job.setJOB_COUNT(Integer.valueOf(req.getParameter("count")));
-		job.setJOB_SALARY(Integer.valueOf(req.getParameter("salary")));
-		job.setJOB_INTRODUCTION(req.getParameter("introduciton"));
-		job.setJOB_CONDITION(req.getParameter("condition"));		
+
 		try {
-			job.setJOB_END_TIME(new SimpleDateFormat("yyyy-MM-dd").parse(req.getParameter("endTime")));
+			job.setJOB_USER_ID(userId);
+			job.setJOB_NAME(name);
+			job.setJOB_COUNT(count);
+			job.setJOB_SALARY(salary);
+			job.setJOB_INTRODUCTION(introduction);
+			job.setJOB_CONDITION(condition);	
+			job.setJOB_END_TIME(new SimpleDateFormat("yyyy-MM-dd").parse(endTime));
 		} catch (ParseException e) {
 			return null;
 		}
-	
 		if (jobService.jobAdd(job)) {
 
 			return new ModelAndView("redirect:/JobManage.do");
@@ -110,17 +96,18 @@ public class JobController {
 	}
 	
 	@RequestMapping("/jobUpdate.do")
-	public ModelAndView jobUpdate(HttpServletRequest req){
+	public ModelAndView jobUpdate(Integer jobid,Integer count,Integer salary,
+			String introduction,String condition,String endTime){
 		
 		Job job = new Job();
-		
-		job.setJOB_ID(Integer.valueOf(req.getParameter("id")));
-		job.setJOB_COUNT(Integer.valueOf(req.getParameter("count")));
-		job.setJOB_SALARY(Integer.valueOf(req.getParameter("salary")));
-		job.setJOB_INTRODUCTION(req.getParameter("introduciton"));
-		job.setJOB_CONDITION(req.getParameter("condition"));		
+			
 		try {
-			job.setJOB_END_TIME(new SimpleDateFormat("yyyy-MM-dd").parse(req.getParameter("endTime")));
+			job.setJOB_ID(jobid);
+			job.setJOB_COUNT(count);
+			job.setJOB_SALARY(salary);
+			job.setJOB_INTRODUCTION(introduction);
+			job.setJOB_CONDITION(condition);	
+			job.setJOB_END_TIME(new SimpleDateFormat("yyyy-MM-dd").parse(endTime));
 		} catch (ParseException e) {
 			return null;
 		}
@@ -178,18 +165,4 @@ public class JobController {
 		return new ModelAndView("JobManage/JobTemplate",model);
 	}
 	
-	/*	@RequestMapping("/jobGetByName.do")
-	public ModelAndView jobGetByName(HttpServletRequest req,@RequestParam(required=true,defaultValue="1") Integer page){
-		
-		PageHelper.startPage(page, 5);
-		
-		Map<String,Object> model = new HashMap<>();
-		List<Job> job= jobService.jobGetByName(userId,req.getParameter("search"));
-		
-		PageInfo<Job> pageJob = new PageInfo<Job>(job);	
-		
-		model.put("job", job);
-		model.put("page", pageJob);
-		return new ModelAndView("JobManage/JobManageTest",model);
-	}*/
 }

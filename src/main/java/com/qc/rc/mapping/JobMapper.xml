@@ -14,18 +14,22 @@
   	</update>
   	
   	<delete id="jobDelete">
-  		delete from RC_JOB where JOB_ID = #{jobId}
+  		delete from RC_JOB 
+  		where JOB_ID = #{jobId}
   	</delete>
   	
   	<update id="jobChangeStatus">
-  		update RC_JOB set JOB_STATUS = #{jobStatus} where JOB_ID = #{jobId}
+  		update RC_JOB set JOB_STATUS = #{jobStatus} 
+  		where JOB_ID = #{jobId}
   	</update>
   	
   	<select id="jobGetByName" resultType="com.qc.rc.entity.Job">
-  		select * from RC_JOB where JOB_USER_ID = #{userId} and JOB_NAME like '%${name}%' order by JOB_ID
+  		select JOB_ID,JOB_NAME,JOB_COUNT,JOB_END_TIME,JOB_STATUS from RC_JOB 
+  		where JOB_USER_ID = #{userId} and JOB_NAME like '%${name}%' order by JOB_STATUS DESC,JOB_END_TIME 
   	</select>
   	
   	<select id="jobGetOne" resultType="com.qc.rc.entity.Job">
-  		select * from RC_JOB where JOB_ID = #{jobId}
+  		select JOB_ID,JOB_NAME,JOB_COUNT,JOB_END_TIME,JOB_STATUS,JOB_SALARY,JOB_CREATE_TIME,JOB_INTRODUCTION,JOB_CONDITION from RC_JOB 
+  		where JOB_ID = #{jobId}
   	</select>
 </mapper>
