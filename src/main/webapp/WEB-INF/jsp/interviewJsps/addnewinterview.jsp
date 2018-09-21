@@ -21,9 +21,11 @@
 		function check(value,id){
 		document.getElementById(id).value = value;
 	}
-	
+		function addtime(value){
+			vue.interviewTime	=	value;
+		}
 	window.onload = function() {
-		new Vue({
+		vue= new Vue({
 			el: "#div0", //绑定标签
 			data: { //定义数据
 				username: "${resume.resumeName}",
@@ -34,6 +36,7 @@
 				interviewAssociatePhone: ""
 			}
 		});
+		
 	}
 	</script>
 	<body>
@@ -64,7 +67,7 @@
 								<input type="hidden" name="resumeId" id="resumeId" value="${resume.resumeId}" />
 								<input type="hidden" name="resumePhone" id="resumePhone" value="${resume.resumePhone}" />
 								<input type="hidden" name="interviewJob" id="interviewJob" value="${resume.resumeJobIntension}" />
-								<input type="hidden" name="interviewTime" id="interviewTime" />
+								<input type="hidden" name="interviewTime" id="interviewTime" onchange="addtime()" />
 								<input type="hidden" name="interviewAddress" id="interviewAddress" />
 								<input type="hidden" name="interviewAssociateUsername" id="interviewAssociateUsername" />
 								<input type="hidden" name="interviewAssociatePhone" id="interviewAssociatePhone" />

@@ -52,7 +52,7 @@ public class ResumeController {
 	
 	//正常应该在session里得到登录人的userId
 	//这里只做测试
-	public static Integer userId = 1;
+	public static Integer userId = 1001;
 	public static Integer pageShow = 5;  //一页显示几条数据
 	@RequestMapping("/resumeDisplay.do")
 	public ModelAndView resumeDisplay(HttpServletRequest request,@RequestParam(required=true,defaultValue="1") Integer page){

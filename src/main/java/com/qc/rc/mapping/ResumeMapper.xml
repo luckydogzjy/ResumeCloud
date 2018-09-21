@@ -390,46 +390,15 @@
 	
 	
 	<insert id="insertResume" parameterType="com.qc.rc.entity.Resume" >
- 	 
- <!-- 	   <selectKey resultType="java.lang.Integer" keyProperty="resumeId" order="AFTER" >
- 	         select max(RESUME_ID) from RC_RESUME 
-      SELECT @@IDENTITY
-  </selectKey> -->
-  
-    insert into RC_RESUME (RESUME_ID,RESUME_NAME, RESUME_SEX, 
-      RESUME_BIRTHDAY, RESUME_PHONE, RESUME_EMAIL,RESUME_ADDRESS,RESUME_GRADUATE_INSTITUTION,
-      RESUME_EDUCATION,RESUME_JOB_INTENSION,RESUME_SELF_EVALUATION,RESUME_WORK_EXPERIENCE,
-      RESUME_WORK_YEARS,RESUME_CREATE_USER,RESUME_CREATE_TIME,
-     <!--  RESUME_UPDATE_USER,
-      RESUME_UPDATE_TIME, -->
-      RESUME_DELETE_FLAG
-      )
+    insert into RC_RESUME (RESUME_ID,RESUME_NAME, 
+      RESUME_PHONE, RESUME_JOB_INTENSION,RESUME_CREATE_USER,RESUME_CREATE_TIME,
+      RESUME_DELETE_FLAG)
     values (RESUME_SEQUENCE.nextval,
-    #{resumeName,jdbcType=VARCHAR}, 
-    #{resumeSex,jdbcType=DECIMAL}, 			
-	#{resumeBirthday,jdbcType=DATE}, 
-	#{resumePhone,jdbcType=DECIMAL}, 
-	#{resumeEmail,jdbcType=DECIMAL},
-	#{resumeAddress,jdbcType=VARCHAR}, 
-	#{resumeGraduateInstitution,jdbcType=VARCHAR}, 
-	#{resumeEducation,jdbcType=VARCHAR}, 
-	#{resumeJobIntension,jdbcType=VARCHAR}, 
-	#{resumeSelfEvaluation,jdbcType=VARCHAR}, 
-	#{resumeWorkExperience,jdbcType=VARCHAR}, 
-	#{resumeWorkYears,jdbcType=DECIMAL},
-	#{resumeCreateUser,jdbcType=VARCHAR},
-	sysdate,
-	<!-- now(), -->
-	 <!-- #{resumeCreateTime,jdbcType=DATE}, -->
-	 <!-- #{resumeUpdateUser,jdbcType=VARCHAR}, -->
-	 <!-- #{resumeUpdateTime,jdbcType=DATE}, -->
-	 <!-- #{resumeDeleteFlag,jdbcType=DECIMAL}, -->
-	 0
-      )
-   <!--    <selectKey resultType="java.lang.Integer">
-      select max(RESUME_ID) from RC_RESUME
-      </selectKey> -->
-  <!--     select @@IDENTITY -->
+    #{resumeName}, 		
+	#{resumePhone}, 
+	#{resumeJobIntension}, 
+	#{resumeCreateUser},
+	sysdate,0)
       <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="resumeId">
              select max(RESUME_ID) from RC_RESUME
         </selectKey> 

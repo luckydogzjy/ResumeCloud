@@ -12,6 +12,7 @@ import com.qc.rc.common.PageMessage;
 import com.qc.rc.common.ServerResponse;
 import com.qc.rc.dao.InterviewMapper;
 import com.qc.rc.entity.Resume;
+import com.qc.rc.entity.User;
 import com.qc.rc.entity.pojo.InterviewPojo;
 import com.qc.rc.service.InterviewService;
 import com.qc.rc.utils.InterviewDateUtil;
@@ -60,16 +61,25 @@ public class InterviewServiceImpl implements InterviewService {
 		
 	}
 	
-	public Integer addInterview(InterviewPojo iPojo,Resume resume,Integer userId) {
+	public Integer addInterview(Integer interviewResumeId,String interviewJob,String interviewTime,
+			String interviewAssociateUsername,String interviewAssociatePhone,String interviewAddress,String interviewInfo,
+			Resume resume,User user) throws ParseException {
+		InterviewPojo iPojo = new InterviewPojo();
+		iPojo.setInterviewResumeId(interviewResumeId);
+		iPojo.setInterviewJob(interviewJob);
+		iPojo.setInterviewTime(InterviewDateUtil.strToDate(interviewTime));
+		iPojo.setInterviewAssociateUsername(interviewAssociateUsername);
+		iPojo.setInterviewAssociatePhone(interviewAssociatePhone);
+		iPojo.setInterviewAddress(interviewAddress);
+		iPojo.setInterviewInfo(interviewInfo);
 		iPojo.setResume(resume);
 		iPojo.setInterviewCreateTime(new Date());
 //		新建时设置状态为待面试
 		iPojo.setInterviewStatus(2);
 //		设置deleteflag为0
 		iPojo.setInterviewDeleteFlag(0);
-		iPojo.setInterviewUserId(userId);
-//		应从缓存中获取username
-		iPojo.setInterviewCreateUser("LING");
+		iPojo.setInterviewUserId(user.getUserId());
+		iPojo.setInterviewCreateUser(user.getUserName());
 		return	interviewMapper.addInterview(iPojo);
 	}
 

@@ -22,11 +22,7 @@
 			$("#actionform").submit();
 		}
 		function resert(){
-			$("#startTime").val();
-			$("#overTime").val();
-			$("#interviewJob").val();
-			$("#interviewInfo").val();
-			$("#actionform").submit();
+			location.href="${pageContext.request.contextPath}/Interview/selectByCondition.do?pageNum=1&sort=1";
 		}
 		
 		function del(interviewId){
@@ -73,7 +69,7 @@
 								<input type="search" name="interviewJob" id="interviewJob" value="${interviewJob}" placeholder="请输入面试职位" />
 							</div>
 							<div id="addnewInterview">
-								<a href="${pageContext.request.contextPath}/WEB-INF/jsp/interviewJsps/addnewTempinterview.jsp"><input type="button" id="addbutton" value="添加新的面试" /></a>
+								<a href="${pageContext.request.contextPath}/Interview/addNewInterview.do"><input type="button" id="addbutton" value="添加新的面试" /></a>
 							</div>
 							<div id="interview_name_address_info">
 								<input type="search" name="interviewInfo" id="interviewInfo" value="${interviewInfo}" placeholder="请输入姓名，面试地点，面试信息等相关信息" />
@@ -83,7 +79,7 @@
 
 							</div>
 							<div id="r">
-								<input type="button" id="reset_button" value="重置" />
+								<input type="button" id="reset_button" value="重置" onclick="resert()"/>
 							</div>
 
 							<div id="table">
