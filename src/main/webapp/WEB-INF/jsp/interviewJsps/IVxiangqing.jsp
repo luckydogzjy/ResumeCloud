@@ -9,8 +9,8 @@
 		<meta charset="UTF-8">
 		<title></title>
 	</head>
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/demo.css"/>
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/interviewCss/IVxiangqing.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/demo.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/interviewCss/IVxiangqing.css"/>
 	<body>
 		<div id="box">
 			<div id="header">

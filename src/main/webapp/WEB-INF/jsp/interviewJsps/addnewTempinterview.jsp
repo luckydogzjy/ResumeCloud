@@ -42,7 +42,6 @@
 						interviewAssociatePhone:""
 					},methods:{	
 							vcheck:function(mes,idname){
-							alert("asdas");
 							check(mes,idname);
 							this.interviewTime.push(mes);
 						}
@@ -109,7 +108,7 @@
 								
 								<!--此处不好用voe-->
 									<td class="left">面试时间</td>
-									<td colspan="2"><input class="Wdate" v-on:change="vcheck(this.value,'interviewTime')" type="text" onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" /> 
+									<td colspan="2"><input class="Wdate" v-on:change="check(this.value,'interviewTime')" type="text" onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" /> 
 									
 									</td>
 

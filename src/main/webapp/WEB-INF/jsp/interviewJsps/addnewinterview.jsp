@@ -83,7 +83,8 @@
 									</tr>
 									<tr>
 										<td class="left">面试职位</td>
-										<td colspan="2"><input type="text" id="job" onblur="checkJob(this.value)" onchange="check(this.value,'interviewJob')" value="${resume.resumeJobIntension}" v-model="interviewJob" name="interviewJob" id="" /></td>
+										<td colspan="2"><input type="text" id="job" onblur="checkJob(this.value)" onchange="check(this.value,'interviewJob')" value="${resume.resumeJobIntension}" v-model="interviewJob" name="interviewJob" />
+										</td>
 										<td><span id="interviewJobMsg">
 									
 								</span></td>
@@ -94,7 +95,6 @@
 										<!--此处不好用voe-->
 										<td class="left">面试时间</td>
 										<td colspan="2"><input class="Wdate" id="time" onblur="checktime(this.value)" onchange="check(this.value,'interviewTime')" type="text" onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
-
 										</td>
 
 										<td><span id="interviewTimeMsg">
