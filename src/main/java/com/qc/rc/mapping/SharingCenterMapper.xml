@@ -48,33 +48,33 @@
 		
 		<where>
 			<!-- 求职意向 -->
-			<if test="resumeJobIntension != null and  resumeJobIntension != '' ">
-				AND RESUME_JOB_INTENSION LIKE '%${resumeJobIntension}%' 
+			<if test="resumePojo.resumeJobIntension != null and  resumePojo.resumeJobIntension != '' ">
+				AND RESUME_JOB_INTENSION LIKE '%${resumePojo.resumeJobIntension}%' 
 			</if>
 			<!-- 工作年限 -->
-			<if test="resumeWorkYears == 0">
+			<if test="resumePojo.resumeWorkYears == 0">
 				AND RESUME_WORK_YEARS &gt;= 0 AND RESUME_WORK_YEARS &lt; 3
 			</if>
-			<if test="resumeWorkYears == 1">
+			<if test="resumePojo.resumeWorkYears == 1">
 				AND RESUME_WORK_YEARS &gt;= 3 AND RESUME_WORK_YEARS &lt; 5
 			</if>
-			<if test="resumeWorkYears == 2">
+			<if test="resumePojo.resumeWorkYears == 2">
 				AND RESUME_WORK_YEARS &gt;= 5 AND RESUME_WORK_YEARS &lt; 10
 			</if>
-			<if test="resumeWorkYears == 3">
+			<if test="resumePojo.resumeWorkYears == 3">
 				AND RESUME_WORK_YEARS &gt;= 10
 			</if>
 			<!-- 性别 -->
-			<if test="resumeSex != -1">
-				AND RESUME_SEX LIKE '%${resumeSex}%'  
+			<if test="resumePojo.resumeSex != -1">
+				AND RESUME_SEX LIKE '%${resumePojo.resumeSex}%'  
 			</if>
 			<!-- 学历 -->
-			<if test="resumeEducation != -1">
-				AND RESUME_EDUCATION LIKE '%${resumeEducation}%'
+			<if test="resumePojo.resumeEducation != -1">
+				AND RESUME_EDUCATION LIKE '%${resumePojo.resumeEducation}%'
 			</if>
 			<!-- 毕业院校 -->
-			<if test="resumeGraduateInstitution != null and  resumeGraduateInstitution != '' ">
-				AND RESUME_GRADUATE_INSTITUTION LIKE '%${resumeGraduateInstitution}%' 
+			<if test="resumePojo.resumeGraduateInstitution != null and  resumePojo.resumeGraduateInstitution != '' ">
+				AND RESUME_GRADUATE_INSTITUTION LIKE '%${resumePojo.resumeGraduateInstitution}%' 
 			</if>
 			
 			AND RC_SHARING_CENTER.SC_RESUME_ID = RC_RESUME.RESUME_ID
@@ -102,5 +102,10 @@
 		FROM RC_DOWNLOAD_RECORD
 		WHERE DR_USER_ID = #{userId }
 	</select>	
-	
+	<!-- 兑换次数+1 -->
+	<update id="updateDownloadCount">
+		UPDATE RC_SHARING_CENTER
+		SET SC_DOWNLOAD_COUNT = SC_DOWNLOAD_COUNT + 1
+		WHERE SC_ID = #{scId }
+	</update>
 </mapper>

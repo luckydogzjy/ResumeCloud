@@ -1,50 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qc.rc.dao.ResumeMapper">
-<!-- 	<resultMap id="ResumeMap" type="com.qc.rc.entity.Resume">
-		<constructor>
-			<idArg column="RESUME_ID" javaType="java.lang.Integer"
-				jdbcType="INTEGER" />
-			<arg column="RESUME_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
-			<arg column="RESUME_SEX" javaType="java.lang.Integer" jdbcType="INTEGER" />
-			<arg column="RESUME_BIRTHDAY" javaType="java.util.Date" jdbcType="DATE" />
-			<arg column="RESUME_PHONE" javaType="java.lang.String" jdbcType="VARCHAR" />
-			<arg column="RESUME_EMAIL" javaType="java.lang.String" jdbcType="VARCHAR" />
-			<arg column="RESUME_ADDRESS" javaType="java.lang.String"
-				jdbcType="VARCHAR" />
-			<arg column="RESUME_GRADUATE_INSTITUTION" javaType="java.lang.String"
-				jdbcType="VARCHAR" />
-			<arg column="RESUME_EDUCATION" javaType="java.lang.Integer"
-				jdbcType="INTEGER" />
-			<arg column="RESUME_JOB_INTENSION" javaType="java.lang.String"
-				jdbcType="VARCHAR" />
-			<arg column="RESUME_SELF_EVALUATION" javaType="java.lang.String"
-				jdbcType="VARCHAR" />
-			<arg column="RESUME_WORK_EXPERIENCE" javaType="java.lang.String"
-				jdbcType="VARCHAR" />
-			<arg column="RESUME_WORK_YEARS" javaType="java.lang.Integer"
-				jdbcType="INTEGER" />
-			<arg column="RESUME_PIC_ID" javaType="java.lang.Integer"
-				jdbcType="INTEGER" />
-			<arg column="RESUME_FILE_ID" javaType="java.lang.Integer"
-				jdbcType="INTEGER" />
-			<arg column="RESUME_CREATE_USER" javaType="java.lang.String"
-				jdbcType="VARCHAR" />
-			<arg column="RESUME_CREATE_TIME" javaType="java.util.Date"
-				jdbcType="DATE" />
-			<arg column="RESUME_UPDATE_USER" javaType="java.lang.String"
-				jdbcType="VARCHAR" />
-			<arg column="RESUME_UPDATE_TIME" javaType="java.util.Date"
-				jdbcType="DATE" />
-			<arg column="RESUME_DELETE_FLAG" javaType="java.lang.Integer"
-				jdbcType="INTEGER" />
-		</constructor>
-	</resultMap>
-	<sql id="ResumeList">
-		RESUME_ID, RESUME_NAME, RESUME_SEX, RESUME_BIRTHDAY, RESUME_PHONE, RESUME_EMAIL,
-		RESUME_ADDRESS,
-		RESUME_GRADUATE_INSTITUTION, RESUME_EDUCATION
-	</sql> -->
 
 	<!--一条简历有一个面试结果，有一个获取方式  -->
 	<resultMap type="com.qc.rc.entity.pojo.ResumePojo" id="getResumeList">
@@ -73,56 +29,9 @@
 		</association>
 		
 	</resultMap> 
-<!-- 	
-	<resultMap type="com.qc.rc.entity.pojo.UserResumePojo" id="getResumeList">
-		
-		<id column="UR_ID" property="urId"></id>
-		<result column="UR_USER_ID" property="urUesrId"></result>			
-		<result column="UR_RESUME_ID" property="urResumeId"></result>
-		<result column="UR_RESUME_GETWAT" property="urResumeGetway"></result>
-		<result column="UR_RESUME_SHARE_FLAG" property="urResumeShareFlag"></result>
-		
-		<collection property="resumePojos" ofType="com.qc.rc.entity.pojo.ResumePojo" >
-			
-			<id column="RESUME_ID" property="resumeId"></id>
-			<result column="RESUME_NAME" property="resumeName"></result>
-			<result column="RESUME_SEX" property="resumeSex"></result>
-			<result column="RESUME_PHONE" property="resumePhone"></result>
-			<result column="RESUME_WORK_YEARS" property="resumeWorkYears"></result>
-			<result column="RESUME_GRADUATE_INSTITUTION" property="resumeGraduateInstitution"></result>
-			<result column="RESUME_EDUCATION" property="resumeEducation"></result>
-			<result column="RESUME_JOB_INTENSION" property="resumeJobIntension"></result>
-			<result column="RESUME_CREATE_TIME" property="resumeCreateTime"></result>
-			
-			<association property="interview" javaType="com.qc.rc.entity.Interview">
-				<id column="INTERVIEW_ID" property="interviewId"></id>
-				<result column="INTERVIEW_STATUS" property="interviewStatus"></result>
-			</association>
-	
-		</collection>
-		
-		
-		
-	</resultMap> -->
-	
-	<select id="getAllResume" resultMap="getResumeList">
-		SELECT
-		RESUME_ID,RESUME_NAME,RESUME_SEX,RESUME_PHONE,RESUME_WORK_YEARS,RESUME_GRADUATE_INSTITUTION,
-		RESUME_EDUCATION,RESUME_JOB_INTENSION,RESUME_CREATE_TIME,INTERVIEW_ID,INTERVIEW_STATUS,
-		UR_ID,UR_USER_ID,UR_RESUME_ID,UR_RESUME_GETWAT,UR_RESUME_SHARE_FLAG
-		FROM RC_RESUME LEFT JOIN RC_INTERVIEW 
-		ON RC_RESUME.RESUME_ID = RC_INTERVIEW.INTERVIEW_RESUME_ID,
-		RC_USER_RESUME
-		WHERE RC_RESUME.RESUME_ID = RC_USER_RESUME.UR_RESUME_ID 
-		AND RC_USER_RESUME.UR_USER_ID = #{userId }
-		AND RESUME_DELETE_FLAG = 0
-		ORDER BY RC_RESUME.RESUME_CREATE_TIME DESC 		
-	</select>
 	
 	
-	
-	
-	<select id="getResumeListByCondition" resultMap="getResumeList">
+	<select id="getResumeListByCondition" resultMap="getResumeList" >
 		SELECT
 		RESUME_ID,RESUME_NAME,RESUME_SEX,RESUME_PHONE,RESUME_WORK_YEARS,RESUME_GRADUATE_INSTITUTION,
 		RESUME_EDUCATION,RESUME_JOB_INTENSION,RESUME_CREATE_TIME,INTERVIEW_ID,INTERVIEW_STATUS,
@@ -131,37 +40,38 @@
 		ON RC_RESUME.RESUME_ID = RC_INTERVIEW.INTERVIEW_RESUME_ID,
 		RC_USER_RESUME
 		<where>
-			<if test="resumeName != null and  resumeName !='' ">
-				AND RESUME_NAME LIKE '%${resumeName}%'
+			<if test="resumePojo.resumeName != null and  resumePojo.resumeName !='' ">
+				AND RESUME_NAME LIKE '%${resumePojo.resumeName}%'
 			</if>
-			<if test="resumeJobIntension != null and  resumeJobIntension != '' ">
-				AND RESUME_JOB_INTENSION LIKE '%${resumeJobIntension}%' 
+			<if test="resumePojo.resumeJobIntension != null and  resumePojo.resumeJobIntension != '' ">
+				AND RESUME_JOB_INTENSION LIKE '%${resumePojo.resumeJobIntension}%' 
 			</if>
-			<if test="resumeSex != -1">
-				AND RESUME_SEX LIKE '%${resumeSex}%'  
+			<if test="resumePojo.resumeSex != -1">
+				AND RESUME_SEX LIKE '%${resumePojo.resumeSex}%'  
 			</if>
-			<if test="resumeEducation != -1">
-				AND RESUME_EDUCATION LIKE '%${resumeEducation}%'
+			<if test="resumePojo.resumeEducation != -1">
+				AND RESUME_EDUCATION LIKE '%${resumePojo.resumeEducation}%'
 			</if>
 			
-			<if test="resumeWorkYears == 0">
+			<if test="resumePojo.resumeWorkYears == 0">
 				AND RESUME_WORK_YEARS &gt;= 0 AND RESUME_WORK_YEARS &lt; 3
 			</if>
-			<if test="resumeWorkYears == 1">
+			<if test="resumePojo.resumeWorkYears == 1">
 				AND RESUME_WORK_YEARS &gt;= 3 AND RESUME_WORK_YEARS &lt; 5
 			</if>
-			<if test="resumeWorkYears == 2">
+			<if test="resumePojo.resumeWorkYears == 2">
 				AND RESUME_WORK_YEARS &gt;= 5 AND RESUME_WORK_YEARS &lt; 10
 			</if>
-			<if test="resumeWorkYears == 3">
+			<if test="resumePojo.resumeWorkYears == 3">
 				AND RESUME_WORK_YEARS &gt;= 10
 			</if>
 			
-			<if test="resumeGraduateInstitution != null and  resumeGraduateInstitution != '' ">
-				AND RESUME_GRADUATE_INSTITUTION LIKE '%${resumeGraduateInstitution}%' 
+			<if test="resumePojo.resumeGraduateInstitution != null and  resumePojo.resumeGraduateInstitution != '' ">
+				AND RESUME_GRADUATE_INSTITUTION LIKE '%${resumePojo.resumeGraduateInstitution}%' 
 			</if>
 			AND RC_USER_RESUME.UR_USER_ID = #{userId }
 			AND RESUME_DELETE_FLAG = 0
+			AND INTERVIEW_DELETE_FLAG = 0
 			AND RC_RESUME.RESUME_ID = RC_USER_RESUME.UR_RESUME_ID 
 			
 		</where>
@@ -215,6 +125,7 @@
     	LEFT JOIN  RC_FILE ON RC_RESUME.RESUME_ID = RC_FILE.F_RESUME_ID
 		WHERE RESUME_ID = #{resumeId }
 	</select> 
+	
 	<!-- 删除操作是将deleteFlag赋值为1 -->
 	<update id="deleteResumeById" >
 		UPDATE RC_RESUME
@@ -222,7 +133,8 @@
 		WHERE RESUME_ID = #{resumeId }
 	</update>
 	
-	<!--点击共享按钮后的操作 将信息插入共享中心表里、同时插入  
+	<!--
+		点击共享按钮后的操作 将信息插入共享中心表里、同时插入  
 		同时需要执行更新RC_USER_RESUME表，让其中的共享标志UR_RESUME_SHARE_FLAG设为1
 	-->
 	<insert id="shareResume" parameterType="com.qc.rc.entity.SharingCenter">
@@ -244,79 +156,14 @@
 		</selectKey>
 		
 	</insert>
-	
+	<!-- 其中的共享标志UR_RESUME_SHARE_FLAG设为1 -->
 	<update id="updateUserResume">
 		UPDATE RC_USER_RESUME
 		SET UR_RESUME_SHARE_FLAG = 1
 		WHERE UR_RESUME_ID = #{resumeId }
 	</update>
 	
-	<resultMap type="com.qc.rc.entity.pojo.SharingCenterPojo" id="getAllSharing">
-		
-		<id column="SC_ID" property="scId"></id>
-		<result column="SC_USER_ID" property="scUserId"></result>
-		<result column="SC_RESUME_ID" property="scResumeId"></result>
-		<result column="SC_INTEGRAL" property="scIntegral"></result>
-		<result column="SC_DOWNLOAD_COUNT" property="scDownloadCount"></result>
-		<result column="SC_DELETE_FLAG" property="scDeleteFlag"></result>
-		<result column="SC_UPDATE_TIME" property="scUpdateTime"></result>
-		<result column="SC_CREATE_TIME" property="scCreateTime"></result>
-		
-		<association property="resume" javaType="com.qc.rc.entity.Resume">
-		
-			<id column="RESUME_ID" property="resumeId"></id>
-			<result column="RESUME_NAME" property="resumeName"></result>
-			<result column="RESUME_SEX" property="resumeSex"></result>
-			<result column="RESUME_BIRTHDAY" property="resumeBirthday"></result>
-			<result column="RESUME_PHONE" property="resumePhone"></result>
-			<result column="RESUME_EMAIL" property="resumeEmail"></result>
-			<result column="RESUME_ADDRESS" property="resumeAddress"></result>
-			
-			<result column="RESUME_GRADUATE_INSTITUTION" property="resumeGraduateInstitution"></result>
-			<result column="RESUME_EDUCATION" property="resumeEducation"></result>
-			<result column="RESUME_JOB_INTENSION" property="resumeJobIntension"></result>
-			<result column="RESUME_SELF_EVALUATION" property="resumeSelfEvaluation"></result>
-			<result column="RESUME_WORK_EXPERIENCE" property="resumeWorkExperience"></result>
-			<result column="RESUME_WORK_YEARS" property="resumeWorkYears"></result>
-		
-			
-		</association>
-			
-	</resultMap>
-	<!-- 查询全部共享信息，默认根据共享时间排序 -->
-	<select id="getAllSharingResume" resultMap="getAllSharing">
-		SELECT 
-		SC_ID,SC_USER_ID,SC_RESUME_ID,SC_INTEGRAL,SC_DOWNLOAD_COUNT,SC_CREATE_TIME,
-		RESUME_ID,RESUME_NAME,RESUME_SEX,RESUME_BIRTHDAY,RESUME_PHONE,RESUME_EMAIL,
-		RESUME_ADDRESS,RESUME_GRADUATE_INSTITUTION,RESUME_EDUCATION,RESUME_JOB_INTENSION,
-		RESUME_SELF_EVALUATION,RESUME_WORK_EXPERIENCE,RESUME_WORK_YEARS
-		FROM RC_SHARING_CENTER,RC_RESUME
-		WHERE RC_SHARING_CENTER.SC_RESUME_ID = RC_RESUME.RESUME_ID
-		AND RC_SHARING_CENTER.SC_DELETE_FLAG = 0 
-		ORDER BY SC_CREATE_TIME DESC
-	</select>
-	
-	
-	<resultMap type="com.qc.rc.entity.DownloadRecord" id="getDownloadRecord">
-		
-		<id column="DR_ID" property="drId"></id>
-		<result column="DR_USER_ID" property="drUserId"></result>
-		<result column="DR_SHARING_CENTER_ID" property="drSharingCenterId"></result>
-		<result column="DR_CREATE_TIME" property="drCreateTime"></result>
-		<result column="DR_UPDATE_TIME" property="drUpdateTime"></result>
-		<result column="DR_DELETE_FLAG" property="drDeleteFlag"></result>
-			
-	</resultMap>
-	<!-- 查找当前用户曾经兑换过的简历 -->
-	<select id="getDownloadRecordById" resultMap="getDownloadRecord">
-		SELECT 
-		DR_ID,DR_USER_ID,DR_SHARING_CENTER_ID
-		FROM RC_DOWNLOAD_RECORD
-		WHERE DR_USER_ID = #{userId }
-	</select>	
-	
-	
-	
+
 	<!--    zhang    -->
 	
 	 <resultMap id="ResumeMap" type="com.qc.rc.entity.Resume">

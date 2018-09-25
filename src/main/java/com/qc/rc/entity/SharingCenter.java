@@ -88,4 +88,11 @@ public class SharingCenter {
 	public SharingCenter(){
 		super();
 	}
+	@Override
+	public String toString() {
+		return "SharingCenter [scId=" + scId + ", scUserId=" + scUserId + ", scResumeId=" + scResumeId + ", scIntegral="
+				+ scIntegral + ", scDownloadCount=" + scDownloadCount + ", scCreateTime=" + scCreateTime
+				+ ", scUpdateTime=" + scUpdateTime + ", scDeleteFlag=" + scDeleteFlag + "]";
+	}
+	
 }
