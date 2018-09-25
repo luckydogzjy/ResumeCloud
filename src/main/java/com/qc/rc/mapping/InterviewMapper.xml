@@ -56,7 +56,9 @@
    	 <where>
     		INTERVIEW_USER_ID = #{userId,jdbcType=INTEGER}
 		    and i.INTERVIEW_DELETE_FLAG = 0
-		    
+		    <if test="status != null and status != 0 ">
+		    	and i.INTERVIEW_STATUS = #{status}
+		    </if>
 		    <if test="startTime != null and startTime !=''">
 				AND i.INTERVIEW_TIME &gt;= #{startTime}
 			</if>
@@ -66,6 +68,8 @@
     		<if test="interviewJob != null and interviewJob !=''">
 				AND i.INTERVIEW_JOB LIKE '%${interviewJob}%'
 			</if>
+			
+			
 			<if test="interviewInfo != null and interviewInfo !=''">
 				AND r.RESUME_NAME LIKE '%${interviewInfo}%'
 				OR i.INTERVIEW_ADDRESS LIKE '%${interviewInfo}%'

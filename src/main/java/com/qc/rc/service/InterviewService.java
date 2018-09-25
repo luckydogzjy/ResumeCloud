@@ -13,8 +13,8 @@ import com.qc.rc.entity.pojo.InterviewPojo;
 public interface InterviewService {
 
 //	根据条件和userid查找当前用户所有的interview
-	public PageInfo<InterviewPojo> selectByCondition(Integer pageNum,Integer userId,
-		String startTime,String overTime,String interviewJob,String interviewInfo,Integer sort)throws ParseException;
+	public PageInfo<InterviewPojo> selectByCondition(Integer pageNum, Integer userId, String startTime,
+			String overTime, String interviewJob, String interviewInfo,Integer sort,Integer status) throws ParseException;
 //	添加面试
 	public Integer addInterview(Integer interviewResumeId,String interviewJob,String interviewTime,
 			String interviewAssociateUsername,String interviewAssociatePhone,String interviewAddress,String interviewInfo,

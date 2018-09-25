@@ -22,18 +22,28 @@
 			$("#actionform").submit();
 		}
 		function resert(){
-			location.href="${pageContext.request.contextPath}/Interview/selectByCondition.do?pageNum=1&sort=1";
+			location.href="${pageContext.request.contextPath}/Interview/selectByCondition.do?pageNum=1";
 		}
-		
+		function sub(){
+			$("#actionform").submit();
+		}
 		function del(interviewId){
-		var user = data[userIndex];
-		$.ajax({
-			type:"get",
-			url:"${pageContext.request.contextPath}/Interview/deleteById.do?id="+interviewId,
-			success:function(data){
-				alert(data);
-			}
-		});
+		var msg = "确认删除？";
+		if(confirm(msg) == true){
+			document.getElementById(interviewId).parentElement.remove();
+			$.ajax({
+				type:'post',
+			    url:'${pageContext.request.contextPath}/Interview/deleteById.do',	
+				data:'id='+interviewId,
+				success:function(data){
+					if(data == 1){
+						
+						alert("删除成功");
+						
+					}
+				} 
+			});
+		}
 	}
 	</script>
 
@@ -96,19 +106,47 @@
 										</th>
 										<th>
 											<font size="2">面试时间</font>
-											<select name="sort">
-												<option value="default">默认</option>
-												<option value="up">↑</option>
-												<option value="down">↓</option>
+											<select name="sort" onchange="sub()">
+											<c:if test = "${sort == 1}">
+													<option value="1">↑</option>
+													<option value="0">↓</option>												
+											</c:if>
+											<c:if test = "${sort == 0}">												
+													<option value="0">↓</option>
+													<option value="1">↑</option>	
+											</c:if>
 											</select>
 										</th>
 										<th>
 											<font size="2">面试结果</font>
-											<select name="interviewResult">
+											<select name="status" onchange="sub()">
+											<c:if test = "${status == 0}">
 												<option value="0">所有</option>
 												<option value="1">成功</option>
 												<option value="2">待面试</option>
 												<option value="3">失败</option>
+											</c:if>
+											<c:if test = "${status == 1}">
+												<option value="1">成功</option>
+												<option value="0">所有</option>
+												<option value="2">待面试</option>
+												<option value="3">失败</option>
+											</c:if>
+											<c:if test = "${status == 2}">
+												<option value="2">待面试</option>
+												<option value="0">所有</option>
+												<option value="1">成功</option>
+												<option value="3">失败</option>
+											</c:if>
+											<c:if test = "${status == 3}">
+												<option value="3">失败</option>
+												<option value="0">所有</option>
+												<option value="1">成功</option>
+												<option value="2">待面试</option>
+												
+											</c:if>
+											
+												
 											</select>
 										</th>
 										<th colspan="2">操作</th>
@@ -137,7 +175,7 @@
 													<c:if test="${interview.interviewStatus==3}">失败</c:if>
 												</font>
 											</td>
-											<td class="right">
+											<td class="right" id="${interview.interviewId}">
 												<a href="updateById.do?id=${interview.interviewId}"><input type="button" value="修改" id="updateBtn" /></a>
 												<input type="button" value="删除" id="deleteBtn" onclick="del(${interview.interviewId})" />
 												<a href=""><input type="button" value="面试结果" id="interviewBtn" /></a>

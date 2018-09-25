@@ -16,7 +16,7 @@ public interface InterviewMapper {
 
 	//根据条件和userid查找当前用户所有的interview 分页
 	List<InterviewPojo> selectByCondition(@Param("userId")Integer userId, @Param("startTime")Date startTime,
-			@Param("overTime")Date overTime, @Param("interviewJob")String interviewJob, @Param("interviewInfo")String interviewInfo,@Param("sort")Integer sort);
+			@Param("overTime")Date overTime, @Param("interviewJob")String interviewJob, @Param("interviewInfo")String interviewInfo,@Param("sort")Integer sort,@Param("status") Integer status);
 
 	//插入interviewPojo	
 	Integer addInterview(InterviewPojo interviewPojo);

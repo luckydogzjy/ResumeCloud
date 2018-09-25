@@ -10,6 +10,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.qc.rc.common.PageMessage;
 import com.qc.rc.common.ServerResponse;
+import com.qc.rc.common.Util;
 import com.qc.rc.dao.InterviewMapper;
 import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.User;
@@ -33,7 +34,7 @@ public class InterviewServiceImpl implements InterviewService {
      * 
      */
 	public PageInfo<InterviewPojo> selectByCondition(Integer pageNum, Integer userId, String startTime,
-			String overTime, String interviewJob, String interviewInfo,Integer sort) throws ParseException {
+			String overTime, String interviewJob, String interviewInfo,Integer sort,Integer status) throws ParseException {
 		Date st = null;
 		Date ot = null;
 
@@ -53,7 +54,7 @@ public class InterviewServiceImpl implements InterviewService {
 	     */
 		PageHelper.startPage(pageNum,PageMessage.interviewpageSize);
 		
-		List<InterviewPojo> interviewPojos = interviewMapper.selectByCondition(userId, st, ot, interviewJob, interviewInfo,sort);
+		List<InterviewPojo> interviewPojos = interviewMapper.selectByCondition(userId, st, ot, interviewJob, interviewInfo,sort,status);
 
 		PageInfo<InterviewPojo> pageResumePojo = new PageInfo<InterviewPojo>(interviewPojos,5);
 		
