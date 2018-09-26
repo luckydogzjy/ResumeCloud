@@ -9,7 +9,7 @@
 		<title>ResumeCloud</title>
 					
 		<link rel="stylesheet" type="text/css" href="css/demo.css"/>
-		<link rel="stylesheet" type="text/css" href="css/jobCss/job.css">
+		<!-- <link rel="stylesheet" type="text/css" href="css/jobCss/job.css"> -->
 		
 		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
@@ -21,15 +21,59 @@
 		<script src="bootstrap/js/bootstrap.js"></script>
 		
 		<script type="text/javascript">
-				$(document).ready(function() {
-					$(".btn").click(function(){
-						var msg = $("#searchName").val();
-						
-						location.href="${pageContext.request.contextPath}/JobManage.do?searchName="+msg;
-						//$(location).attr("href","${pageContext.request.contextPath}/JobManage.do");
-					});
-				}); 
+			//查询	
+			$(function(){
+				$("#search").click(function(){
+					var msg = $("#searchName").val();
+					location.href="${pageContext.request.contextPath}/JobManage.do?searchName=" + msg;
+					//$(location).attr("href","${pageContext.request.contextPath}/JobManage.do");
+				});
+				
+				$("#add").click(function(){
+					location.href="${pageContext.request.contextPath}/jobAddView.do";
+				});
+				
+				/*$("#button-status1").click(function(){
+					var id = $("#jobId").val();
+					var status = $("#jobStatus").val();
+					
+					location.href="${pageContext.request.contextPath}/jobChangeStatus.do?jobId="+id+"&jobStatus="+status;
+				});*/
+			});
+			
+			function jspopen(id,status){
+				alert("asdasd");
+				location.href="${pageContext.request.contextPath}/jobChangeStatus.do?jobId="+id+"&jobStatus="+status;
+			}
+/*			$(document).ready(function() {
+				
+			});
+			//添加	
+			$(document).ready(function() {
+				
+			});
+			//改变状态
+			$(document).ready(function() {
+				
+			});*/
+				
+				
 		</script>
+		
+		<style type="text/css">
+			a:link{
+			text-decoration:none;
+			}
+			a:visited{
+			text-decoration:none;
+			}
+			a:hover{
+			text-decoration:none;
+			}
+			a:active{
+			text-decoration:none;
+			}
+		</style>
 	</head>
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -52,17 +96,34 @@
 							<input id="job-search-input" type="text" name="search" value="${search}"/>
 							<input id="job-search-button" type="submit" value="搜索" />
 						</form> --%>
-						
-						<div style="padding: 20px 20px 10px;">	
+						<div style="padding: 20px 20px 10px; float:left;">	
 							 
 									<div class="col-lg-6">
 									
 										<div class="input-group">
 										
-											<input type="text" class="form-control" name="search" id="searchName">
 											<span class="input-group-btn">
-												<button class="btn btn-default" type="button" style="margin-bottom:10px;" onClick="search()">
-													Go!
+												<button id="add" class="btn btn-default" type="button" style="margin-top:1px;margin-left:30px;">
+													添加职位
+												</button>
+											</span>
+										
+										</div><!-- /input-group -->
+										
+									</div><!-- /.col-lg-6 -->
+									
+						</div>
+						
+						<div style="padding: 20px 20px 10px; float:right; margin-right:50px;">	
+							 
+									<div class="col-lg-6">
+									
+										<div class="input-group">
+										
+											<input type="text" class="form-control" name="search" id="searchName" placeholder="请输入职位名称" >
+											<span class="input-group-btn">
+												<button id="search" class="btn btn-default" type="button" style="margin-bottom:10px;">
+													搜索
 												</button>
 											</span>
 										
@@ -78,44 +139,47 @@
 					</div>
 					</div> --%>
 
-		
-		<div id="job-table">
-				<table id="job-table-list" border="0" cellspacing="0" cellpadding="0">
-					<tr>
-						<th>职位名称</th>
-						<th>职位数量</th>
-						<th>截止时间</th>
-						<th>状态</th>
-						<th>操作</th>
-					</tr>
 					
+		
+		<div id="table-box">
+				<table class="table table-striped" >
+					<thead>
+					<tr>
+						<th style="text-align:center;">职位名称</th>
+						<th style="text-align:center;">职位数量</th>
+						<th style="text-align:center;">截止时间</th>
+						<th style="text-align:center;">状态</th>
+						<th style="text-align:center;">操作</th>
+					</tr>
+					</thead>
+					<tbody>
 					<c:forEach items="${job}" var="job">
 					<tr>
-						<td><a href="${pageContext.request.contextPath}/jobDetails.do?jobId=${job.JOB_ID}">${job.JOB_NAME}</a></td>
-						<td>${job.JOB_COUNT}</td>
-						<td><fmt:formatDate value="${job.JOB_END_TIME}" pattern="yyyy年MM月dd日" /></td>
+						<td style="text-align:center;"><a href="${pageContext.request.contextPath}/jobDetails.do?jobId=${job.JOB_ID}">${job.JOB_NAME}</a></td>
+						<td style="text-align:center;">${job.JOB_COUNT}</td>
+						<td style="text-align:center;"><fmt:formatDate value="${job.JOB_END_TIME}" pattern="yyyy年MM月dd日" /></td>
 
-						<td>
+						<td style="text-align:center;">
 							<c:if test="${job.JOB_STATUS==1}">
-								
-								<input id="button-status1" type="button" value="开启" onClick="location.href='${pageContext.request.contextPath}/jobChangeStatus.do?jobId=${job.JOB_ID}&jobStatus=${job.JOB_STATUS}'"/>
+								<%-- onClick="location.href='${pageContext.request.contextPath}/jobChangeStatus.do?jobId=${job.JOB_ID}&jobStatus=${job.JOB_STATUS}'" --%>
+								<input class="btn btn-success active" id="button-status1" type="button" value="开启" onclick="jspopen(${job.JOB_ID},${job.JOB_STATUS})" />
 							</c:if>
 							<c:if test="${job.JOB_STATUS==0}">
-								<input id="button-status0" type="button" value="关闭" onClick="location.href='${pageContext.request.contextPath}/jobChangeStatus.do?jobId=${job.JOB_ID}&jobStatus=${job.JOB_STATUS}'"/>
+								<input class="btn btn-danger active" id="button-status0" type="button" value="关闭" onClick="location.href='${pageContext.request.contextPath}/jobChangeStatus.do?jobId=${job.JOB_ID}&jobStatus=${job.JOB_STATUS}'"/>
 							</c:if>
 							
 						</td>
-						<td>
-						 	<input id="button-modify" type="button" value="修改" onClick="location.href='${pageContext.request.contextPath}/jobUpdateView.do?jobId=${job.JOB_ID}'"/>
-						 	<input id="button-delete" type="button" value="删除" onClick="location.href='${pageContext.request.contextPath}/jobDelete.do?jobId=${job.JOB_ID}'"/>
-						 	<input id="button-template" type="button" value="生成模板" onClick="location.href='${pageContext.request.contextPath}/jobTemplateView.do?jobId=${job.JOB_ID}'"/>	
+						<td style="text-align:center;">
+						 	<input class="btn btn-warning" id="button-modify" type="button" value="修改" onClick="location.href='${pageContext.request.contextPath}/jobUpdateView.do?jobId=${job.JOB_ID}'"/>
+						 	<input class="btn btn-danger" id="button-delete" type="button" value="删除" onClick="location.href='${pageContext.request.contextPath}/jobDelete.do?jobId=${job.JOB_ID}'"/>
+						 	<input class="btn btn-info" id="button-template" type="button" value="生成模板" onClick="location.href='${pageContext.request.contextPath}/jobTemplateView.do?jobId=${job.JOB_ID}'"/>	
 						</td>
 					</tr>	
 					</c:forEach>
-					
+					</tbody>
 				</table>
-		
 		</div>
+		
 		
 		<div id="page">
 				<span>当前第${page.pageNum}页，一共${page.pages}页</span>
