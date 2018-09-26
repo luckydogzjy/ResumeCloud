@@ -7,7 +7,6 @@
 	height: 100px;
 	Columns="10" 
   	TextMode="MultiLine" 
-	
 }
 #selfevaluation{
 	height: 100px;
@@ -26,7 +25,6 @@
 	top: 0px;
 	width: 200px;
 }
-
 #hengxian{
 	position: absolute;
 	left: 650px;
@@ -38,16 +36,21 @@
 	top: 120px;
 	width: 300px;
 }
-#radioway{
+#right_wenbenyu{
+	position:absolute;
+  	left:360px;
+  	top:60px;
+}
+#tableradio{
 	position: absolute;
 	left: 650px;
 	top: 200px;
 	width: 300px;
 }
-#right_wenbenyu{
-	position:absolute;
-  	left:360px;
-  	top:60px;
+#radioway{
+	position: absolute;
+	left: 650px;
+	top: 200px;
 }
 #updateright_wenbenyu{
 	position:absolute;
@@ -69,8 +72,6 @@
   	top:180px;
   	width: 400px;
 }
-
-
 #addbutton_div {
   border-width:0px;
   position:absolute;

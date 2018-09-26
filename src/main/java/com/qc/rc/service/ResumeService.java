@@ -38,18 +38,40 @@ public interface ResumeService {
 	
 	
 	/*   zhang   */
+	
+	/*
+	 * 简历表增加
+	 * */
 	public int resumeAdd(Resume resume);
 
+	/*
+	 * 简历表更新
+	 * */
 	public int resumeUpdate(Resume resume);
 
+	/*
+	 * 简历表信息查询
+	 * */
 	public Resume resumeUpdateSelect(Integer resume_id);
 	
+	/*
+	 * 文件表更新
+	 * */
 	public int resumeUpdatePic(Pic pic);
 	
+	/*
+	 * 简历 用户关联表增加
+	 * */
 	public int resumeAddResumeUser(int userResumeId, int userId, int resumeId);
 	
+	/*
+	 * 文件表新增
+	 * */
 	public int resumeAddPic(int picId, int resumeId, String piccresteuser, String fileway);
 	
+	/*
+	 * 文件表新增（更改方式为新增）
+	 * */
 	public int resumeUpdateAddPic(Pic pic);
 	
 }

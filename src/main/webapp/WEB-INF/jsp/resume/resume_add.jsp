@@ -9,7 +9,6 @@
 
 <link rel="stylesheet" type="text/css" href="../css/demo.css"/>
  <link rel="stylesheet" type="text/css" href="../css/resumeCss/resume1-1.css"/>
-<!--  <script src="js/resume-1-1.js"></script> -->
  <script type="text/javascript" src="../js/jquery-2.1.1.js"></script>
 		<script type="text/javascript" src="../js/resumeJs/resume-1-2.js"></script>
 </head>
@@ -35,7 +34,7 @@
 
 						<form name="form1" method="POST" action="${pageContext.request.contextPath }/Resume/resume_add.do" enctype="multipart/form-data">
 
-							<table border="1" height="50">
+							<table border="0" height="50">
 								<tr>
 									<td height="35"><span>姓名</span></td>
 									<td><input name="resumeName" id="resume_name" type="text" onblur="checkname();" /></td>

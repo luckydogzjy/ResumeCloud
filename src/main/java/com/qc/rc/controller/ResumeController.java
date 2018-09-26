@@ -249,7 +249,7 @@ public class ResumeController {
 	
 /*      zhang      */
 	/*
-	 * 简历新增
+	 * @Description   简历新增
 	 * 包括简历表新增、关联表新增、以及文件表(如果上传了文件)
 	 * */
 	@RequestMapping(value="/resume_add.do",method=RequestMethod.POST)
@@ -283,6 +283,7 @@ public class ResumeController {
 				
 				if(resultCount == 0){
 					//插入到resume表失败
+					model.put("msg","插入简历信息时出错");
 					return new ModelAndView("resume/resume_error",model);
 				}
 				
@@ -297,6 +298,7 @@ public class ResumeController {
 	                int addpicresult = resumeService.resumeAddPic(picId,resumeId,piccresteuser,fileway);
 	                if(addpicresult==0){
 	                	//插入到文件表失败
+	                	model.put("msg","插入简历信息时出错");
 						return new ModelAndView("resume/resume_error",model);
 	                }
 //	                int addpicresult = resumeService.resumeAddPic(pic);
@@ -309,17 +311,21 @@ public class ResumeController {
 				int result = resumeService.resumeAddResumeUser(userResumeId,userId,resumeId);
 				if(result==0){
 					//插入到关联表失败
+					model.put("msg","插入简历信息时出错");
 					return new ModelAndView("resume/resume_error",model);
 				}
 				
 				}else {
 				/*log.debug("数据验证有误");*/
-					System.out.println("数据验证有误");
+					model.put("msg","输入的简历信息有误");
+					return new ModelAndView("resume/resume_error",model);
 				}		
 		
 			} catch ( Exception e){		
 				//打印到log里
 				e.printStackTrace();
+				model.put("msg","插入简历信息时出错");
+				return new ModelAndView("resume/resume_error",model);
 		}
 		return new ModelAndView("resume/resume_add",model);
 	}
@@ -329,7 +335,7 @@ public class ResumeController {
 
 
 	/*
-	 * 修改之前通过id查找信息，返回到前端页面
+	 * @Description 修改之前通过id查找信息，返回到前端页面
 	 * 方便用户修改
 	 * */
 	@RequestMapping(value="/resume_update_show.do",method=RequestMethod.GET)
@@ -344,13 +350,14 @@ public class ResumeController {
 				model.put("resume",resume);	
 				return new ModelAndView("resume/resume_update",model);
 			}else {	
-				//查找失败
-				return new ModelAndView("resume/resume_update",model);
+				model.put("msg","查找简历信息时出错");
+				return new ModelAndView("resume/resume_error",model);
 			}
 						
 		}catch ( Exception e){
 			e.printStackTrace();
-			return new ModelAndView("resume/resume_update",model);
+			model.put("msg","查找简历信息时出错");
+			return new ModelAndView("resume/resume_error",model);
 		}		
 	}
 		
@@ -358,7 +365,7 @@ public class ResumeController {
 	
 	
 	/*
-	 * 修改简历信息
+	 * @Description 修改简历信息 
 	 * 包括简历表以及文件表
 	 * */
 	@RequestMapping(value="/resume_update.do",method=RequestMethod.POST)
@@ -383,6 +390,7 @@ public class ResumeController {
 			int result  = resumeService.resumeUpdate(resume);
 			if(result == 0){
 				//更新resume表失败
+				model.put("msg","更新简历信息时出错");
 				return new ModelAndView("resume/resume_error",model);
 			}
 			
@@ -399,6 +407,7 @@ public class ResumeController {
 	            	  int addpicresult = resumeService.resumeUpdatePic(pic);
 	  	            if(addpicresult==0){
 	  	            	//更新resume表失败
+	  	            	model.put("msg","更新简历信息时出错");
 	  					return new ModelAndView("resume/resume_error",model);
 	  	            }
 	            	
@@ -407,12 +416,14 @@ public class ResumeController {
 	            	int addpicresult = resumeService.resumeUpdateAddPic(pic);
 	  	            if(addpicresult==0){
 	  	            	//更新resume表失败
+	  	            	model.put("msg","更新简历信息时出错");
 	  					return new ModelAndView("resume/resume_error",model);
 	  	            }
 	            	
 	            }else {
 	            	//获取文件修改方式失败
-  					return new ModelAndView("resume/resume_error",model);
+	            	model.put("msg","更新简历信息时出错");
+					return new ModelAndView("resume/resume_error",model);
 	            }
 
 			}
@@ -420,10 +431,10 @@ public class ResumeController {
 			
 		} else {
 			//插入数据验证失败
+			model.put("msg","数据输入出错");
 			return new ModelAndView("resume/resume_error",model);
 		}
 		return new ModelAndView("resume/resume_update",model);
-
 	}
 	
 	
@@ -445,9 +456,11 @@ public class ResumeController {
 	
 	
 	
-
+	/*
+	 * @Description  图片上传到指定文件夹
+	 * @return 文件的路径
+	 * */
 	public String Fileuploading(HttpServletRequest request){
-	long startTime = System.currentTimeMillis();
 	String path = null;
 	 //将当前上下文初始化给 CommonsMutipartResolver (多部分解析器)
     CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
@@ -476,9 +489,8 @@ public class ResumeController {
                 
             }
         }
-    }
-    long endTime = System.currentTimeMillis();
-    System.out.println("文件上传运行时间："+String.valueOf(endTime-startTime)+"ms");  
+    } 
+
     System.out.println(path);
     return path;
     }
@@ -488,7 +500,9 @@ public class ResumeController {
 	
 	
 	
-	
+	/*
+	 * @Description 数据验证
+	 * */
 	private boolean checkResumeInFo(Resume resume2) {
 		System.out.println(resume2.toString());
 //		if(StringUtils.isBlank(resume)){}
