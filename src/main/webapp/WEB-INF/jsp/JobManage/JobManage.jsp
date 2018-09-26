@@ -11,22 +11,31 @@
 		<link rel="stylesheet" type="text/css" href="css/demo.css"/>
 		<link rel="stylesheet" type="text/css" href="css/jobCss/job.css">
 		
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-responsiv.css">
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-responsiv.min.css">
 		
-		<!-- <style type="text/css" >
+		<script src="bootstrap/js/jquery-3.3.1.min.js"></script>
+ 		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="bootstrap/js/bootstrap.js"></script>
 		
-		a{
-		 	text-decoration:none; 
-		  	color:#333;
-		  	}
-	z
-		
-		</style> -->
-		
-		
+		<script type="text/javascript">
+				$(document).ready(function() {
+					$(".btn").click(function(){
+						var msg = $("#searchName").val();
+						
+						location.href="${pageContext.request.contextPath}/JobManage.do?searchName="+msg;
+						//$(location).attr("href","${pageContext.request.contextPath}/JobManage.do");
+					});
+				}); 
+		</script>
 	</head>
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<body>
+
+		
 		<div id="header">
 		<jsp:include page="header.jsp" flush="true"/>
 		</div>
@@ -37,18 +46,37 @@
 		<div id="right">
 					<div id="right-box">
 
-					<div id="job-search">
+					 <%-- <div id="job-search">
 						<img id="job-search-img" src="${pageContext.request.contextPath}/img/u607.png" />
 						<form id="search" action="${pageContext.request.contextPath}/JobManage.do" method="POST">
 							<input id="job-search-input" type="text" name="search" value="${search}"/>
 							<input id="job-search-button" type="submit" value="搜索" />
-						</form>
-		
-					<div id="job-add">
+						</form> --%>
+						
+						<div style="padding: 20px 20px 10px;">	
+							 
+									<div class="col-lg-6">
+									
+										<div class="input-group">
+										
+											<input type="text" class="form-control" name="search" id="searchName">
+											<span class="input-group-btn">
+												<button class="btn btn-default" type="button" style="margin-bottom:10px;" onClick="search()">
+													Go!
+												</button>
+											</span>
+										
+										</div><!-- /input-group -->
+										
+									</div><!-- /.col-lg-6 -->
+									
+						</div>
+						
+				 <%-- 	<div id="job-add">
 						<input id="job-add-button" type="button" value="添加职位" onClick="location.href='${pageContext.request.contextPath}/jobAddView.do'"/> 
 						<img id="job-add-img" src="${pageContext.request.contextPath}/img/u603.png" />
 					</div>
-					</div>
+					</div> --%>
 
 		
 		<div id="job-table">
@@ -69,11 +97,10 @@
 
 						<td>
 							<c:if test="${job.JOB_STATUS==1}">
-<%-- 							<a id="button-status1" href="${pageContext.request.contextPath}/jobChangeStatus.do?jobId=${job.JOB_ID}&jobStatus=${job.JOB_STATUS}">开启</a>
- --%>							<input id="button-status1" type="button" value="开启" onClick="location.href='${pageContext.request.contextPath}/jobChangeStatus.do?jobId=${job.JOB_ID}&jobStatus=${job.JOB_STATUS}'"/>
+								
+								<input id="button-status1" type="button" value="开启" onClick="location.href='${pageContext.request.contextPath}/jobChangeStatus.do?jobId=${job.JOB_ID}&jobStatus=${job.JOB_STATUS}'"/>
 							</c:if>
 							<c:if test="${job.JOB_STATUS==0}">
-								
 								<input id="button-status0" type="button" value="关闭" onClick="location.href='${pageContext.request.contextPath}/jobChangeStatus.do?jobId=${job.JOB_ID}&jobStatus=${job.JOB_STATUS}'"/>
 							</c:if>
 							
