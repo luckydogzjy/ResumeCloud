@@ -9,24 +9,33 @@
 		<title>ResumeCloud</title>
 					
 		<link rel="stylesheet" type="text/css" href="css/demo.css"/>
-		<link rel="stylesheet" type="text/css" href="css/jobCss/job.css">
-		
-		
-		<!-- <style type="text/css" >
-		
-		a{
-		 	text-decoration:none; 
-		  	color:#333;
-		  	}
-	z
-		
-		</style> -->
-		
-		
+		<link rel="stylesheet" type="text/css" href="css/jobCss/job.css">	
+		<script type="text/javascript" src="js/jquery-2.1.1.js"></script>
+		<script type="text/javascript">
+			
+			
+		function showDiv(ev,jobId,jobDate){
+	        alert(jobDate);
+        	var oEvent=ev||event;
+        	var cD=$("#DivChange");
+        	$('#jDate').val(jobDate)
+        	$('#DivChange').css({'left':oEvent.clientX+'px','top':oEvent.clientY+'px','display':'block'});
+        }
+   		
+   		function cancelC(){
+   			$('#DivChange').css({'display':'none'});
+   		}
+		</script>
 	</head>
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<body>
+	
+		<div id="DivChange" style="display: none;left:0; top: 0; border:1px solid #FF0000;position: fixed; width: 200px;height: 100px;background-color: greenyellow;">
+			截止时间：<input id="jDate" type="date" value="" /><br />
+			<input type="button" value="提交"  onclick="" /><input type="button" value="取消" onclick="cancelC()" />
+		</div>
+		
 		<div id="header">
 		<jsp:include page="header.jsp" flush="true"/>
 		</div>
@@ -74,7 +83,7 @@
 							</c:if>
 							<c:if test="${job.JOB_STATUS==0}">
 								
-								<input id="button-status0" type="button" value="关闭" onClick="location.href='${pageContext.request.contextPath}/jobChangeStatus.do?jobId=${job.JOB_ID}&jobStatus=${job.JOB_STATUS}'"/>
+								<input id="button-status0" type="button" value="关闭" onclick="showDiv(null,${job.JOB_ID},"<fmt:formatDate value="${job.JOB_END_TIME}" pattern="yyyy-MM-dd" />)"/>
 							</c:if>
 							
 						</td>

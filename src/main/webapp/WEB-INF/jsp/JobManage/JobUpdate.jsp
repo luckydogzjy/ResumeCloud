@@ -9,17 +9,22 @@
 		<title></title>
 		<link rel="stylesheet" type="text/css" href="css/demo.css"/>
 		<link rel="stylesheet" type="text/css" href="css/jobCss/add.css">
-		
+		<script type="text/javascript" src="js/jquery-2.1.1.js"></script>
 		<script type="text/javascript">
 		function backout(){
 			location.href="${pageContext.request.contextPath}/JobManage.do"
 		}
-			
+		
+	
 		</script>
 	</head>
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<body>
+		
+		
+		
+		
 		<div id="header">
 		<jsp:include page="header.jsp" flush="true"/>
 		</div>
