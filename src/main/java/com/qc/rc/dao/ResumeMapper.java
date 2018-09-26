@@ -42,18 +42,6 @@ public interface ResumeMapper {
 
 	Resume selectResumeById(Integer resumeId);
 
-	int selectResumeBestId();
-	
-	int resumeUpdatePic(Pic pic);
-	
-	int SharingInsertUserResume(UserResume userResume);
-	
-	int resumeAddResumeUser(@Param("userResumeId")int userResumeId, @Param("userId")int userId,@Param("resumeId") int resumeId);
-	
-	int resumeAddPic(@Param("picId")int picId, @Param("resumeId")int resumeId, @Param("piccresteuser")String piccresteuser, @Param("fileway")String fileway);
-	
-	
-	
 	
 	
 }

@@ -316,37 +316,14 @@
 	</select>	
 	
 	
-	
-	<!--    zhang    -->
-	
-	 <resultMap id="ResumeMap" type="com.qc.rc.entity.Resume">
-    <constructor>
-      <idArg column="RESUME_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="RESUME_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="RESUME_SEX" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="RESUME_BIRTHDAY" javaType="java.util.Date" jdbcType="DATE" />
-      <arg column="RESUME_PHONE" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="RESUME_EMAIL" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="RESUME_ADDRESS" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="RESUME_GRADUATE_INSTITUTION" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="RESUME_EDUCATION" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="RESUME_JOB_INTENSION" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="RESUME_SELF_EVALUATION" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="RESUME_WORK_EXPERIENCE" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="RESUME_WORK_YEARS" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="RESUME_CREATE_USER" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="RESUME_CREATE_TIME" javaType="java.util.Date" jdbcType="DATE" />
-      <arg column="RESUME_UPDATE_USER" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="RESUME_UPDATE_TIME" javaType="java.util.Date" jdbcType="DATE" /> 
-      <arg column="RESUME_DELETE_FLAG" javaType="java.lang.Integer" jdbcType="INTEGER" />
-    </constructor>
-  </resultMap>
-  
-  
-  
-  
-  
-  <resultMap type="com.qc.rc.entity.Resume" id="ResumeMapPART">
+
+
+
+
+
+     <!-- zhang -->
+     
+       <resultMap type="com.qc.rc.entity.Resume" id="ResumeMapPART">
 
 		<id column="RESUME_ID" property="resumeId"></id>
 		<result column="RESUME_NAME" property="resumeName"></result>
@@ -368,27 +345,7 @@
 		</association> -->
 		
 	</resultMap>
-	
-	
-	  <resultMap type="com.qc.rc.entity.UserResume" id="UserResumeMapPART">
 
-		<id column="UR_ID" property="urId"></id>
-		<result column="UR_USER_ID" property="urUesrId"></result>
-		<result column="UR_RESUME_ID" property="urResumeId"></result>
-		<result column="UR_RESUME_GETWAT" property="urResumeGetway"></result>
-		<result column="UR_RESUME_SHARE_FLAG" property="urResumeShareFlag"></result>
-		<result column="UR_DELETE_FLAG" property="urDeleteFlag"></result>	
-		<result column="UR_CREATE_TIME" property="urCreateTime"></result>
-		<result column="UR_UPDATE_TIME" property="urUpdateTime"></result>
-		
-		<!-- <association property="interview" javaType="com.qc.rc.entity.Interview">
-			<id column="INTERVIEW_ID" property="interviewId"></id>
-			<result column="INTERVIEW_STATUS" property="interviewStatus"></result>
-		</association> -->
-		
-	</resultMap>
-	
-	
 	<insert id="insertResume" parameterType="com.qc.rc.entity.Resume" >  
     	insert into RC_RESUME (RESUME_ID,RESUME_NAME, RESUME_SEX, 
       RESUME_BIRTHDAY, RESUME_PHONE, RESUME_EMAIL,RESUME_ADDRESS,RESUME_GRADUATE_INSTITUTION,
@@ -414,23 +371,9 @@
 	 0
       )
   </insert>
-	
-	
-	
-	
-	<update id="resumeUpdatePic" parameterType="com.qc.rc.entity.Pic">
-    	update RC_PIC set  
-   	 	P_PIC = #{pPic},
-      P_UPDATE_USER = #{pUpdateUser},
-      P_UPDATE_TIME = sysdate
-        
-      where P_RESUME_ID = #{pResumeId}      
-   	  <!-- where P_ID = #{pId} -->
-  </update>
   
-	
-	
-	<update id="updateResume" parameterType="com.qc.rc.entity.Resume">
+  
+  	<update id="updateResume" parameterType="com.qc.rc.entity.Resume">
     	update RC_RESUME
    		 set  RESUME_NAME = #{resumeName},
       RESUME_SEX = #{resumeSex},
@@ -449,12 +392,9 @@
             
    	  where RESUME_ID = #{resumeId}
   </update>
-	
-	
-	
-	
-	
-	   <select id="selectResumeById" resultMap="ResumeMapPART" parameterType="java.lang.Integer">
+  
+  
+   <select id="selectResumeById" resultMap="ResumeMapPART" parameterType="java.lang.Integer">
   
      select RESUME_ID,RESUME_NAME,RESUME_SEX,RESUME_BIRTHDAY,RESUME_PHONE,RESUME_EMAIL,
      RESUME_ADDRESS,RESUME_SELF_EVALUATION,RESUME_WORK_EXPERIENCE,RESUME_WORK_YEARS,RESUME_GRADUATE_INSTITUTION,
@@ -464,48 +404,10 @@
 
  	</select> 
 	
-	
-	 <insert id="resumeAddResumeUser" >
- 	  insert into RC_USER_RESUME (UR_ID,UR_USER_ID,UR_RESUME_ID,UR_RESUME_GETWAT,UR_RESUME_SHARE_FLAG,UR_DELETE_FLAG,UR_CREATE_TIME)
- 	  values (
- 	   	  #{userResumeId},
- 	 	  #{userId},
- 	  	  #{resumeId},
- 	 	  0,
- 	 	  0,
- 	 	  0,
- 	   sysdate
- 	  )
- 	 </insert>
- 	 
- 	 
- 	 <insert id="SharingInsertUserResume" parameterType="com.qc.rc.entity.UserResume">
- 	  insert into RC_USER_RESUME (UR_ID,UR_USER_ID,UR_RESUME_ID,UR_RESUME_GETWAT,UR_RESUME_SHARE_FLAG,UR_DELETE_FLAG,UR_CREATE_TIME)
- 	  values (USER_RESUME_SEQUENCE.nextval,
- 	   #{urUesrId},
- 	   #{urResumeId},
- 	   #{urResumeGetway},
- 	   #{urResumeShareFlag},
- 	   0,
- 	   sysdate
- 	  )
- 	 </insert>
- 	 
- 	 
- 	 
-	
-	 <insert id="resumeAddPic" >
- 	  insert into RC_PIC 
- 	  (P_ID, P_RESUME_ID, P_PIC, P_CREATE_USER, P_CREATE_TIME, P_DELETE_FLAG)
- 	  values (
- 	   #{picId},
- 	   #{resumeId},
- 	   #{fileway},
- 	   #{piccresteuser},
- 	   sysdate,
- 	   0
- 	  )
- 	 </insert>
+
+
+
+
 		
 	
 	

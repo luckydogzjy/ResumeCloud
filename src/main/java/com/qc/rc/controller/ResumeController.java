@@ -31,7 +31,6 @@ import com.qc.rc.entity.DownloadRecord;
 import com.qc.rc.entity.Pic;
 import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.SharingCenter;
-import com.qc.rc.entity.UserResume;
 import com.qc.rc.entity.pojo.ResumePojo;
 import com.qc.rc.entity.pojo.SharingCenterPojo;
 import com.qc.rc.service.ResumeService;
@@ -95,7 +94,6 @@ public class ResumeController {
 			resumeName = FormParameterUtil.changeCode(request.getParameter("resumeName"));
 			resumeJobIntension = FormParameterUtil.changeCode(request.getParameter("resumeJobIntension"));
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -244,6 +242,11 @@ public class ResumeController {
 
 	
 	
+	
+	
+	
+	
+	
 /*      zhang      */
 	/*
 	 * 简历新增
@@ -359,12 +362,10 @@ public class ResumeController {
 	 * 包括简历表以及文件表
 	 * */
 	@RequestMapping(value="/resume_update.do",method=RequestMethod.POST)
-	public ModelAndView resumeUpdate(Resume resume,String resumeBirthdayString,HttpServletRequest request){
+	public ModelAndView resumeUpdate(Resume resume,Pic pic,String resumeBirthdayString,String changeway,HttpServletRequest request){
 		
 		Map<String,Object> model = new HashMap<String,Object>();
-
-		long startTime = System.currentTimeMillis();
-		
+	
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");//小写的mm表示的是分钟
 		java.util.Date date_Birthday;
 		try {
@@ -386,24 +387,43 @@ public class ResumeController {
 			}
 			
 			String fileway = Fileuploading(request);
-		/*	 //修改到数据库
-            Pic pic = null;
-            pic.setpResumeId(resume.getResumeId());
-            pic.setpUpdateUser("zhang");
-            pic.setpPic(fileway);
-            
-            int addpicresult = resumeService.resumeUpdatePic(pic);*/
-            if(addpicresult==0){
-            	//更新resume表失败
-				return new ModelAndView("resume/resume_error",model);
-            }
-	
+			if(StringUtils.isNotBlank(fileway)){
+				 //修改到数据库
+				pic.setpId(454);
+	            pic.setpResumeId(resume.getResumeId());
+	            pic.setpUpdateUser("zhang");
+	            pic.setpCreateUser("zhang");
+	            pic.setpPic(fileway);
+	            
+	            if(changeway.equals("替换")){
+	            	  int addpicresult = resumeService.resumeUpdatePic(pic);
+	  	            if(addpicresult==0){
+	  	            	//更新resume表失败
+	  					return new ModelAndView("resume/resume_error",model);
+	  	            }
+	            	
+	            }else if(changeway.equals("新增")){
+	            	System.out.println(pic.toString());
+	            	int addpicresult = resumeService.resumeUpdateAddPic(pic);
+	  	            if(addpicresult==0){
+	  	            	//更新resume表失败
+	  					return new ModelAndView("resume/resume_error",model);
+	  	            }
+	            	
+	            }else {
+	            	//获取文件修改方式失败
+  					return new ModelAndView("resume/resume_error",model);
+	            }
+
+			}
+			
 			
 		} else {
 			//插入数据验证失败
 			return new ModelAndView("resume/resume_error",model);
 		}
-		return null;
+		return new ModelAndView("resume/resume_update",model);
+
 	}
 	
 	
@@ -459,6 +479,7 @@ public class ResumeController {
     }
     long endTime = System.currentTimeMillis();
     System.out.println("文件上传运行时间："+String.valueOf(endTime-startTime)+"ms");  
+    System.out.println(path);
     return path;
     }
 	

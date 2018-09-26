@@ -170,6 +170,15 @@
 							<HR id="hengxian" size="4" width="300" noshade>
 
 							<input id="wenjian" type="file" name="file_03" onchange="promote();" />
+							<table border="1" id="radioway">
+							<tr>
+							<td>
+							<INPUT  name="changeway" type="radio" value="替换" checked>替换原有
+							<INPUT  name="changeway" type="radio" value="新增">新增文件
+							</td>
+							</tr>	
+							</table>
+							
 							<font id="s9" size="2" color="red"></font>
 							<font id="s10" size="2" color="red"></font>
 

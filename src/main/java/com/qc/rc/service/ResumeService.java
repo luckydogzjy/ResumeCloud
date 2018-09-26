@@ -43,13 +43,13 @@ public interface ResumeService {
 	public int resumeUpdate(Resume resume);
 
 	public Resume resumeUpdateSelect(Integer resume_id);
-
-	public int selectResumeBestId();
 	
 	public int resumeUpdatePic(Pic pic);
 	
 	public int resumeAddResumeUser(int userResumeId, int userId, int resumeId);
 	
 	public int resumeAddPic(int picId, int resumeId, String piccresteuser, String fileway);
+	
+	public int resumeUpdateAddPic(Pic pic);
 	
 }

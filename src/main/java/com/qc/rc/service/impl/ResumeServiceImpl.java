@@ -5,12 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.qc.rc.dao.PicMapper;
 import com.qc.rc.dao.ResumeMapper;
+import com.qc.rc.dao.UserResumeMapper;
 import com.qc.rc.entity.DownloadRecord;
 import com.qc.rc.entity.Pic;
 import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.SharingCenter;
-import com.qc.rc.entity.UserResume;
 import com.qc.rc.entity.pojo.ResumePojo;
 import com.qc.rc.entity.pojo.SharingCenterPojo;
 import com.qc.rc.service.ResumeService;
@@ -21,10 +22,14 @@ public class ResumeServiceImpl implements ResumeService {
 	
 	@Autowired
 	private ResumeMapper resumeMapper;
-	
+	@Autowired
+	private UserResumeMapper userresumeMapper;
+	@Autowired
+	private PicMapper picMapper;
 	
 	private ResumePojo resumePojo;
 
+	
 	
 	public List<ResumePojo> getAllResume(Integer userId) {
 		
@@ -101,29 +106,28 @@ public class ResumeServiceImpl implements ResumeService {
 
 
 
-
-	public int selectResumeBestId() {
-		int result = resumeMapper.selectResumeBestId();
-		return result;
-	}
-
-
-
 	public int resumeUpdatePic(Pic pic) {
-		int result = resumeMapper.resumeUpdatePic(pic);
+		int result = picMapper.resumeUpdatePic(pic);
 		return result;
 	}
 
 
 
 	public int resumeAddResumeUser(int userResumeId, int userId, int resumeId) {
-		int result = resumeMapper.resumeAddResumeUser(userResumeId,userId,resumeId);
+		int result = userresumeMapper.resumeAddResumeUser(userResumeId,userId,resumeId);
 		return result;
 	}
 
 
-	public int resumeAddPic(int picId, int resumeId, String piccresteuser, String fileway) {
-		int result = resumeMapper.resumeAddPic(picId,resumeId,piccresteuser,fileway);
+	public int resumeAddPic(int picId, int resumeId, String piccresteuser, String fileway) {	
+		
+		int result = picMapper.resumeAddPic(picId,resumeId,piccresteuser,fileway);
+		
+		return result;
+	}
+
+	public int resumeUpdateAddPic(Pic pic) {
+		int result = picMapper.resumeUpdateAddPic(pic);	
 		return result;
 	}
 	
