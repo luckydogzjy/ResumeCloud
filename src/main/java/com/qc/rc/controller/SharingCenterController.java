@@ -34,7 +34,7 @@ public class SharingCenterController {
 	@RequestMapping(value="/getSharingResumeListByCondition.do",method=RequestMethod.GET)
 	public ModelAndView getSharingResumeListByCondition(ResumePojo searchResumePojo,@RequestParam(required=true,defaultValue="1") Integer page) {
 	
-		user.setUserId(1);
+		user.setUserId(2);
 		//	User user = (User) session.getAttribute("user");
 		
 		if (user != null) {
@@ -78,10 +78,11 @@ public class SharingCenterController {
 	@RequestMapping(value="/exchangeResume.do",method=RequestMethod.GET)
 	public ModelAndView exchangeResume(ResumePojo searchResumePojo,SharingCenter sharingCenter,@RequestParam(required=true,defaultValue="1") Integer page) {
 		
-		user.setUserId(1);
+		user.setUserId(2);
+		user.setUserName("ww");;
 		try {
 			if (user != null) {
-				sharingCenterService.exchangeResume(user.getUserId(), searchResumePojo, sharingCenter);
+				sharingCenterService.exchangeResume(user, searchResumePojo, sharingCenter);
 				
 				return getSharingResumeListByCondition(searchResumePojo, page);
 				

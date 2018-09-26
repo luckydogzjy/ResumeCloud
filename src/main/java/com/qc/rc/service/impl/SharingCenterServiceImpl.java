@@ -16,6 +16,7 @@ import com.qc.rc.dao.UserResumeMapper;
 import com.qc.rc.entity.DownloadRecord;
 import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.SharingCenter;
+import com.qc.rc.entity.User;
 import com.qc.rc.entity.UserResume;
 import com.qc.rc.entity.pojo.ResumePojo;
 import com.qc.rc.entity.pojo.SharingCenterPojo;
@@ -32,6 +33,8 @@ public class SharingCenterServiceImpl implements SharingCenterService {
 	private UserResumeMapper userResumeMapper;
 	@Autowired
 	private DownloadRecordMapper downloadRecordMapper;
+	@Autowired
+	private UserResume userResume;
 	
 	private static Integer pageShow = 5;
 		
@@ -44,12 +47,18 @@ public class SharingCenterServiceImpl implements SharingCenterService {
 		List<SharingCenterPojo> list = sharingCenterMapper.getSharingResumeListByCondition(resumePojo);
 		//取到符合条件信息后，取当前用户所兑换过的简历列表
 		List<DownloadRecord> downloadRecords = sharingCenterMapper.getDownloadRecordById(userId);
+		
+		for (DownloadRecord downloadRecord : downloadRecords) {
+			System.out.println(downloadRecord.toString());
+		}
 			
 		PageInfo<SharingCenterPojo> pageInfo = new PageInfo<SharingCenterPojo>(list);
 		
 		for(int i = 0; i < downloadRecords.size(); i++){
+			
 			for(int j = 0; j < list.size(); j++){
-				if (downloadRecords.get(i).getDrSharingCenterId() == list.get(j).getScId()) {
+				
+				if (downloadRecords.get(i).getDrSharingCenterId().equals(list.get(j).getScId())) {
 					//将当前用户兑换过的简历信息，在list里将标志位赋值为1，意思为当前用户已经兑换过，
 					//在前台显示 已兑换 按钮
 					
@@ -77,18 +86,20 @@ public class SharingCenterServiceImpl implements SharingCenterService {
 	//7.RC_USER表里的积分字段USER_INTEGRAL减去相应分数
 	
 	@Override
-	public void exchangeResume(Integer userId,ResumePojo searchResumePojo, SharingCenter sharingCenter) throws Exception{
+	public void exchangeResume(User user,ResumePojo searchResumePojo, SharingCenter sharingCenter) throws Exception{
 		
 		//2.根据id返回resume
 		Resume resume = resumeMapper.selectResumeById(sharingCenter.getScResumeId());
+		System.out.println(resume.toString());
 		//3.重新set id  调用uuid方法
 		Integer id = 888;    //现在的简历id
 		resume.setResumeId(id);
+		resume.setResumeCreateUser(user.getUserName());
 		//插入数据库,存在出异常的可能 ，向上抛
 		resumeMapper.insertResume(resume);
-		//4.赋值
-		UserResume userResume = new UserResume();
-		userResume.setUrUesrId(userId);
+		System.out.println(user.getUserId());
+		//4.赋值				
+		userResume.setUrUesrId(user.getUserId());
 		userResume.setUrResumeId(id); //现在的简历id
 		userResume.setUrResumeGetway(sharingCenter.getScResumeId()); //原来的简历id
 		userResume.setUrResumeShareFlag(1);
@@ -96,7 +107,7 @@ public class SharingCenterServiceImpl implements SharingCenterService {
 		userResumeMapper.SharingInsertUserResume(userResume);
 		//5.插入RC_DOWNLOAD_RECORD一条数据
 		Integer drId = 6412;  //后期改为uuid 
-		downloadRecordMapper.insertDownloadRecord(drId, userId, sharingCenter.getScId());
+		downloadRecordMapper.insertDownloadRecord(drId, user.getUserId(), sharingCenter.getScId());
 		//6.兑换次数+1
 		sharingCenterMapper.updateDownloadCount(sharingCenter.getScId());
 		//7.减积分

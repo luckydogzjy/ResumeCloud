@@ -11,9 +11,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,7 +44,7 @@ public class ResumeController {
 	@RequestMapping(value="/getResumeListByCondition.do",method=RequestMethod.GET)
 	public ModelAndView getResumeListByCondition(ResumePojo searchResumePojo,@RequestParam(required=true,defaultValue="1") Integer page) {
 
-		user.setUserId(1);	
+		user.setUserId(2);	
 	//	User user = (User) session.getAttribute("user");
 		
 		if (user != null) {
@@ -115,7 +115,7 @@ public class ResumeController {
 	@RequestMapping(value="/resumeShare.do",method=RequestMethod.GET)
 	public ModelAndView resumeShare(ResumePojo searchResumePojo,SharingCenter sharingCenter,Integer page){
 		
-		user.setUserId(1);
+		user.setUserId(2);
 		
 		if (user != null) {
 			
@@ -193,7 +193,7 @@ public class ResumeController {
 				
 				String fileway = Fileuploading(request);
 				if(StringUtils.isNotBlank(fileway)){
-				    //添加到数据库
+				    //添加到数据库 
 	               
 	               //uuid生成
 	                int picId = 222;

@@ -30,18 +30,29 @@
 				location.href = urlEnd;  
 			} 
 			
-			function sharingGet(scId,scResumeId,page){
+			function sharingGet(scId,scResumeId,page,scIntegral){
 				
 				var resumeJobIntension = $("#resumeJobIntension").val();
 				var resumeSex = $("#resumeSex").val();
 				var resumeEducation = $("#resumeEducation").val();
 				var resumeWorkYears = $("#resumeWorkYears").val();
-				var resumeGraduateInstitution = $("#resumeGraduateInstitution").val();
+				var resumeGraduateInstitution = $("#resumeGraduateInstitution").val();		
 				
-				var str = "&resumeJobIntension=" + resumeJobIntension + "&resumeSex=" + resumeSex + "&resumeEducation=" + resumeEducation + "&resumeWorkYears=" + resumeWorkYears + "&resumeGraduateInstitution=" + resumeGraduateInstitution;
-				var url = "${pageContext.request.contextPath }/SharingCenter/exchangeResume.do?page=" + page + "scResumeId=" + scResumeId + "scId=" + scId;
-				var urlEnd = url + str;
-				location.href = urlEnd;
+				var msg = "确认花费" + scIntegral + "积分兑换?";
+			  //var msg = "确认花费积分兑换?";
+				if(confirm(msg) == true){
+					
+					var str = "&resumeJobIntension=" + resumeJobIntension + "&resumeSex=" + resumeSex + "&resumeEducation=" + resumeEducation + "&resumeWorkYears=" + resumeWorkYears + "&resumeGraduateInstitution=" + resumeGraduateInstitution;
+					var url = "${pageContext.request.contextPath }/SharingCenter/exchangeResume.do?page=" + page + "&scResumeId=" + scResumeId + "&scId=" + scId;
+					var urlEnd = url + str;
+					location.href = urlEnd;
+					
+					return true;
+				} else{
+					return false;
+				}
+				
+				
 			}
 		</script>
 	</head>
@@ -190,7 +201,7 @@
 											<td>
 												<!-- 如果该条简历不是自己共享的并且用户还未兑换过显示 兑换按钮 -->
 												<c:if test="${sharing.flag == 0 && sharing.scUserId != userId}">
-													<input type="button" id="getBtn" value="兑换" onclic="sharingGet(${sharing.scId },${sharing.scResumeId },${page.pageNum})"/>
+													<input type="button" id="getBtn" value="兑换" onclick="sharingGet(${sharing.scId },${sharing.scResumeId },${page.pageNum},${sharing.scIntegral })"/>
 												</c:if>
 												<!-- 如果该条简历不是自己共享的但是用户已经兑换过显示 已兑换 按钮 -->
 												<c:if test="${sharing.flag == 1 && sharing.scUserId != userId}">
