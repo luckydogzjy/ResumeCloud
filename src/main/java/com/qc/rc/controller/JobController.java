@@ -169,8 +169,8 @@ public class JobController {
 	@RequestMapping("/jobStatusOpen.do")
 	@ResponseBody
 	public String jobStatusOpen(String jobId,String jobDate){
-		System.out.println(jobId);
-		System.out.println(jobDate);
+//		System.out.println(jobId);
+//		System.out.println(jobDate);
 		try {
 			boolean ok = jobService.jobStatusOpen(Integer.valueOf(jobId), new SimpleDateFormat("yyyy-MM-dd").parse(jobDate));
 			if (ok) {
