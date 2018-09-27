@@ -1,13 +1,16 @@
 package com.qc.rc.service;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.qc.rc.common.PageBean;
+import com.github.pagehelper.PageInfo;
 import com.qc.rc.common.ServerResponse;
 import com.qc.rc.entity.Interview;
+import com.qc.rc.entity.Resume;
+import com.qc.rc.entity.User;
 import com.qc.rc.entity.pojo.InterviewPojo;
 
 public interface InterviewService {
