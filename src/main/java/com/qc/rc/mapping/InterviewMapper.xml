@@ -152,4 +152,14 @@
 		    i.INTERVIEW_UPDATE_USER = 'jayne'
 		where i.INTERVIEW_RESUME_ID = #{interviewResumeId}
   	</update>
+  	
+  	
+  	<select id="selectInterviewsByUserId" resultMap="resumeAndInterviewMap2">
+		select 
+		  i.INTERVIEW_ID,i.INTERVIEW_JOB,i.INTERVIEW_TIME,
+		  r.RESUME_ID,r.RESUME_NAME
+	    from  RC_RESUME r left join RC_INTERVIEW i 
+	    on  r.RESUME_ID = i.INTERVIEW_RESUME_ID 
+	    where i.INTERVIEW_USER_ID = #{userId,jdbcType=INTEGER}
+  	</select>
 </mapper>

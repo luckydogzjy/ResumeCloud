@@ -9,6 +9,7 @@ import com.qc.rc.common.PageBean;
 import com.qc.rc.common.ServerResponse;
 import com.qc.rc.entity.Interview;
 import com.qc.rc.entity.pojo.InterviewPojo;
+import com.qc.rc.entity.pojoView.InterviewPojoView;
 
 public interface InterviewService {
 	
@@ -18,5 +19,8 @@ public interface InterviewService {
 		
 	//根据ResumeId更新面试信息
 	public ServerResponse updateInterviewsByResumeId(InterviewPojo interviewPojo,Integer ResumeId,String resumePhone);
+	
+	//根据userId查询所有的面试安排
+	public ServerResponse<List<InterviewPojoView>> selectAllInterviews(Integer userId);
 		
 }

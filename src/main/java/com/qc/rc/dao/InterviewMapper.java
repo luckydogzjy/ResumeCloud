@@ -11,9 +11,12 @@ import com.qc.rc.entity.pojo.InterviewPojo;
 public interface InterviewMapper {
 	
 	//Liu
-	//根据ResumeId查询简历
+	//根据ResumeId查询面试安排
 	InterviewPojo selectInterviewsByResumeId(@Param("ResumeId")Integer ResumeId);
 	
-	//根据ResumeId更新简历
+	//根据ResumeId更新面试安排
 	int updateInterviewsByResumeId(InterviewPojo interviewPojo);
+	
+	//根据userId查询所有的面试安排
+	List<InterviewPojo> selectInterviewsByUserId(Integer userId);
 }
