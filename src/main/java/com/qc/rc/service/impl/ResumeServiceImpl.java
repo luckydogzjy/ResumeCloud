@@ -85,66 +85,59 @@ public class ResumeServiceImpl implements ResumeService {
 	}
 	
 	
-	
 /*    zhang   */
-	/*
-	 * 简历表新增
-	 * */
-	public int resumeAdd(Resume resume) {	
+	
+	public int resumeAdd(Resume resume) {
+		
 		Integer resultcount = resumeMapper.insertResume(resume);
 		return resultcount;
 		
 	}
 
-	/*
-	 * 简历表更新
-	 * */
-	public int resumeUpdate(Resume resume) {	
+	
+	public int resumeUpdate(Resume resume) {
+		
 		int resultcount = resumeMapper.updateResume(resume);
 		return resultcount;
 	}
 
-	/*
-	 * 简历表信息查询
-	 * */
-	public Resume resumeUpdateSelect(Integer resumeId) {	
-		Resume resume = resumeMapper.selectResumeById(resumeId);
-		return resume;			
+	
+	public Resume resumeUpdateSelect(Integer resumeId) {
+		
+		resume = resumeMapper.selectResumeById(resumeId);
+		return resume;
+		
+		
 	}
 
 
-	/*
-	 * 文件表更新
-	 * */
+
+
+	public int selectResumeBestId() {
+		int result = resumeMapper.selectResumeBestId();
+		return result;
+	}
+
+
+
+	public int resumeAddResumeUser(UserResume userresume) {
+		int result = resumeMapper.resumeAddResumeUser(userresume);
+		return result;
+	}
+
+
+
+	@Override
+	public int resumeAddPic(Pic pic) {
+		int result = resumeMapper.resumeAddPic(pic);
+		return result;
+	}
+
+
+
+	@Override
 	public int resumeUpdatePic(Pic pic) {
-		int result = picMapper.resumeUpdatePic(pic);
-		return result;
-	}
-
-
-	/*
-	 * 简历 用户关联表增加
-	 * */
-	public int resumeAddResumeUser(int userResumeId, int userId, int resumeId) {
-		int result = userresumeMapper.resumeAddResumeUser(userResumeId,userId,resumeId);
-		return result;
-	}
-
-	/*
-	 * 文件表新增
-	 * */
-	public int resumeAddPic(int picId, int resumeId, String piccresteuser, String fileway) {	
-		
-		int result = picMapper.resumeAddPic(picId,resumeId,piccresteuser,fileway);
-		
-		return result;
-	}
-
-	/*
-	 * 文件表新增（更改方式为新增）
-	 * */
-	public int resumeUpdateAddPic(Pic pic) {
-		int result = picMapper.resumeUpdateAddPic(pic);	
+		int result = resumeMapper.resumeUpdatePic(pic);
 		return result;
 	}
 	

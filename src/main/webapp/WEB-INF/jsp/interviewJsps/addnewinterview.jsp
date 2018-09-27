@@ -21,9 +21,11 @@
 		function check(value,id){
 		document.getElementById(id).value = value;
 	}
-	
+		function addtime(value){
+			vue.interviewTime	=	value;
+		}
 	window.onload = function() {
-		new Vue({
+		vue= new Vue({
 			el: "#div0", //绑定标签
 			data: { //定义数据
 				username: "${resume.resumeName}",
@@ -34,6 +36,7 @@
 				interviewAssociatePhone: ""
 			}
 		});
+		
 	}
 	</script>
 	<body>
@@ -64,7 +67,7 @@
 								<input type="hidden" name="resumeId" id="resumeId" value="${resume.resumeId}" />
 								<input type="hidden" name="resumePhone" id="resumePhone" value="${resume.resumePhone}" />
 								<input type="hidden" name="interviewJob" id="interviewJob" value="${resume.resumeJobIntension}" />
-								<input type="hidden" name="interviewTime" id="interviewTime" />
+								<input type="hidden" name="interviewTime" id="interviewTime" onchange="addtime()" />
 								<input type="hidden" name="interviewAddress" id="interviewAddress" />
 								<input type="hidden" name="interviewAssociateUsername" id="interviewAssociateUsername" />
 								<input type="hidden" name="interviewAssociatePhone" id="interviewAssociatePhone" />
@@ -83,7 +86,8 @@
 									</tr>
 									<tr>
 										<td class="left">面试职位</td>
-										<td colspan="2"><input type="text" id="job" onblur="checkJob(this.value)" onchange="check(this.value,'interviewJob')" value="${resume.resumeJobIntension}" v-model="interviewJob" name="interviewJob" id="" /></td>
+										<td colspan="2"><input type="text" id="job" onblur="checkJob(this.value)" onchange="check(this.value,'interviewJob')" value="${resume.resumeJobIntension}" v-model="interviewJob" name="interviewJob" />
+										</td>
 										<td><span id="interviewJobMsg">
 									
 								</span></td>
@@ -94,7 +98,6 @@
 										<!--此处不好用voe-->
 										<td class="left">面试时间</td>
 										<td colspan="2"><input class="Wdate" id="time" onblur="checktime(this.value)" onchange="check(this.value,'interviewTime')" type="text" onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
-
 										</td>
 
 										<td><span id="interviewTimeMsg">
