@@ -37,7 +37,7 @@
 				<div id="left-item-interview"  class="left-item">
 					<div class="left-item-box">
 					<img class="left-item-pic" src="${pageContext.request.contextPath}/img/u15.png" />
-					<a class="left-item-a" href="${pageContext.request.contextPath}/Interview/showAllInterviews.do">面试安排</a>
+					<a class="left-item-a" href="${pageContext.request.contextPath}/Interview/selectByCondition.do">面试安排</a>
 
 					</div>
 				</div>

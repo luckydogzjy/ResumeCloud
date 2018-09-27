@@ -8,13 +8,11 @@
 </head>
 <body>
 
-	<form action="${pageContext.request.contextPath}/login.action" method="post">
-		手机号：<input type="text" name="userPhone"><br>
-		验证码：<input type="password" name="userPassword">
-				<input type="button" name="yanzhengma" value="获取验证码"><br>
-			<input type="submit" value="登录">
-	</form>
-	<a href="login.jsp">账号密码登录</a>&nbsp &nbsp<a href="login2.jsp">验证功能登录</a>
+springmvc上传文件
+<form name="form1" action="Picture/upload.do" method="post" enctype="multipart/form-data">
+    <input type="file" name="upload_file" />
+    <input type="submit" value="上传文件" />
+</form>
 	
 </body>
 </html>
