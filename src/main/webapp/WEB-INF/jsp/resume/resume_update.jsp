@@ -174,7 +174,7 @@
 							<font id="s9" size="2" color="red"></font>
 							<font id="s10" size="2" color="red"></font>
 							
-							<table border="1" id="radioway">
+							<table border="0" id="radioway">
 								<tr>
 									<td>
 							 			   <INPUT  name="changeway" type="radio" value="替换" checked>替换原有
