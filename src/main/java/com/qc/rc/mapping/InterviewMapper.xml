@@ -110,8 +110,8 @@
 	select 
 	  i.INTERVIEW_ID,i.INTERVIEW_INFO,i.INTERVIEW_JOB,i.INTERVIEW_ADDRESS,i.INTERVIEW_TIME,i.INTERVIEW_STATUS,i.INTERVIEW_ASSOCIATE_USERNAME,i.INTERVIEW_ASSOCIATE_PHONE,
 	  r.RESUME_ID,r.RESUME_NAME,r.RESUME_PHONE
-    from  RC_INTERVIEW i join RC_RESUME r 
-    on i.INTERVIEW_RESUME_ID = r.RESUME_ID
+    from  RC_RESUME r left join RC_INTERVIEW i 
+    on  r.RESUME_ID = i.INTERVIEW_RESUME_ID 
     where r.RESUME_ID = #{ResumeId,jdbcType=INTEGER}
   	</select>
   	
@@ -123,8 +123,9 @@
 		    i.INTERVIEW_ASSOCIATE_USERNAME = #{interviewAssociateUsername},
 		    i.INTERVIEW_ASSOCIATE_PHONE = #{interviewAssociatePhone},
 		    i.INTERVIEW_INFO = #{interviewInfo},
+		    i.INTERVIEW_STATUS = #{interviewStatus},
 		    i.INTERVIEW_UPDATE_TIME = sysdate,
 		    i.INTERVIEW_UPDATE_USER = 'jayne'
-		where i.INTERVIEW_RESUME_ID = #{interviewResumeId};
+		where i.INTERVIEW_RESUME_ID = #{interviewResumeId}
   	</update>
 </mapper>

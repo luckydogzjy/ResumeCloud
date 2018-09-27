@@ -43,5 +43,6 @@ public interface ResumeMapper {
 	Resume selectResumeById(Integer resumeId);
 
 	
-	
+	//liu
+	int updateResumePhone(@Param("resumeId")Integer resumeId,@Param("resumePhone")String resumePhone);
 }
