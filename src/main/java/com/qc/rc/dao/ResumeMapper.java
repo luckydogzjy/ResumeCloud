@@ -42,15 +42,6 @@ public interface ResumeMapper {
 
 	Resume selectResumeById(Integer resumeId);
 
-	int selectResumeBestId();
-
-	int resumeAddResumeUser(UserResume userresume);
-	
-	int resumeAddPic(Pic pic);
-	
-	int resumeUpdatePic(Pic pic);
-	
-	
 	
 	
 }

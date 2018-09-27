@@ -5,12 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.qc.rc.dao.PicMapper;
 import com.qc.rc.dao.ResumeMapper;
+import com.qc.rc.dao.UserResumeMapper;
 import com.qc.rc.entity.DownloadRecord;
 import com.qc.rc.entity.Pic;
 import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.SharingCenter;
-import com.qc.rc.entity.UserResume;
 import com.qc.rc.entity.pojo.ResumePojo;
 import com.qc.rc.entity.pojo.SharingCenterPojo;
 import com.qc.rc.service.ResumeService;
@@ -21,19 +22,19 @@ public class ResumeServiceImpl implements ResumeService {
 	
 	@Autowired
 	private ResumeMapper resumeMapper;
-	
+	@Autowired
+	private UserResumeMapper userresumeMapper;
+	@Autowired
+	private PicMapper picMapper;
 	
 	private ResumePojo resumePojo;
-	
-	
-	private Resume resume;
+
 	
 	
 	public List<ResumePojo> getAllResume(Integer userId) {
 		
 		List<ResumePojo> list = resumeMapper.getAllResume(userId);
 		
-		System.out.println("ResumeServiceImpl:::" + list.size());
 		
 		return list;
 	}
@@ -84,59 +85,65 @@ public class ResumeServiceImpl implements ResumeService {
 	}
 	
 	
-/*    zhang   */
 	
-	public int resumeAdd(Resume resume) {
-		
+/*    zhang   */
+	/*
+	 * 简历表新增
+	 * */
+	public int resumeAdd(Resume resume) {	
 		Integer resultcount = resumeMapper.insertResume(resume);
-		return resultcount;
-		
+		return resultcount;	
 	}
 
-	
-	public int resumeUpdate(Resume resume) {
-		
+	/*
+	 * 简历表更新
+	 * */
+	public int resumeUpdate(Resume resume) {	
 		int resultcount = resumeMapper.updateResume(resume);
 		return resultcount;
 	}
 
-	
-	public Resume resumeUpdateSelect(Integer resumeId) {
-		
-		resume = resumeMapper.selectResumeById(resumeId);
-		return resume;
-		
-		
+	/*
+	 * 简历表信息查询
+	 * */
+	public Resume resumeUpdateSelect(Integer resumeId) {	
+		Resume resume = resumeMapper.selectResumeById(resumeId);
+		return resume;			
 	}
 
 
-
-
-	public int selectResumeBestId() {
-		int result = resumeMapper.selectResumeBestId();
-		return result;
-	}
-
-
-
-	public int resumeAddResumeUser(UserResume userresume) {
-		int result = resumeMapper.resumeAddResumeUser(userresume);
-		return result;
-	}
-
-
-
-	@Override
-	public int resumeAddPic(Pic pic) {
-		int result = resumeMapper.resumeAddPic(pic);
-		return result;
-	}
-
-
-
-	@Override
+	/*
+	 * 文件表更新
+	 * */
 	public int resumeUpdatePic(Pic pic) {
-		int result = resumeMapper.resumeUpdatePic(pic);
+		int result = picMapper.resumeUpdatePic(pic);
+		return result;
+	}
+
+
+	/*
+	 * 简历 用户关联表增加
+	 * */
+	public int resumeAddResumeUser(int userResumeId, int userId, int resumeId) {
+		int result = userresumeMapper.resumeAddResumeUser(userResumeId,userId,resumeId);
+		return result;
+	}
+
+	/*
+	 * 文件表新增
+	 * */
+	public int resumeAddPic(int picId, int resumeId, String piccresteuser, String fileway) {	
+		
+		int result = picMapper.resumeAddPic(picId,resumeId,piccresteuser,fileway);
+		
+		return result;
+	}
+
+	/*
+	 * 文件表新增（更改方式为新增）
+	 * */
+	public int resumeUpdateAddPic(Pic pic) {
+		int result = picMapper.resumeUpdateAddPic(pic);	
 		return result;
 	}
 	

@@ -22,7 +22,6 @@ import org.springframework.stereotype.Component;
 	"UPDATE_TIME" DATE, 
 	"USER_STATUS" NUMBER(1,0) DEFAULT 0*/
 
-@Component
 public class User {
 	
 	public User(Integer userId, String userPhone, String userPassword, String userName, Integer userSex,
