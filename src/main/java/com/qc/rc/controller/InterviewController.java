@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.mail.search.IntegerComparisonTerm;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -24,7 +25,7 @@ import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.User;
 import com.qc.rc.entity.UserResume;
 import com.qc.rc.entity.pojo.InterviewPojo;
-
+import com.qc.rc.entity.pojo.ResumeInterviews;
 import com.qc.rc.service.InterviewService;
 import com.qc.rc.service.ResumeService;
 
@@ -313,9 +314,9 @@ public class InterviewController {
 			resume.setResumePhone(FormParameterUtil.changeCode(resumePhone));
 			resume.setResumeJobIntension(FormParameterUtil.changeCode(interviewJob));
 			resume.setResumeCreateUser(user.getUserName());
-			System.out.println(resume.toString());
+		
 			int resultCount = resumeService.resumeAdd(resume);
-			System.out.println(resume.toString());
+		
 //			创建UserResume对象	插入数据库
 			if(resultCount != 0){
 
@@ -324,7 +325,7 @@ public class InterviewController {
 				ur.setUrUesrId(userId);
 				int result = resumeService.resumeAddResumeUser(ur);
 				if(result !=0){
-					System.out.println(resume.toString());
+					
 					result = iInterviewService.addInterview(resume.getResumeId(), FormParameterUtil.changeCode(interviewJob), 
 							FormParameterUtil.changeCode(interviewTime), FormParameterUtil.changeCode(interviewAssociateUsername),
 							FormParameterUtil.changeCode(interviewAssociatePhone)
@@ -405,5 +406,28 @@ public class InterviewController {
 		ServerResponse<InterviewPojo> interviewPojo = iInterviewService.getInterviewByResumeId(ResumeId);
 		model.put("interviewPojo", interviewPojo.getData());
 		return new ModelAndView("interviewJsps/IVxiangqing",model);	
+	}
+	
+	
+	@RequestMapping("resumeInterviews.do")
+	public ModelAndView getResumeInterviewsByRId(String resumeId){
+		Map<String,Object> model = new HashMap<String,Object>();
+		try {
+			if(StringUtils.isBlank(resumeId)){
+				model.put("errormsg", "resumeId为空");
+				return new ModelAndView("interviewJsps/error",model);
+			}else {
+				Integer rid = Integer.valueOf(resumeId);
+				ResumeInterviews resumeInterviews = iInterviewService.getResumeInterviewsByRId(rid);
+				System.out.println(resumeInterviews.getResumeName());
+				model.put("resumeInterviews", resumeInterviews);
+				return new ModelAndView("interviewJsps/RISdetail",model);	
+			}
+			
+		}catch (NumberFormatException e) {
+			logger.debug("不支持的字符类型转整型");
+			model.put("message", "不支持的字符类型转整型");
+		}
+		return new ModelAndView("interviewJsps/error",model);
 	}
 }

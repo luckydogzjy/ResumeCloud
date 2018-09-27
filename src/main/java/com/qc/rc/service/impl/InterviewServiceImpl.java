@@ -15,6 +15,7 @@ import com.qc.rc.dao.InterviewMapper;
 import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.User;
 import com.qc.rc.entity.pojo.InterviewPojo;
+import com.qc.rc.entity.pojo.ResumeInterviews;
 import com.qc.rc.service.InterviewService;
 import com.qc.rc.utils.InterviewDateUtil;
 
@@ -101,6 +102,12 @@ public class InterviewServiceImpl implements InterviewService {
 			return ServerResponse.createByErrorMessage("参数错误");
 		}
 		return ServerResponse.createBySuccess(interviewPojo);
+	}
+
+
+	public ResumeInterviews getResumeInterviewsByRId(Integer ResumeId) {
+		ResumeInterviews resumeInterviews= interviewMapper.getResumeInterviewsByRId(ResumeId);
+		return resumeInterviews;
 	}
 
 }

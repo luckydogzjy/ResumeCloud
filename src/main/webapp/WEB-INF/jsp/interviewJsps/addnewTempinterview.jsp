@@ -57,7 +57,7 @@
 						<div id="body">
 
 							<form action="${pageContext.request.contextPath }/Interview/newResumeInterview.do" onsubmit="return formcheck()">
-								<textarea id="msg" name="interviewMessage">{{resumeName}} 您好！&#13;&#10 ${user.company}公司提醒您&#13;&#10请携带简历于  {{interviewTime}}参加面试 &#13;&#10面试职位:{{interviewJob}}&#13;&#10地址:{{interviewAddress}}&#13;&#10联系人:{{interviewAssociateUsername}}&#13;&#10手机号:{{interviewAssociatePhone}}</textarea>
+								<textarea id="msg" name="interviewMessage">{{resumeName}} 您好！&#13;&#10 ${user.userCompany}公司提醒您&#13;&#10请携带简历于 {{interviewTime}}  参加面试 &#13;&#10面试职位:{{interviewJob}}&#13;&#10地址:{{interviewAddress}}&#13;&#10联系人:{{interviewAssociateUsername}}&#13;&#10手机号:{{interviewAssociatePhone}}</textarea>
 								<input type="button" id="jscopy" value="点我复制信息" onclick="copy()" />
 	
 								<input type="hidden" name="resumeName" id="resumeName"  />
@@ -71,7 +71,7 @@
 								<table cellSpacing="5" cellPadding="4">
 									<tr>
 										<td class="left">求职者姓名</td>
-										<td colspan="2"><input type="text" id="name" onblur="checkresumename()" onchange="check(this.value,'resumeName')" v-model="resumeName" name="resumeName" />
+										<td colspan="2"><input type="text" id="name" onblur="checkresumename()" onchange="check(this.value,'resumeName')" v-model="resumeName" />
 										</td>
 										<td><span id="resumeNameMsg">
 									
@@ -86,7 +86,7 @@
 									</tr>
 									<tr>
 										<td class="left">面试职位</td>
-										<td colspan="2"><input type="text" id="job" onblur="checkJob()" onchange="check(this.value,'interviewJob')" v-model="interviewJob" name="interviewJob" />
+										<td colspan="2"><input type="text" id="job" onblur="checkJob()" onchange="check(this.value,'interviewJob')" v-model="interviewJob" />
 										</td>
 										<td><span id="interviewJobMsg">
 									

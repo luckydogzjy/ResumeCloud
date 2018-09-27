@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qc.rc.dao.InterviewMapper">
-	
 	<resultMap id="resumeAndInterviewMap" type="com.qc.rc.entity.pojo.InterviewPojo">		
 		<id column="INTERVIEW_ID" property="interviewId"></id>
 		<result column="INTERVIEW_JOB" property="interviewJob"></result>
@@ -20,6 +19,19 @@
 		</association>
 	</resultMap>
 	
+	 <resultMap id="getResumeInterviewsById" type="com.qc.rc.entity.pojo.ResumeInterviews">
+		<id column="RESUMEID" property="resumeId"></id>
+		<result column="RESUME_NAME" property="resumeName"></result>
+		
+		<collection property="interviews" ofType="com.qc.rc.entity.Interview">
+			<id column="INTERVIEW_ID" property="interviewId"></id>
+			<result column="INTERVIEW_JOB" property="interviewJob"></result>
+			<result column="INTERVIEW_ADDRESS" property="interviewAddress"></result>
+			<result column="INTERVIEW_TIME" property="interviewTime"></result>
+			<result column="INTERVIEW_STATUS" property="interviewStatus"></result>
+			<result column="INTERVIEW_RECODE_INFO" property="interviewRecodeInfo"></result>
+		</collection>
+	</resultMap> 
 	<select id="selectCount" resultType="java.lang.Integer">
     select count(INTERVIEW_ID)
 	
@@ -127,4 +139,18 @@
 		    i.INTERVIEW_UPDATE_USER = 'jayne'
 		where i.INTERVIEW_RESUME_ID = #{interviewResumeId};
   	</update>
+
+
+	<select id="getResumeInterviewsByRId" resultMap="getResumeInterviewsById">
+    select r.RESUME_NAME,i.INTERVIEW_JOB,i.INTERVIEW_ADDRESS,i.INTERVIEW_TIME,i.INTERVIEW_STATUS,i.INTERVIEW_RECODE_INFO
+	
+    from  RC_RESUME r join RC_INTERVIEW i
+    on  r.RESUME_ID = i.INTERVIEW_RESUME_ID
+   	where
+    		r.RESUME_ID = #{resumeId,jdbcType=INTEGER}
+		    and i.INTERVIEW_DELETE_FLAG = 0
+
+  	</select> 
+	
+  	
 </mapper>

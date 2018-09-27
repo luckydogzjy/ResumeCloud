@@ -7,13 +7,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<link rel="stylesheet" type="text/css" href="../css/demo.css" />
-<script src="../My97DatePicker/WdatePicker.js" type="text/javascript"></script>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>显示interviews</title>
 		<link rel="stylesheet" type="text/css" href="../css/interviewCss/selectinterview.css"/>
 
 	</head>
+	<script src="../My97DatePicker/WdatePicker.js" type="text/javascript"></script>
 	<script src="../My97DatePicker/WdatePicker.js" type="text/javascript"></script>
 	<script src="../js/jquery-2.1.1.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
@@ -22,8 +22,13 @@
 			$("#actionform").submit();
 		}
 		function resert(){
-			location.href="${pageContext.request.contextPath}/Interview/selectByCondition.do?pageNum=1";
+			location.href="${pageContext.request.contextPath}/Interview/selectByCondition.do";
 		}
+		
+		function godetail(resumeId){
+			location.href="${pageContext.request.contextPath}/Interview/resumeInterviews.do?resumeId="+resumeId;
+		}
+		
 		function sub(){
 			$("#actionform").submit();
 		}
@@ -178,7 +183,7 @@
 											<td class="right" id="${interview.interviewId}">
 												<a href="updateById.do?id=${interview.interviewId}"><input type="button" value="修改" id="updateBtn" /></a>
 												<input type="button" value="删除" id="deleteBtn" onclick="del(${interview.interviewId})" />
-												<a href=""><input type="button" value="面试结果" id="interviewBtn" /></a>
+												<input type="button" value="面试结果" id="interviewBtn" onclick="godetail(${interview.resume.resumeId})" />
 											</td>
 										</tr>
 

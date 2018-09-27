@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 
 import com.qc.rc.entity.Interview;
 import com.qc.rc.entity.pojo.InterviewPojo;
+import com.qc.rc.entity.pojo.ResumeInterviews;
 
 public interface InterviewMapper {
 	
@@ -29,4 +30,7 @@ public interface InterviewMapper {
 	
 	//根据ResumeId查询简历
 	int updateInterviewsByResumeId(InterviewPojo interviewPojo);
+	
+	//根据ResumeId查询所有简历
+	ResumeInterviews getResumeInterviewsByRId(@Param("resumeId")Integer resumeId);
 }
