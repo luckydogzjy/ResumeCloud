@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.User;
+import com.qc.rc.entity.pojo.ResumePojo;
 import com.qc.rc.entity.pojo.UserExchangeResumePojo;
 
 
@@ -22,5 +23,9 @@ public interface PersonalMapper {
 	
 	//兑换的简历信息
 	List<UserExchangeResumePojo> getAllExchangResume(@Param("userId")Integer userId);
+
+	
+	List<ResumePojo> getResumeListByCondition(Integer userId, String resumeName, String resumeJobIntension,
+			Integer resumeSex, Integer resumeEducation, Integer resumeWorkYears, String resumeGraduateInstitution);
 	
 }

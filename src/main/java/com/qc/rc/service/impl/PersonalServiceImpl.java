@@ -68,4 +68,16 @@ public class PersonalServiceImpl implements PersonalService {
 			return exchangeResumeList;
 		}
 
+
+		@Override
+		public List<ResumePojo> getResumeListByCondition(Integer userId, String resumeName, String resumeJobIntension,
+				Integer resumeSex, Integer resumeEducation, Integer resumeWorkYears, String resumeGraduateInstitution) {
+			List<ResumePojo> list = personalMapper.getResumeListByCondition(userId,resumeName, resumeJobIntension, resumeSex, resumeEducation, resumeWorkYears, resumeGraduateInstitution);
+			
+			System.out.println("ResumeServiceImpl->getResumeListByCondition :::" + list.size());
+			
+			return list;
+			
+		}
+
 }

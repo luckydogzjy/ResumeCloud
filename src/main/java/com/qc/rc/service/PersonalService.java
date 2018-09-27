@@ -23,4 +23,7 @@ public interface PersonalService {
 	public int updateInfo(User user);
 	//显示积分兑换的简历
 	public List<UserExchangeResumePojo> getAllExchangResume(Integer userId);
+
+	public List<ResumePojo> getResumeListByCondition(Integer userId, String resumeName, String resumeJobIntension,
+			Integer resumeSex, Integer resumeEducation, Integer resumeWorkYears, String resumeGraduateInstitution);
 }
