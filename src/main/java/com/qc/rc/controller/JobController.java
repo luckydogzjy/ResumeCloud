@@ -7,9 +7,11 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.qc.rc.entity.Job;
@@ -64,7 +66,6 @@ public class JobController {
 	public ModelAndView jobAdd(String name,Integer count,Integer salary,String introduction,String condition,String endTime){;
 		
 		Job job = new Job();
-
 		try {
 			job.setJOB_USER_ID(userId);
 			job.setJOB_NAME(name);
@@ -165,4 +166,25 @@ public class JobController {
 		return new ModelAndView("JobManage/JobTemplate",model);
 	}
 	
+	@RequestMapping("/jobStatusOpen.do")
+	@ResponseBody
+	public String jobStatusOpen(String jobId,String jobDate){
+		System.out.println(jobId);
+		System.out.println(jobDate);
+		try {
+			boolean ok = jobService.jobStatusOpen(Integer.valueOf(jobId), new SimpleDateFormat("yyyy-MM-dd").parse(jobDate));
+			if (ok) {
+				return "Success!";
+			}
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "error";
+		
+	}
 }

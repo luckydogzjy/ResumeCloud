@@ -21,28 +21,24 @@ public class JobServiceImpl implements JobService {
 	
 	@Override
 	public boolean jobAdd(Job job) {
-		// TODO Auto-generated method stub
-
+		
 		return JobMapper.jobAdd(job)==1?true:false;
 	}
 
 	@Override
 	public boolean jobUpdate(Job job) {
-		// TODO Auto-generated method stub
 		
 		return JobMapper.jobUpdate(job)==1?true:false;
 	}
 
 	@Override
 	public boolean jobDelete(Integer jobId) {
-		// TODO Auto-generated method stub
 		
 		return JobMapper.jobDelete(jobId)==1?true:false;
 	}
 
 	@Override
 	public boolean jobChangeStatus(Integer jobId, Integer jobStatus) {
-		// TODO Auto-generated method stub
 		
 		int ok=-1;
 		
@@ -62,7 +58,6 @@ public class JobServiceImpl implements JobService {
 
 	@Override
 	public Map<String, Object> jobGetByName(Integer userId,String jobName,Integer page) {
-		// TODO Auto-generated method stub
 		
 		for (Job j : JobMapper.jobGetByName(userId,jobName)) {
 			if (new Date().compareTo(j.getJOB_END_TIME())>0) {
@@ -82,9 +77,15 @@ public class JobServiceImpl implements JobService {
 
 	@Override
 	public Job jobGetOne(Integer jobId) {
-		// TODO Auto-generated method stub
 		
 		return JobMapper.jobGetOne(jobId);
+	}
+
+	@Override
+	public boolean jobStatusOpen(Integer jobId, Date jobEndTime) {
+		
+		return JobMapper.jobStatusOpen(jobId, jobEndTime)==1?true:false;
+		
 	}
 
 	
