@@ -39,8 +39,6 @@ import com.qc.rc.service.ResumeService;
 @RequestMapping("Resume")
 public class ResumeController {
 
-	private static Logger log = Logger.getLogger(ResumeController.class);
-	
 	@Autowired 
 	private ResumeService resumeService;
 	
@@ -239,7 +237,7 @@ public class ResumeController {
 	
 	
 	
-
+	
 	
 	
 	

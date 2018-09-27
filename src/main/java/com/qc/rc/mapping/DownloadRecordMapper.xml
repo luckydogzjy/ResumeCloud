@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qc.rc.dao.DownloadRecordMapper">
+	
+	<insert id="insertDownloadRecord">
+		INSERT INTO RC_DOWNLOAD_RECORD
+		(DR_ID,DR_USER_ID,DR_SHARING_CENTER_ID) 
+		VALUES(
+		#{id },
+		#{userId },
+		#{sharingCenterId }
+		)
+	</insert>
+</mapper>

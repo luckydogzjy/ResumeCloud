@@ -44,14 +44,8 @@ public interface ResumeService {
 	 * */
 	public int resumeAdd(Resume resume);
 
-	/*
-	 * 简历表更新
-	 * */
 	public int resumeUpdate(Resume resume);
 
-	/*
-	 * 简历表信息查询
-	 * */
 	public Resume resumeUpdateSelect(Integer resume_id);
 	
 	/*

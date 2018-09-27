@@ -48,8 +48,5 @@ public class SharingCenterPojo extends SharingCenter{
 		super();
 		flag = 0;
 	}
-
-	
-
 	
 }

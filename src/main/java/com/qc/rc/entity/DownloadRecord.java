@@ -69,5 +69,11 @@ public class DownloadRecord {
 	public DownloadRecord(){
 		super();
 	}
+	@Override
+	public String toString() {
+		return "DownloadRecord [drId=" + drId + ", drUserId=" + drUserId + ", drSharingCenterId=" + drSharingCenterId
+				+ ", drCreateTime=" + drCreateTime + ", drUpdateTime=" + drUpdateTime + ", drDeleteFlag=" + drDeleteFlag
+				+ "]";
+	}
 	
 }

@@ -92,7 +92,8 @@ public class ResumeServiceImpl implements ResumeService {
 	 * */
 	public int resumeAdd(Resume resume) {	
 		Integer resultcount = resumeMapper.insertResume(resume);
-		return resultcount;	
+		return resultcount;
+		
 	}
 
 	/*
