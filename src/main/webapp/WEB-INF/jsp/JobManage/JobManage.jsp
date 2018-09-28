@@ -11,52 +11,56 @@
 		<link rel="stylesheet" type="text/css" href="css/demo.css"/>
 		<!-- <link rel="stylesheet" type="text/css" href="css/jobCss/job.css"> -->
 		
-		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
-		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-responsiv.css">
-		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-responsiv.min.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
 		
-		<script src="bootstrap/js/jquery-3.3.1.min.js"></script>
- 		<script src="bootstrap/js/bootstrap.min.js"></script>
-		<script src="bootstrap/js/bootstrap.js"></script>
+		<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js"></script>
+ 		<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
+		<script src="${pageContext.request.contextPath}/bootstrap/js/jquery-3.3.1.min.js"></script>
+		
 		
 		<script type="text/javascript">
-			//查询	
-			$(function(){
+			
+			$(document).ready(function(){
+				//查询职位名
 				$("#search").click(function(){
 					var msg = $("#searchName").val();
 					location.href="${pageContext.request.contextPath}/JobManage.do?searchName=" + msg;
 					//$(location).attr("href","${pageContext.request.contextPath}/JobManage.do");
 				});
-				
+				//添加职位
 				$("#add").click(function(){
 					location.href="${pageContext.request.contextPath}/jobAddView.do";
 				});
-				
-				/*$("#button-status1").click(function(){
-					var id = $("#jobId").val();
-					var status = $("#jobStatus").val();
-					
-					location.href="${pageContext.request.contextPath}/jobChangeStatus.do?jobId="+id+"&jobStatus="+status;
-				});*/
 			});
 			
+			//改变状态为关闭
 			function jspopen(id,status){
-				alert("asdasd");
+				//alert("您已关闭该职位的招聘");
 				location.href="${pageContext.request.contextPath}/jobChangeStatus.do?jobId="+id+"&jobStatus="+status;
 			}
-/*			$(document).ready(function() {
+
+			//改变状态为打开
+			function jspclose(id,status){
+				location.href="${pageContext.request.contextPath}/jobChangeStatus.do?jobId="+id+"&jobStatus="+status;
+			}
+			
+			//修改职位
+			function modify(id){
 				
-			});
-			//添加	
-			$(document).ready(function() {
-				
-			});
-			//改变状态
-			$(document).ready(function() {
-				
-			});*/
-				
+				location.href="${pageContext.request.contextPath}/jobUpdateView.do?jobId="+id;
+			}
+			
+			//删除职位
+			function jspdelete(id){
+				location.href="${pageContext.request.contextPath}/jobDelete.do?jobId="+id;
+			}
+			
+			//职位模板
+			function jsptemp(id){
+				location.href="${pageContext.request.contextPath}/jobTemplateView.do?jobId="+id;
+			}
+			
 				
 		</script>
 		
@@ -165,14 +169,26 @@
 								<input class="btn btn-success active" id="button-status1" type="button" value="开启" onclick="jspopen(${job.JOB_ID},${job.JOB_STATUS})" />
 							</c:if>
 							<c:if test="${job.JOB_STATUS==0}">
-								<input class="btn btn-danger active" id="button-status0" type="button" value="关闭" onClick="location.href='${pageContext.request.contextPath}/jobChangeStatus.do?jobId=${job.JOB_ID}&jobStatus=${job.JOB_STATUS}'"/>
+								<%-- location.href='${pageContext.request.contextPath}/jobChangeStatus.do?jobId=${job.JOB_ID}&jobStatus=${job.JOB_STATUS}' --%>
+								<input class="btn btn-danger active" id="button-status0" type="button" value="关闭" onClick="jspclose(${job.JOB_ID},${job.JOB_STATUS})"/>
 							</c:if>
 							
 						</td>
 						<td style="text-align:center;">
-						 	<input class="btn btn-warning" id="button-modify" type="button" value="修改" onClick="location.href='${pageContext.request.contextPath}/jobUpdateView.do?jobId=${job.JOB_ID}'"/>
-						 	<input class="btn btn-danger" id="button-delete" type="button" value="删除" onClick="location.href='${pageContext.request.contextPath}/jobDelete.do?jobId=${job.JOB_ID}'"/>
-						 	<input class="btn btn-info" id="button-template" type="button" value="生成模板" onClick="location.href='${pageContext.request.contextPath}/jobTemplateView.do?jobId=${job.JOB_ID}'"/>	
+							<c:if test="${job.JOB_STATUS==1}">
+								<%-- onClick="location.href='${pageContext.request.contextPath}/jobUpdateView.do?jobId=${job.JOB_ID}'" --%>
+						 		<input class="btn btn-warning" id="button-modify" type="button" value="修改" onClick="modify(${job.JOB_ID})"/>
+						 		<%-- onClick="location.href='${pageContext.request.contextPath}/jobDelete.do?jobId=${job.JOB_ID}'" --%>
+						 		<input class="btn btn-danger" id="button-delete" type="button" value="删除" onClick="jspdelete(${job.JOB_ID})"/>
+						 		<%-- onClick="location.href='${pageContext.request.contextPath}/jobTemplateView.do?jobId=${job.JOB_ID}'" --%>
+						 		<input class="btn btn-info" id="button-template" type="button" value="生成模板" onClick="jsptemp(${job.JOB_ID})"/>
+							</c:if>
+							<c:if test="${job.JOB_STATUS==0}">
+								<input class="btn btn-warning" id="button-modify" type="button" disabled="disabled" value="修改" onClick="modify(${job.JOB_ID})"/>
+								<input class="btn btn-danger" id="button-delete" type="button" disabled="disabled" value="删除" onClick="jspdelete(${job.JOB_ID})"/>
+								<input class="btn btn-info" id="button-template" type="button" disabled="disabled" value="生成模板" onClick="jsptemp(${job.JOB_ID})"/>
+							</c:if>
+								
 						</td>
 					</tr>	
 					</c:forEach>
@@ -182,15 +198,17 @@
 		
 		
 		<div id="page">
-				<span>当前第${page.pageNum}页，一共${page.pages}页</span>
+			<span>当前第${page.pageNum}页，一共${page.pages}页</span>
 				<span>
 					<a href="${pageContext.request.contextPath}/JobManage.do?page=${page.firstPage}">首页</a>
 			        <a href="${pageContext.request.contextPath}/JobManage.do?page=${page.prePage}">上一页</a>
 			        <a href="${pageContext.request.contextPath}/JobManage.do?page=${page.nextPage}">下一页</a>
 			        <a href="${pageContext.request.contextPath}/JobManage.do?page=${page.lastPage}">尾页</a>			 
-           </span>
+           </span>  
+           
 				
 		</div>
+		
 		
 		
 		</div>

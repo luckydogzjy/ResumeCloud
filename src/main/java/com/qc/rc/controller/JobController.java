@@ -30,12 +30,12 @@ public class JobController {
 	 */
 	private static Integer userId = 1 ;
 	
-	private static String searchName = null;
+	//private static String searchName = null;
 	
 	@RequestMapping(value="/JobManage.do",method=RequestMethod.POST)
-	public ModelAndView ManageViewPost(HttpServletRequest req,@RequestParam(required=true,defaultValue="1") Integer page){
+	public ModelAndView ManageViewPost(String searchName,@RequestParam(required=true,defaultValue="1") Integer page){
 		
-		searchName = req.getParameter("search");
+		//searchName = req.getParameter("search");
 		
 		PageHelper.startPage(page, 6);
 		
@@ -52,7 +52,7 @@ public class JobController {
 	}
 	
 	@RequestMapping(value="/JobManage.do",method=RequestMethod.GET)
-	public ModelAndView ManageViewGet(@RequestParam(required=true,defaultValue="1") Integer page){
+	public ModelAndView ManageViewGet(String searchName,@RequestParam(required=true,defaultValue="1") Integer page){
 		
 		PageHelper.startPage(page, 6);
 		
