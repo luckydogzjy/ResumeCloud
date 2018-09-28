@@ -2,40 +2,45 @@ package com.qc.rc.entity;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Component;
+@Component
 public class UserResume {
 	
-		private Integer urId;
-		private Integer urUesrId;
-		private Integer urResumeId;
-		private Integer urResumeGetway;
+		private String urId;
+		private String urUesrId;
+		private String urResumeId;
+		private String urResumeGetway;
 		private Integer urResumeShareFlag;
 		
 		private Integer urDeleteFlag;
 		private Date urCreateTime;
 		private Date urUpdateTime;
 		
-		public Integer getUrId() {
+
+		
+		
+		public String getUrId() {
 			return urId;
 		}
-		public void setUrId(Integer urId) {
+		public void setUrId(String urId) {
 			this.urId = urId;
 		}
-		public Integer getUrUesrId() {
+		public String getUrUesrId() {
 			return urUesrId;
 		}
-		public void setUrUesrId(Integer urUesrId) {
+		public void setUrUesrId(String urUesrId) {
 			this.urUesrId = urUesrId;
 		}
-		public Integer getUrResumeId() {
+		public String getUrResumeId() {
 			return urResumeId;
 		}
-		public void setUrResumeId(Integer urResumeId) {
+		public void setUrResumeId(String urResumeId) {
 			this.urResumeId = urResumeId;
 		}
-		public Integer getUrResumeGetway() {
+		public String getUrResumeGetway() {
 			return urResumeGetway;
 		}
-		public void setUrResumeGetway(Integer urResumeGetway) {
+		public void setUrResumeGetway(String urResumeGetway) {
 			this.urResumeGetway = urResumeGetway;
 		}
 		public Integer getUrResumeShareFlag() {
@@ -62,7 +67,10 @@ public class UserResume {
 		public void setUrUpdateTime(Date urUpdateTime) {
 			this.urUpdateTime = urUpdateTime;
 		}
+
+		
 		/**
+		 * @param urId
 		 * @param urUesrId
 		 * @param urResumeId
 		 * @param urResumeGetway
@@ -71,9 +79,10 @@ public class UserResume {
 		 * @param urCreateTime
 		 * @param urUpdateTime
 		 */
-		public UserResume(Integer urUesrId, Integer urResumeId, Integer urResumeGetway, Integer urResumeShareFlag,
-				Integer urDeleteFlag, Date urCreateTime, Date urUpdateTime) {
+		public UserResume(String urId, String urUesrId, String urResumeId, String urResumeGetway,
+				Integer urResumeShareFlag, Integer urDeleteFlag, Date urCreateTime, Date urUpdateTime) {
 			super();
+			this.urId = urId;
 			this.urUesrId = urUesrId;
 			this.urResumeId = urResumeId;
 			this.urResumeGetway = urResumeGetway;
@@ -82,8 +91,6 @@ public class UserResume {
 			this.urCreateTime = urCreateTime;
 			this.urUpdateTime = urUpdateTime;
 		}
-		
-		
 		public UserResume(){
 			super();
 		}

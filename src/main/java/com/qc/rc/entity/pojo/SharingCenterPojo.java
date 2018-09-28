@@ -9,8 +9,9 @@ public class SharingCenterPojo extends SharingCenter{
 	
 	private Resume resume;
 	private Integer flag; //当前用户的兑换状态 未兑换为0，若兑换了，则赋值为1
+	private String nowResumeId; //已兑换信息的简历id
 
-	public Resume getResume() {
+	public Resume getResume() { 
 		return resume;
 	}
 
@@ -27,6 +28,18 @@ public class SharingCenterPojo extends SharingCenter{
 	}
 	
 
+	public String getNowResumeId() {
+		return nowResumeId;
+	}
+
+	public void setNowResumeId(String nowResumeId) {
+		this.nowResumeId = nowResumeId;
+	}
+
+
+	
+
+
 	/**
 	 * @param scId
 	 * @param scUserId
@@ -37,19 +50,22 @@ public class SharingCenterPojo extends SharingCenter{
 	 * @param scUpdateTime
 	 * @param scDeleteFlag
 	 * @param resume
+	 * @param flag
+	 * @param nowResumeId
 	 */
-	public SharingCenterPojo(Integer scId, Integer scUserId, Integer scResumeId, Integer scIntegral,
-			Integer scDownloadCount, Date scCreateTime, Date scUpdateTime, Integer scDeleteFlag, Resume resume) {
+	public SharingCenterPojo(String scId, String scUserId, String scResumeId, Integer scIntegral,
+			Integer scDownloadCount, Date scCreateTime, Date scUpdateTime, Integer scDeleteFlag, Resume resume,
+			Integer flag, String nowResumeId) {
 		super(scId, scUserId, scResumeId, scIntegral, scDownloadCount, scCreateTime, scUpdateTime, scDeleteFlag);
 		this.resume = resume;
+		this.flag = flag;
+		this.nowResumeId = nowResumeId;
 	}
-	
+
 	public SharingCenterPojo(){	
 		super();
 		flag = 0;
+		nowResumeId = "0";
 	}
-
-	
-
 	
 }

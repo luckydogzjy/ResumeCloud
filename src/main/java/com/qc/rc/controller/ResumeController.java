@@ -39,96 +39,55 @@ public class ResumeController {
 
 	@Autowired 
 	private ResumeService resumeService;
-
-	private ResumePojo resumePojo;
-
-	private SharingCenter sharingCenter;
-
-	private Resume resume;
-
-	private UserResume userresume;
-
-	private Pic pic;
+	@Autowired
+	private HttpSession session;
 	
-	//正常应该在session里得到登录人的userId
-	//这里只做测试
-	public static Integer userId = 1001;
-	public static Integer pageShow = 5;  //一页显示几条数据
-	@RequestMapping("/resumeDisplay.do")
-	public ModelAndView resumeDisplay(HttpServletRequest request,@RequestParam(required=true,defaultValue="1") Integer page){
-		
-		//引入分页查询，使用PageHelper分页功能
-        //在查询之前传入当前页，然后多少记录
-		PageHelper.startPage(page,pageShow);
-	
-		List<ResumePojo> list = resumeService.getAllResume(userId);
-				
-		Map<String,Object> model = new HashMap<String,Object>(); 
-		
-		PageInfo<ResumePojo> pageResumePojo = new PageInfo<ResumePojo>(list);
-		
-		model.put("resumeList", list);
-		model.put("page", pageResumePojo);
-		return new ModelAndView("resume/resumeDisplay",model);
-		
-	}
-	
-	@RequestMapping("/getResumeListByCondition.do")
-	public ModelAndView getResumeListByCondition(HttpServletRequest request,@RequestParam(required=true,defaultValue="1") Integer page) {
-		//引入分页查询，使用PageHelper分页功能
-        //在查询之前传入当前页，然后多少记录
-		PageHelper.startPage(page,pageShow);
+	@RequestMapping(value="/getResumeListByCondition.do",method=RequestMethod.GET)
+	public ModelAndView getResumeListByCondition(ResumePojo searchResumePojo,@RequestParam(required=true,defaultValue="1") Integer page) {
 
-		String resumeName = null;
-		String resumeJobIntension = null;
-		//性别
-		String resumeSexStr = request.getParameter("resumeSex");
-		Integer resumeSex = Integer.valueOf(resumeSexStr);
 		
-		String resumeEducationStr = request.getParameter("resumeEducation");
-		Integer resumeEducation = Integer.valueOf(resumeEducationStr);
-		
-		String resumeWorkYearsStr = request.getParameter("resumeWorkYears");
-		Integer resumeWorkYears = Integer.valueOf(resumeWorkYearsStr);
-		
-		String resumeGraduateInstitution = null;
-		
-		try {
-			resumeGraduateInstitution = FormParameterUtil.changeCode(request.getParameter("resumeGraduateInstitution"));
-			resumeName = FormParameterUtil.changeCode(request.getParameter("resumeName"));
-			resumeJobIntension = FormParameterUtil.changeCode(request.getParameter("resumeJobIntension"));
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	//	User user = (User) session.getAttribute("user");
+		User user = GetUser.getUser();
+		if (user != null) {
+			
+			if (searchResumePojo.getResumeSex() == null) {
+				searchResumePojo.setResumeSex(-1);
+			}
+			if (searchResumePojo.getResumeEducation() == null) {
+				searchResumePojo.setResumeEducation(-1);
+			}
+			if (searchResumePojo.getResumeWorkYears() == null) {
+				searchResumePojo.setResumeWorkYears(-1);
+			}
+
+			try {
+				if (searchResumePojo.getResumeName() != null) {
+					searchResumePojo.setResumeName(FormParameterUtil.changeCode(searchResumePojo.getResumeName()));
+				}
+				if (searchResumePojo.getResumeJobIntension() != null) {
+					searchResumePojo.setResumeJobIntension(FormParameterUtil.changeCode(searchResumePojo.getResumeJobIntension()));
+
+				}
+				if (searchResumePojo.getResumeGraduateInstitution() != null) {
+					searchResumePojo.setResumeGraduateInstitution(FormParameterUtil.changeCode(searchResumePojo.getResumeGraduateInstitution()));
+
+				}
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			
+			
+			Map<String,Object> model = new HashMap<String,Object>(); 
+			model = resumeService.getResumeListByCondition(user.getUserId(),searchResumePojo,page);		
+			return new ModelAndView("resume/resumeDisplay",model);
+			
+		} else {
+			
+			//调到登录页面
+			System.out.println("登录");
 		}
-
-		
-//		System.out.println(resumeName);
-//		System.out.println(resumeJobIntension);
-//		System.out.println(resumeSex);
-//		System.out.println(resumeEducation);
-//		System.out.println(resumeWorkYears);
-//		System.out.println(resumeGraduateInstitution);
-		
-		List<ResumePojo> list = resumeService.getResumeListByCondition(userId,resumeName, resumeJobIntension, resumeSex, resumeEducation, resumeWorkYears, resumeGraduateInstitution);
-		
-		System.out.println("getResumeListByCondition里得到的list长度为" + list.size());
-		
-		Map<String,Object> model = new HashMap<String,Object>(); 
-		
-		PageInfo<ResumePojo> pageResumePojo = new PageInfo<ResumePojo>(list);
-		model.put("page", pageResumePojo);
-		
-		model.put("resumeList", list);
-		
-		model.put("resumeName", resumeName);
-		model.put("resumeJobIntension", resumeJobIntension);
-		model.put("resumeSex", resumeSex);
-		model.put("resumeEducation", resumeEducation);
-		model.put("resumeWorkYears", resumeWorkYears);
-		model.put("resumeGraduateInstitution", resumeGraduateInstitution);
-		
-		return new ModelAndView("resume/resumeDisplay",model);
+		System.out.println("空");
+		return null;
 		
 	}
 	

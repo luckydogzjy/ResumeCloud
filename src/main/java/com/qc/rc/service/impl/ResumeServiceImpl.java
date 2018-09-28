@@ -22,17 +22,24 @@ public class ResumeServiceImpl implements ResumeService {
 	@Autowired
 	private ResumeMapper resumeMapper;
 	
-	private ResumePojo resumePojo;
+	private static Integer pageShow = 5;
 	
-	private Resume resume;
-	
-	public List<ResumePojo> getAllResume(Integer userId) {
+	@Override
+	public Map<String, Object> getResumeListByCondition(String userId, ResumePojo resumePojo, Integer page) {
+		//引入分页查询，使用PageHelper分页功能
+        //在查询之前传入当前页，然后多少记录
+		PageHelper.startPage(page,pageShow);	
+		List<ResumePojo> list = resumeMapper.getResumeListByCondition(userId, resumePojo);
 		
-		List<ResumePojo> list = resumeMapper.getAllResume(userId);
+		PageInfo<ResumePojo> pageInfo = new PageInfo<ResumePojo>(list);
 		
-		System.out.println("ResumeServiceImpl:::" + list.size());
+		Map<String,Object> model = new HashMap<String,Object>(); 
+		model.put("resumeList", list);
+		model.put("page", pageInfo);
+		//返回查询条件
+		model.put("search", resumePojo);
 		
-		return list;
+		return model;
 	}
 
 

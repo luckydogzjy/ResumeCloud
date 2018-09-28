@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qc.rc.dao.DownloadRecordMapper">
+	
+	<insert id="insertDownloadRecord">
+		INSERT INTO RC_DOWNLOAD_RECORD
+		(DR_ID,DR_USER_ID,DR_SHARING_CENTER_ID) 
+		VALUES(
+		#{id },
+		#{userId },
+		#{sharingCenterId }
+		)
+	</insert>
+	
+	<resultMap type="com.qc.rc.entity.pojo.DownloadRecordPojo" id="getDownloadRecord">
+	
+		<id column="DR_ID" property="drId"></id>
+		<result column="DR_USER_ID" property="drUserId"></result>
+		<result column="DR_SHARING_CENTER_ID" property="drSharingCenterId"></result>
+		<result column="DR_CREATE_TIME" property="drCreateTime"></result>
+		<result column="DR_UPDATE_TIME" property="drUpdateTime"></result>
+		<result column="DR_DELETE_FLAG" property="drDeleteFlag"></result>
+		
+		<result column="SC_RESUME_ID" property="scResumeId"></result>
+		<result column="UR_RESUME_ID" property="urResumeId"></result>
+		
+			
+	</resultMap>
+	<!-- 查找当前用户曾经兑换过的简历 -->
+	<select id="getDownloadRecordById" resultMap="getDownloadRecord">
+		
+		SELECT 
+		DR_ID,DR_USER_ID,DR_SHARING_CENTER_ID
+   		,SC_RESUME_ID 
+    	,UR_RESUME_ID 
+    	
+		FROM RC_DOWNLOAD_RECORD,RC_SHARING_CENTER,RC_USER_RESUME
+		
+		WHERE DR_USER_ID = #{userId }
+   		AND DR_SHARING_CENTER_ID = SC_ID
+    	AND SC_RESUME_ID = UR_RESUME_GETWAT
+		AND UR_USER_ID = #{userId }
+	</select>
+</mapper>

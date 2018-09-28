@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class User {
 	
-	public User(Integer userId, String userPhone, String userPassword, String userName, Integer userSex,
+	public User(String userId, String userPhone, String userPassword, String userName, Integer userSex,
 			String userCompany, Date userBirthday, String userPic, Integer userIntegral, Date createTime,
 			Date updateTime) {
 		super();
@@ -30,7 +30,7 @@ public class User {
         super();
         // TODO Auto-generated constructor stub
     }
-	private Integer userId;
+	private String userId;
 	private String userPhone;
 	private String userPassword;
 	private String userName;
@@ -42,10 +42,10 @@ public class User {
 	private Date createTime;
 	private Date updateTime;	
 	
-	public Integer getUserId() {
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(Integer userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	public String getUserPhone() {
