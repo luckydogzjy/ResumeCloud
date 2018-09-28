@@ -41,81 +41,11 @@ public class InterviewServiceImpl implements InterviewService {
 	@Autowired
 	private ResumeMapper resumeMapper;
 
-	 /**
-     * @param pageNum 页码
-     * @param userId 用户id
-     * @param startTime 起始时间
-     * @param overTime 终止时间
-     * @param interviewJob 面试职位
-     * @param interviewInfo 姓名，备注信息，面试地址
-     * @param sort 时间升降排序
-     * 
-     */
-	public PageInfo<InterviewPojo> selectByCondition(Integer pageNum, Integer userId, String startTime,
-			String overTime, String interviewJob, String interviewInfo,Integer sort,Integer status) throws ParseException {
-		Date st = null;
-		Date ot = null;
 
-		if (StringUtils.isNotBlank(startTime)) {
-			st = InterviewDateUtil.strToDate(startTime);
-		}
-		if (StringUtils.isNotBlank(overTime)) {
-			ot  = InterviewDateUtil.strToDate(overTime);
-		}
+
+	public ServerResponse<InterviewPojo> getInterviewByInterviewId(String InterviewId) {
 		
-		
-		 /**
-	     * 包装Page对象
-	     *
-	     * @param list          page结果
-	     * @param navigatePages 页码数量
-	     */
-		PageHelper.startPage(pageNum,PageMessage.interviewpageSize);
-		
-		List<InterviewPojo> interviewPojos = interviewMapper.selectByCondition(userId, st, ot, interviewJob, interviewInfo,sort,status);
-
-		PageInfo<InterviewPojo> pageResumePojo = new PageInfo<InterviewPojo>(interviewPojos,5);
-		
-		return pageResumePojo;
-		
-	}
-
-
-
-	public Integer addInterview(Integer interviewResumeId,String interviewJob,String interviewTime,
-			String interviewAssociateUsername,String interviewAssociatePhone,String interviewAddress,String interviewInfo,
-			Resume resume,User user) throws ParseException {
-		InterviewPojo iPojo = new InterviewPojo();
-		iPojo.setInterviewResumeId(interviewResumeId);
-		iPojo.setInterviewJob(interviewJob);
-		iPojo.setInterviewTime(InterviewDateUtil.strToDate(interviewTime));
-		iPojo.setInterviewAssociateUsername(interviewAssociateUsername);
-		iPojo.setInterviewAssociatePhone(interviewAssociatePhone);
-		iPojo.setInterviewAddress(interviewAddress);
-		iPojo.setInterviewInfo(interviewInfo);
-		iPojo.setResume(resume);
-		iPojo.setInterviewCreateTime(new Date());
-//		新建时设置状态为待面试
-		iPojo.setInterviewStatus(2);
-//		设置deleteflag为0
-		iPojo.setInterviewDeleteFlag(0);
-		iPojo.setInterviewUserId(user.getUserId());
-		iPojo.setInterviewCreateUser(user.getUserName());
-		return	interviewMapper.addInterview(iPojo);
-	}
-
-	public Integer deleteInterview(Integer interviewId){
-		InterviewPojo iPojo = new InterviewPojo();
-		iPojo.setInterviewId(interviewId);
-		iPojo.setInterviewUpdateUser("LING");
-		return interviewMapper.deleteInterview(iPojo);
-	}
-	
-
-
-	public ServerResponse<InterviewPojo> getInterviewByResumeId(Integer ResumeId) {
-		
-		InterviewPojo interviewPojo = interviewMapper.selectInterviewsByResumeId(ResumeId);
+		InterviewPojo interviewPojo = interviewMapper.selectInterviewsByInterviewId(InterviewId);
 		
 		if(interviewPojo==null){
 			return ServerResponse.createByErrorMessage("参数错误");
@@ -124,9 +54,9 @@ public class InterviewServiceImpl implements InterviewService {
 
 	}	
 	
-	public ServerResponse updateInterviewsByResumeId(InterviewPojo interviewPojo,Integer ResumeId,String resumePhone){
+	public ServerResponse updateInterviewsByInterviewId(InterviewPojo interviewPojo,String ResumeId,String resumePhone){
 		
-		int InterviewResultCount = interviewMapper.updateInterviewsByResumeId(interviewPojo);
+		int InterviewResultCount = interviewMapper.updateInterviewsByInterviewId(interviewPojo);
 		
 		int ResumeResultCount = resumeMapper.updateResumePhone(ResumeId,resumePhone);
 		
@@ -139,7 +69,7 @@ public class InterviewServiceImpl implements InterviewService {
 	}
 
 	@Override
-	public ServerResponse<List<InterviewPojoView>> selectAllInterviews(Integer userId) {
+	public ServerResponse<List<InterviewPojoView>> selectAllInterviews(String userId) {
 		
 		List<InterviewPojo> InterviewPojos  = interviewMapper.selectInterviewsByUserId(userId);
 		

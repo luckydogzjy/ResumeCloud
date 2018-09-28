@@ -1,18 +1,17 @@
 package com.qc.rc.entity.pojoView;
 
-import java.util.Date;
 
 public class InterviewPojoView {
-	private Integer id;
+	private String id;
 	private String title;
 	private String start;
 	private String end;
 	private Boolean allDay;
 	
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getTitle() {
