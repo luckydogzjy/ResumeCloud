@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qc.rc.dao.PicMapper">
+
+	 <insert id="resumeAddPic" >
+ 	  insert into RC_PIC 
+ 	  (P_ID, P_RESUME_ID, P_PIC, P_CREATE_USER, P_CREATE_TIME, P_DELETE_FLAG)
+ 	  values (
+ 	   #{picId},
+ 	   #{resumeId},
+ 	   #{pPic},
+ 	   #{pCreateUser},
+ 	   sysdate,
+ 	   0
+ 	  )
+ 	 </insert>
+ 	 
+ 	 
+ 	 
+ 	
+   <insert id="resumeUpdateAddPic" parameterType="com.qc.rc.entity.Pic">
+ 	  insert into RC_PIC 
+ 	  (P_ID, P_RESUME_ID, P_PIC, P_CREATE_USER, P_CREATE_TIME, P_DELETE_FLAG)
+ 	  values (
+ 	   #{pId},
+ 	   #{pResumeId},
+ 	   #{pPic},
+ 	   #{pCreateUser},
+ 	   sysdate,
+ 	   0
+ 	  )
+ 	 </insert>
+ 	 
+ 	 
+ 	 
+ 	 
+ 	 <update id="resumeUpdatePic" parameterType="com.qc.rc.entity.Pic">
+    	update RC_PIC set  
+   	 	P_PIC = #{pPic},
+     	P_UPDATE_USER = #{pUpdateUser},
+     	P_UPDATE_TIME = sysdate
+        
+        where P_RESUME_ID = #{pResumeId}      
+   	  <!-- where P_ID = #{pId} -->
+  </update>
+
+</mapper>

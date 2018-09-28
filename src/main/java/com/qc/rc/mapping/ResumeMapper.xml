@@ -37,7 +37,7 @@
 		RESUME_EDUCATION,RESUME_JOB_INTENSION,RESUME_CREATE_TIME,INTERVIEW_ID,INTERVIEW_STATUS,
 		UR_ID,UR_USER_ID,UR_RESUME_ID,UR_RESUME_GETWAT,UR_RESUME_SHARE_FLAG
 		FROM RC_RESUME LEFT JOIN RC_INTERVIEW
-		ON RC_RESUME.RESUME_ID = RC_INTERVIEW.INTERVIEW_RESUME_ID,
+		ON RC_RESUME.RESUME_ID = RC_INTERVIEW.INTERVIEW_RESUME_ID AND INTERVIEW_DELETE_FLAG = 0,
 		RC_USER_RESUME
 		<where>
 			<if test="resumePojo.resumeName != null and  resumePojo.resumeName !='' ">
@@ -71,8 +71,7 @@
 				AND RESUME_GRADUATE_INSTITUTION LIKE '%${resumePojo.resumeGraduateInstitution}%' 
 			</if>
 			AND RC_USER_RESUME.UR_USER_ID = #{userId }
-			AND RESUME_DELETE_FLAG = 0
-			AND INTERVIEW_DELETE_FLAG = 0
+			AND RESUME_DELETE_FLAG = 0		
 			AND RC_RESUME.RESUME_ID = RC_USER_RESUME.UR_RESUME_ID 
 			
 		</where>
@@ -143,14 +142,14 @@
 		INSERT INTO RC_SHARING_CENTER
 		(SC_ID,SC_USER_ID,SC_RESUME_ID,SC_INTEGRAL,SC_DOWNLOAD_COUNT)
 		VALUES(
-		SHARING_CENTER_SEQUENCE.NEXTVAL,
-		#{scUserId,jdbcType=INTEGER },
-		#{scResumeId,jdbcType=INTEGER },
-		#{scIntegral,jdbcType=INTEGER },
+		#{scId},
+		#{scUserId},
+		#{scResumeId},
+		#{scIntegral},
 		0
 		)
 		<!--  -->
-		<selectKey keyProperty="scId" order="AFTER" resultType="java.lang.Integer">
+		<selectKey keyProperty="scId" order="AFTER" resultType="java.lang.String">
 			SELECT
 			MAX(SC_ID) FROM RC_SHARING_CENTER
 			<!-- SHARING_CENTER_SEQUENCE.NEXTVAL-1 from dual -->
@@ -238,7 +237,7 @@
   </update>
   
   
-   <select id="selectResumeById" resultMap="ResumeMapPART" parameterType="java.lang.Integer">
+   <select id="selectResumeById" resultMap="ResumeMapPART" parameterType="java.lang.String">
   
      select RESUME_ID,RESUME_NAME,RESUME_SEX,RESUME_BIRTHDAY,RESUME_PHONE,RESUME_EMAIL,
      RESUME_ADDRESS,RESUME_SELF_EVALUATION,RESUME_WORK_EXPERIENCE,RESUME_WORK_YEARS,RESUME_GRADUATE_INSTITUTION,
@@ -248,7 +247,10 @@
 
  	</select> 
 	
-	
+
+
+
+
 	
 	
 	
