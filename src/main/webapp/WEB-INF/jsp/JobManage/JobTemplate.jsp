@@ -9,11 +9,36 @@
 		<title></title>
 		<link rel="stylesheet" type="text/css" href="css/demo.css"/>
 		<link rel="stylesheet" type="text/css" href="css/jobCss/add.css">
-		
+		<script type="text/javascript" src="js/jquery-2.1.1.js"></script>
 		<script type="text/javascript">
 			
 		function backout(){
 			location.href="${pageContext.request.contextPath}/JobManage.do"
+		}
+		
+		function checkValue(e){
+			//alert($(e).val());
+			if($(e).val()==""){
+				$(e).attr('placeholder','不能为空');
+			} 					
+		}
+		
+		function sub(){
+			var fal = 0
+			var errArr = new Array()
+			$("input").each(function(){
+				if($(this).val()==""){
+					errArr.push($(this).attr("name"))
+					fal=1
+					
+				}
+			})
+			if(fal==0){
+				document.getElementById("jobFormId").submit()
+				alert("添加成功")
+			}else{
+				alert(errArr+"\n内容为空")
+			}
 		}
 		</script>
 	</head>
@@ -32,16 +57,16 @@
 			<div id="right-box">
 				<h1>模板生成</h1>
 				<hr>
-					<form action="${pageContext.request.contextPath}/jobAdd.do" method="POST">
+					<form action="${pageContext.request.contextPath}/jobAdd.do" method="POST" id="jobFormId">
 				<div id="right-box-east">
 					<div id="jobName">
-						<font id="" >职位名称:</font><input type="text" value="${job.JOB_NAME}" name="name"><br>
+						<font id="" >职位名称:</font><input type="text" value="${job.JOB_NAME}"  onblur="checkValue(this)" name="name"><br>
 					</div>
 					<div id="jobCount">
-						<font id="" >职位数量:</font><input type="number"  value="${job.JOB_COUNT}" name="count" min="0"><br>
+						<font id="" >职位数量:</font><input type="number"  value="${job.JOB_COUNT}"  onblur="checkValue(this)" name="count" min="0"><br>
 					</div>
 					<div id="jobSalary">
-						<font id="" >职位薪资:</font><input type="number" value="${job.JOB_SALARY}" name="salary" min="0"><br>
+						<font id="" >职位薪资:</font><input type="number" value="${job.JOB_SALARY}"  onblur="checkValue(this)" name="salary" min="0"><br>
 					</div>
 					<div id="jobDate">
 						<font id="" >截止时间:</font><input  type="date" name="endTime" value="<fmt:formatDate value="${job.JOB_END_TIME}" pattern="yyyy-MM-dd" />"><br>
@@ -65,7 +90,7 @@
 				</div>
 				
 				<div id="btn">
-					<input id="submit" type="submit" value="提交">
+					<input id="submit00" type="button" value="提交" onclick="sub()">
 					<input id="cancel" type="button" value="取消" onclick="backout()" />
 				</div>
 			</form>
