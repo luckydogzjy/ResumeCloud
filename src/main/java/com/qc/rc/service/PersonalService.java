@@ -18,9 +18,10 @@ public interface PersonalService {
 
 //	public List<User> getUserInfo(Integer userId);
 	//个人中心显示个人信息
-	public List<User> getUserInfo(Integer userId);
+	public List<User> getUserInfo(String userId);
 	//修改个人中心信息
 	public int updateInfo(User user);
 	//显示积分兑换的简历
-	public List<UserExchangeResumePojo> getAllExchangResume(Integer userId);
+	public List<UserExchangeResumePojo> getAllExchangResume(String userId);
+	
 }

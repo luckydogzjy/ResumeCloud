@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="../../../css/login1.css"/>
+<title>登陆界面</title>
+<link rel="stylesheet" type="text/css" href="css/login1.css"/>
 
 <script type="text/javascript">
 
@@ -37,31 +37,33 @@
 
 		</script>
 </head>
-
-	<header>
+<header>
 		<div id="header_box">
-			<img id="headerbox_pic_logo"  src="../../../img/u7.png"/>
-			<img id="headerbox_pic_bottom" src="../../../img/u16.png"/>
+			<img id="headerbox_pic_logo"  src="img/u7.png"/>
+			<img id="headerbox_pic_bottom" src="img/u16.png"/>
 		</div>
 	</header>
 	
 	<body>
+		<div id="body_box">
+			<div id="body_left">
+				<img id="body_left_pic" src="img/u1758.jpg"/>
+			</div>
 			
 			<div id="body_right">
-<%-- 			<span id="tishi">${info}</span>	</br>
- --%>				<form id="body_right_form" action="${pageContext.request.contextPath }/login.action" method="post">
-					<input type="text" name="userPhone" id="body_right_form_phoneNum" placeholder="请输入手机号"  onblur="isPhone(this.value)"/><br>
-					<label class="err err-top40" id="login_phone_text">${msg}</label><br>					
+			<span id="alert">${msg}</span></br>
+				<form id="body_right_form" action="${pageContext.request.contextPath }/login.action" method="post">
+					<input type="text" name="userPhone" id="body_right_form_phoneNum" placeholder="请输入手机号"  onblur="isPhone(this.value)"/>
 					<input type="text" name="userPassword" id="body_right_form_pass" placeholder="请输入密码" />
-					<input type="submit" id="body_right_form_submit" value="登录" onclick="return login()"/>
+					<input type="submit" id="body_right_form_submit" value="登录" onclick="return login()"/><br>	
 				</form>
-				<div>${lastId}</div>
-<%-- 		<a href="${pageContext.request.contextPath }/registe.jsp">去注册</a> --%>		
-			<a href="registe.jsp">去注册</a>
-				
-				
+				<br><br>	
 			</div>
-		</div>	
+		<div id="goregisteDiv">
+			<a id="goregisteA"href="${pageContext.request.contextPath}/goRegiste.action">免费注册</a>
+			<a id="gologin2A"href="${pageContext.request.contextPath}/gologin2.action">短信验证码登陆</a>
+		</div>
+		</div>
 		
 	</body>
 </html>

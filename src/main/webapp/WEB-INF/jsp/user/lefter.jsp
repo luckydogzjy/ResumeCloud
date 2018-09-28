@@ -44,14 +44,14 @@
 				<div id="left-item-person"  class="left-item" >
 					<div class="left-item-box">
 					<img class="left-item-pic" src="${pageContext.request.contextPath}/img/u14.png" />
-					<a class="left-item-a" href="#">个人中心</a>
+					<a class="left-item-a" href="${pageContext.request.contextPath}/gorechargerecord.action">个人中心</a>
 					</div>
 				</div>
 
 				<div id="left-item-quit" class="left-item">
 					<div class="left-item-box">
 					<img class="left-item-pic" src="${pageContext.request.contextPath}/img/u19.png" />
-					<a class="left-item-a" href="#">退出登录</a>
+					<a class="left-item-a" href="${pageContext.request.contextPath}/goLogin.action">退出登录</a>
 					</div>
 				</div>
 			</div>

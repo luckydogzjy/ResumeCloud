@@ -14,7 +14,7 @@
 				<input type="button" name="yanzhengma" value="获取验证码"><br>
 			<input type="submit" value="登录">
 	</form>
-	<a href="login.jsp">账号密码登录</a>&nbsp &nbsp<a href="login2.jsp">验证功能登录</a>
+
 	
 </body>
 </html>

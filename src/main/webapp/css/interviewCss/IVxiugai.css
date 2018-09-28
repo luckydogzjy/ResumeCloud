@@ -64,12 +64,14 @@ span{
 }
 
 #right-box-button{
+	height: 38px;
+	width: 600px;
 	position: absolute;
-	top: 470px;
+	top: 370px;
 }
 #right-box-button-xiugai{
 	position: absolute;
-	left: 600px;
+	left: 500px;
 	border-radius: 5px;
 	border: 0px;
 	width: 89px;
@@ -83,7 +85,7 @@ span{
 }
 #right-box-button-shanchu{
 	position: absolute;
-	left: 750px;
+	left: 650px;
 	border-radius: 5px;
 	border: 0px;
 	width: 89px;

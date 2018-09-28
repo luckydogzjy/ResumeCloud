@@ -3,9 +3,11 @@ package com.qc.rc.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.qc.rc.dao.PersonalMapper;
+import com.qc.rc.dao.UserMapper;
 import com.qc.rc.entity.User;
 import com.qc.rc.entity.pojo.ResumePojo;
 import com.qc.rc.entity.pojo.UserExchangeResumePojo;
@@ -16,6 +18,8 @@ public class PersonalServiceImpl implements PersonalService {
 	
 	@Autowired
 	private PersonalMapper personalMapper;
+	@Autowired UserMapper userMapper;
+
 	
 	
 //	//判断用户是否存在
@@ -43,7 +47,7 @@ public class PersonalServiceImpl implements PersonalService {
 	}
 	
 	
-		public List<User> getUserInfo(Integer userId) {
+		public List<User> getUserInfo(String userId) {
 		
 		List<User> list = personalMapper.getUserInfo(userId);
 		
@@ -61,11 +65,12 @@ public class PersonalServiceImpl implements PersonalService {
 		
 		
 		//获取积分兑换的简历
-		public List<UserExchangeResumePojo> getAllExchangResume(Integer userId){
+		public List<UserExchangeResumePojo> getAllExchangResume(String userId){
 			
 			List<UserExchangeResumePojo> exchangeResumeList= personalMapper.getAllExchangResume(userId);
 			
 			return exchangeResumeList;
 		}
+
 
 }

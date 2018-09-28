@@ -33,7 +33,7 @@ public class PersonalController {
 
 	
 	public static String userPhone="15542431051";
-	public static Integer userId = 1;
+	public static String userId;
 	
 	
 	@RequestMapping("/modifypassword.do")
@@ -182,5 +182,6 @@ public class PersonalController {
 		return new ModelAndView("personal/ur_resume_exchange",model);
 		
 	}
+	
 	
 }

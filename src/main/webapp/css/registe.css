@@ -57,36 +57,6 @@ body{
 	width: 444px;
 	height: 408px;
 }
-#body_right_form_phoneNum{
-	position: absolute;
-	top: 60px;
-	left: 60px;
-	width: 309px;
-    height: 55px;
-}
-#body_right_form_pass{
-	position: absolute;
-	top: 140px;
-	left: 60px;
-	width: 309px;
-    height: 55px;
-}
-#body_right_form_submit{
-	border:0px;
-	background-color: rgb(22,155,213);
-	width: 309px;
-    height: 50px;
-    position: absolute;
-    top: 240px;
-    left: 63px;
-    font-size: 20px;
-    color: white;
-    border-radius: 3px;
-}
-
-#body_right_form_submit:hover{
-	background-color:#00CCFF;
-}
 
 #goregisteA {
     position: absolute;
@@ -106,14 +76,14 @@ body{
 
 #gologin1A{
 	position: absolute;
-    top: 440px;
-    left: 1040px;
+    top: 460px;
+    left: 1055px;
     width: 309px;
     height: 55px;
 	
 }
 
-#phone{
+#inputphone{
 	position: absolute;
 	top: 60px;
 	left: 60px;
@@ -129,7 +99,7 @@ body{
     height: 40px;
 }
 
-#button{
+#btn_send{
 	border:0px;
 	background-color: rgb(22,155,213);
 	position: absolute;
@@ -139,10 +109,11 @@ body{
     height: 40px;
     font-size: 15px;
     color: white;
+    border-radius: 6px;
 	
 }
 
-#yanzhengma{
+#code{
 	position: absolute;
 	top: 220px;
 	left: 60px;
@@ -150,8 +121,8 @@ body{
     height: 34px;
 }
 
-#registe{
-	border:1px;
+#btn_registe{
+	border:0px;
 	background-color: rgb(22,155,213);
 	position: absolute;
 	top: 295px;
@@ -160,7 +131,82 @@ body{
     height: 40px;
     font-size: 15px;
     color: white;
+    border-radius: 3px;
 	
+}
+
+#returnMessage{
+	border:0px;
+	position: absolute;
+	top: 338px;
+	left: 60px;
+	width: 309px;
+    height: 20px;
+    font-size: 12px;
+    color: red;
+    border-radius: 3px;
+    
+}
+
+#IsRegiste{
+	border:0px;
+	position: absolute;
+	top: 107px;
+	left: 60px;
+	width: 309px;
+    height: 20px;
+    font-size: 12px;
+    color: red;
+    border-radius: 3px;
+/*  	background-color:blue;
+ */ }
+ 
+ #IsEmptyPassword{
+ border:0px;
+	position: absolute;
+	top: 186px;
+	left: 60px;
+	width: 309px;
+    height: 20px;
+    font-size: 12px;
+    color: red;
+    border-radius: 3px;
+
+ }
+
+#jbPhoneTip{
+	border:0px;
+	position: absolute;
+	top: 260px;
+	left: 60px;
+	width: 309px;
+    height: 20px;
+    font-size: 12px;
+    color: red;
+    border-radius: 3px;
+  
+}
+
+#registeSuccessMessage{
+	border:0px;
+	position: absolute;
+	top: 338px;
+	left: 60px;
+	width: 309px;
+    height: 20px;
+    font-size: 12px;
+    color: red;
+    border-radius: 3px;
+     
+}
+
+
+#btn_registe:hover{
+	background-color:#00CCFF;
+}
+
+#btn_send:hover{	
+	background-color:#00CCFF;
 }
 
 a{color:#169BD5} /*设置默认颜色*/
