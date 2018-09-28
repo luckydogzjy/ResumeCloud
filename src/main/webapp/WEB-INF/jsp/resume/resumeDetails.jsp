@@ -117,37 +117,36 @@
 						 	</tr>
 
 						 </table>
-
-						 <FONT id="right_fujia" size="6" color="#FF0000">附加信息</FONT>
+					  </div>
+					  <div id="right_fujia">
+						 <FONT size="6" color="#FF0000">附加信息</FONT>
 						 <HR id="hengxian"	size="4" width="300" noshade>
 
 					 	<table id="table_pic_file" border="0">
 			
 					 		<tr>
-							 	<td height="35" colspan="2">图片地址</td>
+							 	<td height="35" >图片地址</td>
 						 	</tr>
 						 	<c:forEach items="${resume.lPics }" var="resumePic">
 							 	<tr>
-							 		<td height="35"></td>
-								 	<td>${resumePic.pPic }</td>
+								 	<td >${resumePic.pPic }</td>
 								 </tr>		
 							 </c:forEach>
 
 						 	<tr>
-								 <td height="35" colspan="2">文件地址</td>
+								 <td height="35">文件地址</td>
 							 </tr>
 
 							 <c:forEach items="${resume.lFiles }" var="resumeFile">
 							 	<tr>
-							 		<td height="35"></td>
-							 		<td>${resumeFile.fFile }</td>
+							 		<td >${resumeFile.fFile }</td>
 							 	</tr>		
 						 	</c:forEach>
 						 </table>
 
-
-						 <a href="javascript:history.back();"><input id="backbtn" type="button" value="返回"/></a>
-					 </div>
+					   </div>
+					   <a href="javascript:history.back();"><input id="backbtn" type="button" value="返回"/></a>
+					
 					
 				</div>
 			</div>

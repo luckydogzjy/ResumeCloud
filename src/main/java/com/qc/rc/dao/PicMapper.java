@@ -6,7 +6,7 @@ import com.qc.rc.entity.Pic;
 
 public interface PicMapper {
 	
-	int resumeAddPic(@Param("picId")int picId, @Param("resumeId")int resumeId, @Param("pCreateUser")String pCreateUser, @Param("pPic")String pPic);
+	int resumeAddPic(@Param("picId")String picId, @Param("resumeId")String resumeId, @Param("pCreateUser")String pCreateUser, @Param("pPic")String pPic);
 	
 	/*int resumeAddPic(Pic pic);*/
 
