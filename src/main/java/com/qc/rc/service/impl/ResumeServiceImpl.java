@@ -32,7 +32,7 @@ public class ResumeServiceImpl implements ResumeService {
 	private static Integer pageShow = 5;
 	
 	@Override
-	public Map<String, Object> getResumeListByCondition(Integer userId, ResumePojo resumePojo, Integer page) {
+	public Map<String, Object> getResumeListByCondition(String userId, ResumePojo resumePojo, Integer page) {
 		//引入分页查询，使用PageHelper分页功能
         //在查询之前传入当前页，然后多少记录
 		PageHelper.startPage(page,pageShow);	
@@ -49,7 +49,7 @@ public class ResumeServiceImpl implements ResumeService {
 		return model;
 	}
 	//根据id查详情
-	public Map<String, Object> getResumeDetailsById(Integer resumeId) {
+	public Map<String, Object> getResumeDetailsById(String resumeId) {
 	
 		ResumePojo resumePojo = resumeMapper.getResumeDetailsById(resumeId);	
 		Map<String,Object> model = new HashMap<String,Object>(); 
@@ -57,7 +57,7 @@ public class ResumeServiceImpl implements ResumeService {
 		return model;
 	}
 	//根据id删resume
-	public void deleteResumeById(Integer resumeId){
+	public void deleteResumeById(String resumeId){
 		
 		resumeMapper.deleteResumeById(resumeId);
 	}	
@@ -67,7 +67,7 @@ public class ResumeServiceImpl implements ResumeService {
 		return resumeMapper.shareResume(sharingCenter);
 	}
 	//插入共享中心后更新user 和 resume的关联表
-	public void  updateUserResume(Integer resumeId){
+	public void  updateUserResume(String resumeId){
 		
 		resumeMapper.updateUserResume(resumeId);
 	}
@@ -78,45 +78,69 @@ public class ResumeServiceImpl implements ResumeService {
 	
 	
 	
-/*    zhang   */	
+	/*    zhang   */
+	/*
+	 * 简历表新增
+	 * */
 	public int resumeAdd(Resume resume) {	
 		Integer resultcount = resumeMapper.insertResume(resume);
 		return resultcount;	
 	}
 
-	
+	/*
+	 * 简历表更新
+	 * */
 	public int resumeUpdate(Resume resume) {	
 		int resultcount = resumeMapper.updateResume(resume);
 		return resultcount;
 	}
 
-	
-	public Resume resumeUpdateSelect(Integer resumeId) {	
+	/*
+	 * 简历表信息查询
+	 * */
+	public Resume resumeUpdateSelect(String resumeId) {	
 		Resume resume = resumeMapper.selectResumeById(resumeId);
 		return resume;			
 	}
 
 
-
+	/*
+	 * 文件表更新
+	 * */
 	public int resumeUpdatePic(Pic pic) {
 		int result = picMapper.resumeUpdatePic(pic);
 		return result;
 	}
 
 
-
-	public int resumeAddResumeUser(int userResumeId, int userId, int resumeId) {
+	/*
+	 * 简历 用户关联表增加
+	 * */
+	public int resumeAddResumeUser(String userResumeId, String userId, String resumeId) {
 		int result = userresumeMapper.resumeAddResumeUser(userResumeId,userId,resumeId);
 		return result;
 	}
 
-
-	public int resumeAddPic(int picId, int resumeId, String piccresteuser, String fileway) {	
+	/*
+	 * 文件表新增
+	 * */
+	public int resumeAddPic(String picId, String resumeId, String piccresteuser, String fileway) {	
 		
 		int result = picMapper.resumeAddPic(picId,resumeId,piccresteuser,fileway);
 		
 		return result;
 	}
+
+	/*
+	 * 文件表新增（更改方式为新增）
+	 * */
+	public int resumeUpdateAddPic(Pic pic) {
+		int result = picMapper.resumeUpdateAddPic(pic);	
+		return result;
+	}
+
+	
+	
 	
 	
 

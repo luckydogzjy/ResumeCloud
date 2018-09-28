@@ -4,30 +4,31 @@ import java.util.Date;
 
 public class DownloadRecord {
 	
-	private Integer drId;
-	private Integer drUserId;
-	private Integer drSharingCenterId;
+	private String drId;
+	private String drUserId;
+	private String drSharingCenterId;
 
 	private Date drCreateTime;
 	private Date drUpdateTime;
 	private Integer drDeleteFlag;
 	
-	public Integer getDrId() {
+
+	public String getDrId() {
 		return drId;
 	}
-	public void setDrId(Integer drId) {
+	public void setDrId(String drId) {
 		this.drId = drId;
 	}
-	public Integer getDrUserId() {
+	public String getDrUserId() {
 		return drUserId;
 	}
-	public void setDrUserId(Integer drUserId) {
+	public void setDrUserId(String drUserId) {
 		this.drUserId = drUserId;
 	}
-	public Integer getDrSharingCenterId() {
+	public String getDrSharingCenterId() {
 		return drSharingCenterId;
 	}
-	public void setDrSharingCenterId(Integer drSharingCenterId) {
+	public void setDrSharingCenterId(String drSharingCenterId) {
 		this.drSharingCenterId = drSharingCenterId;
 	}
 	public Date getDrCreateTime() {
@@ -56,7 +57,7 @@ public class DownloadRecord {
 	 * @param drUpdateTime
 	 * @param drDeleteFlag
 	 */
-	public DownloadRecord(Integer drId, Integer drUserId, Integer drSharingCenterId, Date drCreateTime,
+	public DownloadRecord(String drId, String drUserId, String drSharingCenterId, Date drCreateTime,
 			Date drUpdateTime, Integer drDeleteFlag) {
 		super();
 		this.drId = drId;
