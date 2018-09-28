@@ -135,7 +135,7 @@
 
 						 </table>
 
-						 <a href="${pageContext.request.contextPath}/Resume/resumeDisplay.do"><input id="backbtn" type="button" value="返回"/></a>
+						 <a href="${pageContext.request.contextPath}/Resume/getResumeListByCondition.do"><input id="backbtn" type="button" value="返回"/></a>
 					 </div>
 					
 				</div>

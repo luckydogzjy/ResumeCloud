@@ -25,7 +25,7 @@
 		var resumeGraduateInstitution = document.getElementsByName("resumeGraduateInstitution")[0].value;
 		
 		var str = "&resumeName=" + resumeName+ "&resumeJobIntension=" + resumeJobIntension + "&resumeSex=" + resumeSex + "&resumeEducation=" + resumeEducation + "&resumeWorkYears=" + resumeWorkYears + "&resumeGraduateInstitution=" + resumeGraduateInstitution;
-		var url = "<%=request.getContextPath()%>/Resume/getResumeListByCondition.do?page=" + page;
+		var url = "${pageContext.request.contextPath}/Resume/getResumeListByCondition.do?page=" + page;
 		var urlEnd = url + str;
 		location.href = urlEnd; 
 		
@@ -43,7 +43,7 @@
 		
 		if (confirm(msg) == true) 
 		{
-			var url = "<%=request.getContextPath()%>/Resume/resumeDelete.do?page=" + pageN + "&resumeId_Delete=" + resumeId +  "&resumeName=" + resumeName+ "&resumeJobIntension=" + resumeJobIntension + "&resumeSex=" + resumeSex + "&resumeEducation=" + resumeEducation + "&resumeWorkYears=" + resumeWorkYears + "&resumeGraduateInstitution=" + resumeGraduateInstitution; 
+			var url = "${pageContext.request.contextPath}/Resume/resumeDelete.do?page=" + pageN + "&resumeId_Delete=" + resumeId +  "&resumeName=" + resumeName+ "&resumeJobIntension=" + resumeJobIntension + "&resumeSex=" + resumeSex + "&resumeEducation=" + resumeEducation + "&resumeWorkYears=" + resumeWorkYears + "&resumeGraduateInstitution=" + resumeGraduateInstitution; 
         	location.href = url; 
 			return true;
 		}
@@ -64,7 +64,7 @@
 		var msg = "请输入可以兑换积分";
 		integral = prompt(msg)
 		if(integral){
-			var url = "<%=request.getContextPath()%>/Resume/resumeShare.do?page=" + pageN + "&resumeId_Share=" + resumeId +  "&integral=" + integral + "&resumeName=" + resumeName+ "&resumeJobIntension=" + resumeJobIntension + "&resumeSex=" + resumeSex + "&resumeEducation=" + resumeEducation + "&resumeWorkYears=" + resumeWorkYears + "&resumeGraduateInstitution=" + resumeGraduateInstitution;
+			var url = "${pageContext.request.contextPath}/Resume/resumeShare.do?page=" + pageN + "&scResumeId=" + resumeId +  "&scIntegral=" + integral + "&resumeName=" + resumeName+ "&resumeJobIntension=" + resumeJobIntension + "&resumeSex=" + resumeSex + "&resumeEducation=" + resumeEducation + "&resumeWorkYears=" + resumeWorkYears + "&resumeGraduateInstitution=" + resumeGraduateInstitution;
         	location.href = url; 
 			return true;
 		}
@@ -110,20 +110,20 @@
 					
 					<div id="selectByName">
 						<span>姓名</span>
-						<input type="search" name="resumeName" value="${resumeName }" placeholder="请输入姓名"/>
+						<input type="search" name="resumeName" value="${search.resumeName }" placeholder="请输入姓名"/>
 					</div>
 
 					<div id="selectByJob">
 						<span>求职意向</span>
-						<input type="search" name="resumeJobIntension" value="${resumeJobIntension }" placeholder="请输入求职意向"/>
+						<input type="search" name="resumeJobIntension" value="${search.resumeJobIntension }" placeholder="请输入求职意向"/>
 					</div>
 
 					<div id="selectBySex">
 						<span>性别</span>
 						 <select name="resumeSex" >
-								<option value="-1" <c:if test="${'-1' eq resumeSex}">selected="selected"</c:if>>全部</option>
-								<option value="1" <c:if test="${'1' eq resumeSex}">selected="selected"</c:if>>男</option>
-								<option value="0" <c:if test="${'0' eq resumeSex}">selected="selected"</c:if>>女</option>
+								<option value="-1" <c:if test="${'-1' eq search.resumeSex}">selected="selected"</c:if>>全部</option>
+								<option value="1" <c:if test="${'1' eq search.resumeSex}">selected="selected"</c:if>>男</option>
+								<option value="0" <c:if test="${'0' eq search.resumeSex}">selected="selected"</c:if>>女</option>
 						</select>
 					</div>
 
@@ -131,21 +131,21 @@
 						<span>学历</span>
 						<select name="resumeEducation">
 								<option value="-1"
-									<c:if test="${'-1' eq resumeEducation}">selected="selected"</c:if>>全部</option>
+									<c:if test="${'-1' eq search.resumeEducation}">selected="selected"</c:if>>全部</option>
 								<option value="0"
-									<c:if test="${'0' eq resumeEducation}">selected="selected"</c:if>>高中及高中以下</option>
+									<c:if test="${'0' eq search.resumeEducation}">selected="selected"</c:if>>高中及高中以下</option>
 								<option value="1"
-									<c:if test="${'1' eq resumeEducation}">selected="selected"</c:if>>专科</option>
+									<c:if test="${'1' eq search.resumeEducation}">selected="selected"</c:if>>专科</option>
 								<option value="2"
-									<c:if test="${'2' eq resumeEducation}">selected="selected"</c:if>>本科</option>
+									<c:if test="${'2' eq search.resumeEducation}">selected="selected"</c:if>>本科</option>
 								<option value="3"
-									<c:if test="${'3' eq resumeEducation}">selected="selected"</c:if>>研究生</option>
+									<c:if test="${'3' eq search.resumeEducation}">selected="selected"</c:if>>研究生</option>
 								<option value="4"
-									<c:if test="${'4' eq resumeEducation}">selected="selected"</c:if>>硕士</option>
+									<c:if test="${'4' eq search.resumeEducation}">selected="selected"</c:if>>硕士</option>
 								<option value="5"
-									<c:if test="${'5' eq resumeEducation}">selected="selected"</c:if>>博士</option>
+									<c:if test="${'5' eq search.resumeEducation}">selected="selected"</c:if>>博士</option>
 								<option value="6"
-									<c:if test="${'6' eq resumeEducation}">selected="selected"</c:if>>博士以上</option>
+									<c:if test="${'6' eq search.resumeEducation}">selected="selected"</c:if>>博士以上</option>
 						</select>
 					</div>
 
@@ -153,28 +153,28 @@
 						<span>工作年限</span>
 						<select name="resumeWorkYears">
 								<option value="-1"
-									<c:if test="${'-1' eq resumeWorkYears}">selected="selected"</c:if>>全部</option>
+									<c:if test="${'-1' eq search.resumeWorkYears}">selected="selected"</c:if>>全部</option>
 								<option value="0"
-									<c:if test="${'0' eq resumeWorkYears}">selected="selected"</c:if>>0-3年</option>
+									<c:if test="${'0' eq search.resumeWorkYears}">selected="selected"</c:if>>0-3年</option>
 								<option value="1"
-									<c:if test="${'1' eq resumeWorkYears}">selected="selected"</c:if>>3-5年</option>
+									<c:if test="${'1' eq search.resumeWorkYears}">selected="selected"</c:if>>3-5年</option>
 								<option value="2"
-									<c:if test="${'2' eq resumeWorkYears}">selected="selected"</c:if>>5-10年</option>
+									<c:if test="${'2' eq search.resumeWorkYears}">selected="selected"</c:if>>5-10年</option>
 								<option value="3"
-									<c:if test="${'3' eq resumeWorkYears}">selected="selected"</c:if>>10年以上</option>
+									<c:if test="${'3' eq search.resumeWorkYears}">selected="selected"</c:if>>10年以上</option>
 						</select>
 					</div>
 
 					<div id="selectByGradu">
 						<span>毕业院校</span>
-						<input type="search" name="resumeGraduateInstitution" value="${resumeGraduateInstitution }" style="width: 483px" placeholder="请输入毕业院校"/>
+						<input type="search" name="resumeGraduateInstitution" value="${search.resumeGraduateInstitution }" style="width: 483px" placeholder="请输入毕业院校"/>
 					</div>
 
 					<div id="searchBtn">
 						<input type="submit" id="search_button" value="搜索" />
 					</div>
 					<div id="addBtn">
-						<a  href="${pageContext.request.contextPath}/Resume/tiaozhuan_add.do"><input type="button" id="add_button" value="新增"/></a>
+						<a href="${pageContext.request.contextPath}/Resume/tiaozhuan_add.do"><input type="button" id="add_button" value="新增"/></a>
 					</div>
 					
 					<div id="table">
@@ -200,7 +200,7 @@
 
 									<tr>
 										<td title="${resume.resumeName }">
-											<a href="<%=request.getContextPath() %>/Resume/resumeDetails.do?resumeId_Details=${resume.resumeId }">${resume.resumeName }</a>
+											<a href="${pageContext.request.contextPath}/Resume/resumeDetails.do?resumeId_Details=${resume.resumeId }">${resume.resumeName }</a>
 										</td>
 										<td>
 											<c:if test="${resume.resumeSex == 1}">
@@ -275,15 +275,15 @@
 										
 										
 											<!--如果简历是自己录入的(0),并且没没有被共享过(0) 则按钮为共享 -->
-											<c:if test="${resume.userResume.urResumeGetway == 0 &&  resume.userResume.urResumeShareFlag == 0}">
-												<input type="button" id="sharingBtn" value="共享" onclick="resumeShare(${resume.resumeId },${page.pageNum})"/>
+											<c:if test="${resume.userResume.urResumeGetway == '0' &&  resume.userResume.urResumeShareFlag == 0}">
+												<input type="button" id="sharingBtn" value="共享" onclick="resumeShare('${resume.resumeId }',${page.pageNum})"/>
 											</c:if> 
 											<!-- 如果简历是自己录入的(0),并且已经被共享过(1) 则按钮为已共享 -->
-											<c:if test="${resume.userResume.urResumeGetway == 0 &&  resume.userResume.urResumeShareFlag == 1}">
+											<c:if test="${resume.userResume.urResumeGetway == '0' &&  resume.userResume.urResumeShareFlag == 1}">
 												<input type="button" id="NoBtn" value="已共享" disabled="disabled" />
 											</c:if>
 											<!-- 如果简历是在共享中心兑换的(1), 则按钮为不可共享 --> 
-											<c:if test="${resume.userResume.urResumeGetway != 0 &&  resume.userResume.urResumeShareFlag == 1}">
+											<c:if test="${resume.userResume.urResumeGetway != '0' &&  resume.userResume.urResumeShareFlag == 1}">
 												<input type="button" id="NoBtn" value="不可共享" disabled="disabled"/>
 											</c:if>
 										</td>

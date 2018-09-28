@@ -38,14 +38,28 @@ function checkphone() {
 function checkJob() {
 	var value = $("#job").val();
 	if(isNull(value)) {
-		$("#interviewJobMsg").text("请输入手机号").attr("style", "color:red;");
+		$("#interviewJobMsg").text("请输入面试职位").attr("style", "color:red;");
 		return false;
 	} else {
-		$("#resumePhoneMsg").text("√").attr("style", "color:green;");
+		$("#interviewJobMsg").text("√").attr("style", "color:green;");
 
 	}
 	return true;
 }
+
+function checkresumename() {
+	var value = $("#name").val();
+	if(isNull(value)) {
+		$("#resumeNameMsg").text("请输入求职者姓名").attr("style", "color:red;");
+		return false;
+	} else {
+		$("#resumeNameMsg").text("√").attr("style", "color:green;");
+
+	}
+	return true;
+}
+
+
 
 function checktime() {
 	var value = $("#time").val();

@@ -1,12 +1,6 @@
 a{
 	text-decoration: none;
 }
-#right_fujia{
-  position: absolute;
-  left: 650px;
-  top: 0px;
-  width: 200px;
-}
 
 #right_jiben{
   position: absolute;
@@ -14,25 +8,26 @@ a{
   top: 20px;
   width: 640px;
 }
-
-#hengxian{
+#right_fujia{
   position: absolute;
-  left: 650px;
-  top: 37px;
+  left: 722px;
+  top: 20px;
+  width: 300px;
 }
-
 #table_pic_file{
-  position: absolute;
-  left: 650px;
-  top: 58px;
-  width:300px;
+	width: 300px;
+	table-layout:fixed;
+	word-break:break-all;
 }
-
+#table_pic{
+	width: 100px;
+	height: 100px;
+}
 #backbtn{
   border-width:0px;
   position:absolute;
-    left:2px;
-    top:470px;
+    left:68px;
+    top:486px;
     width:100px;
     height:39px;
     background:inherit;

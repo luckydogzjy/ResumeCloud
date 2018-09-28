@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qc.rc.dao.SharingCenterMapper">
+	
+	<resultMap type="com.qc.rc.entity.pojo.SharingCenterPojo" id="getSharingByCon">
+		
+		<id column="SC_ID" property="scId"></id>
+		<result column="SC_USER_ID" property="scUserId"></result>
+		<result column="SC_RESUME_ID" property="scResumeId"></result>
+		<result column="SC_INTEGRAL" property="scIntegral"></result>
+		<result column="SC_DOWNLOAD_COUNT" property="scDownloadCount"></result>
+		<result column="SC_DELETE_FLAG" property="scDeleteFlag"></result>
+		<result column="SC_UPDATE_TIME" property="scUpdateTime"></result>
+		<result column="SC_CREATE_TIME" property="scCreateTime"></result>
+		
+		<association property="resume" javaType="com.qc.rc.entity.Resume">
+		
+			<id column="RESUME_ID" property="resumeId"></id>
+			<result column="RESUME_NAME" property="resumeName"></result>
+			<result column="RESUME_SEX" property="resumeSex"></result>
+			<result column="RESUME_BIRTHDAY" property="resumeBirthday"></result>
+			<result column="RESUME_PHONE" property="resumePhone"></result>
+			<result column="RESUME_EMAIL" property="resumeEmail"></result>
+			<result column="RESUME_ADDRESS" property="resumeAddress"></result>
+			
+			<result column="RESUME_GRADUATE_INSTITUTION" property="resumeGraduateInstitution"></result>
+			<result column="RESUME_EDUCATION" property="resumeEducation"></result>
+			<result column="RESUME_JOB_INTENSION" property="resumeJobIntension"></result>
+			<result column="RESUME_SELF_EVALUATION" property="resumeSelfEvaluation"></result>
+			<result column="RESUME_WORK_EXPERIENCE" property="resumeWorkExperience"></result>
+			<result column="RESUME_WORK_YEARS" property="resumeWorkYears"></result>
+		
+			
+		</association>
+			
+	</resultMap>
+	
+	<!--条件查询共享中心信息  -->
+	<select id="getSharingResumeListByCondition" resultMap="getSharingByCon">
+		SELECT 
+		
+		SC_ID,SC_USER_ID,SC_RESUME_ID,SC_INTEGRAL,SC_DOWNLOAD_COUNT,SC_CREATE_TIME,
+		RESUME_ID,RESUME_NAME,RESUME_SEX,RESUME_BIRTHDAY,RESUME_PHONE,RESUME_EMAIL,
+		RESUME_ADDRESS,RESUME_GRADUATE_INSTITUTION,RESUME_EDUCATION,RESUME_JOB_INTENSION,
+		RESUME_SELF_EVALUATION,RESUME_WORK_EXPERIENCE,RESUME_WORK_YEARS
+		
+		FROM RC_SHARING_CENTER,RC_RESUME
+		
+		<where>
+			<!-- 求职意向 -->
+			<if test="resumePojo.resumeJobIntension != null and  resumePojo.resumeJobIntension != '' ">
+				AND RESUME_JOB_INTENSION LIKE '%${resumePojo.resumeJobIntension}%' 
+			</if>
+			<!-- 工作年限 -->
+			<if test="resumePojo.resumeWorkYears == 0">
+				AND RESUME_WORK_YEARS &gt;= 0 AND RESUME_WORK_YEARS &lt; 3
+			</if>
+			<if test="resumePojo.resumeWorkYears == 1">
+				AND RESUME_WORK_YEARS &gt;= 3 AND RESUME_WORK_YEARS &lt; 5
+			</if>
+			<if test="resumePojo.resumeWorkYears == 2">
+				AND RESUME_WORK_YEARS &gt;= 5 AND RESUME_WORK_YEARS &lt; 10
+			</if>
+			<if test="resumePojo.resumeWorkYears == 3">
+				AND RESUME_WORK_YEARS &gt;= 10
+			</if>
+			<!-- 性别 -->
+			<if test="resumePojo.resumeSex != -1">
+				AND RESUME_SEX LIKE '%${resumePojo.resumeSex}%'  
+			</if>
+			<!-- 学历 -->
+			<if test="resumePojo.resumeEducation != -1">
+				AND RESUME_EDUCATION LIKE '%${resumePojo.resumeEducation}%'
+			</if>
+			<!-- 毕业院校 -->
+			<if test="resumePojo.resumeGraduateInstitution != null and  resumePojo.resumeGraduateInstitution != '' ">
+				AND RESUME_GRADUATE_INSTITUTION LIKE '%${resumePojo.resumeGraduateInstitution}%' 
+			</if>
+			
+			AND RC_SHARING_CENTER.SC_RESUME_ID = RC_RESUME.RESUME_ID
+			AND RC_SHARING_CENTER.SC_DELETE_FLAG = 0 
+
+		</where>
+		ORDER BY SC_CREATE_TIME DESC
+	</select>
+	
+	
+	<resultMap type="com.qc.rc.entity.DownloadRecord" id="getDownloadRecord">
+		
+		<id column="DR_ID" property="drId"></id>
+		<result column="DR_USER_ID" property="drUserId"></result>
+		<result column="DR_SHARING_CENTER_ID" property="drSharingCenterId"></result>
+		<result column="DR_CREATE_TIME" property="drCreateTime"></result>
+		<result column="DR_UPDATE_TIME" property="drUpdateTime"></result>
+		<result column="DR_DELETE_FLAG" property="drDeleteFlag"></result>
+			
+	</resultMap>
+	<!-- 查找当前用户曾经兑换过的简历 -->
+	<select id="getDownloadRecordById" resultMap="getDownloadRecord">
+		SELECT 
+		DR_ID,DR_USER_ID,DR_SHARING_CENTER_ID
+		FROM RC_DOWNLOAD_RECORD
+		WHERE DR_USER_ID = #{userId }
+	</select>	
+	<!-- 兑换次数+1 -->
+	<update id="updateDownloadCount">
+		UPDATE RC_SHARING_CENTER
+		SET SC_DOWNLOAD_COUNT = SC_DOWNLOAD_COUNT + 1
+		WHERE SC_ID = #{scId }
+	</update>
+</mapper>

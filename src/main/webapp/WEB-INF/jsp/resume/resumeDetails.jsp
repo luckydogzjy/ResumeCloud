@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<meta charset="UTF-8">
 		<title>简历详情</title>
 		<link rel="stylesheet" type="text/css" href="../css/resumeCss/resume-ww.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/demo.css"/>
@@ -117,37 +116,37 @@
 						 	</tr>
 
 						 </table>
-
-						 <FONT id="right_fujia" size="6" color="#FF0000">附加信息</FONT>
+					  </div>
+					  <div id="right_fujia">
+						 <FONT size="6" color="#FF0000">附加信息</FONT>
 						 <HR id="hengxian"	size="4" width="300" noshade>
 
 					 	<table id="table_pic_file" border="0">
 			
 					 		<tr>
-							 	<td height="35" colspan="2">图片地址</td>
+							 	<td height="35" >图片地址</td>
 						 	</tr>
 						 	<c:forEach items="${resume.lPics }" var="resumePic">
 							 	<tr>
-							 		<td height="35"></td>
-								 	<td>${resumePic.pPic }</td>
+								 <!--	<td >${resumePic.pPic }</td>  -->
+									 <td ><img src="${resumePic.pPic }" id="table_pic" alt="图片"/></td>
 								 </tr>		
 							 </c:forEach>
 
 						 	<tr>
-								 <td height="35" colspan="2">文件地址</td>
+								 <td height="35">文件地址</td>
 							 </tr>
 
 							 <c:forEach items="${resume.lFiles }" var="resumeFile">
 							 	<tr>
-							 		<td height="35"></td>
-							 		<td>${resumeFile.fFile }</td>
+							 		<td >${resumeFile.fFile }</td>
 							 	</tr>		
 						 	</c:forEach>
 						 </table>
 
-
-						 <a href="javascript:history.back();"><input id="backbtn" type="button" value="返回"/></a>
-					 </div>
+					   </div>
+					   <a href="javascript:history.back();"><input id="backbtn" type="button" value="返回"/></a>
+					
 					
 				</div>
 			</div>

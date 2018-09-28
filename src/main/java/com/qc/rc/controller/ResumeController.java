@@ -6,15 +6,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,16 +23,14 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.qc.rc.common.FormParameterUtil;
-import com.qc.rc.common.ServerResponse;
-import com.qc.rc.entity.DownloadRecord;
+import com.qc.rc.common.GetUser;
+import com.qc.rc.common.GetUuid;
 import com.qc.rc.entity.Pic;
 import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.SharingCenter;
+import com.qc.rc.entity.User;
 import com.qc.rc.entity.pojo.ResumePojo;
-import com.qc.rc.entity.pojo.SharingCenterPojo;
 import com.qc.rc.service.IPictureService;
 import com.qc.rc.service.ResumeService;
 
@@ -43,208 +38,115 @@ import com.qc.rc.service.ResumeService;
 @RequestMapping("Resume")
 public class ResumeController {
 
-	private static Logger log = Logger.getLogger(ResumeController.class);
-	
 	@Autowired 
 	private ResumeService resumeService;
 	@Autowired
+	private HttpSession session;
+	@Autowired
 	private IPictureService iPictureService;
 	
-	//正常应该在session里得到登录人的userId
-	//这里只做测试
-	public static String userId = "1b786bc41114f67ae059cea5f1789d";
-	public static Integer pageShow = 5;  //一页显示几条数据
-	@RequestMapping("/resumeDisplay.do")
-	public ModelAndView resumeDisplay(HttpServletRequest request,@RequestParam(required=true,defaultValue="1") Integer page){
-		
-		//引入分页查询，使用PageHelper分页功能
-        //在查询之前传入当前页，然后多少记录
-		PageHelper.startPage(page,pageShow);
-		
-		List<ResumePojo> list = resumeService.getAllResume(userId);
-				
-		Map<String,Object> model = new HashMap<String,Object>(); 
-		
-		PageInfo<ResumePojo> pageResumePojo = new PageInfo<ResumePojo>(list);
-		
-		model.put("resumeList", list);
-		model.put("page", pageResumePojo);
-		
-		return new ModelAndView("resume/resumeDisplay",model);
-		
-	}
-	
-	@RequestMapping("/getResumeListByCondition.do")
-	public ModelAndView getResumeListByCondition(HttpServletRequest request,@RequestParam(required=true,defaultValue="1") Integer page) {
-		//引入分页查询，使用PageHelper分页功能
-        //在查询之前传入当前页，然后多少记录
-		PageHelper.startPage(page,pageShow);
+	@RequestMapping(value="/getResumeListByCondition.do",method=RequestMethod.GET)
+	public ModelAndView getResumeListByCondition(ResumePojo searchResumePojo,@RequestParam(required=true,defaultValue="1") Integer page) {
 
-		String resumeName = null;
-		String resumeJobIntension = null;
-		//性别
-		String resumeSexStr = request.getParameter("resumeSex");
-		Integer resumeSex = Integer.valueOf(resumeSexStr);
 		
-		String resumeEducationStr = request.getParameter("resumeEducation");
-		Integer resumeEducation = Integer.valueOf(resumeEducationStr);
-		
-		String resumeWorkYearsStr = request.getParameter("resumeWorkYears");
-		Integer resumeWorkYears = Integer.valueOf(resumeWorkYearsStr);
-		
-		String resumeGraduateInstitution = null;
-		
-		try {
-			resumeGraduateInstitution = FormParameterUtil.changeCode(request.getParameter("resumeGraduateInstitution"));
-			resumeName = FormParameterUtil.changeCode(request.getParameter("resumeName"));
-			resumeJobIntension = FormParameterUtil.changeCode(request.getParameter("resumeJobIntension"));
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+	//	User user = (User) session.getAttribute("user");
+		User user = GetUser.getUser();
+		if (user != null) {
+			
+			if (searchResumePojo.getResumeSex() == null) {
+				searchResumePojo.setResumeSex(-1);
+			}
+			if (searchResumePojo.getResumeEducation() == null) {
+				searchResumePojo.setResumeEducation(-1);
+			}
+			if (searchResumePojo.getResumeWorkYears() == null) {
+				searchResumePojo.setResumeWorkYears(-1);
+			}
+
+			try {
+				if (searchResumePojo.getResumeName() != null) {
+					searchResumePojo.setResumeName(FormParameterUtil.changeCode(searchResumePojo.getResumeName()));
+				}
+				if (searchResumePojo.getResumeJobIntension() != null) {
+					searchResumePojo.setResumeJobIntension(FormParameterUtil.changeCode(searchResumePojo.getResumeJobIntension()));
+
+				}
+				if (searchResumePojo.getResumeGraduateInstitution() != null) {
+					searchResumePojo.setResumeGraduateInstitution(FormParameterUtil.changeCode(searchResumePojo.getResumeGraduateInstitution()));
+
+				}
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			
+			
+			Map<String,Object> model = new HashMap<String,Object>(); 
+			model = resumeService.getResumeListByCondition(user.getUserId(),searchResumePojo,page);		
+			return new ModelAndView("resume/resumeDisplay",model);
+			
+		} else {
+			
+			//调到登录页面
+			System.out.println("登录");
 		}
-
-		
-//		System.out.println(resumeName);
-//		System.out.println(resumeJobIntension);
-//		System.out.println(resumeSex);
-//		System.out.println(resumeEducation);
-//		System.out.println(resumeWorkYears);
-//		System.out.println(resumeGraduateInstitution);
-		
-		List<ResumePojo> list = resumeService.getResumeListByCondition(userId,resumeName, resumeJobIntension, resumeSex, resumeEducation, resumeWorkYears, resumeGraduateInstitution);
-		
-		System.out.println("getResumeListByCondition里得到的list长度为" + list.size());
-		
-		Map<String,Object> model = new HashMap<String,Object>(); 
-		
-		PageInfo<ResumePojo> pageResumePojo = new PageInfo<ResumePojo>(list);
-		model.put("page", pageResumePojo);
-		
-		model.put("resumeList", list);
-		
-		model.put("resumeName", resumeName);
-		model.put("resumeJobIntension", resumeJobIntension);
-		model.put("resumeSex", resumeSex);
-		model.put("resumeEducation", resumeEducation);
-		model.put("resumeWorkYears", resumeWorkYears);
-		model.put("resumeGraduateInstitution", resumeGraduateInstitution);
-		
-		return new ModelAndView("resume/resumeDisplay",model);
+		System.out.println("空");
+		return null;
 		
 	}
 	
-	@RequestMapping("/resumeDetails.do")
-	public ModelAndView resumeDetails(HttpServletRequest request,  HttpServletResponse response){
-		
-		String resumeIdStr = request.getParameter("resumeId_Details");
 	
-//		System.out.println();
+	@RequestMapping(value="/resumeDetails.do",method=RequestMethod.GET)
+	public ModelAndView resumeDetails(String resumeId_Details){
+		
 		//根据id取到要显示的resume
-		ResumePojo resumePojo = resumeService.getResumeDetailsById(resumeIdStr);
-		
-//		List<Pic> list = resumePojo.getlPics();
-//		
-//		for (Pic pic : list) {
-//			System.out.println(pic.toString());
-//		}
-		
 		Map<String,Object> model = new HashMap<String,Object>(); 
+		ResumePojo resumePojo = resumeService.getResumeDetailsById(resumeId_Details);	
+	
+		if(resumePojo != null){
+			for (int i=0;i<resumePojo.getlPics().size();i++){
+				resumePojo.getlPics().get(i).setpPic("https://kbase-1256168134.file.myqcloud.com/" + resumePojo.getlPics().get(i).getpPic());
+			}
+		}
 		model.put("resume", resumePojo);
 		
 		return new ModelAndView("resume/resumeDetails",model);
 		
 	}
 	
-	@RequestMapping("/resumeDelete.do")
-	public ModelAndView resumeDelete(HttpServletRequest request,  HttpServletResponse response){
-		
-		String resumeIdStr = request.getParameter("resumeId_Delete");
-		Integer resumeId = Integer.valueOf(resumeIdStr);
-		
-		String pageStr = request.getParameter("page");
-		Integer page = Integer.valueOf(pageStr);
-		
-		System.out.println(resumeId);
-		System.out.println("111");
-//		System.out.println();
+	@RequestMapping(value="/resumeDelete.do",method=RequestMethod.GET)
+	public ModelAndView resumeDelete(ResumePojo searchResumePojo,String resumeId_Delete,Integer page){
+
 		//根据id删除resume
-		resumeService.deleteResumeById(resumeId);
+		resumeService.deleteResumeById(resumeId_Delete);
 		//删除之后根据刚才所输入的信息遍历resumeList
-		
-		return getResumeListByCondition(request,page);
-		
-	}
-	
-	@RequestMapping("/resumeShare.do")
-	public ModelAndView resumeShare(HttpServletRequest request,  HttpServletResponse response){
-		
-		String resumeIdStr = request.getParameter("resumeId_Share");
-		Integer resumeId = Integer.valueOf(resumeIdStr);
-		
-		String pageStr = request.getParameter("page");
-		Integer page = Integer.valueOf(pageStr);
-		
-		String integralStr = request.getParameter("integral");
-		Integer integral = Integer.valueOf(integralStr);
-		
-		System.out.println(resumeId);
-		System.out.println(userId);
-		System.out.println(integral);
-		System.out.println("111");
-		
-		SharingCenter sharingCenter = null;
-		sharingCenter.setScUserId(userId);
-		sharingCenter.setScResumeId(resumeId);
-		sharingCenter.setScIntegral(integral);
-		
-		Integer integer = resumeService.shareResume(sharingCenter);	
-		
-		//返回主键 ，暂时没用
-		System.out.println("返回的主键为"+ sharingCenter.getScId());
-		//执行完插入后，要将RC_USER_RESUME表更新		
-		resumeService.updateUserResume(resumeId);
-		
-		
-		return getResumeListByCondition(request,page);
+		return getResumeListByCondition(searchResumePojo,page);
 		
 	}
 	
-	@RequestMapping("/resumeSharingCenter.do")
-	public ModelAndView resumeSharingCenter(){
+	@RequestMapping(value="/resumeShare.do",method=RequestMethod.GET)
+	public ModelAndView resumeShare(ResumePojo searchResumePojo,SharingCenter sharingCenter,Integer page){
 		
-		List<SharingCenterPojo> list = resumeService.getAllSharingResume();
-		//取到全部信息后，取当前用户所兑换过的简历列表
-		List<DownloadRecord> downloadRecords = resumeService.getDownloadRecordById(userId);
+		User user = GetUser.getUser();
 		
-		System.out.println(list.size());
-		System.out.println(downloadRecords.size());
-		
-		for(int i = 0; i < downloadRecords.size(); i++){
-			for(int j = 0; j < list.size(); j++){
-				if (downloadRecords.get(i).getDrSharingCenterId() == list.get(j).getScId()) {
-					//将当前用户兑换过的简历信息，在list里将标志位赋值为1，意思为当前用户已经兑换过，
-					//在前台显示 已兑换 按钮
-					
-					list.get(j).setFlag(1);
-				}
-			}
+		if (user != null) {
+			
+			sharingCenter.setScId(GetUuid.getuuid32());
+			//将从session得到的id set
+			sharingCenter.setScUserId(user.getUserId());
+			
+			//将共享信息插入  返回主键 ，暂时没用
+			Integer integer = resumeService.shareResume(sharingCenter);			
+			//执行完插入后，要将RC_USER_RESUME表更新		
+			resumeService.updateUserResume(sharingCenter.getScResumeId());
+			return getResumeListByCondition(searchResumePojo,page);	
+			
+		} else {
+			System.out.println("登录");
 		}
-		
-//		for (SharingCenterPojo sharingCenterPojo : list) {
-//			System.out.println(sharingCenterPojo.getScId()+ "---------"+ sharingCenterPojo.getFalg());
-//		}
-		
-		Map<String,Object> model = new HashMap<String,Object>(); 
-		model.put("sharingList", list);
-		
-		return new ModelAndView("resume/resumeSharingCenter",model);	
+		return null;	
 	}
 	
 	
-
-	
-	
-	
-
 	
 	
 	
@@ -252,7 +154,17 @@ public class ResumeController {
 	
 	
 	
-/*      zhang      */
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*      zhang      */
 	/**
 	 *   @Description   简历新增
 	 * 包括简历表新增、关联表新增、以及文件表(如果上传了文件)
@@ -322,31 +234,11 @@ public class ResumeController {
 				
 				
 				
-				
-				
-			/*	String fileway = Fileuploading(request);
-				if(StringUtils.isNotBlank(fileway)){
-				    //添加到数据库
-					
-	                String picId = getuuid32();
-//	    			request.getSession().getAttribute("userId");
-//	    			request.getSession().setAttribute("person", person);
-	                String piccresteuser = "zhang";
-	                
-	                int addpicresult = resumeService.resumeAddPic(picId,resumeId,piccresteuser,fileway);
-	                if(addpicresult==0){
-	                	//插入到文件表失败
-	                	model.put("msg","插入简历信息时出错");
-						return new ModelAndView("resume/resume_error",model);
-	                }
-//	                int addpicresult = resumeService.resumeAddPic(pic);
-				}*/
-				
 				String userResumeId = getuuid32();
 				//Session中取用户id		
-				String userId = "1b786bc41114f67ae059cea5f1789d";	
+			//	String userId = "1b786bc41114f67ae059cea5f1789d";	
+				String userId = GetUser.getUser().getUserId();
 //				request.getSession().getAttribute("userId");
-//				request.getSession().setAttribute("person", person);
 				//插入到连接表
 				int result = resumeService.resumeAddResumeUser(userResumeId,userId,resumeId);
 				if(result==0){
@@ -433,7 +325,7 @@ public class ResumeController {
 	@RequestMapping(value="/resume_update.do",method=RequestMethod.POST)
 	public ModelAndView resumeUpdate(@RequestParam(value="upload_file" ,required = false) MultipartFile file,Resume resume,Pic pic,String resumeBirthdayString,String changeway,HttpServletRequest request){
 		
-		System.out.println(file+"测试");
+	
 		Map<String,Object> model = new HashMap<String,Object>();
 	
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");//小写的mm表示的是分钟
@@ -610,5 +502,4 @@ public class ResumeController {
 	public static String getuuid32(){
 		return UUID.randomUUID().toString().replace("-", "").toLowerCase();
 	}
-	
 }
