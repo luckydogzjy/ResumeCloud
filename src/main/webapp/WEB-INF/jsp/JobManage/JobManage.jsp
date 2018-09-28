@@ -9,7 +9,7 @@
 		<title>ResumeCloud</title>
 					
 		<link rel="stylesheet" type="text/css" href="css/demo.css"/>
-		<!-- <link rel="stylesheet" type="text/css" href="css/jobCss/job.css"> -->
+		<link rel="stylesheet" type="text/css" href="css/jobCss/job.css">
 		
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
@@ -107,7 +107,7 @@
 										<div class="input-group">
 										
 											<span class="input-group-btn">
-												<button id="add" class="btn btn-default" type="button" style="margin-top:1px;margin-left:30px;">
+												<button id="add" class="btn btn-default" type="button" >
 													添加职位
 												</button>
 											</span>
@@ -126,7 +126,7 @@
 										
 											<input type="text" class="form-control" name="search" id="searchName" placeholder="请输入职位名称" >
 											<span class="input-group-btn">
-												<button id="search" class="btn btn-default" type="button" style="margin-bottom:10px;">
+												<button id="search" class="btn btn-default" type="button" >
 													搜索
 												</button>
 											</span>

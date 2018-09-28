@@ -1,4 +1,4 @@
-#job{
+/* #job{
 	width: 1067px;
 	height: 551px;
 }
@@ -80,11 +80,11 @@ td,th{
 
 tr:nth-child(2n){background:#d7d7d7;}
 
-/*#job-page{
+#job-page{
 	float: right;
 	width: 25px;
 	height: 120px;
-}*/
+}
 
 #page{
 	text-align: center;
@@ -160,4 +160,31 @@ tr:nth-child(2n){background:#d7d7d7;}
 a{
 	text-decoration:none; 
 	color:blue;
+}
+ */
+ 
+ a:link{
+	text-decoration:none;
+}
+a:visited{
+	text-decoration:none;
+}
+a:hover{
+	text-decoration:none;
+}
+a:active{
+	text-decoration:none;
+}
+
+#add{
+	margin-top:1px;
+	margin-left:30px;
+}
+
+#search{
+	margin-bottom:10px;
+}
+
+tr{
+	text-align:center;
 }
