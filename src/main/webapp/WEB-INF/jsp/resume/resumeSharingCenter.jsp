@@ -149,10 +149,10 @@
 												</c:if>
 												<!-- 如果该条简历不是自己共享的但是用户已经兑换过显示 姓名为超链接 -->
 												<c:if test="${sharing.flag == 1 && sharing.scUserId != userId}">
-													<a href="${pageContext.request.contextPath }/Resume/resumeDetails.do?resumeId_Details=${sharing.nowResumeId }">${sharing.resume.resumeName }</a>
+													<a href="${pageContext.request.contextPath }/resumeDetails.do?resumeId_Details=${sharing.scResumeId }">${sharing.resume.resumeName }</a>
 												</c:if>
 												<c:if test="${sharing.scUserId == userId}">
-													<a href="${pageContext.request.contextPath }/Resume/resumeDetails.do?resumeId_Details=${sharing.scResumeId }">${sharing.resume.resumeName }</a>
+													<a href="${pageContext.request.contextPath }/resumeDetails.do?resumeId_Details=${sharing.scResumeId }">${sharing.resume.resumeName }</a>
 												</c:if>
 											</td>
 											<td>
@@ -201,7 +201,7 @@
 											<td>
 												<!-- 如果该条简历不是自己共享的并且用户还未兑换过显示 兑换按钮 -->
 												<c:if test="${sharing.flag == 0 && sharing.scUserId != userId}">
-													<input type="button" id="getBtn" value="兑换" onclick="sharingGet('${sharing.scId }','${sharing.scResumeId }',${page.pageNum},${sharing.scIntegral })"/>
+													<input type="button" id="getBtn" value="兑换" onclick="sharingGet(${sharing.scId },${sharing.scResumeId },${page.pageNum},${sharing.scIntegral })"/>
 												</c:if>
 												<!-- 如果该条简历不是自己共享的但是用户已经兑换过显示 已兑换 按钮 -->
 												<c:if test="${sharing.flag == 1 && sharing.scUserId != userId}">

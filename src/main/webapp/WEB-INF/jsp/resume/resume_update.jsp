@@ -35,7 +35,9 @@
 
 						<%-- <form method="post" action="${pageContext.request.contextPath }/resume_update.do" enctype="multipart/form-data">  --%>
 
-						<form method="POST" action="${pageContext.request.contextPath }/Resume/resume_update.do" enctype="multipart/form-data">
+						<form method="POST" action="${pageContext.request.contextPath }/Resume/resume_update.do?page=${page}&resumeName=${resumeName}
+										&resumeJobIntension=${resumeJobIntension}&resumeSex=${resumeSex}&resumeEducation=${resumeEducation}
+										&resumeWorkYears=${resumeWorkYears}&resumeGraduateInstitution=${resumeGraduateInstitution}" enctype="multipart/form-data">
 
 							<table border="0">
 

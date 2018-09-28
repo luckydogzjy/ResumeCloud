@@ -85,7 +85,7 @@
 	</select>
 	
 	
-<!-- 	<resultMap type="com.qc.rc.entity.DownloadRecord" id="getDownloadRecord">
+	<resultMap type="com.qc.rc.entity.DownloadRecord" id="getDownloadRecord">
 		
 		<id column="DR_ID" property="drId"></id>
 		<result column="DR_USER_ID" property="drUserId"></result>
@@ -95,14 +95,13 @@
 		<result column="DR_DELETE_FLAG" property="drDeleteFlag"></result>
 			
 	</resultMap>
-	查找当前用户曾经兑换过的简历
+	<!-- 查找当前用户曾经兑换过的简历 -->
 	<select id="getDownloadRecordById" resultMap="getDownloadRecord">
 		SELECT 
 		DR_ID,DR_USER_ID,DR_SHARING_CENTER_ID
 		FROM RC_DOWNLOAD_RECORD
 		WHERE DR_USER_ID = #{userId }
-	</select> -->	
-	
+	</select>	
 	<!-- 兑换次数+1 -->
 	<update id="updateDownloadCount">
 		UPDATE RC_SHARING_CENTER

@@ -5,8 +5,8 @@ import java.util.Date;
 
 public class Pic {
 	
-	private String pId;
-	private String pResumeId;
+	private Integer pId;
+	private Integer pResumeId;
 	private String pPic;  //图片路径
 	
 	private String pCreateUser;
@@ -22,16 +22,16 @@ public class Pic {
 				+ ", pCreateTime=" + pCreateTime + ", pUpdateUser=" + pUpdateUser + ", pUpdateTime=" + pUpdateTime
 				+ ", pDeleteFlag=" + pDeleteFlag + "]";
 	}
-	public String getpId() {
+	public Integer getpId() {
 		return pId;
 	}
-	public void setpId(String pId) {
+	public void setpId(Integer pId) {
 		this.pId = pId;
 	}
-	public String getpResumeId() {
+	public Integer getpResumeId() {
 		return pResumeId;
 	}
-	public void setpResumeId(String pResumeId) {
+	public void setpResumeId(Integer pResumeId) {
 		this.pResumeId = pResumeId;
 	}
 	public String getpPic() {
@@ -80,7 +80,7 @@ public class Pic {
 	 * @param pUpdateTime
 	 * @param pDeleteFlag
 	 */
-	public Pic(String pId, String pResumeId, String pPic, String pCreateUser, Date pCreateTime, String pUpdateUser,
+	public Pic(Integer pId, Integer pResumeId, String pPic, String pCreateUser, Date pCreateTime, String pUpdateUser,
 			Date pUpdateTime, Date pDeleteFlag) {
 		super();
 		this.pId = pId;

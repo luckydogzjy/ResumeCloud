@@ -5,8 +5,8 @@ import java.util.Date;
 import com.qc.rc.common.Util;
 
 public class Interview {
-	private String interviewId;//id
-	private String interviewResumeId;//面试人id
+	private Integer interviewId;//id
+	private Integer interviewResumeId;//面试人id
 	private String interviewJob;//面试职位
 	private Date interviewTime;//面试时间
 	private String interviewAssociateUsername;//联系人
@@ -20,19 +20,19 @@ public class Interview {
 	private String interviewUpdateUser;//面试更新人
 	private Date interviewUpdateTime;//面试更新时间
 	private Integer interviewDeleteFlag;//删除标志
-	private String interviewUserId;//userid
+	private Integer interviewUserId;//userid
 	
 	
-	public String getInterviewId() {
+	public Integer getInterviewId() {
 		return interviewId;
 	}
-	public void setInterviewId(String interviewId) {
+	public void setInterviewId(Integer interviewId) {
 		this.interviewId = interviewId;
 	}
-	public String getInterviewResumeId() {
+	public Integer getInterviewResumeId() {
 		return interviewResumeId;
 	}
-	public void setInterviewResumeId(String interviewResumeId) {
+	public void setInterviewResumeId(Integer interviewResumeId) {
 		this.interviewResumeId = interviewResumeId;
 	}
 	public String getInterviewJob() {
@@ -113,17 +113,17 @@ public class Interview {
 	public void setInterviewDeleteFlag(Integer interviewDeleteFlag) {
 		this.interviewDeleteFlag = interviewDeleteFlag;
 	}
-	public String getInterviewUserId() {
+	public Integer getInterviewUserId() {
 		return interviewUserId;
 	}
-	public void setInterviewUserId(String interviewUserId) {
+	public void setInterviewUserId(Integer interviewUserId) {
 		this.interviewUserId = interviewUserId;
 	}
-	public Interview(String interviewId, String interviewResumeId, String interviewJob, Date interviewTime,
+	public Interview(Integer interviewId, Integer interviewResumeId, String interviewJob, Date interviewTime,
 			String interviewAssociateUsername, String interviewAssociatePhone, String interviewAddress,
 			String interviewInfo, Integer interviewStatus, String interviewRecodeInfo, String interviewCreateUser,
 			Date interviewCreateTime, String interviewUpdateUser, Date interviewUpdateTime, Integer interviewDeleteFlag,
-			String interviewUserId) {
+			Integer interviewUserId) {
 		super();
 		this.interviewId = interviewId;
 		this.interviewResumeId = interviewResumeId;

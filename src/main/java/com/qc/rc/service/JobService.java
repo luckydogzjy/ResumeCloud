@@ -1,6 +1,6 @@
 package com.qc.rc.service;
 
-import java.util.List;
+import java.util.Map;
 
 import com.qc.rc.entity.Job;
 
@@ -36,7 +36,7 @@ public interface JobService {
 	 * @param jobName
 	 * @return
 	 */
-	public List<Job> jobGetByName(Integer userId,String jobName);
+	public Map<String, Object> jobGetByName(Integer userId,String jobName,Integer page);
 	/**
 	 * 查看职位详情
 	 * @param jobId

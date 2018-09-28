@@ -174,7 +174,7 @@
 						<input type="submit" id="search_button" value="搜索" />
 					</div>
 					<div id="addBtn">
-						<a href="${pageContext.request.contextPath}/Resume/tiaozhuan_add.do"><input type="button" id="add_button" value="新增"/></a>
+						<a  href="${pageContext.request.contextPath}/Resume/tiaozhuan_add.do"><input type="button" id="add_button" value="新增"/></a>
 					</div>
 					
 					<div id="table">
@@ -260,10 +260,10 @@
 										
 
 										<td>
-											<input type="button" id="updateBtn" value="修改" onclick="resumeUpdate('${resume.resumeId }',${page.pageNum})"/>
+											<input type="button" id="updateBtn" value="修改" onclick="resumeUpdate(${resume.resumeId },${page.pageNum})"/>
 										
 										
-											<input type="button" id="deleteBtn" value="删除" onclick="resumeDelete('${resume.resumeId }',${page.pageNum})" />
+											<input type="button" id="deleteBtn" value="删除" onclick="resumeDelete(${resume.resumeId },${page.pageNum})" />
 										
 											<!-- 如果面试情况为待面试，则面试按钮不可点 -->
 											<c:if test="${resume.interview.interviewStatus == 2}">
@@ -275,15 +275,15 @@
 										
 										
 											<!--如果简历是自己录入的(0),并且没没有被共享过(0) 则按钮为共享 -->
-											<c:if test="${resume.userResume.urResumeGetway == '0' &&  resume.userResume.urResumeShareFlag == 0}">
-												<input type="button" id="sharingBtn" value="共享" onclick="resumeShare('${resume.resumeId }',${page.pageNum})"/>
+											<c:if test="${resume.userResume.urResumeGetway == 0 &&  resume.userResume.urResumeShareFlag == 0}">
+												<input type="button" id="sharingBtn" value="共享" onclick="resumeShare(${resume.resumeId },${page.pageNum})"/>
 											</c:if> 
 											<!-- 如果简历是自己录入的(0),并且已经被共享过(1) 则按钮为已共享 -->
-											<c:if test="${resume.userResume.urResumeGetway == '0' &&  resume.userResume.urResumeShareFlag == 1}">
+											<c:if test="${resume.userResume.urResumeGetway == 0 &&  resume.userResume.urResumeShareFlag == 1}">
 												<input type="button" id="NoBtn" value="已共享" disabled="disabled" />
 											</c:if>
 											<!-- 如果简历是在共享中心兑换的(1), 则按钮为不可共享 --> 
-											<c:if test="${resume.userResume.urResumeGetway != '0' &&  resume.userResume.urResumeShareFlag == 1}">
+											<c:if test="${resume.userResume.urResumeGetway != 0 &&  resume.userResume.urResumeShareFlag == 1}">
 												<input type="button" id="NoBtn" value="不可共享" disabled="disabled"/>
 											</c:if>
 										</td>

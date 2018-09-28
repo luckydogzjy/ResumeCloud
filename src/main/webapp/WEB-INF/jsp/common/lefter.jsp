@@ -52,7 +52,7 @@
 				<div id="left-item-quit" class="left-item">
 					<div class="left-item-box">
 					<img class="left-item-pic" src="${pageContext.request.contextPath}/img/u19.png" />
-					<a class="left-item-a" href="">退出登录</a>
+					<a class="left-item-a" href="#">退出登录</a>
 					</div>
 				</div>
 			</div>

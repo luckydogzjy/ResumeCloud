@@ -1,49 +1,4 @@
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-	</head>
-	<link rel="stylesheet" type="text/css" href="css/demo.css"/>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<body>
-		<div id="header">
-		<jsp:include page="header.jsp" flush="true"/>
-		</div>
-		<div id="lefter">
-		<jsp:include page="lefter.jsp" flush="true"/>
-		</div>
-		
-		
-		<div id="right">
-			<div id="right-box" style="position:relative;">
-			
-				<div style="position: absolute;left:50%;top:50%;margin-left:-100px; margin-top:-100px;">
-					<form action="${pageContext.request.contextPath}/jobAdd.do" method="POST">
-			
-						职位名称:<input type="text"  name="name"><br>
-						职位数量:<input type="number" name="count" min="0"><br>
-						职位薪资:<input type="number" name="salary" min="0"><br>
-						截止时间:<input type="date" name="endTime" ><br>
-						职位介绍:<textarea name="introduciton" ></textarea><br>
-						任职要求:<textarea name="condition" ></textarea><br>
-						<input type="submit" value="提交"><input type="reset" value="重置">
-			
-					</form>
-				</div>
-				
-			</div>
-		</div>
-	</body>
-</html>
- --%>
- 
- 
- <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -99,7 +54,7 @@
 						<div id="jobItro">
 							<font>职位介绍:</font>
 						</div>
-						<textarea name="introduciton" ></textarea><br>
+						<textarea name="introduction" ></textarea><br>
 					</div>
 					<div id="jobCondition">
 						<div  id="jobCod" >

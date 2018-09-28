@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.qc.rc.common.FormParameterUtil;
-import com.qc.rc.common.GetUser;
 import com.qc.rc.entity.SharingCenter;
 import com.qc.rc.entity.User;
 import com.qc.rc.entity.pojo.ResumePojo;
@@ -35,7 +34,7 @@ public class SharingCenterController {
 	@RequestMapping(value="/getSharingResumeListByCondition.do",method=RequestMethod.GET)
 	public ModelAndView getSharingResumeListByCondition(ResumePojo searchResumePojo,@RequestParam(required=true,defaultValue="1") Integer page) {
 	
-		User user = GetUser.getUser();
+		user.setUserId(2);
 		//	User user = (User) session.getAttribute("user");
 		
 		if (user != null) {
@@ -79,7 +78,8 @@ public class SharingCenterController {
 	@RequestMapping(value="/exchangeResume.do",method=RequestMethod.GET)
 	public ModelAndView exchangeResume(ResumePojo searchResumePojo,SharingCenter sharingCenter,@RequestParam(required=true,defaultValue="1") Integer page) {
 		
-		User user = GetUser.getUser();
+		user.setUserId(2);
+		user.setUserName("ww");;
 		try {
 			if (user != null) {
 				sharingCenterService.exchangeResume(user, searchResumePojo, sharingCenter);

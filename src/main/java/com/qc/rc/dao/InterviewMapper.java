@@ -7,16 +7,15 @@ import org.apache.ibatis.session.RowBounds;
 
 import com.qc.rc.entity.Interview;
 import com.qc.rc.entity.pojo.InterviewPojo;
-import com.qc.rc.entity.pojo.ResumeInterviews;
 
 public interface InterviewMapper {
 	
 //	根据多个条件查询所有面试信息返回数量
-	Integer selectCount(@Param("userId")String userId,@Param("startTime") Date startTime,
+	Integer selectCount(@Param("userId")Integer userId,@Param("startTime") Date startTime,
 			@Param("overTime")Date overTime, @Param("interviewJob")String interviewJob, @Param("interviewInfo")String interviewInfo,@Param("sort")Integer sort); 
 
 	//根据条件和userid查找当前用户所有的interview 分页
-	List<InterviewPojo> selectByCondition(@Param("userId")String userId, @Param("startTime")Date startTime,
+	List<InterviewPojo> selectByCondition(@Param("userId")Integer userId, @Param("startTime")Date startTime,
 			@Param("overTime")Date overTime, @Param("interviewJob")String interviewJob, @Param("interviewInfo")String interviewInfo,@Param("sort")Integer sort,@Param("status") Integer status);
 
 	//插入interviewPojo	
@@ -30,7 +29,4 @@ public interface InterviewMapper {
 	
 	//根据ResumeId查询简历
 	int updateInterviewsByResumeId(InterviewPojo interviewPojo);
-	
-	//根据ResumeId查询所有简历
-	ResumeInterviews getResumeInterviewsByRId(@Param("resumeId")String resumeId);
 }
