@@ -16,10 +16,10 @@ import com.qc.rc.entity.pojo.ResumeInterviews;
 public interface InterviewService {
 
 //	根据条件和userid查找当前用户所有的interview
-	public PageInfo<InterviewPojo> selectByCondition(Integer pageNum, Integer userId, String startTime,
+	public PageInfo<InterviewPojo> selectByCondition(Integer pageNum, String userId, String startTime,
 			String overTime, String interviewJob, String interviewInfo,Integer sort,Integer status) throws ParseException;
 //	添加面试
-	public Integer addInterview(Integer interviewResumeId,String interviewJob,String interviewTime,
+	public Integer addInterview(String interviewResumeId,String interviewJob,String interviewTime,
 			String interviewAssociateUsername,String interviewAssociatePhone,String interviewAddress,String interviewInfo,
 			Resume resume,User user) throws ParseException;
 //	删除面试
@@ -29,5 +29,5 @@ public interface InterviewService {
 	public ServerResponse<InterviewPojo> getInterviewByResumeId(Integer ResumeId);
 	
 	//根据ResumeId查询所有面试信息
-	public ResumeInterviews getResumeInterviewsByRId(Integer ResumeId);
+	public ResumeInterviews getResumeInterviewsByRId(String resumeId);
 }

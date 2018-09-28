@@ -25,26 +25,25 @@
 			location.href="${pageContext.request.contextPath}/Interview/selectByCondition.do";
 		}
 		
-		function godetail(resumeId){
-			location.href="${pageContext.request.contextPath}/Interview/resumeInterviews.do?resumeId="+resumeId;
-		}
-		
 		function sub(){
 			$("#actionform").submit();
 		}
-		function del(interviewId){
+		function del(index){
 		var msg = "确认删除？";
 		if(confirm(msg) == true){
-			document.getElementById(interviewId).parentElement.remove();
+			var interviewId=document.getElementById(index).value;
+			var delid="index"+index;
+			document.getElementById(delid).parentElement.remove(); 
 			$.ajax({
 				type:'post',
 			    url:'${pageContext.request.contextPath}/Interview/deleteById.do',	
 				data:'id='+interviewId,
 				success:function(data){
 					if(data == 1){
-						
 						alert("删除成功");
-						
+					}
+					else{
+						alert("删除失败");
 					}
 				} 
 			});
@@ -156,7 +155,7 @@
 										</th>
 										<th colspan="2">操作</th>
 									</tr>
-									<c:forEach items="${pageInfo.list}" var="interview">
+									<c:forEach items="${pageInfo.list}" var="interview" begin="0" step="1" varStatus="status" >
 										<tr>
 											<td class="normal">
 												<font size="2">
@@ -180,10 +179,12 @@
 													<c:if test="${interview.interviewStatus==3}">失败</c:if>
 												</font>
 											</td>
-											<td class="right" id="${interview.interviewId}">
+											<td class="right" id="index${status.index}">
+												<input type="hidden" value ="${interview.interviewId}" id="${status.index}">
 												<a href="updateById.do?id=${interview.interviewId}"><input type="button" value="修改" id="updateBtn" /></a>
-												<input type="button" value="删除" id="deleteBtn" onclick="del(${interview.interviewId})" />
-												<input type="button" value="面试结果" id="interviewBtn" onclick="godetail(${interview.resume.resumeId})" />
+												<input type="button" value="删除" id="deleteBtn" onclick="del(${status.index})" />
+												<a href="resumeInterviews.do?resumeId=${interview.resume.resumeId}"><input type="button" value="面试结果" id="interviewBtn" /></a>
+																			
 											</td>
 										</tr>
 

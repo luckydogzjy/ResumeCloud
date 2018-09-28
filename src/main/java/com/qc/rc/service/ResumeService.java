@@ -49,7 +49,7 @@ public interface ResumeService {
 	 * @param resume_id
 	 * @return
 	 */
-	public Resume resumeUpdateSelect(String resume_id);
+	public Resume getResumeById(String resume_id);
 
 	/**
 	 * 文件表更新

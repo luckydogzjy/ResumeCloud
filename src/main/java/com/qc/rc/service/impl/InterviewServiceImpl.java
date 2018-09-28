@@ -37,7 +37,7 @@ public class InterviewServiceImpl implements InterviewService {
      * @param sort 时间升降排序
      * 
      */
-	public PageInfo<InterviewPojo> selectByCondition(Integer pageNum, Integer userId, String startTime,
+	public PageInfo<InterviewPojo> selectByCondition(Integer pageNum, String userId, String startTime,
 			String overTime, String interviewJob, String interviewInfo,Integer sort,Integer status) throws ParseException {
 		Date st = null;
 		Date ot = null;
@@ -66,7 +66,7 @@ public class InterviewServiceImpl implements InterviewService {
 		
 	}
 	
-	public Integer addInterview(Integer interviewResumeId,String interviewJob,String interviewTime,
+	public Integer addInterview(String interviewResumeId,String interviewJob,String interviewTime,
 			String interviewAssociateUsername,String interviewAssociatePhone,String interviewAddress,String interviewInfo,
 			Resume resume,User user) throws ParseException {
 		InterviewPojo iPojo = new InterviewPojo();
@@ -109,7 +109,7 @@ public class InterviewServiceImpl implements InterviewService {
 	}
 
 
-	public ResumeInterviews getResumeInterviewsByRId(Integer ResumeId) {
+	public ResumeInterviews getResumeInterviewsByRId(String ResumeId) {
 		ResumeInterviews resumeInterviews= interviewMapper.getResumeInterviewsByRId(ResumeId);
 		return resumeInterviews;
 	}

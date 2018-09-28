@@ -20,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageInfo;
 import com.qc.rc.common.FormParameterUtil;
+import com.qc.rc.common.GetUser;
+import com.qc.rc.common.GetUuid;
 import com.qc.rc.common.ServerResponse;
 import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.User;
@@ -29,20 +31,17 @@ import com.qc.rc.entity.pojo.ResumeInterviews;
 import com.qc.rc.service.InterviewService;
 import com.qc.rc.service.ResumeService;
 
-
-
-
 @Controller
 @RequestMapping("Interview/")
 public class InterviewController {
 	private static Logger logger = Logger.getLogger(InterviewController.class.getName());
-	
-	static Integer userId = 1001;	
 	@Autowired  
 	private InterviewService iInterviewService;
 	
 	@Autowired 
 	private ResumeService resumeService;
+	
+	private static User user = GetUser.getUser();
 	
 	@RequestMapping("selectByCondition.do")
 	public ModelAndView selectByCondition(String pageNum,String interviewInfo,
@@ -81,7 +80,7 @@ public class InterviewController {
 				sta = Integer.valueOf(status);
 			}
 			
-			PageInfo<InterviewPojo> pageInfo = iInterviewService.selectByCondition(pn, userId, startTime, overTime,
+			PageInfo<InterviewPojo> pageInfo = iInterviewService.selectByCondition(pn, user.getUserId(), startTime, overTime,
 					 interviewJob, interviewInfo, st,sta);
 			model.put("pageInfo", pageInfo);
 			model.put("startTime", startTime);
@@ -91,8 +90,7 @@ public class InterviewController {
 			model.put("sort", st);
 			model.put("status", sta);
 			return new ModelAndView("interviewJsps/showAllInterviews",model);
-			
-			
+
 		} catch (ParseException e) {
 			logger.debug("日期类型不匹配");
 			model.put("message", "日期类型不匹配");
@@ -106,11 +104,10 @@ public class InterviewController {
 			logger.debug("不支持的字符类型转整型");
 			model.put("message", "不支持的字符类型转整型");
 		}
-		return new ModelAndView("interviewJsps/error",model);
-		
-		
-		
+		return new ModelAndView("interviewJsps/error",model);	
 	}
+	
+	
 //	页面跳转
 	@RequestMapping("addNewInterview.do")
 	public ModelAndView addNewInterview(String resumeId,HttpServletRequest request){
@@ -118,9 +115,7 @@ public class InterviewController {
 		logger.debug("a3s2d13as2d");
 		try {
 			if (StringUtils.isNotBlank(resumeId)) {
-				Integer rid = Integer.valueOf(resumeId);
-				Resume resume = resumeService.getResumeDetailsById(rid);
-				model.put("resume", resume);
+				model =  resumeService.getResumeDetailsById(resumeId);
 				return new ModelAndView("interviewJsps/addnewinterview",model);
 	
 			}else {
@@ -148,9 +143,8 @@ public class InterviewController {
 		Map<String,Object> model = new HashMap<String,Object>();
 		try {
 //			临时设置user  应从缓存中得到数据
-			User user =	new User();
-			user.setUserId(1001);
-			user.setUserName("LING");
+			User user =	GetUser.getUser();
+
 
 			String errorMsg = "";
 			if(StringUtils.isBlank(resumeId)){
@@ -191,10 +185,9 @@ public class InterviewController {
 				return new ModelAndView("interviewJsps/error",model);
 			}
 //			从前台获取id查询resume
-			Integer rid = Integer.valueOf(resumeId);
-			Resume resume = resumeService.getResumeDetailsById(rid);
+			Resume resume = resumeService.getResumeById(resumeId);
 
-			Integer result = iInterviewService.addInterview(rid, FormParameterUtil.changeCode(interviewJob), 
+			Integer result = iInterviewService.addInterview(resumeId, FormParameterUtil.changeCode(interviewJob), 
 					FormParameterUtil.changeCode(interviewTime), FormParameterUtil.changeCode(interviewAssociateUsername), FormParameterUtil.changeCode(interviewAssociatePhone),FormParameterUtil.changeCode(interviewAddress) , FormParameterUtil.changeCode(interviewInfo), resume, user);
 			if(result==0){
 				model.put("message","添加面试失败");
@@ -215,7 +208,7 @@ public class InterviewController {
 							logger.debug("发送短信到"+resumePhone);
 							logger.debug(interviewMessage);
 						}
-						return new ModelAndView("redirect:/Interview/selectByCondition.do?userId="+userId+"&sort=1",model);
+						return new ModelAndView("redirect:/Interview/selectByCondition.do",model);
 						//return new ModelAndView("redirect:/Interview/showAllInterviews.do",model);
 					}else {
 						model.put("resume", resume);
@@ -233,7 +226,7 @@ public class InterviewController {
 						logger.debug("发送短信到"+resumePhone);
 						logger.debug(interviewMessage);
 					}
-					return new ModelAndView("redirect:/Interview/selectByCondition.do?userId="+userId,model);
+					return new ModelAndView("redirect:/Interview/selectByCondition.do",model);
 //					转发到详情页面
 //					return new ModelAndView("redirect:/Interview/showInterviewDetail.do?interviewId="+iPojo.getInterviewId(),model);
 				}
@@ -261,9 +254,6 @@ public class InterviewController {
 		Map<String,Object> model = new HashMap<String,Object>();
 		try {
 //			临时设置user  应从缓存中得到数据
-			User user =	new User();
-			user.setUserId(1001);
-			user.setUserName("LING");
 			
 			String errorMsg = "";
 
@@ -319,11 +309,8 @@ public class InterviewController {
 		
 //			创建UserResume对象	插入数据库
 			if(resultCount != 0){
-
-				UserResume ur = new UserResume();
-				ur.setUrResumeId(resume.getResumeId());
-				ur.setUrUesrId(userId);
-				int result = resumeService.resumeAddResumeUser(ur);
+				
+				int result = resumeService.resumeAddResumeUser(GetUuid.getuuid32(), user.getUserId(), resume.getResumeId());
 				if(result !=0){
 					
 					result = iInterviewService.addInterview(resume.getResumeId(), FormParameterUtil.changeCode(interviewJob), 
@@ -347,7 +334,7 @@ public class InterviewController {
 									logger.debug("发送短信到"+resumePhone);
 									logger.debug(interviewMessage);
 								}
-								return new ModelAndView("redirect:/Interview/selectByCondition.do?userId="+userId,model);
+								return new ModelAndView("redirect:/Interview/selectByCondition.do",model);
 								//return new ModelAndView("redirect:/Interview/showAllInterviews.do",model);
 							}else {
 								model.put("resume", resume);
@@ -364,7 +351,7 @@ public class InterviewController {
 								logger.debug("发送短信到"+resumePhone);
 								logger.debug(interviewMessage);
 							}
-							return new ModelAndView("redirect:/Interview/selectByCondition.do?userId="+userId,model);
+							return new ModelAndView("redirect:/Interview/selectByCondition.do",model);
 //							转发到详情页面
 //							return new ModelAndView("redirect:/Interview/showInterviewDetail.do?interviewId="+iPojo.getInterviewId(),model);
 						}
@@ -417,12 +404,14 @@ public class InterviewController {
 		Map<String,Object> model = new HashMap<String,Object>();
 		try {
 			if(StringUtils.isBlank(resumeId)){
-				model.put("errormsg", "resumeId为空");
+				model.put("message", "resumeId为空");
 				return new ModelAndView("interviewJsps/error",model);
 			}else {
-				Integer rid = Integer.valueOf(resumeId);
-				ResumeInterviews resumeInterviews = iInterviewService.getResumeInterviewsByRId(rid);
-				System.out.println(resumeInterviews.getResumeName());
+				ResumeInterviews resumeInterviews = iInterviewService.getResumeInterviewsByRId(resumeId);
+				if(StringUtils.isBlank(resumeInterviews.getResumeName())){
+					model.put("message", "不存在的resumeId");
+					return new ModelAndView("interviewJsps/error",model);
+				}
 				model.put("resumeInterviews", resumeInterviews);
 				return new ModelAndView("interviewJsps/RISdetail",model);	
 			}

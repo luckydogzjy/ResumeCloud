@@ -1,11 +1,13 @@
 package com.qc.rc.entity.pojo;
 
+import java.util.Date;
 import java.util.List;
 
 import com.qc.rc.entity.Interview;
 import com.qc.rc.entity.Resume;
 
 public class ResumeInterviews extends Resume{
+
 	private List<Interview> interviews;
 
 	public List<Interview> getInterviews() {
