@@ -55,6 +55,12 @@
 		<link rel="stylesheet" type="text/css" href="css/demo.css"/>
 		<link rel="stylesheet" type="text/css" href="css/jobCss/add.css">
 		
+		
+		<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js"></script>
+ 		<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
+		<script src="${pageContext.request.contextPath}/bootstrap/js/jquery-3.3.1.min.js"></script>
+		
+		
 		<script type="text/javascript">
 		
 				function backout(){

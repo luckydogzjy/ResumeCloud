@@ -197,7 +197,7 @@
 		</div>
 		
 		
-		<div id="page">
+		<div id="page" class="pagination pagination-lg">
 			<span>当前第${page.pageNum}页，一共${page.pages}页</span>
 				<span>
 					<a href="${pageContext.request.contextPath}/JobManage.do?page=${page.firstPage}">首页</a>
@@ -205,10 +205,19 @@
 			        <a href="${pageContext.request.contextPath}/JobManage.do?page=${page.nextPage}">下一页</a>
 			        <a href="${pageContext.request.contextPath}/JobManage.do?page=${page.lastPage}">尾页</a>			 
            </span>  
-           
+            
 				
 		</div>
 		
+		<!--<ul class="pagination pagination-lg">
+			<li><a href="#">&laquo;</a></li>
+		    <li><a href="#">1</a></li>
+		    <li><a href="#">2</a></li>
+		    <li><a href="#">3</a></li>
+		    <li><a href="#">4</a></li>
+		    <li><a href="#">5</a></li>
+		    <li><a href="#">&raquo;</a></li>
+		</ul><br>-->
 		
 		
 		</div>
