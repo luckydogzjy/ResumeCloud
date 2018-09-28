@@ -6,22 +6,6 @@ import java.util.Date;
 import org.springframework.stereotype.Component;
 
 
-
-
-/*CREATE TABLE "RC_USER" 
-(	"USER_ID" NUMBER(6,0), 
-	"USER_PHONE" VARCHAR2(11 BYTE), 
-	"USER_PASSWORD" VARCHAR2(20 BYTE), 
-	"USER_NAME" VARCHAR2(20 BYTE), 
-	"USER_SEX" NUMBER(1,0), 
-	"USER_COMPANY" VARCHAR2(50 BYTE), 
-	"USER_BIRTHDAY" DATE, 
-	"USER_PIC" BLOB, 
-	"USER_INTEGRAL" NUMBER(10,0), 
-	"CREATE_TIME" DATE DEFAULT sysdate, 
-	"UPDATE_TIME" DATE, 
-	"USER_STATUS" NUMBER(1,0) DEFAULT 0*/
-
 @Component
 public class User {
 	

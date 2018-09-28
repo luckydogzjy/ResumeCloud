@@ -23,7 +23,7 @@ public interface InterviewService {
 			String interviewAssociateUsername,String interviewAssociatePhone,String interviewAddress,String interviewInfo,
 			Resume resume,User user) throws ParseException;
 //	删除面试
-	public Integer deleteInterview(Integer interviewId);
+	public Integer deleteInterview(String interviewId);
 	
 	//根据ResumeId查询详细信息
 	public ServerResponse<InterviewPojo> getInterviewByResumeId(Integer ResumeId);

@@ -5,7 +5,7 @@ import java.util.Date;
 import com.qc.rc.common.Util;
 
 public class Interview {
-	private Integer interviewId;//id
+	private String interviewId;//id
 	private Integer interviewResumeId;//面试人id
 	private String interviewJob;//面试职位
 	private Date interviewTime;//面试时间
@@ -23,10 +23,10 @@ public class Interview {
 	private Integer interviewUserId;//userid
 	
 	
-	public Integer getInterviewId() {
+	public String getInterviewId() {
 		return interviewId;
 	}
-	public void setInterviewId(Integer interviewId) {
+	public void setInterviewId(String interviewId) {
 		this.interviewId = interviewId;
 	}
 	public Integer getInterviewResumeId() {
@@ -119,7 +119,7 @@ public class Interview {
 	public void setInterviewUserId(Integer interviewUserId) {
 		this.interviewUserId = interviewUserId;
 	}
-	public Interview(Integer interviewId, Integer interviewResumeId, String interviewJob, Date interviewTime,
+	public Interview(String interviewId, Integer interviewResumeId, String interviewJob, Date interviewTime,
 			String interviewAssociateUsername, String interviewAssociatePhone, String interviewAddress,
 			String interviewInfo, Integer interviewStatus, String interviewRecodeInfo, String interviewCreateUser,
 			Date interviewCreateTime, String interviewUpdateUser, Date interviewUpdateTime, Integer interviewDeleteFlag,

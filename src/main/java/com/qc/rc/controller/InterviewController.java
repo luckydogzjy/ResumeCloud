@@ -391,7 +391,10 @@ public class InterviewController {
 	
 	@RequestMapping("deleteById.do")
 	@ResponseBody
-	public Integer deleteById(Integer id){
+	public Integer deleteById(String id){
+		if (StringUtils.isBlank(id)) {
+			return 0;
+		}
 		Integer result = iInterviewService.deleteInterview(id);
 		return result;
 		

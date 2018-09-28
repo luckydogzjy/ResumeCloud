@@ -105,7 +105,7 @@
   	insert into RC_INTERVIEW(INTERVIEW_ID,INTERVIEW_RESUME_ID,INTERVIEW_JOB,INTERVIEW_TIME,INTERVIEW_ASSOCIATE_USERNAME
   	,INTERVIEW_ASSOCIATE_PHONE,INTERVIEW_ADDRESS,INTERVIEW_INFO,INTERVIEW_STATUS,INTERVIEW_CREATE_USER,INTERVIEW_CREATE_TIME
   	,INTERVIEW_DELETE_FLAG,INTERVIEW_USER_ID) 
-  		values(RC_INTERVIEW_SEQUENCE.nextval,#{interviewResumeId},#{interviewJob},#{interviewTime},#{interviewAssociateUsername},
+  		values(#{interviewId},#{interviewResumeId},#{interviewJob},#{interviewTime},#{interviewAssociateUsername},
   		#{interviewAssociatePhone},#{interviewAddress},#{interviewInfo},#{interviewStatus},#{interviewCreateUser},
   		#{interviewCreateTime},#{interviewDeleteFlag},#{interviewUserId})
   	</insert>

@@ -6,8 +6,11 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.alibaba.fastjson.serializer.UUIDCodec;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.qc.rc.common.GetUuid;
 import com.qc.rc.common.PageMessage;
 import com.qc.rc.common.ServerResponse;
 import com.qc.rc.common.Util;
@@ -67,6 +70,7 @@ public class InterviewServiceImpl implements InterviewService {
 			String interviewAssociateUsername,String interviewAssociatePhone,String interviewAddress,String interviewInfo,
 			Resume resume,User user) throws ParseException {
 		InterviewPojo iPojo = new InterviewPojo();
+		iPojo.setInterviewId(GetUuid.getuuid32());
 		iPojo.setInterviewResumeId(interviewResumeId);
 		iPojo.setInterviewJob(interviewJob);
 		iPojo.setInterviewTime(InterviewDateUtil.strToDate(interviewTime));
@@ -85,7 +89,7 @@ public class InterviewServiceImpl implements InterviewService {
 		return	interviewMapper.addInterview(iPojo);
 	}
 
-	public Integer deleteInterview(Integer interviewId){
+	public Integer deleteInterview(String interviewId){
 		InterviewPojo iPojo = new InterviewPojo();
 		iPojo.setInterviewId(interviewId);
 		iPojo.setInterviewUpdateUser("LING");
