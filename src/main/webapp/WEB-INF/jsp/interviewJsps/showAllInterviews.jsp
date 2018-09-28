@@ -40,6 +40,9 @@
 				data:'id='+interviewId,
 				success:function(data){
 					if(data == 1){
+						var t = ${pageInfo.total}-1;
+						var msg = "共检索到"+t+"条数据";
+						$("#total").html(msg);
 						alert("删除成功");
 					}
 					else{
@@ -196,7 +199,7 @@
 								
 							
 							<div id="message">
-								<span class="color :lightblue">
+								<span id ="total" class="color :lightblue">
 								共检索到${pageInfo.total}条数据
 								</span>
 							</div>

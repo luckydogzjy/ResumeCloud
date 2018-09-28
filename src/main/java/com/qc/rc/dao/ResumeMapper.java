@@ -36,4 +36,7 @@ public interface ResumeMapper {
 
 	Resume selectResumeById(String resumeId);
 	
+	//ling
+	int addResume(Resume resume);
+
 }

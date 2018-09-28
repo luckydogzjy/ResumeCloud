@@ -143,8 +143,11 @@ public class ResumeServiceImpl implements ResumeService {
 		return result;
 	}
 
-	
-	
+	//ling
+	public int resumeAddfromInterview(Resume resume) {	
+		Integer resultcount = resumeMapper.addResume(resume);
+		return resultcount;	
+	}
 	
 	
 

@@ -297,16 +297,16 @@ public class InterviewController {
 				return new ModelAndView("interviewJsps/error",model);
 			}
 			
-			logger.debug(resumeName+resumePhone+interviewJob+interviewTime+interviewAddress+interviewAssociatePhone+interviewAssociateUsername);
+			
 //			封装数据成resume 在数据库中插入返回resumeid
 			Resume resume = new Resume();
-			
+			resume.setResumeId(GetUuid.getuuid32());
 			resume.setResumeName(FormParameterUtil.changeCode(resumeName));
 			resume.setResumePhone(FormParameterUtil.changeCode(resumePhone));
 			resume.setResumeJobIntension(FormParameterUtil.changeCode(interviewJob));
 			resume.setResumeCreateUser(user.getUserName());
 		
-			int resultCount = resumeService.resumeAdd(resume);
+			int resultCount = resumeService.resumeAddfromInterview(resume);
 		
 //			创建UserResume对象	插入数据库
 			if(resultCount != 0){
