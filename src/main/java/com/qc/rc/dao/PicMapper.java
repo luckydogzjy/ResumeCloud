@@ -13,4 +13,6 @@ public interface PicMapper {
 	int resumeUpdatePic(Pic pic);
 
 	int resumeUpdateAddPic(Pic pic);
+
+	int deletePicById(String resumeId);
 }

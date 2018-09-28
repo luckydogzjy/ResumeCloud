@@ -38,7 +38,7 @@ public class SharingCenterPojo extends SharingCenter{
 	 * @param scDeleteFlag
 	 * @param resume
 	 */
-	public SharingCenterPojo(Integer scId, Integer scUserId, Integer scResumeId, Integer scIntegral,
+	public SharingCenterPojo(Integer scId, String scUserId, Integer scResumeId, Integer scIntegral,
 			Integer scDownloadCount, Date scCreateTime, Date scUpdateTime, Integer scDeleteFlag, Resume resume) {
 		super(scId, scUserId, scResumeId, scIntegral, scDownloadCount, scCreateTime, scUpdateTime, scDeleteFlag);
 		this.resume = resume;

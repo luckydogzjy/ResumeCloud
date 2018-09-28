@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 public class Resume {
 	
-	private Integer resumeId;
+	private String resumeId;
 	private String resumeName;
 	private Integer resumeSex;
 	private Date resumeBirthday;
@@ -25,10 +25,10 @@ public class Resume {
 	private String resumeUpdateUser;
 	private Date resumeUpdateTime; 
 	private Integer resumeDeleteFlag;
-	public Integer getResumeId() {
+	public String getResumeId() {
 		return resumeId;
 	}
-	public void setResumeId(Integer resumeId) {
+	public void setResumeId(String resumeId) {
 		this.resumeId = resumeId;
 	}
 	public String getResumeName() {
@@ -156,7 +156,7 @@ public class Resume {
 	 * @param resumeUpdateTime
 	 * @param resumeDeleteFlag
 	 */
-	public Resume(Integer resumeId, String resumeName, Integer resumeSex, Date resumeBirthday, String resumePhone,
+	public Resume(String resumeId, String resumeName, Integer resumeSex, Date resumeBirthday, String resumePhone,
 			String resumeEmail, String resumeAddress, String resumeGraduateInstitution, Integer resumeEducation,
 			String resumeJobIntension, String resumeSelfEvaluation, String resumeWorkExperience,
 			Integer resumeWorkYears, String resumeCreateUser, Date resumeCreateTime, String resumeUpdateUser,

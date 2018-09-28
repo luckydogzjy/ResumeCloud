@@ -260,10 +260,10 @@
 										
 
 										<td>
-											<input type="button" id="updateBtn" value="修改" onclick="resumeUpdate(${resume.resumeId },${page.pageNum})"/>
+											<input type="button" id="updateBtn" value="修改" onclick="resumeUpdate('${resume.resumeId }',${page.pageNum})"/>
 										
 										
-											<input type="button" id="deleteBtn" value="删除" onclick="resumeDelete(${resume.resumeId },${page.pageNum})" />
+											<input type="button" id="deleteBtn" value="删除" onclick="resumeDelete('${resume.resumeId }',${page.pageNum})" />
 										
 											<!-- 如果面试情况为待面试，则面试按钮不可点 -->
 											<c:if test="${resume.interview.interviewStatus == 2}">

@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 
 public class SharingCenter {
 	
-	private String scId;
+	private Integer scId;
 	private String scUserId;
-	private String scResumeId;
+	private Integer scResumeId;
 	private Integer scIntegral;
 	private Integer scDownloadCount;
 	
@@ -16,23 +16,22 @@ public class SharingCenter {
 	private Date scUpdateTime;
 	private Integer scDeleteFlag;
 	
-
-	public String getScId() {
+	public Integer getScId() {
 		return scId;
 	}
-	public void setScId(String scId) {
+	public void setScId(Integer scId) {
 		this.scId = scId;
 	}
-	public String getScUserId() {
+	public Integer getScUserId() {
 		return scUserId;
 	}
-	public void setScUserId(String scUserId) {
-		this.scUserId = scUserId;
+	public void setScUserId(String userId) {
+		this.scUserId = userId;
 	}
-	public String getScResumeId() {
+	public Integer getScResumeId() {
 		return scResumeId;
 	}
-	public void setScResumeId(String scResumeId) {
+	public void setScResumeId(Integer scResumeId) {
 		this.scResumeId = scResumeId;
 	}
 	public Integer getScIntegral() {
@@ -65,10 +64,6 @@ public class SharingCenter {
 	public void setScDeleteFlag(Integer scDeleteFlag) {
 		this.scDeleteFlag = scDeleteFlag;
 	}
-
-	
-	
-	
 	/**
 	 * @param scId
 	 * @param scUserId
@@ -79,8 +74,8 @@ public class SharingCenter {
 	 * @param scUpdateTime
 	 * @param scDeleteFlag
 	 */
-	public SharingCenter(String scId, String scUserId, String scResumeId, Integer scIntegral, Integer scDownloadCount,
-			Date scCreateTime, Date scUpdateTime, Integer scDeleteFlag) {
+	public SharingCenter(Integer scId, String scUserId, Integer scResumeId, Integer scIntegral,
+			Integer scDownloadCount, Date scCreateTime, Date scUpdateTime, Integer scDeleteFlag) {
 		super();
 		this.scId = scId;
 		this.scUserId = scUserId;
@@ -94,11 +89,4 @@ public class SharingCenter {
 	public SharingCenter(){
 		super();
 	}
-	@Override
-	public String toString() {
-		return "SharingCenter [scId=" + scId + ", scUserId=" + scUserId + ", scResumeId=" + scResumeId + ", scIntegral="
-				+ scIntegral + ", scDownloadCount=" + scDownloadCount + ", scCreateTime=" + scCreateTime
-				+ ", scUpdateTime=" + scUpdateTime + ", scDeleteFlag=" + scDeleteFlag + "]";
-	}
-	
 }

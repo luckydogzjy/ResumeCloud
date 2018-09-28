@@ -14,13 +14,13 @@ import com.qc.rc.entity.pojo.SharingCenterPojo;
 
 public interface ResumeService {
 	//返回全部简历
-	public List<ResumePojo> getAllResume(Integer userId);
+	public List<ResumePojo> getAllResume(String userId);
 	//条件查询返回简历list
-	public List<ResumePojo> getResumeListByCondition(Integer userId,String resumeName,String resumeJobIntension,Integer resumeSex,
+	public List<ResumePojo> getResumeListByCondition(String userId,String resumeName,String resumeJobIntension,Integer resumeSex,
 			Integer resumeEducation,Integer resumeWorkYears,String resumeGraduateInstitution);
 	
 	//根据id返回resume表的全部详细信息
-	public ResumePojo getResumeDetailsById(Integer resumeId);
+	public ResumePojo getResumeDetailsById(String string);
 	//根据id删除resume信息
 	public void deleteResumeById(Integer resumeId);
 	
@@ -34,7 +34,7 @@ public interface ResumeService {
 	public List<SharingCenterPojo> getAllSharingResume();
 	
 	//显示当前用户所兑换过的简历列表
-	public List<DownloadRecord> getDownloadRecordById(Integer userId);
+	public List<DownloadRecord> getDownloadRecordById(String userId);
 	
 	
 	/*   zhang   */
@@ -44,9 +44,15 @@ public interface ResumeService {
 	 * */
 	public int resumeAdd(Resume resume);
 
+	/*
+	 * 简历表更新
+	 * */
 	public int resumeUpdate(Resume resume);
 
-	public Resume resumeUpdateSelect(Integer resume_id);
+	/*
+	 * 简历表信息查询
+	 * */
+	public Resume resumeUpdateSelect(String resume_id);
 	
 	/*
 	 * 文件表更新
@@ -56,16 +62,19 @@ public interface ResumeService {
 	/*
 	 * 简历 用户关联表增加
 	 * */
-	public int resumeAddResumeUser(int userResumeId, int userId, int resumeId);
+	public int resumeAddResumeUser(String userResumeId, String userId, String resumeId);
 	
 	/*
 	 * 文件表新增
 	 * */
-	public int resumeAddPic(int picId, int resumeId, String piccresteuser, String fileway);
+	public int resumeAddPic(String picId, String resumeId, String piccresteuser, String fileway);
 	
 	/*
 	 * 文件表新增（更改方式为新增）
 	 * */
 	public int resumeUpdateAddPic(Pic pic);
+	
+	
+	public int deletePicById(String resumeId);
 	
 }
