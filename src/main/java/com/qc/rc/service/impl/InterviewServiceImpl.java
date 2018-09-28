@@ -114,4 +114,10 @@ public class InterviewServiceImpl implements InterviewService {
 		return resumeInterviews;
 	}
 
+
+	public Integer updateInteviewRecodeInfo(String interviewRecodeInfo, String interviewId) {
+
+		return interviewMapper.updateInteviewRecodeInfo(interviewRecodeInfo, interviewId);
+	}
+
 }

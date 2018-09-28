@@ -30,4 +30,6 @@ public interface InterviewService {
 	
 	//根据ResumeId查询所有面试信息
 	public ResumeInterviews getResumeInterviewsByRId(String resumeId);
+	//更新面试记录
+	public Integer updateInteviewRecodeInfo(String interviewRecodeInfo,String interviewId);
 }

@@ -137,12 +137,12 @@
 		    i.INTERVIEW_INFO = #{interviewInfo},
 		    i.INTERVIEW_UPDATE_TIME = sysdate,
 		    i.INTERVIEW_UPDATE_USER = 'jayne'
-		where i.INTERVIEW_RESUME_ID = #{interviewResumeId};
+		where i.INTERVIEW_RESUME_ID = #{interviewResumeId}
   	</update>
 
 
 	<select id="getResumeInterviewsByRId" resultMap="getResumeInterviewsById">
-    select r.RESUME_NAME,i.INTERVIEW_JOB,i.INTERVIEW_ADDRESS,i.INTERVIEW_TIME,i.INTERVIEW_STATUS,i.INTERVIEW_RECODE_INFO
+    select r.RESUME_NAME,i.INTERVIEW_ID,i.INTERVIEW_JOB,i.INTERVIEW_ADDRESS,i.INTERVIEW_TIME,i.INTERVIEW_STATUS,i.INTERVIEW_RECODE_INFO
 	
     from  RC_RESUME r join RC_INTERVIEW i
     on  r.RESUME_ID = i.INTERVIEW_RESUME_ID
@@ -152,5 +152,10 @@
 
   	</select> 
 	
+	<update id="updateInteviewRecodeInfo">
+  		update RC_INTERVIEW i
+		set i.INTERVIEW_RECODE_INFO= #{interviewRecodeInfo}
+		where i.INTERVIEW_ID = #{interviewId}
+  	</update>
   	
 </mapper>

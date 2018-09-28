@@ -30,6 +30,7 @@ import com.qc.rc.entity.pojo.InterviewPojo;
 import com.qc.rc.entity.pojo.ResumeInterviews;
 import com.qc.rc.service.InterviewService;
 import com.qc.rc.service.ResumeService;
+import com.sun.org.apache.xml.internal.security.Init;
 
 @Controller
 @RequestMapping("Interview/")
@@ -421,5 +422,19 @@ public class InterviewController {
 			model.put("message", "不支持的字符类型转整型");
 		}
 		return new ModelAndView("interviewJsps/error",model);
+	}
+	
+	
+	@RequestMapping("updateRecodeInfo.do") 
+	@ResponseBody
+	public Integer updateRecodeInfo(String interviewId,String recodeInfo){ 
+		Integer msg = -1;
+		if (StringUtils.isNotBlank(interviewId)) { 
+			System.out.println(interviewId+recodeInfo);
+			msg = iInterviewService.updateInteviewRecodeInfo(recodeInfo, interviewId);
+			
+		}
+		return msg;
+		
 	}
 }

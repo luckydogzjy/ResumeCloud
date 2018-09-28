@@ -33,4 +33,7 @@ public interface InterviewMapper {
 	
 	//根据ResumeId查询所有简历
 	ResumeInterviews getResumeInterviewsByRId(@Param("resumeId")String resumeId);
+	
+	//更新面试记录
+	Integer updateInteviewRecodeInfo(@Param("interviewRecodeInfo")String interviewRecodeInfo,@Param("interviewId")String interviewId);
 }
