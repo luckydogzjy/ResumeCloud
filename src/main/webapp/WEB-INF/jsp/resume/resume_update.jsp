@@ -168,8 +168,17 @@
 
 							<FONT id="right_fujia" size="6" color="#FF0000">附加信息</FONT>
 							<HR id="hengxian" size="4" width="300" noshade>
+							
+							<div id="update_wenjianxianshi">
+							<c:forEach items="${resume.lPics }" var="resumePic">
 
-							<input id="wenjian" type="file" name="file_03" onchange="promote();" />
+								 	<img id="tu" src="${resumePic.pPic }"  width="80" height="100"/>		
+							 </c:forEach>
+							</div>
+							
+							
+
+							<input id="wenjian" type="file" name="upload_file" onchange="promote();" />
 						
 							<font id="s9" size="2" color="red"></font>
 							<font id="s10" size="2" color="red"></font>
@@ -177,8 +186,8 @@
 							<table border="0" id="radioway">
 								<tr>
 									<td>
-							 			   <INPUT  name="changeway" type="radio" value="替换" checked>替换原有
-										   <INPUT  name="changeway" type="radio" value="新增">新增
+							 			   <INPUT  name="changeway" type="radio" value="新增" checked>新增
+										   <INPUT  name="changeway" type="radio" value="替换">替换原有
 									</td>
 								</tr>	
 							</table>

@@ -36,6 +36,12 @@
 	top: 120px;
 	width: 300px;
 }
+#update_wenjianxianshi{
+	position: absolute;
+	left: 650px;
+	width: 360px;
+	top: 240px;
+}
 #right_wenbenyu{
 	position:absolute;
   	left:360px;

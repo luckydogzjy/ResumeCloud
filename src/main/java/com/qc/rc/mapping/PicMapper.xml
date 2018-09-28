@@ -30,8 +30,7 @@
  	   0
  	  )
  	 </insert>
- 	 
- 	 
+ 
  	 
  	 
  	 <update id="resumeUpdatePic" parameterType="com.qc.rc.entity.Pic">
@@ -42,6 +41,14 @@
         
         where P_RESUME_ID = #{pResumeId}      
    	  <!-- where P_ID = #{pId} -->
+  </update>
+  
+  
+   <update id="deletePicById" parameterType="java.lang.String">
+    	update RC_PIC set  	 	
+     	P_DELETE_FLAG = 1,
+     	P_UPDATE_TIME = sysdate   
+        where P_RESUME_ID = #{pResumeId}      
   </update>
 
 </mapper>

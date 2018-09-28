@@ -31,7 +31,7 @@ public class ResumeServiceImpl implements ResumeService {
 
 	
 	
-	public List<ResumePojo> getAllResume(Integer userId) {
+	public List<ResumePojo> getAllResume(String userId) {
 		
 		List<ResumePojo> list = resumeMapper.getAllResume(userId);
 		
@@ -40,18 +40,21 @@ public class ResumeServiceImpl implements ResumeService {
 	}
 
 
+
 	
-	public List<ResumePojo> getResumeListByCondition(Integer userId,String resumeName, String resumeJobIntension, Integer resumeSex,
-			Integer resumeEducation, Integer resumeWorkYears, String resumeGraduateInstitution) {
-		
-		List<ResumePojo> list = resumeMapper.getResumeListByCondition(userId,resumeName, resumeJobIntension, resumeSex, resumeEducation, resumeWorkYears, resumeGraduateInstitution);
+	public List<ResumePojo> getResumeListByCondition(String userId, String resumeName, String resumeJobIntension,
+			Integer resumeSex, Integer resumeEducation, Integer resumeWorkYears, String resumeGraduateInstitution) {
+			List<ResumePojo> list = resumeMapper.getResumeListByCondition(userId,resumeName, resumeJobIntension, resumeSex, resumeEducation, resumeWorkYears, resumeGraduateInstitution);
 		
 		System.out.println("ResumeServiceImpl->getResumeListByCondition :::" + list.size());
 		
 		return list;
 	}
 	
-	public ResumePojo getResumeDetailsById(Integer resumeId){
+	
+	
+	
+	public ResumePojo getResumeDetailsById(String resumeId){
 		
 		resumePojo = resumeMapper.getResumeDetailsById(resumeId);
 		
@@ -79,7 +82,7 @@ public class ResumeServiceImpl implements ResumeService {
 		return resumeMapper.getAllSharingResume();
 	}
 	//显示当前用户所兑换过的简历列表
-	public List<DownloadRecord> getDownloadRecordById(Integer userId){
+	public List<DownloadRecord> getDownloadRecordById(String userId){
 		
 		return resumeMapper.getDownloadRecordById(userId);
 	}
@@ -106,7 +109,7 @@ public class ResumeServiceImpl implements ResumeService {
 	/*
 	 * 简历表信息查询
 	 * */
-	public Resume resumeUpdateSelect(Integer resumeId) {	
+	public Resume resumeUpdateSelect(String resumeId) {	
 		Resume resume = resumeMapper.selectResumeById(resumeId);
 		return resume;			
 	}
@@ -124,7 +127,7 @@ public class ResumeServiceImpl implements ResumeService {
 	/*
 	 * 简历 用户关联表增加
 	 * */
-	public int resumeAddResumeUser(int userResumeId, int userId, int resumeId) {
+	public int resumeAddResumeUser(String userResumeId, String userId, String resumeId) {
 		int result = userresumeMapper.resumeAddResumeUser(userResumeId,userId,resumeId);
 		return result;
 	}
@@ -132,7 +135,7 @@ public class ResumeServiceImpl implements ResumeService {
 	/*
 	 * 文件表新增
 	 * */
-	public int resumeAddPic(int picId, int resumeId, String piccresteuser, String fileway) {	
+	public int resumeAddPic(String picId, String resumeId, String piccresteuser, String fileway) {	
 		
 		int result = picMapper.resumeAddPic(picId,resumeId,piccresteuser,fileway);
 		
@@ -146,8 +149,13 @@ public class ResumeServiceImpl implements ResumeService {
 		int result = picMapper.resumeUpdateAddPic(pic);	
 		return result;
 	}
-	
-	
+
+
+	public int deletePicById(String resumeId) {
+		int result = picMapper.deletePicById(resumeId);	
+		return result;
+	}
+
 	
 	
 	

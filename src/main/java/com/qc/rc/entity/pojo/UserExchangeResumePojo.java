@@ -50,7 +50,7 @@ public class UserExchangeResumePojo extends Resume {
 		return "UserExchangeResumePojo [urResumeGetway=" + urResumeGetway + ", urUesrId=" + urUesrId + ", urResumeId="
 				+ urResumeId + ", urCreateTime=" + urCreateTime + ", userresume=" + userresume + "]";
 	}
-	public UserExchangeResumePojo(Integer resumeId, String resumeName, Integer resumeSex, Date resumeBirthday,
+	public UserExchangeResumePojo(String resumeId, String resumeName, Integer resumeSex, Date resumeBirthday,
 			String resumePhone, String resumeEmail, String resumeAddress, String resumeGraduateInstitution,
 			Integer resumeEducation, String resumeJobIntension, String resumeSelfEvaluation,
 			String resumeWorkExperience, Integer resumeWorkYears, String resumeCreateUser, Date resumeCreateTime,
@@ -70,7 +70,7 @@ public class UserExchangeResumePojo extends Resume {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public UserExchangeResumePojo(Integer resumeId, String resumeName, Integer resumeSex, Date resumeBirthday,
+	public UserExchangeResumePojo(String resumeId, String resumeName, Integer resumeSex, Date resumeBirthday,
 			String resumePhone, String resumeEmail, String resumeAddress, String resumeGraduateInstitution,
 			Integer resumeEducation, String resumeJobIntension, String resumeSelfEvaluation,
 			String resumeWorkExperience, Integer resumeWorkYears, String resumeCreateUser, Date resumeCreateTime,

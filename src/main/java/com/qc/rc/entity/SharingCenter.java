@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 public class SharingCenter {
 	
 	private Integer scId;
-	private Integer scUserId;
+	private String scUserId;
 	private Integer scResumeId;
 	private Integer scIntegral;
 	private Integer scDownloadCount;
@@ -22,11 +22,11 @@ public class SharingCenter {
 	public void setScId(Integer scId) {
 		this.scId = scId;
 	}
-	public Integer getScUserId() {
+	public String getScUserId() {
 		return scUserId;
 	}
-	public void setScUserId(Integer scUserId) {
-		this.scUserId = scUserId;
+	public void setScUserId(String userId) {
+		this.scUserId = userId;
 	}
 	public Integer getScResumeId() {
 		return scResumeId;
@@ -74,7 +74,7 @@ public class SharingCenter {
 	 * @param scUpdateTime
 	 * @param scDeleteFlag
 	 */
-	public SharingCenter(Integer scId, Integer scUserId, Integer scResumeId, Integer scIntegral,
+	public SharingCenter(Integer scId, String scUserId, Integer scResumeId, Integer scIntegral,
 			Integer scDownloadCount, Date scCreateTime, Date scUpdateTime, Integer scDeleteFlag) {
 		super();
 		this.scId = scId;

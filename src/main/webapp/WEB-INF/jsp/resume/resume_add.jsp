@@ -13,8 +13,24 @@
 		<script type="text/javascript" src="../js/resumeJs/resume-1-2.js"></script>
 </head>
 
+<script type="text/javascript">
+    function checkForm(){
+     var flag=true;
+     var message=form1.message.value;
+     if(message!='null'){
+      alert(message);
+      flag=false;
+     }
+     return flag;
+    }
+
+</script>
+
+
 
 	<body>
+	
+	<input type="hidden" name="message" value="<%=request.getAttribute("message") %>">
 
 		<div id="box">
 			<div id="header">
@@ -146,7 +162,7 @@
 
 							<FONT id="right_fujia" size="6" color="#FF0000">附加信息</FONT>
 							<HR id="hengxian" size="4" width="300" noshade>
-							<input id="wenjian" type="file" name="file_03" onchange="promote();" />
+							<input id="wenjian" type="file" name="upload_file" onchange="promote();" />
 							<font id="s9" size="2" color="red"></font>
 							<font id="s10" size="2" color="red"></font>
 

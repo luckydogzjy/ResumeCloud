@@ -4,9 +4,9 @@ import java.util.Date;
 
 public class UserResume {
 	
-		private Integer urId;
-		private Integer urUesrId;
-		private Integer urResumeId;
+		private String urId;
+		private String urUesrId;
+		private String urResumeId;
 		private Integer urResumeGetway;
 		private Integer urResumeShareFlag;
 		
@@ -14,22 +14,22 @@ public class UserResume {
 		private Date urCreateTime;
 		private Date urUpdateTime;
 		
-		public Integer getUrId() {
+		public String getUrId() {
 			return urId;
 		}
-		public void setUrId(Integer urId) {
+		public void setUrId(String urId) {
 			this.urId = urId;
 		}
-		public Integer getUrUesrId() {
+		public String getUrUesrId() {
 			return urUesrId;
 		}
-		public void setUrUesrId(Integer urUesrId) {
+		public void setUrUesrId(String urUesrId) {
 			this.urUesrId = urUesrId;
 		}
-		public Integer getUrResumeId() {
+		public String getUrResumeId() {
 			return urResumeId;
 		}
-		public void setUrResumeId(Integer urResumeId) {
+		public void setUrResumeId(String urResumeId) {
 			this.urResumeId = urResumeId;
 		}
 		public Integer getUrResumeGetway() {
@@ -71,7 +71,7 @@ public class UserResume {
 		 * @param urCreateTime
 		 * @param urUpdateTime
 		 */
-		public UserResume(Integer urUesrId, Integer urResumeId, Integer urResumeGetway, Integer urResumeShareFlag,
+		public UserResume(String urUesrId, String urResumeId, Integer urResumeGetway, Integer urResumeShareFlag,
 				Integer urDeleteFlag, Date urCreateTime, Date urUpdateTime) {
 			super();
 			this.urUesrId = urUesrId;

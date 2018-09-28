@@ -38,7 +38,7 @@ public class ResumePojo extends Resume {
 	 * @param lPics
 	 * @param lFiles
 	 */
-	public ResumePojo(Integer resumeId, String resumeName, Integer resumeSex, Date resumeBirthday, String resumePhone,
+	public ResumePojo(String resumeId, String resumeName, Integer resumeSex, Date resumeBirthday, String resumePhone,
 			String resumeEmail, String resumeAddress, String resumeGraduateInstitution, Integer resumeEducation,
 			String resumeJobIntension, String resumeSelfEvaluation, String resumeWorkExperience,
 			Integer resumeWorkYears, String resumeCreateUser, Date resumeCreateTime, String resumeUpdateUser,
