@@ -249,7 +249,17 @@
 	
 
 
-
+	<insert id="addResume" parameterType="com.qc.rc.entity.Resume" >
+    insert into RC_RESUME (RESUME_ID,RESUME_NAME, 
+      RESUME_PHONE, RESUME_JOB_INTENSION,RESUME_CREATE_USER,RESUME_CREATE_TIME,
+      RESUME_DELETE_FLAG)
+    values (#{resumeId},
+    #{resumeName}, 		
+	#{resumePhone}, 
+	#{resumeJobIntension}, 
+	#{resumeCreateUser},
+	sysdate,0)
+  	</insert>
 
 	
 	
