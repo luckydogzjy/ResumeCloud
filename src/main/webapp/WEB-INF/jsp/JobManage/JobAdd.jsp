@@ -54,6 +54,7 @@
 	</head>
 	
 	<body>
+	 <div id="box">
 		<div id="header">
 		<jsp:include page="../common/header.jsp" flush="true"/>
 		</div>
@@ -104,6 +105,7 @@
 				</div>
 			</form>
 			</div>
+		</div>
 		</div>
 	</body>
 </html>

@@ -24,8 +24,7 @@ public interface ResumeService {
 	//执行完插入共享中心的操作后，继续执行更新RC_USER_RESUME表，让其中的共享标志UR_RESUME_SHARE_FLAG设为1
 	public void  updateUserResume(String resumeId);
 	
-	//ling
-	public int resumeAddfromInterview(Resume resume);
+	
 	
 	
 	
@@ -88,6 +87,10 @@ public interface ResumeService {
 	public int resumeUpdateAddPic(Pic pic);
 	
 	public int deletePicById(String resumeId);
+
+	public int resumeAddfile(String picId, String resumeId, String piccresteuser, String filepath);
+
+	public int deleteFileById(String resumeId);
 	
 	
 }

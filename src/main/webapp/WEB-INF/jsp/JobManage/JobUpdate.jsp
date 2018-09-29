@@ -48,7 +48,7 @@
 		
 		
 		
-		
+		 <div id="box">
 		<div id="header">
 		<jsp:include page="../common/header.jsp" flush="true"/>
 		</div>
@@ -100,6 +100,7 @@
 					<input id="cancel" type="button" value="取消" onclick="backout()" />
 				</div>
 			</form>
+			</div>
 			</div>
 		</div>
 	</body>

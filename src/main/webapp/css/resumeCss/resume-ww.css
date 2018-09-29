@@ -19,6 +19,12 @@ a{
 	table-layout:fixed;
 	word-break:break-all;
 }
+#result_wenjianxianshi{
+	position: absolute;
+	left: 0px;
+	width: 360px;
+	top: 100px;
+}
 #table_pic{
 	width: 100px;
 	height: 100px;

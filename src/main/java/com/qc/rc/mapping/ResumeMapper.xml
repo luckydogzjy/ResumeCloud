@@ -105,7 +105,7 @@
 			<result column="P_PIC" property="pPic"></result>
 		</collection>
 		
-		<collection property="lFiles" ofType="com.qc.rc.entity.File">
+		<collection property="lFiles" ofType="com.qc.rc.entity.ResumeFile">
 			<id column="FID" property="fId"></id>
 			<result column="F_RESUME_ID" property="fResumeId"></result>			
 			<result column="F_FILE" property="fFile"></result>
@@ -246,17 +246,7 @@
     where RESUME_ID=#{resumeId}
 
  	</select> 
-	<insert id="addResume" parameterType="com.qc.rc.entity.Resume" >
-    insert into RC_RESUME (RESUME_ID,RESUME_NAME, 
-      RESUME_PHONE, RESUME_JOB_INTENSION,RESUME_CREATE_USER,RESUME_CREATE_TIME,
-      RESUME_DELETE_FLAG)
-    values (#{resumeId},
-    #{resumeName}, 		
-	#{resumePhone}, 
-	#{resumeJobIntension}, 
-	#{resumeCreateUser},
-	sysdate,0)
-  	</insert>
+	
 
 
 

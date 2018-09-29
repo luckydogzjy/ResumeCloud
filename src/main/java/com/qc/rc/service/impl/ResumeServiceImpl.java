@@ -143,11 +143,16 @@ public class ResumeServiceImpl implements ResumeService {
 		int result = picMapper.deletePicById(resumeId);	
 		return result;
 	}
-	
-	//ling
-	public int resumeAddfromInterview(Resume resume) {	
-		Integer resultcount = resumeMapper.addResume(resume);
-		return resultcount;	
+
+	public int resumeAddfile(String fileId, String resumeId, String filecresteuser, String filepath) {
+		int result = picMapper.resumeAddFile(fileId,resumeId,filecresteuser,filepath);	
+		return result;
 	}
+	
+	public int deleteFileById(String resumeId) {
+		int result = picMapper.deleteFileById(resumeId);	
+		return result;
+	}
+	
 
 }

@@ -53,7 +53,7 @@ public  class COSUtil {
     }
 
     //连接cos服务器
-    private  COSClient getCOSClient() {
+    private static  COSClient getCOSClient() {
         // 1 初始化用户身份信息(secretId, secretKey)
         COSCredentials cred = new BasicCOSCredentials(secretId, secretKey);
         // 2 设置bucket的区域, COS地域的简称请参照 https://cloud.tencent.com/document/product/436/6224
@@ -90,7 +90,7 @@ public  class COSUtil {
 
 
 
-    private String generatePresignedUrl(String key) throws CosClientException {
+    public static String generatePresignedUrl(String key) throws CosClientException {
         // 生成一个下载链接
         // bucket 的命名规则为{name}-{appid} ，此处填写的存储桶名称必须为此格式
         GeneratePresignedUrlRequest req = new GeneratePresignedUrlRequest(bucketName, key, HttpMethodName.GET);

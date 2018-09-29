@@ -8,6 +8,7 @@ import java.util.List;
 import com.qc.rc.entity.Interview;
 import com.qc.rc.entity.Pic;
 import com.qc.rc.entity.Resume;
+import com.qc.rc.entity.ResumeFile;
 import com.qc.rc.entity.UserResume;
 
 public class ResumePojo extends Resume {
@@ -43,7 +44,7 @@ public class ResumePojo extends Resume {
 			String resumeJobIntension, String resumeSelfEvaluation, String resumeWorkExperience,
 			Integer resumeWorkYears, String resumeCreateUser, Date resumeCreateTime, String resumeUpdateUser,
 			Date resumeUpdateTime, Integer resumeDeleteFlag, Interview interview, UserResume userResume,
-			List<Pic> lPics, List<File> lFiles) {
+			List<Pic> lPics, List<ResumeFile> lFiles) {
 		super(resumeId, resumeName, resumeSex, resumeBirthday, resumePhone, resumeEmail, resumeAddress,
 				resumeGraduateInstitution, resumeEducation, resumeJobIntension, resumeSelfEvaluation,
 				resumeWorkExperience, resumeWorkYears, resumeCreateUser, resumeCreateTime, resumeUpdateUser,
@@ -81,13 +82,13 @@ public class ResumePojo extends Resume {
 
 	//查询详情的图片和文件 一对多
 	private	List<Pic> lPics;
-	private List<File> lFiles;
+	private List<ResumeFile> lFiles;
 	
-	public List<File> getlFiles() {
+	public List<ResumeFile> getlFiles() {
 		return lFiles;
 	}
 
-	public void setlFiles(List<File> lFiles) {
+	public void setlFiles(List<ResumeFile> lFiles) {
 		this.lFiles = lFiles;
 	}
 

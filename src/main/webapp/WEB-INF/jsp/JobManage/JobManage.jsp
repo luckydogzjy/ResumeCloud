@@ -127,6 +127,7 @@
 	</head>
 
 	<body>
+	 <div id="box">
 
 		
 		<div id="header">
@@ -281,6 +282,7 @@
 		</ul><br>-->
 		
 		
+		</div>
 		</div>
 		</div>
 

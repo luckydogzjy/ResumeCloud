@@ -24,7 +24,9 @@
 			<div id="right">
 				<div id="right-box">
 					<div id="right_jiben"  style="text-align: left;" >
-						<FONT  size="6" color="#FF0000">基本信息</FONT>
+						<strong>
+						<FONT  size="6" color="#003366">基本信息</FONT>
+						</strong>
 
 						<HR size="4" width="" noshade>
 
@@ -117,21 +119,36 @@
 						 	</tr>
 
 						 </table>
-
-						 <FONT id="right_fujia" size="6" color="#FF0000">附加信息</FONT>
+						<strong>
+						 <FONT id="right_fujia" size="6" color="#003366">附加信息</FONT>
+						 </strong>
 						 <HR id="hengxian"	size="4" width="300" noshade>
-
-					 	<table id="table_pic_file" border="0">
-			
-					 		<tr>
-							 	<td height="35" colspan="2">简历图片</td>
-						 	</tr>							 
-							 	<div id="result_wenjianxianshi">
+							
+							<div id="result_wenjianxianshi">
+							<strong>
+							<FONT  size="4" color="#003366">简历图片:</FONT>
+							</strong>
+							<br>
 							<c:forEach items="${resume.lPics }" var="resumePic">
 
 								 	<img id="tu" src="${resumePic.pPic }"  width="80" height="100"/>		
 							 </c:forEach>
+							 <br>
+							 
+							<strong>
+							 <FONT  size="4" color="#003366">简历文件:</FONT>
+							 </strong>
+							 <br>
+						
+						 	 <UL>
+							 <c:forEach items="${resume.lFiles }" var="resumeFile" varStatus="i">				 	
+							 	 <LI> <a href="${resumeFile.fFile}">简历文件</a></LI>			 			 			
+						 	</c:forEach>
+						 	</UL>
 							</div>
+							
+							
+							
 
 						 </table>
 

@@ -4,10 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.qc.rc.entity.Pic;
 import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.SharingCenter;
-import com.qc.rc.entity.UserResume;
 import com.qc.rc.entity.pojo.ResumePojo;
 
 public interface ResumeMapper {
@@ -36,6 +34,4 @@ public interface ResumeMapper {
 
 	Resume selectResumeById(String resumeId);
 	
-	//ling
-	int addResume(Resume resume);
 }

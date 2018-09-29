@@ -40,6 +40,7 @@
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<body>
+	 <div id="box">
 		<div id="header">
 		<jsp:include page="../common/header.jsp" flush="true"/>
 		</div>
@@ -98,6 +99,7 @@
 			</div>
 			
 			</div>
+		</div>
 		</div>
 		
 	</body>
