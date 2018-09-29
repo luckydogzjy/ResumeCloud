@@ -87,6 +87,10 @@ public interface ResumeService {
 	public int resumeUpdateAddPic(Pic pic);
 	
 	public int deletePicById(String resumeId);
+
+	public int resumeAddfile(String picId, String resumeId, String piccresteuser, String filepath);
+
+	public int deleteFileById(String resumeId);
 	
 	
 }

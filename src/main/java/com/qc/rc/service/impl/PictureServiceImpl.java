@@ -25,15 +25,13 @@ public class PictureServiceImpl implements IPictureService{
     public String upload(MultipartFile file, String path){
     	//获取上传文件的原名
         String fileName =file.getOriginalFilename();
-        if(StringUtils.isBlank(fileName)){
-        	
+        if(StringUtils.isBlank(fileName)){    	
         	return null;
         }
         
         //获取文件扩展名
-        String fileExtensionName = fileName.substring(fileName.lastIndexOf(".")+1);
-        if(StringUtils.isBlank(fileExtensionName)){
-        	
+        String fileExtensionName = fileName.substring(fileName.lastIndexOf(".")+1);      
+        if(StringUtils.isBlank(fileExtensionName)){      	
         	return null;
         }
         
@@ -67,7 +65,6 @@ public class PictureServiceImpl implements IPictureService{
         }
     	
     	return targetFile.getName();
-        
-//        return targetFile.getName();
+
     }   
 }

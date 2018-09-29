@@ -121,30 +121,31 @@
 						 <FONT size="6" color="#FF0000">附加信息</FONT>
 						 <HR id="hengxian"	size="4" width="300" noshade>
 
-					 	<table id="table_pic_file" border="0">
-			
-					 		<tr>
-							 	<td height="35" >图片地址</td>
-						 	</tr>
-						 	<c:forEach items="${resume.lPics }" var="resumePic">
-							 	<tr>
-								 <!--	<td >${resumePic.pPic }</td>  -->
-									 <td ><img src="${resumePic.pPic }" id="table_pic" alt="图片"/></td>
-								 </tr>		
+					
+						<div id="result_wenjianxianshi">
+							<strong>
+							<FONT  size="4" color="#003366">简历图片:</FONT>
+							</strong>
+							<br>
+							<c:forEach items="${resume.lPics }" var="resumePic">
+
+								 	<img id="tu" src="${resumePic.pPic }"  width="80" height="100"/>		
 							 </c:forEach>
-
-						 	<tr>
-								 <td height="35">文件地址</td>
-							 </tr>
-
-							 <c:forEach items="${resume.lFiles }" var="resumeFile">
-							 	<tr>
-							 		<td >${resumeFile.fFile }</td>
-							 	</tr>		
+							 <br>
+							 
+							<strong>
+							 <FONT  size="4" color="#003366">简历文件:</FONT>
+							 </strong>
+							 <br>
+						
+						 	 <UL>
+							 <c:forEach items="${resume.lFiles }" var="resumeFile" varStatus="i">				 	
+							 	 <LI> <a href="${resumeFile.fFile}">简历文件</a></LI>			 			 			
 						 	</c:forEach>
-						 </table>
+						 	</UL>
+							</div>
 
-					   </div>
+				</div>
 					   <a href="javascript:history.back();"><input id="backbtn" type="button" value="返回"/></a>
 					
 					

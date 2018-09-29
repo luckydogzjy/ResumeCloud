@@ -105,7 +105,7 @@
 			<result column="P_PIC" property="pPic"></result>
 		</collection>
 		
-		<collection property="lFiles" ofType="com.qc.rc.entity.File">
+		<collection property="lFiles" ofType="com.qc.rc.entity.ResumeFile">
 			<id column="FID" property="fId"></id>
 			<result column="F_RESUME_ID" property="fResumeId"></result>			
 			<result column="F_FILE" property="fFile"></result>
