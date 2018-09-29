@@ -8,12 +8,14 @@
 		<meta charset="UTF-8">
 		<title>ResumeCloud</title>
 					
-		<link rel="stylesheet" type="text/css" href="css/demo.css"/>
+		<link rel="stylesheet" type="text/css" href="css/demo.css"/> 
+		<!-- <link rel="stylesheet" type="text/css" href="../css/demo.css"/> -->
+		
 		<link rel="stylesheet" type="text/css" href="css/jobCss/job.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">	
 		
-		<script type="text/javascript" src="js/jquery-2.1.1.js"></script>
+		<!-- <script type="text/javascript" src="js/jquery-2.1.1.js"></script> -->
 		<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js"></script>
  		<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
 		<script src="${pageContext.request.contextPath}/bootstrap/js/jquery-3.3.1.min.js"></script>
@@ -282,6 +284,6 @@
 		</div>
 		</div>
 
-
+	</div>
 	</body>
 </html>
