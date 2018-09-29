@@ -50,10 +50,10 @@
 		
 		
 		<div id="header">
-		<jsp:include page="header.jsp" flush="true"/>
+		<jsp:include page="../common/header.jsp" flush="true"/>
 		</div>
 		<div id="lefter">
-		<jsp:include page="lefter.jsp" flush="true"/>
+		<jsp:include page="../common/lefter.jsp" flush="true"/>
 		</div>
 		
 		
