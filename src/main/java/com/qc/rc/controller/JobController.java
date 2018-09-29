@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,12 +28,17 @@ public class JobController {
 //	private Integer userId = 1 ;
 	private String userId = GetUser.getUser().getUserId();
 	
-	private static String searchName = null;
+	//private static String searchName = null;
 	
 	@RequestMapping(value="/JobManage.do",method=RequestMethod.POST)
-	public ModelAndView ManageViewPost(String search,@RequestParam(required=true,defaultValue="1") Integer page){
+
+	public ModelAndView ManageViewPost(String searchName,@RequestParam(required=true,defaultValue="1") Integer page){
+
+		//searchName = search;
+
+		//searchName = req.getParameter("search");
 		
-		searchName = search;
+
 		
 		Map<String,Object> model = new HashMap<>();
 		Map<String,Object> map= jobService.jobGetByName(userId,searchName,page);		
@@ -47,7 +51,7 @@ public class JobController {
 	}
 	
 	@RequestMapping(value="/JobManage.do",method=RequestMethod.GET)
-	public ModelAndView ManageViewGet(@RequestParam(required=true,defaultValue="1") Integer page){
+	public ModelAndView ManageViewGet(String searchName,@RequestParam(required=true,defaultValue="1") Integer page){
 		
 		Map<String,Object> model = new HashMap<>();
 		Map<String,Object> map= jobService.jobGetByName(userId,searchName,page);		
