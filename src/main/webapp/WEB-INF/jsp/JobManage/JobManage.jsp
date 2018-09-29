@@ -224,11 +224,11 @@
 						<td style="text-align:center;">
 							<c:if test="${job.JOB_STATUS==1}">
 								<%-- onClick="location.href='${pageContext.request.contextPath}/jobChangeStatus.do?jobId=${job.JOB_ID}&jobStatus=${job.JOB_STATUS}'" --%>
-								<input class="btn btn-success active" id="button-status1" type="button" value="开启" onclick="jspopen(${job.JOB_ID},${job.JOB_STATUS})" />
+								<input class="btn btn-success active" id="button-status1" type="button" data-toggle="tooltip" data-placement="bottom" title="关闭该职位的招聘" value="开启" onclick="jspopen(${job.JOB_ID},${job.JOB_STATUS})" />
 							</c:if>
 							<c:if test="${job.JOB_STATUS==0}">
 				
-								<input class="btn btn-danger active" id="button-status0" type="button" value="关闭" onclick="showDiv(null,${job.JOB_ID},'<fmt:formatDate value="${job.JOB_END_TIME}" pattern="yyyy-MM-dd" />')"/>
+								<input class="btn btn-danger active" id="button-status0" type="button" data-toggle="tooltip" data-placement="bottom" title="开启该职位的招聘" value="关闭" onclick="showDiv(null,${job.JOB_ID},'<fmt:formatDate value="${job.JOB_END_TIME}" pattern="yyyy-MM-dd" />')"/>
 
 								
 								<%-- <input class="btn btn-danger active" id="button-status0" type="button" value="关闭" onClick="jspclose(${job.JOB_ID},${job.JOB_STATUS})"/> --%>
