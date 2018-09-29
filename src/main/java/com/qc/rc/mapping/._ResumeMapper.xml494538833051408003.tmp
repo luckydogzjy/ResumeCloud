@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qc.rc.dao.ResumeMapper">
+<!-- 	<resultMap id="ResumeMap" type="com.qc.rc.entity.Resume">
+		<constructor>
+			<idArg column="RESUME_ID" javaType="java.lang.Integer"
+				jdbcType="INTEGER" />
+			<arg column="RESUME_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+			<arg column="RESUME_SEX" javaType="java.lang.Integer" jdbcType="INTEGER" />
+			<arg column="RESUME_BIRTHDAY" javaType="java.util.Date" jdbcType="DATE" />
+			<arg column="RESUME_PHONE" javaType="java.lang.String" jdbcType="VARCHAR" />
+			<arg column="RESUME_EMAIL" javaType="java.lang.String" jdbcType="VARCHAR" />
+			<arg column="RESUME_ADDRESS" javaType="java.lang.String"
+				jdbcType="VARCHAR" />
+			<arg column="RESUME_GRADUATE_INSTITUTION" javaType="java.lang.String"
+				jdbcType="VARCHAR" />
+			<arg column="RESUME_EDUCATION" javaType="java.lang.Integer"
+				jdbcType="INTEGER" />
+			<arg column="RESUME_JOB_INTENSION" javaType="java.lang.String"
+				jdbcType="VARCHAR" />
+			<arg column="RESUME_SELF_EVALUATION" javaType="java.lang.String"
+				jdbcType="VARCHAR" />
+			<arg column="RESUME_WORK_EXPERIENCE" javaType="java.lang.String"
+				jdbcType="VARCHAR" />
+			<arg column="RESUME_WORK_YEARS" javaType="java.lang.Integer"
+				jdbcType="INTEGER" />
+			<arg column="RESUME_PIC_ID" javaType="java.lang.Integer"
+				jdbcType="INTEGER" />
+			<arg column="RESUME_FILE_ID" javaType="java.lang.Integer"
+				jdbcType="INTEGER" />
+			<arg column="RESUME_CREATE_USER" javaType="java.lang.String"
+				jdbcType="VARCHAR" />
+			<arg column="RESUME_CREATE_TIME" javaType="java.util.Date"
+				jdbcType="DATE" />
+			<arg column="RESUME_UPDATE_USER" javaType="java.lang.String"
+				jdbcType="VARCHAR" />
+			<arg column="RESUME_UPDATE_TIME" javaType="java.util.Date"
+				jdbcType="DATE" />
+			<arg column="RESUME_DELETE_FLAG" javaType="java.lang.Integer"
+				jdbcType="INTEGER" />
+		</constructor>
+	</resultMap>
+	<sql id="ResumeList">
+		RESUME_ID, RESUME_NAME, RESUME_SEX, RESUME_BIRTHDAY, RESUME_PHONE, RESUME_EMAIL,
+		RESUME_ADDRESS,
+		RESUME_GRADUATE_INSTITUTION, RESUME_EDUCATION
+	</sql> -->
+
+	<!--一条简历有一个面试结果，有一个获取方式  -->
+	<resultMap type="com.qc.rc.entity.pojo.ResumePojo" id="getResumeList">
+
+		<id column="RESUME_ID" property="resumeId"></id>
+		<result column="RESUME_NAME" property="resumeName"></result>
+		<result column="RESUME_SEX" property="resumeSex"></result>
+		<result column="RESUME_PHONE" property="resumePhone"></result>
+		<result column="RESUME_WORK_YEARS" property="resumeWorkYears"></result>
+		<result column="RESUME_GRADUATE_INSTITUTION" property="resumeGraduateInstitution"></result>
+		<result column="RESUME_EDUCATION" property="resumeEducation"></result>
+		<result column="RESUME_JOB_INTENSION" property="resumeJobIntension"></result>
+		<result column="RESUME_CREATE_TIME" property="resumeCreateTime"></result>
+
+		<association property="interview" javaType="com.qc.rc.entity.Interview">
+			<id column="INTERVIEW_ID" property="interviewId"></id>
+			<result column="INTERVIEW_STATUS" property="interviewStatus"></result>
+		</association>
+		
+		<association property="userResume" javaType="com.qc.rc.entity.UserResume">
+			<id column="UR_ID" property="urId"></id>
+			<result column="UR_USER_ID" property="urUesrId"></result>			
+			<result column="UR_RESUME_ID" property="urResumeId"></result>
+			<result column="UR_RESUME_GETWAT" property="urResumeGetway"></result>
+			<result column="UR_RESUME_SHARE_FLAG" property="urResumeShareFlag"></result>
+		</association>
+		
+	</resultMap> 
+<!-- 	
+	<resultMap type="com.qc.rc.entity.pojo.UserResumePojo" id="getResumeList">
+		
+		<id column="UR_ID" property="urId"></id>
+		<result column="UR_USER_ID" property="urUesrId"></result>			
+		<result column="UR_RESUME_ID" property="urResumeId"></result>
+		<result column="UR_RESUME_GETWAT" property="urResumeGetway"></result>
+		<result column="UR_RESUME_SHARE_FLAG" property="urResumeShareFlag"></result>
+		
+		<collection property="resumePojos" ofType="com.qc.rc.entity.pojo.ResumePojo" >
+			
+			<id column="RESUME_ID" property="resumeId"></id>
+			<result column="RESUME_NAME" property="resumeName"></result>
+			<result column="RESUME_SEX" property="resumeSex"></result>
+			<result column="RESUME_PHONE" property="resumePhone"></result>
+			<result column="RESUME_WORK_YEARS" property="resumeWorkYears"></result>
+			<result column="RESUME_GRADUATE_INSTITUTION" property="resumeGraduateInstitution"></result>
+			<result column="RESUME_EDUCATION" property="resumeEducation"></result>
+			<result column="RESUME_JOB_INTENSION" property="resumeJobIntension"></result>
+			<result column="RESUME_CREATE_TIME" property="resumeCreateTime"></result>
+			
+			<association property="interview" javaType="com.qc.rc.entity.Interview">
+				<id column="INTERVIEW_ID" property="interviewId"></id>
+				<result column="INTERVIEW_STATUS" property="interviewStatus"></result>
+			</association>
+	
+		</collection>
+		
+		
+		
+	</resultMap> -->
+	
+	<select id="getAllResume" resultMap="getResumeList">
+		SELECT
+		RESUME_ID,RESUME_NAME,RESUME_SEX,RESUME_PHONE,RESUME_WORK_YEARS,RESUME_GRADUATE_INSTITUTION,
+		RESUME_EDUCATION,RESUME_JOB_INTENSION,RESUME_CREATE_TIME,INTERVIEW_ID,INTERVIEW_STATUS,
+		UR_ID,UR_USER_ID,UR_RESUME_ID,UR_RESUME_GETWAT,UR_RESUME_SHARE_FLAG
+		FROM RC_RESUME LEFT JOIN RC_INTERVIEW 
+		ON RC_RESUME.RESUME_ID = RC_INTERVIEW.INTERVIEW_RESUME_ID,
+		RC_USER_RESUME
+		WHERE RC_RESUME.RESUME_ID = RC_USER_RESUME.UR_RESUME_ID 
+		AND RC_USER_RESUME.UR_USER_ID = #{userId }
+		AND RESUME_DELETE_FLAG = 0
+		ORDER BY RC_RESUME.RESUME_CREATE_TIME DESC 		
+	</select>
+	
+	
+	
+	
+	<select id="getResumeListByCondition" resultMap="getResumeList">
+		SELECT
+		RESUME_ID,RESUME_NAME,RESUME_SEX,RESUME_PHONE,RESUME_WORK_YEARS,RESUME_GRADUATE_INSTITUTION,
+		RESUME_EDUCATION,RESUME_JOB_INTENSION,RESUME_CREATE_TIME,INTERVIEW_ID,INTERVIEW_STATUS,
+		UR_ID,UR_USER_ID,UR_RESUME_ID,UR_RESUME_GETWAT,UR_RESUME_SHARE_FLAG
+		FROM RC_RESUME LEFT JOIN RC_INTERVIEW
+		ON RC_RESUME.RESUME_ID = RC_INTERVIEW.INTERVIEW_RESUME_ID,
+		RC_USER_RESUME
+		<where>
+			<if test="resumeName != null and  resumeName !='' ">
+				AND RESUME_NAME LIKE '%${resumeName}%'
+			</if>
+			<if test="resumeJobIntension != null and  resumeJobIntension != '' ">
+				AND RESUME_JOB_INTENSION LIKE '%${resumeJobIntension}%' 
+			</if>
+			<if test="resumeSex != -1">
+				AND RESUME_SEX LIKE '%${resumeSex}%'  
+			</if>
+			<if test="resumeEducation != -1">
+				AND RESUME_EDUCATION LIKE '%${resumeEducation}%'
+			</if>
+			
+			<if test="resumeWorkYears == 0">
+				AND RESUME_WORK_YEARS &gt;= 0 AND RESUME_WORK_YEARS &lt; 3
+			</if>
+			<if test="resumeWorkYears == 1">
+				AND RESUME_WORK_YEARS &gt;= 3 AND RESUME_WORK_YEARS &lt; 5
+			</if>
+			<if test="resumeWorkYears == 2">
+				AND RESUME_WORK_YEARS &gt;= 5 AND RESUME_WORK_YEARS &lt; 10
+			</if>
+			<if test="resumeWorkYears == 3">
+				AND RESUME_WORK_YEARS &gt;= 10
+			</if>
+			
+			<if test="resumeGraduateInstitution != null and  resumeGraduateInstitution != '' ">
+				AND RESUME_GRADUATE_INSTITUTION LIKE '%${resumeGraduateInstitution}%' 
+			</if>
+			AND RC_USER_RESUME.UR_USER_ID = #{userId }
+			AND RESUME_DELETE_FLAG = 0
+			AND RC_RESUME.RESUME_ID = RC_USER_RESUME.UR_RESUME_ID 
+			
+		</where>
+		ORDER BY RC_RESUME.RESUME_CREATE_TIME DESC
+	</select>
+	
+
+	<!--一条简历有多个图片，有多个文件  -->
+	<resultMap type="com.qc.rc.entity.pojo.ResumePojo" id="getResumeById">
+
+		<id column="RESUMEID" property="resumeId"></id>
+		<result column="RESUME_NAME" property="resumeName"></result>
+		<result column="RESUME_SEX" property="resumeSex"></result>
+		<result column="RESUME_BIRTHDAY" property="resumeBirthday"></result>
+		<result column="RESUME_PHONE" property="resumePhone"></result>
+		<result column="RESUME_EMAIL" property="resumeEmail"></result>
+		<result column="RESUME_ADDRESS" property="resumeAddress"></result>
+		
+		<result column="RESUME_GRADUATE_INSTITUTION" property="resumeGraduateInstitution"></result>
+		<result column="RESUME_EDUCATION" property="resumeEducation"></result>
+		<result column="RESUME_JOB_INTENSION" property="resumeJobIntension"></result>
+		<result column="RESUME_SELF_EVALUATION" property="resumeSelfEvaluation"></result>
+		<result column="RESUME_WORK_EXPERIENCE" property="resumeWorkExperience"></result>
+		<result column="RESUME_WORK_YEARS" property="resumeWorkYears"></result>
+		
+		<result column="RESUME_CREATE_TIME" property="resumeCreateTime"></result>
+
+		<collection property="lPics" ofType="com.qc.rc.entity.Pic">
+			<id column="PID" property="pId"></id>
+			<result column="P_RESUME_ID" property="pResumeId"></result>
+			<result column="P_PIC" property="pPic"></result>
+		</collection>
+		
+		<collection property="lFiles" ofType="com.qc.rc.entity.File">
+			<id column="FID" property="fId"></id>
+			<result column="F_RESUME_ID" property="fResumeId"></result>			
+			<result column="F_FILE" property="fFile"></result>
+		</collection>
+		
+	</resultMap> 
+		
+ 	<select id="getResumeDetailsById" resultMap="getResumeById">
+		SELECT
+		RESUME_ID RESUMEID,RESUME_NAME,RESUME_SEX,RESUME_BIRTHDAY,RESUME_PHONE,RESUME_EMAIL,RESUME_ADDRESS,
+		RESUME_GRADUATE_INSTITUTION,RESUME_EDUCATION,RESUME_JOB_INTENSION,RESUME_SELF_EVALUATION,
+		RESUME_WORK_EXPERIENCE,RESUME_WORK_YEARS,
+		P_ID PID,P_RESUME_ID,P_PIC,
+		F_ID FID,F_RESUME_ID,F_FILE
+		FROM RC_RESUME 
+    	LEFT JOIN  RC_PIC  ON RC_RESUME.RESUME_ID = RC_PIC.P_RESUME_ID
+    	LEFT JOIN  RC_FILE ON RC_RESUME.RESUME_ID = RC_FILE.F_RESUME_ID
+		WHERE RESUME_ID = #{resumeId }
+	</select> 
+	<!-- 删除操作是将deleteFlag赋值为1 -->
+	<update id="deleteResumeById" >
+		UPDATE RC_RESUME
+		SET RESUME_DELETE_FLAG = 1
+		WHERE RESUME_ID = #{resumeId }
+	</update>
+	
+	<!--点击共享按钮后的操作 将信息插入共享中心表里、同时插入  
+		同时需要执行更新RC_USER_RESUME表，让其中的共享标志UR_RESUME_SHARE_FLAG设为1
+	-->
+	<insert id="shareResume" parameterType="com.qc.rc.entity.SharingCenter">
+
+		INSERT INTO RC_SHARING_CENTER
+		(SC_ID,SC_USER_ID,SC_RESUME_ID,SC_INTEGRAL,SC_DOWNLOAD_COUNT)
+		VALUES(
+		SHARING_CENTER_SEQUENCE.NEXTVAL,
+		#{scUserId,jdbcType=INTEGER },
+		#{scResumeId,jdbcType=INTEGER },
+		#{scIntegral,jdbcType=INTEGER },
+		0
+		)
+		<!--  -->
+		<selectKey keyProperty="scId" order="AFTER" resultType="java.lang.Integer">
+			SELECT
+			MAX(SC_ID) FROM RC_SHARING_CENTER
+			<!-- SHARING_CENTER_SEQUENCE.NEXTVAL-1 from dual -->
+		</selectKey>
+		
+	</insert>
+	
+	<update id="updateUserResume">
+		UPDATE RC_USER_RESUME
+		SET UR_RESUME_SHARE_FLAG = 1
+		WHERE UR_RESUME_ID = #{resumeId }
+	</update>
+	
+	<resultMap type="com.qc.rc.entity.pojo.SharingCenterPojo" id="getAllSharing">
+		
+		<id column="SC_ID" property="scId"></id>
+		<result column="SC_USER_ID" property="scUserId"></result>
+		<result column="SC_RESUME_ID" property="scResumeId"></result>
+		<result column="SC_INTEGRAL" property="scIntegral"></result>
+		<result column="SC_DOWNLOAD_COUNT" property="scDownloadCount"></result>
+		<result column="SC_DELETE_FLAG" property="scDeleteFlag"></result>
+		<result column="SC_UPDATE_TIME" property="scUpdateTime"></result>
+		<result column="SC_CREATE_TIME" property="scCreateTime"></result>
+		
+		<association property="resume" javaType="com.qc.rc.entity.Resume">
+		
+			<id column="RESUME_ID" property="resumeId"></id>
+			<result column="RESUME_NAME" property="resumeName"></result>
+			<result column="RESUME_SEX" property="resumeSex"></result>
+			<result column="RESUME_BIRTHDAY" property="resumeBirthday"></result>
+			<result column="RESUME_PHONE" property="resumePhone"></result>
+			<result column="RESUME_EMAIL" property="resumeEmail"></result>
+			<result column="RESUME_ADDRESS" property="resumeAddress"></result>
+			
+			<result column="RESUME_GRADUATE_INSTITUTION" property="resumeGraduateInstitution"></result>
+			<result column="RESUME_EDUCATION" property="resumeEducation"></result>
+			<result column="RESUME_JOB_INTENSION" property="resumeJobIntension"></result>
+			<result column="RESUME_SELF_EVALUATION" property="resumeSelfEvaluation"></result>
+			<result column="RESUME_WORK_EXPERIENCE" property="resumeWorkExperience"></result>
+			<result column="RESUME_WORK_YEARS" property="resumeWorkYears"></result>
+		
+			
+		</association>
+			
+	</resultMap>
+	<!-- 查询全部共享信息，默认根据共享时间排序 -->
+	<select id="getAllSharingResume" resultMap="getAllSharing">
+		SELECT 
+		SC_ID,SC_USER_ID,SC_RESUME_ID,SC_INTEGRAL,SC_DOWNLOAD_COUNT,SC_CREATE_TIME,
+		RESUME_ID,RESUME_NAME,RESUME_SEX,RESUME_BIRTHDAY,RESUME_PHONE,RESUME_EMAIL,
+		RESUME_ADDRESS,RESUME_GRADUATE_INSTITUTION,RESUME_EDUCATION,RESUME_JOB_INTENSION,
+		RESUME_SELF_EVALUATION,RESUME_WORK_EXPERIENCE,RESUME_WORK_YEARS
+		FROM RC_SHARING_CENTER,RC_RESUME
+		WHERE RC_SHARING_CENTER.SC_RESUME_ID = RC_RESUME.RESUME_ID
+		AND RC_SHARING_CENTER.SC_DELETE_FLAG = 0 
+		ORDER BY SC_CREATE_TIME DESC
+	</select>
+	
+	
+	<resultMap type="com.qc.rc.entity.DownloadRecord" id="getDownloadRecord">
+		
+		<id column="DR_ID" property="drId"></id>
+		<result column="DR_USER_ID" property="drUserId"></result>
+		<result column="DR_SHARING_CENTER_ID" property="drSharingCenterId"></result>
+		<result column="DR_CREATE_TIME" property="drCreateTime"></result>
+		<result column="DR_UPDATE_TIME" property="drUpdateTime"></result>
+		<result column="DR_DELETE_FLAG" property="drDeleteFlag"></result>
+			
+	</resultMap>
+	<!-- 查找当前用户曾经兑换过的简历 -->
+	<select id="getDownloadRecordById" resultMap="getDownloadRecord">
+		SELECT 
+		DR_ID,DR_USER_ID,DR_SHARING_CENTER_ID
+		FROM RC_DOWNLOAD_RECORD
+		WHERE DR_USER_ID = #{userId }
+	</select>	
+	
+	
+	
+	<!--    zhang    -->
+	
+	 <resultMap id="ResumeMap" type="com.qc.rc.entity.Resume">
+    <constructor>
+      <idArg column="RESUME_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="RESUME_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="RESUME_SEX" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="RESUME_BIRTHDAY" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="RESUME_PHONE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="RESUME_EMAIL" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="RESUME_ADDRESS" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="RESUME_GRADUATE_INSTITUTION" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="RESUME_EDUCATION" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="RESUME_JOB_INTENSION" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="RESUME_SELF_EVALUATION" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="RESUME_WORK_EXPERIENCE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="RESUME_WORK_YEARS" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="RESUME_CREATE_USER" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="RESUME_CREATE_TIME" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="RESUME_UPDATE_USER" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="RESUME_UPDATE_TIME" javaType="java.util.Date" jdbcType="DATE" /> 
+      <arg column="RESUME_DELETE_FLAG" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  
+  
+  
+  
+  
+  <resultMap type="com.qc.rc.entity.Resume" id="ResumeMapPART">
+
+		<id column="RESUME_ID" property="resumeId"></id>
+		<result column="RESUME_NAME" property="resumeName"></result>
+		<result column="RESUME_SEX" property="resumeSex"></result>
+		<result column="RESUME_BIRTHDAY" property="resumeBirthday"></result>
+		<result column="RESUME_PHONE" property="resumePhone"></result>
+		<result column="RESUME_EMAIL" property="resumeEmail"></result>	
+		<result column="RESUME_ADDRESS" property="resumeAddress"></result>
+		<result column="RESUME_SELF_EVALUATION" property="resumeSelfEvaluation"></result>
+		<result column="RESUME_WORK_EXPERIENCE" property="resumeWorkExperience"></result>
+		<result column="RESUME_WORK_YEARS" property="resumeWorkYears"></result>
+		<result column="RESUME_GRADUATE_INSTITUTION" property="resumeGraduateInstitution"></result>
+		<result column="RESUME_EDUCATION" property="resumeEducation"></result>
+		<result column="RESUME_JOB_INTENSION" property="resumeJobIntension"></result>
+
+		<!-- <association property="interview" javaType="com.qc.rc.entity.Interview">
+			<id column="INTERVIEW_ID" property="interviewId"></id>
+			<result column="INTERVIEW_STATUS" property="interviewStatus"></result>
+		</association> -->
+		
+	</resultMap>
+	
+	
+	  <resultMap type="com.qc.rc.entity.UserResume" id="UserResumeMapPART">
+
+		<id column="UR_ID" property="urId"></id>
+		<result column="UR_USER_ID" property="urUesrId"></result>
+		<result column="UR_RESUME_ID" property="urResumeId"></result>
+		<result column="UR_RESUME_GETWAT" property="urResumeGetway"></result>
+		<result column="UR_RESUME_SHARE_FLAG" property="urResumeShareFlag"></result>
+		<result column="UR_DELETE_FLAG" property="urDeleteFlag"></result>	
+		<result column="UR_CREATE_TIME" property="urCreateTime"></result>
+		<result column="UR_UPDATE_TIME" property="urUpdateTime"></result>
+		
+		<!-- <association property="interview" javaType="com.qc.rc.entity.Interview">
+			<id column="INTERVIEW_ID" property="interviewId"></id>
+			<result column="INTERVIEW_STATUS" property="interviewStatus"></result>
+		</association> -->
+		
+	</resultMap>
+	
+	
+	<insert id="insertResume" parameterType="com.qc.rc.entity.Resume" >
+ 	 
+ <!-- 	   <selectKey resultType="java.lang.Integer" keyProperty="resumeId" order="AFTER" >
+ 	         select max(RESUME_ID) from RC_RESUME 
+      SELECT @@IDENTITY
+  </selectKey> -->
+  
+    insert into RC_RESUME (RESUME_ID,RESUME_NAME, RESUME_SEX, 
+      RESUME_BIRTHDAY, RESUME_PHONE, RESUME_EMAIL,RESUME_ADDRESS,RESUME_GRADUATE_INSTITUTION,
+      RESUME_EDUCATION,RESUME_JOB_INTENSION,RESUME_SELF_EVALUATION,RESUME_WORK_EXPERIENCE,
+      RESUME_WORK_YEARS,RESUME_CREATE_USER,RESUME_CREATE_TIME,
+     <!--  RESUME_UPDATE_USER,
+      RESUME_UPDATE_TIME, -->
+      RESUME_DELETE_FLAG
+      )
+    values (RESUME_SEQUENCE.nextval,
+    #{resumeName,jdbcType=VARCHAR}, 
+    #{resumeSex,jdbcType=DECIMAL}, 			
+	#{resumeBirthday,jdbcType=DATE}, 
+	#{resumePhone,jdbcType=DECIMAL}, 
+	#{resumeEmail,jdbcType=DECIMAL},
+	#{resumeAddress,jdbcType=VARCHAR}, 
+	#{resumeGraduateInstitution,jdbcType=VARCHAR}, 
+	#{resumeEducation,jdbcType=VARCHAR}, 
+	#{resumeJobIntension,jdbcType=VARCHAR}, 
+	#{resumeSelfEvaluation,jdbcType=VARCHAR}, 
+	#{resumeWorkExperience,jdbcType=VARCHAR}, 
+	#{resumeWorkYears,jdbcType=DECIMAL},
+	#{resumeCreateUser,jdbcType=VARCHAR},
+	sysdate,
+	<!-- now(), -->
+	 <!-- #{resumeCreateTime,jdbcType=DATE}, -->
+	 <!-- #{resumeUpdateUser,jdbcType=VARCHAR}, -->
+	 <!-- #{resumeUpdateTime,jdbcType=DATE}, -->
+	 <!-- #{resumeDeleteFlag,jdbcType=DECIMAL}, -->
+	 0
+      )
+   <!--    <selectKey resultType="java.lang.Integer">
+      select max(RESUME_ID) from RC_RESUME
+      </selectKey> -->
+  <!--     select @@IDENTITY -->
+      <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="resumeId">
+             select max(RESUME_ID) from RC_RESUME
+        </selectKey> 
+  </insert>
+	
+	
+	
+	
+	<update id="resumeUpdatePic" parameterType="com.qc.rc.entity.Pic">
+    	update RC_PIC set  
+   	 	P_PIC = #{pPic},
+      P_UPDATE_USER = #{pUpdateUser},
+      P_UPDATE_TIME = sysdate
+        
+      where P_RESUME_ID = #{pResumeId}      
+   	  <!-- where P_ID = #{pId} -->
+  </update>
+  
+	
+	
+	<update id="updateResume" parameterType="com.qc.rc.entity.Resume">
+    	update RC_RESUME
+   		 set  RESUME_NAME = #{resumeName},
+      RESUME_SEX = #{resumeSex},
+      RESUME_BIRTHDAY = #{resumeBirthday},
+      RESUME_PHONE = #{resumePhone},
+      RESUME_EMAIL = #{resumeEmail},
+      RESUME_ADDRESS = #{resumeAddress},
+      RESUME_GRADUATE_INSTITUTION = #{resumeGraduateInstitution},
+      RESUME_EDUCATION = #{resumeEducation},
+      RESUME_JOB_INTENSION = #{resumeJobIntension},
+      RESUME_SELF_EVALUATION = #{resumeSelfEvaluation},
+      RESUME_WORK_EXPERIENCE = #{resumeWorkExperience},
+      RESUME_WORK_YEARS = #{resumeWorkYears},
+      RESUME_UPDATE_USER = #{resumeUpdateUser},
+      RESUME_UPDATE_TIME=sysdate
+            
+   	  where RESUME_ID = #{resumeId}
+  </update>
+	
+	
+	
+	
+	
+	   <select id="selectResumeById" resultMap="ResumeMapPART" parameterType="java.lang.Integer">
+  
+     select RESUME_ID,RESUME_NAME,RESUME_SEX,RESUME_BIRTHDAY,RESUME_PHONE,RESUME_EMAIL,
+     RESUME_ADDRESS,RESUME_SELF_EVALUATION,RESUME_WORK_EXPERIENCE,RESUME_WORK_YEARS,RESUME_GRADUATE_INSTITUTION,
+     RESUME_EDUCATION,RESUME_JOB_INTENSION
+    from RC_RESUME 
+    where RESUME_ID=#{resumeId}
+
+ 	</select> 
+	
+	
+	 <insert id="resumeAddResumeUser" parameterType="com.qc.rc.entity.UserResume">
+ 	  insert into RC_USER_RESUME (UR_ID,UR_USER_ID,UR_RESUME_ID,UR_RESUME_GETWAT,UR_RESUME_SHARE_FLAG,UR_DELETE_FLAG,UR_CREATE_TIME)
+ 	  values (USER_RESUME_SEQUENCE.nextval,
+ 	   #{urUesrId},
+ 	   #{urResumeId},
+ 	   0,
+ 	   0,
+ 	   0,
+ 	   sysdate
+ 	  )
+ 	 </insert>
+	
+	
+	 <select id="selectResumeBestId" resultType="Integer">
+   		 select max(RESUME_ID) from RC_RESUME
+ 	</select> 
+	
+	
+	 <insert id="resumeAddPic" parameterType="com.qc.rc.entity.Pic">
+ 	  insert into RC_PIC 
+ 	  (P_ID,
+ 	  P_RESUME_ID,
+ 	  P_PIC,
+ 	  P_CREATE_USER,
+ 	  P_CREATE_TIME,
+ 	  P_DELETE_FLAG)
+ 	  values (RC_PIC_SEQUENCE.nextval,
+ 	   #{pResumeId},
+ 	   #{pPic},
+ 	   #{pCreateUser},
+ 	   sysdate,
+ 	   0
+ 	  )
+ 	 </insert>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>
