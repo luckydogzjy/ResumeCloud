@@ -76,6 +76,13 @@ public class Job {
 	public void setJOB_END_TIME(Date jOB_END_TIME) {
 		JOB_END_TIME = jOB_END_TIME;
 	}
+	@Override
+	public String toString() {
+		return "Job [JOB_ID=" + JOB_ID + ", JOB_USER_ID=" + JOB_USER_ID + ", JOB_NAME=" + JOB_NAME + ", JOB_COUNT="
+				+ JOB_COUNT + ", JOB_SALARY=" + JOB_SALARY + ", JOB_INTRODUCTION=" + JOB_INTRODUCTION
+				+ ", JOB_CONDITION=" + JOB_CONDITION + ", JOB_STATUS=" + JOB_STATUS + ", JOB_CREATE_TIME="
+				+ JOB_CREATE_TIME + ", JOB_END_TIME=" + JOB_END_TIME + "]";
+	}
 	
 	
 }

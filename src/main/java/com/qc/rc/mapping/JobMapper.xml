@@ -4,7 +4,7 @@
  	
  	<insert id="jobAdd" parameterType="com.qc.rc.entity.Job">
   		insert into RC_JOB(JOB_ID,JOB_USER_ID,JOB_NAME,JOB_COUNT,JOB_SALARY,JOB_INTRODUCTION,JOB_CONDITION,JOB_END_TIME) 
-  		values(JOB_ID.nextval,#{JOB_USER_ID},#{JOB_NAME},#{JOB_COUNT},#{JOB_SALARY},#{JOB_INTRODUCTION},#{JOB_CONDITION},#{JOB_END_TIME})
+  		values(2,#{JOB_USER_ID},#{JOB_NAME},#{JOB_COUNT},#{JOB_SALARY},#{JOB_INTRODUCTION},#{JOB_CONDITION},#{JOB_END_TIME})
   	</insert>
   	
   	<update id="jobUpdate" parameterType="com.qc.rc.entity.Job">
@@ -32,4 +32,9 @@
   		select JOB_ID,JOB_NAME,JOB_COUNT,JOB_END_TIME,JOB_STATUS,JOB_SALARY,JOB_CREATE_TIME,JOB_INTRODUCTION,JOB_CONDITION from RC_JOB 
   		where JOB_ID = #{jobId}
   	</select>
+  	
+  	<update id="jobStatusOpen">
+  		update RC_JOB set JOB_END_TIME = #{endTime} 
+  		where JOB_ID = #{jobId}
+  	</update>
 </mapper>

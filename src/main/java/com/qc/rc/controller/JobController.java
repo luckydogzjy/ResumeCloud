@@ -5,12 +5,13 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.qc.rc.common.GetUser;
@@ -18,7 +19,6 @@ import com.qc.rc.entity.Job;
 import com.qc.rc.service.JobService;
 
 @Controller
-
 public class JobController {
 	
 	@Autowired
@@ -26,15 +26,15 @@ public class JobController {
 	/**
 	 * userId from session
 	 */
-	private String userId =GetUser.getUser().getUserId();
+//	private Integer userId = 1 ;
+	private String userId = GetUser.getUser().getUserId();
 	
-	private static String searchName = "";
+	private static String searchName = null;
 	
 	@RequestMapping(value="/JobManage.do",method=RequestMethod.POST)
 	public ModelAndView ManageViewPost(String search,@RequestParam(required=true,defaultValue="1") Integer page){
-		if(StringUtils.isNotBlank(search)){
-			searchName = search;
-		}
+		
+		searchName = search;
 		
 		Map<String,Object> model = new HashMap<>();
 		Map<String,Object> map= jobService.jobGetByName(userId,searchName,page);		
@@ -68,7 +68,6 @@ public class JobController {
 	public ModelAndView jobAdd(String name,Integer count,Integer salary,String introduction,String condition,String endTime){;
 		
 		Job job = new Job();
-
 		try {
 			job.setJOB_USER_ID(userId);
 			job.setJOB_NAME(name);
@@ -80,6 +79,8 @@ public class JobController {
 		} catch (ParseException e) {
 			return null;
 		}
+		
+		System.out.println(job.toString());
 		if (jobService.jobAdd(job)) {
 
 			return new ModelAndView("redirect:/JobManage.do");
@@ -169,4 +170,25 @@ public class JobController {
 		return new ModelAndView("JobManage/JobTemplate",model);
 	}
 	
+	@RequestMapping("/jobStatusOpen.do")
+	@ResponseBody
+	public String jobStatusOpen(String jobId,String jobDate){
+//		System.out.println(jobId);
+//		System.out.println(jobDate);
+		try {
+			boolean ok = jobService.jobStatusOpen(Integer.valueOf(jobId), new SimpleDateFormat("yyyy-MM-dd").parse(jobDate));
+			if (ok) {
+				return "Success!";
+			}
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "error";
+		
+	}
 }

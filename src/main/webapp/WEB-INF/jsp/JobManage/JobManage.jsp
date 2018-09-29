@@ -12,29 +12,50 @@
 		<link rel="stylesheet" type="text/css" href="css/jobCss/job.css">	
 		<script type="text/javascript" src="js/jquery-2.1.1.js"></script>
 		<script type="text/javascript">
-			
-			
-		function showDiv(ev,jobId,jobDate){
-	        alert(jobDate);
+		
+		var jobId=0;
+		
+		function showDiv(ev,jId,jDate){
+	       // alert(jDate);
         	var oEvent=ev||event;
         	var cD=$("#DivChange");
-        	$('#jDate').val(jobDate)
+        	jobId=jId;
+        	$('#jDate').val(jDate)
         	$('#DivChange').css({'left':oEvent.clientX+'px','top':oEvent.clientY+'px','display':'block'});
         }
    		
    		function cancelC(){
    			$('#DivChange').css({'display':'none'});
+   			init();
+   		}
+   		
+   		function subTime(){
+   			var jobDate = $("#jDate").val()
+   			//alert(jobDate)
+   			$.ajax({
+   				type:"POST",
+   				url:"${pageContext.request.contextPath}/jobStatusOpen.do",
+   				data:{
+   					"jobId":jobId,
+   					"jobDate":jobDate
+   				},
+   				success:function(data){
+   					alert(data);
+   					location.href="${pageContext.request.contextPath}/jobChangeStatus.do?jobId="+jobId+"&jobStatus=0"
+   				}
+   			})
+   		}
+   		
+   		function init(){
+   			jobId=0;
+   			$('#jDate').val(null)
    		}
 		</script>
 	</head>
-	
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
 	<body>
 	
-		<div id="DivChange" style="display: none;left:0; top: 0; border:1px solid #FF0000;position: fixed; width: 200px;height: 100px;background-color: greenyellow;">
-			截止时间：<input id="jDate" type="date" value="" /><br />
-			<input type="button" value="提交"  onclick="" /><input type="button" value="取消" onclick="cancelC()" />
-		</div>
+		
 		
 		<div id="header">
 		<jsp:include page="header.jsp" flush="true"/>
@@ -45,7 +66,13 @@
 		
 		<div id="right">
 					<div id="right-box">
-
+					
+				
+<!--开启-->			<div id="DivChange" style="display: none;left:0; top: 0; border:1px solid #FF0000;position: fixed; width: 140px;height: 80px;background-color: greenyellow;">
+							截止时间：<input id="jDate" type="date" value="" /><br />
+							<input type="button" value="提交"  onclick="subTime()" /><input type="button" value="取消" onclick="cancelC()" />
+					</div>
+					
 					<div id="job-search">
 						<img id="job-search-img" src="${pageContext.request.contextPath}/img/u607.png" />
 						<form id="search" action="${pageContext.request.contextPath}/JobManage.do" method="POST">
@@ -83,7 +110,7 @@
 							</c:if>
 							<c:if test="${job.JOB_STATUS==0}">
 								
-								<input id="button-status0" type="button" value="关闭" onclick="showDiv(null,${job.JOB_ID},"<fmt:formatDate value="${job.JOB_END_TIME}" pattern="yyyy-MM-dd" />)"/>
+								<input id="button-status0" type="button" value="关闭" onclick="showDiv(null,${job.JOB_ID},'<fmt:formatDate value="${job.JOB_END_TIME}" pattern="yyyy-MM-dd" />')"/>
 							</c:if>
 							
 						</td>

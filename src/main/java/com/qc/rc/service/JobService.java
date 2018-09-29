@@ -1,6 +1,6 @@
 package com.qc.rc.service;
 
-import java.util.List;
+import java.util.Date;
 import java.util.Map;
 
 import com.qc.rc.entity.Job;
@@ -44,9 +44,12 @@ public interface JobService {
 	 * @return
 	 */
 	public Job jobGetOne(Integer jobId);
-	
-	
-	
-	List<Job> jobGetByName(String userId, String jobName);
+	/**
+	 * 开启职位重设时间
+	 * @param jobId
+	 * @param jobEndTime
+	 * @return 
+	 */
+	public boolean jobStatusOpen(Integer jobId,Date jobEndTime);
 	
 }
