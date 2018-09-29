@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.qc.rc.common.GetUser;
 import com.qc.rc.entity.Job;
 import com.qc.rc.service.JobService;
 
 @Controller
+
 public class JobController {
 	
 	@Autowired
@@ -23,14 +26,15 @@ public class JobController {
 	/**
 	 * userId from session
 	 */
-	private Integer userId = 1 ;
+	private String userId =GetUser.getUser().getUserId();
 	
-	private static String searchName = null;
+	private static String searchName = "";
 	
 	@RequestMapping(value="/JobManage.do",method=RequestMethod.POST)
 	public ModelAndView ManageViewPost(String search,@RequestParam(required=true,defaultValue="1") Integer page){
-		
-		searchName = search;
+		if(StringUtils.isNotBlank(search)){
+			searchName = search;
+		}
 		
 		Map<String,Object> model = new HashMap<>();
 		Map<String,Object> map= jobService.jobGetByName(userId,searchName,page);		

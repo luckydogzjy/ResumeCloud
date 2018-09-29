@@ -26,14 +26,14 @@ public class PictureServiceImpl implements IPictureService{
     	//获取上传文件的原名
         String fileName =file.getOriginalFilename();
         if(StringUtils.isBlank(fileName)){
-        	System.out.println("文件原名空");
+        	
         	return null;
         }
         
         //获取文件扩展名
         String fileExtensionName = fileName.substring(fileName.lastIndexOf(".")+1);
         if(StringUtils.isBlank(fileExtensionName)){
-        	System.out.println("文件扩展名空");
+        	
         	return null;
         }
         

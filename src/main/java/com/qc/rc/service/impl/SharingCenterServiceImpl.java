@@ -1,3 +1,4 @@
+
 package com.qc.rc.service.impl;
 
 import java.util.HashMap;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.qc.rc.common.GetUuid;
 import com.qc.rc.dao.DownloadRecordMapper;
 import com.qc.rc.dao.ResumeMapper;
 import com.qc.rc.dao.SharingCenterMapper;
@@ -18,6 +20,7 @@ import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.SharingCenter;
 import com.qc.rc.entity.User;
 import com.qc.rc.entity.UserResume;
+import com.qc.rc.entity.pojo.DownloadRecordPojo;
 import com.qc.rc.entity.pojo.ResumePojo;
 import com.qc.rc.entity.pojo.SharingCenterPojo;
 import com.qc.rc.service.SharingCenterService;
@@ -39,18 +42,15 @@ public class SharingCenterServiceImpl implements SharingCenterService {
 	private static Integer pageShow = 5;
 		
 	@Override
-	public Map<String, Object> getSharingResumeListByCondition(Integer userId,ResumePojo resumePojo,Integer page) {
+	public Map<String, Object> getSharingResumeListByCondition(String userId,ResumePojo resumePojo,Integer page) {
 		
 		//引入分页查询，使用PageHelper分页功能
         //在查询之前传入当前页，然后多少记录
 		PageHelper.startPage(page,pageShow);
 		List<SharingCenterPojo> list = sharingCenterMapper.getSharingResumeListByCondition(resumePojo);
 		//取到符合条件信息后，取当前用户所兑换过的简历列表
-		List<DownloadRecord> downloadRecords = sharingCenterMapper.getDownloadRecordById(userId);
-		
-		for (DownloadRecord downloadRecord : downloadRecords) {
-			System.out.println(downloadRecord.toString());
-		}
+	//	List<DownloadRecord> downloadRecords = sharingCenterMapper.getDownloadRecordById(userId);
+		List<DownloadRecordPojo> downloadRecords = downloadRecordMapper.getDownloadRecordById(userId);
 			
 		PageInfo<SharingCenterPojo> pageInfo = new PageInfo<SharingCenterPojo>(list);
 		
@@ -60,9 +60,11 @@ public class SharingCenterServiceImpl implements SharingCenterService {
 				
 				if (downloadRecords.get(i).getDrSharingCenterId().equals(list.get(j).getScId())) {
 					//将当前用户兑换过的简历信息，在list里将标志位赋值为1，意思为当前用户已经兑换过，
-					//在前台显示 已兑换 按钮
+					//在前台显示 已兑换 按钮   替换信息
 					
+					list.get(j).setResume(resumeMapper.getResumeDetailsById(downloadRecords.get(i).getUrResumeId()));
 					list.get(j).setFlag(1);
+					list.get(j).setNowResumeId(downloadRecords.get(i).getUrResumeId());
 				}
 			}
 		}
@@ -92,13 +94,14 @@ public class SharingCenterServiceImpl implements SharingCenterService {
 		Resume resume = resumeMapper.selectResumeById(sharingCenter.getScResumeId());
 		System.out.println(resume.toString());
 		//3.重新set id  调用uuid方法
-		Integer id = 888;    //现在的简历id
+		String id = GetUuid.getuuid32();    //现在的简历id
 		resume.setResumeId(id);
 		resume.setResumeCreateUser(user.getUserName());
 		//插入数据库,存在出异常的可能 ，向上抛
 		resumeMapper.insertResume(resume);
 		System.out.println(user.getUserId());
-		//4.赋值				
+		//4.赋值	
+		userResume.setUrId(GetUuid.getuuid32());
 		userResume.setUrUesrId(user.getUserId());
 		userResume.setUrResumeId(id); //现在的简历id
 		userResume.setUrResumeGetway(sharingCenter.getScResumeId()); //原来的简历id
@@ -106,12 +109,18 @@ public class SharingCenterServiceImpl implements SharingCenterService {
 		//插入
 		userResumeMapper.SharingInsertUserResume(userResume);
 		//5.插入RC_DOWNLOAD_RECORD一条数据
-		Integer drId = 6412;  //后期改为uuid 
+		String drId = GetUuid.getuuid32();  //后期改为uuid  
 		downloadRecordMapper.insertDownloadRecord(drId, user.getUserId(), sharingCenter.getScId());
 		//6.兑换次数+1
 		sharingCenterMapper.updateDownloadCount(sharingCenter.getScId());
 		//7.减积分
 	
+	}
+
+	@Override
+	public void cancelSharingResume(String scId) throws Exception{
+		
+		sharingCenterMapper.cancelSharingResume(scId);
 	}
 
 }

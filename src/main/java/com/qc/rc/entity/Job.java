@@ -6,7 +6,7 @@ import java.util.Date;
 public class Job {
 	
 	private Integer JOB_ID;
-	private Integer JOB_USER_ID;
+	private String JOB_USER_ID;
 	private String JOB_NAME;
 	private Integer JOB_COUNT;
 	private Integer JOB_SALARY;
@@ -22,10 +22,10 @@ public class Job {
 	public void setJOB_ID(Integer jOB_ID) {
 		JOB_ID = jOB_ID;
 	}
-	public Integer getJOB_USER_ID() {
+	public String getJOB_USER_ID() {
 		return JOB_USER_ID;
 	}
-	public void setJOB_USER_ID(Integer jOB_USER_ID) {
+	public void setJOB_USER_ID(String jOB_USER_ID) {
 		JOB_USER_ID = jOB_USER_ID;
 	}
 	public String getJOB_NAME() {

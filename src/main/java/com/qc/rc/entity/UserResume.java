@@ -9,12 +9,15 @@ public class UserResume {
 		private String urId;
 		private String urUesrId;
 		private String urResumeId;
-		private Integer urResumeGetway;
+		private String urResumeGetway;
 		private Integer urResumeShareFlag;
 		
 		private Integer urDeleteFlag;
 		private Date urCreateTime;
 		private Date urUpdateTime;
+		
+
+		
 		
 		public String getUrId() {
 			return urId;
@@ -34,10 +37,10 @@ public class UserResume {
 		public void setUrResumeId(String urResumeId) {
 			this.urResumeId = urResumeId;
 		}
-		public Integer getUrResumeGetway() {
+		public String getUrResumeGetway() {
 			return urResumeGetway;
 		}
-		public void setUrResumeGetway(Integer urResumeGetway) {
+		public void setUrResumeGetway(String urResumeGetway) {
 			this.urResumeGetway = urResumeGetway;
 		}
 		public Integer getUrResumeShareFlag() {
@@ -64,7 +67,10 @@ public class UserResume {
 		public void setUrUpdateTime(Date urUpdateTime) {
 			this.urUpdateTime = urUpdateTime;
 		}
+
+		
 		/**
+		 * @param urId
 		 * @param urUesrId
 		 * @param urResumeId
 		 * @param urResumeGetway
@@ -73,9 +79,10 @@ public class UserResume {
 		 * @param urCreateTime
 		 * @param urUpdateTime
 		 */
-		public UserResume(String urUesrId, String urResumeId, Integer urResumeGetway, Integer urResumeShareFlag,
-				Integer urDeleteFlag, Date urCreateTime, Date urUpdateTime) {
+		public UserResume(String urId, String urUesrId, String urResumeId, String urResumeGetway,
+				Integer urResumeShareFlag, Integer urDeleteFlag, Date urCreateTime, Date urUpdateTime) {
 			super();
+			this.urId = urId;
 			this.urUesrId = urUesrId;
 			this.urResumeId = urResumeId;
 			this.urResumeGetway = urResumeGetway;
@@ -84,8 +91,6 @@ public class UserResume {
 			this.urCreateTime = urCreateTime;
 			this.urUpdateTime = urUpdateTime;
 		}
-		
-		
 		public UserResume(){
 			super();
 		}

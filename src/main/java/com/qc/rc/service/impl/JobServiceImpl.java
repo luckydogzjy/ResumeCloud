@@ -1,15 +1,11 @@
 package com.qc.rc.service.impl;
 
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.qc.rc.dao.JobMapper;
 import com.qc.rc.entity.Job;
 import com.qc.rc.service.JobService;
@@ -22,7 +18,7 @@ public class JobServiceImpl implements JobService {
 	@Override
 	public boolean jobAdd(Job job) {
 		// TODO Auto-generated method stub
-
+	
 		return JobMapper.jobAdd(job)==1?true:false;
 	}
 
@@ -61,23 +57,10 @@ public class JobServiceImpl implements JobService {
 	}
 
 	@Override
-	public Map<String, Object> jobGetByName(Integer userId,String jobName,Integer page) {
+	public List<Job> jobGetByName(String userId,String jobName) {
 		// TODO Auto-generated method stub
 		
-		for (Job j : JobMapper.jobGetByName(userId,jobName)) {
-			if (new Date().compareTo(j.getJOB_END_TIME())>0) {
-				JobMapper.jobChangeStatus(j.getJOB_ID(), 0);
-			}
-		}
-		Map<String, Object> map = new HashMap<>();
-		PageHelper.startPage(page, 6);
-		List<Job> newjob = JobMapper.jobGetByName(userId,jobName);			
-		PageInfo<Job> pageJob = new PageInfo<Job>(newjob);	
-		map.put("job", newjob);
-		map.put("page", pageJob);
-		
-		
-		return  map;
+		return JobMapper.jobGetByName(userId,jobName);
 	}
 
 	@Override
@@ -85,6 +68,12 @@ public class JobServiceImpl implements JobService {
 		// TODO Auto-generated method stub
 		
 		return JobMapper.jobGetOne(jobId);
+	}
+
+	@Override
+	public Map<String, Object> jobGetByName(String userId, String jobName, Integer page) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

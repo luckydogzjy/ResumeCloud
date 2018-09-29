@@ -7,14 +7,18 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.serializer.UUIDCodec;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.qc.rc.common.GetUuid;
 import com.qc.rc.common.PageMessage;
 import com.qc.rc.common.ServerResponse;
+import com.qc.rc.common.Util;
 import com.qc.rc.dao.InterviewMapper;
 import com.qc.rc.entity.Resume;
 import com.qc.rc.entity.User;
 import com.qc.rc.entity.pojo.InterviewPojo;
+import com.qc.rc.entity.pojo.ResumeInterviews;
 import com.qc.rc.service.InterviewService;
 import com.qc.rc.utils.InterviewDateUtil;
 
@@ -33,7 +37,7 @@ public class InterviewServiceImpl implements InterviewService {
      * @param sort 时间升降排序
      * 
      */
-	public PageInfo<InterviewPojo> selectByCondition(Integer pageNum, Integer userId, String startTime,
+	public PageInfo<InterviewPojo> selectByCondition(Integer pageNum, String userId, String startTime,
 			String overTime, String interviewJob, String interviewInfo,Integer sort,Integer status) throws ParseException {
 		Date st = null;
 		Date ot = null;
@@ -62,10 +66,11 @@ public class InterviewServiceImpl implements InterviewService {
 		
 	}
 	
-	public Integer addInterview(Integer interviewResumeId,String interviewJob,String interviewTime,
+	public Integer addInterview(String interviewResumeId,String interviewJob,String interviewTime,
 			String interviewAssociateUsername,String interviewAssociatePhone,String interviewAddress,String interviewInfo,
 			Resume resume,User user) throws ParseException {
 		InterviewPojo iPojo = new InterviewPojo();
+		iPojo.setInterviewId(GetUuid.getuuid32());
 		iPojo.setInterviewResumeId(interviewResumeId);
 		iPojo.setInterviewJob(interviewJob);
 		iPojo.setInterviewTime(InterviewDateUtil.strToDate(interviewTime));
@@ -84,7 +89,7 @@ public class InterviewServiceImpl implements InterviewService {
 		return	interviewMapper.addInterview(iPojo);
 	}
 
-	public Integer deleteInterview(Integer interviewId){
+	public Integer deleteInterview(String interviewId){
 		InterviewPojo iPojo = new InterviewPojo();
 		iPojo.setInterviewId(interviewId);
 		iPojo.setInterviewUpdateUser("LING");
@@ -101,6 +106,18 @@ public class InterviewServiceImpl implements InterviewService {
 			return ServerResponse.createByErrorMessage("参数错误");
 		}
 		return ServerResponse.createBySuccess(interviewPojo);
+	}
+
+
+	public ResumeInterviews getResumeInterviewsByRId(String ResumeId) {
+		ResumeInterviews resumeInterviews= interviewMapper.getResumeInterviewsByRId(ResumeId);
+		return resumeInterviews;
+	}
+
+
+	public Integer updateInteviewRecodeInfo(String interviewRecodeInfo, String interviewId) {
+
+		return interviewMapper.updateInteviewRecodeInfo(interviewRecodeInfo, interviewId);
 	}
 
 }

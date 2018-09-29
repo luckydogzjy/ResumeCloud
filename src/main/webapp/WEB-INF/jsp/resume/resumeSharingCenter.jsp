@@ -54,6 +54,31 @@
 				
 				
 			}
+			
+			function sharingCancel(scId,page){
+				
+				var resumeJobIntension = $("#resumeJobIntension").val();
+				var resumeSex = $("#resumeSex").val();
+				var resumeEducation = $("#resumeEducation").val();
+				var resumeWorkYears = $("#resumeWorkYears").val();
+				var resumeGraduateInstitution = $("#resumeGraduateInstitution").val();	
+
+				var msg = "确认取消共享?";
+				
+				if(confirm(msg) == true){
+					
+					var str = "&resumeJobIntension=" + resumeJobIntension + "&resumeSex=" + resumeSex + "&resumeEducation=" + resumeEducation + "&resumeWorkYears=" + resumeWorkYears + "&resumeGraduateInstitution=" + resumeGraduateInstitution;
+					var url = "${pageContext.request.contextPath }/SharingCenter/cancelSharingResume.do?page=" + page + "&scId=" + scId;
+					var urlEnd = url + str;
+					location.href = urlEnd;
+					
+					return true;
+				} else{
+					return false;
+				}
+
+			}
+			
 		</script>
 	</head>
 	
@@ -149,10 +174,10 @@
 												</c:if>
 												<!-- 如果该条简历不是自己共享的但是用户已经兑换过显示 姓名为超链接 -->
 												<c:if test="${sharing.flag == 1 && sharing.scUserId != userId}">
-													<a href="${pageContext.request.contextPath }/resumeDetails.do?resumeId_Details=${sharing.scResumeId }">${sharing.resume.resumeName }</a>
+													<a href="${pageContext.request.contextPath }/Resume/resumeDetails.do?resumeId_Details=${sharing.nowResumeId }">${sharing.resume.resumeName }</a>
 												</c:if>
 												<c:if test="${sharing.scUserId == userId}">
-													<a href="${pageContext.request.contextPath }/resumeDetails.do?resumeId_Details=${sharing.scResumeId }">${sharing.resume.resumeName }</a>
+													<a href="${pageContext.request.contextPath }/Resume/resumeDetails.do?resumeId_Details=${sharing.scResumeId }">${sharing.resume.resumeName }</a>
 												</c:if>
 											</td>
 											<td>
@@ -201,14 +226,14 @@
 											<td>
 												<!-- 如果该条简历不是自己共享的并且用户还未兑换过显示 兑换按钮 -->
 												<c:if test="${sharing.flag == 0 && sharing.scUserId != userId}">
-													<input type="button" id="getBtn" value="兑换" onclick="sharingGet(${sharing.scId },${sharing.scResumeId },${page.pageNum},${sharing.scIntegral })"/>
+													<input type="button" id="getBtn" value="兑换" onclick="sharingGet('${sharing.scId }','${sharing.scResumeId }',${page.pageNum},${sharing.scIntegral })"/>
 												</c:if>
 												<!-- 如果该条简历不是自己共享的但是用户已经兑换过显示 已兑换 按钮 -->
 												<c:if test="${sharing.flag == 1 && sharing.scUserId != userId}">
 													<input type="button" id="NoBtn" value="已兑换" disabled="disabled" />
 												</c:if>
 												<c:if test="${sharing.scUserId == userId}">
-													<input type="button" id="cancelBtn" value="取消共享" />
+													<input type="button" id="cancelBtn" value="取消共享" onclick="sharingCancel('${sharing.scId }',${page.pageNum})"/>
 												</c:if>
 										</tr>
 

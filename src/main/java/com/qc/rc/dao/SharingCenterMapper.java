@@ -14,9 +14,12 @@ public interface SharingCenterMapper {
 	public List<SharingCenterPojo> getSharingResumeListByCondition(@Param("resumePojo")ResumePojo resumePojo);
 	
 	//显示当前用户所兑换过的简历列表
-	public List<DownloadRecord> getDownloadRecordById(@Param("userId")Integer userId);
+//	public List<DownloadRecord> getDownloadRecordById(@Param("userId")Integer userId);
 	
 	//兑换次数加一
-	public Integer updateDownloadCount(@Param("scId")Integer scId);
+	public Integer updateDownloadCount(@Param("scId")String scId);
+	
+	//取消共享
+	public void cancelSharingResume(@Param("scId")String scId);
 	
 }

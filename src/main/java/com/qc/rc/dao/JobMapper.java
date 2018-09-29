@@ -38,7 +38,7 @@ public interface JobMapper {
 	 * @param name
 	 * @return
 	 */
-	public List<Job> jobGetByName(@Param("userId")Integer userId,@Param("name")String name);
+	public List<Job> jobGetByName(@Param("userId")String userId,@Param("name")String name);
 	/**
 	 * 查看详情
 	 * @param jobId
