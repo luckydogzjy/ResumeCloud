@@ -82,6 +82,8 @@ span{
     color: #FFFFFF;
 }
 #right-box-button-shanchu{
+	text-align:center;
+	line-height: 38px;
 	position: absolute;
 	left: 600px;
 	border-radius: 5px;
