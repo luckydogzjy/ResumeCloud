@@ -130,10 +130,12 @@ public class InterviewController {
 		return new ModelAndView("interviewJsps/IVxiangqing",model);
 	}
 	
+	//获取所有的面试安排
 	@RequestMapping(value="selectAllInterviews.do",method = RequestMethod.GET)
 	@ResponseBody
 	public List<InterviewPojoView> selectAllInterviews(){
 		
+		log.info("hello log4j");
 		//TODO user登录验证，userId获取
 		String userId ="1b786bc41114f67ae059cea5f1789d";
 		
