@@ -25,7 +25,8 @@ public interface ResumeService {
 	public void  updateUserResume(String resumeId);
 	
 	
-	
+	//ling
+	public int resumeAddfromInterview(Resume resume);
 	
 	
 	/*   zhang   */

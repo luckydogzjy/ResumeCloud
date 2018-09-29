@@ -137,25 +137,27 @@
 		点击共享按钮后的操作 将信息插入共享中心表里、同时插入  
 		同时需要执行更新RC_USER_RESUME表，让其中的共享标志UR_RESUME_SHARE_FLAG设为1
 	-->
-	<insert id="shareResume" parameterType="com.qc.rc.entity.SharingCenter">
+		<insert id="shareResume" parameterType="com.qc.rc.entity.SharingCenter">
 
 		INSERT INTO RC_SHARING_CENTER
 		(SC_ID,SC_USER_ID,SC_RESUME_ID,SC_INTEGRAL,SC_DOWNLOAD_COUNT)
 		VALUES(
-		SHARING_CENTER_SEQUENCE.NEXTVAL,
-		#{scUserId,jdbcType=INTEGER },
-		#{scResumeId,jdbcType=INTEGER },
-		#{scIntegral,jdbcType=INTEGER },
+		#{scId},
+		#{scUserId},
+		#{scResumeId},
+		#{scIntegral},
 		0
 		)
 		<!--  -->
-		<selectKey keyProperty="scId" order="AFTER" resultType="java.lang.Integer">
+		<selectKey keyProperty="scId" order="AFTER" resultType="java.lang.String">
 			SELECT
 			MAX(SC_ID) FROM RC_SHARING_CENTER
 			<!-- SHARING_CENTER_SEQUENCE.NEXTVAL-1 from dual -->
 		</selectKey>
 		
 	</insert>
+
+
 	<!-- 其中的共享标志UR_RESUME_SHARE_FLAG设为1 -->
 	<update id="updateUserResume">
 		UPDATE RC_USER_RESUME
@@ -251,6 +253,17 @@
 
 
 
+		<insert id="addResume" parameterType="com.qc.rc.entity.Resume" >
+    insert into RC_RESUME (RESUME_ID,RESUME_NAME, 
+      RESUME_PHONE, RESUME_JOB_INTENSION,RESUME_CREATE_USER,RESUME_CREATE_TIME,
+      RESUME_DELETE_FLAG)
+    values (#{resumeId},
+    #{resumeName}, 		
+	#{resumePhone}, 
+	#{resumeJobIntension}, 
+	#{resumeCreateUser},
+	sysdate,0)
+  	</insert>
 	
 	
 	

@@ -25,8 +25,11 @@ public interface ResumeMapper {
 	//执行完插入共享中心的操作后，继续执行更新RC_USER_RESUME表，让其中的共享标志UR_RESUME_SHARE_FLAG设为1
 	void  updateUserResume(@Param("resumeId")String resumeId);
 	
-	
-	
+	//ling
+	int addResume(Resume resume);
+
+
+
 	/*    zhang   */
 	int insertResume(Resume resume);
 

@@ -29,7 +29,7 @@ public class ResumeServiceImpl implements ResumeService {
 	@Autowired
 	private PicMapper picMapper;
 	
-	private static Integer pageShow = 5;
+	private static Integer pageShow = 6;
 	
 	@Override
 	public Map<String, Object> getResumeListByCondition(String userId, ResumePojo resumePojo, Integer page) {
@@ -70,8 +70,12 @@ public class ResumeServiceImpl implements ResumeService {
 		resumeMapper.updateUserResume(resumeId);
 	}
 	
-	
-	
+	//ling
+	public int resumeAddfromInterview(Resume resume) {	
+		Integer resultcount = resumeMapper.addResume(resume);
+		return resultcount;	
+	}
+
 	
 	
 	

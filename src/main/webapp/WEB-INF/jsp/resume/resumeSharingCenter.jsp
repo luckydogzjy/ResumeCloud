@@ -55,7 +55,7 @@
 				
 			}
 			
-			function sharingCancel(scId,page){
+			function sharingCancel(scId,scResumeId,page){
 				
 				var resumeJobIntension = $("#resumeJobIntension").val();
 				var resumeSex = $("#resumeSex").val();
@@ -68,7 +68,7 @@
 				if(confirm(msg) == true){
 					
 					var str = "&resumeJobIntension=" + resumeJobIntension + "&resumeSex=" + resumeSex + "&resumeEducation=" + resumeEducation + "&resumeWorkYears=" + resumeWorkYears + "&resumeGraduateInstitution=" + resumeGraduateInstitution;
-					var url = "${pageContext.request.contextPath }/SharingCenter/cancelSharingResume.do?page=" + page + "&scId=" + scId;
+					var url = "${pageContext.request.contextPath }/SharingCenter/cancelSharingResume.do?page=" + page + "&scId=" + scId + "&scResumeId=" + scResumeId;
 					var urlEnd = url + str;
 					location.href = urlEnd;
 					
@@ -233,7 +233,7 @@
 													<input type="button" id="NoBtn" value="已兑换" disabled="disabled" />
 												</c:if>
 												<c:if test="${sharing.scUserId == userId}">
-													<input type="button" id="cancelBtn" value="取消共享" onclick="sharingCancel('${sharing.scId }',${page.pageNum})"/>
+													<input type="button" id="cancelBtn" value="取消共享" onclick="sharingCancel('${sharing.scId }','${sharing.scResumeId }',${page.pageNum})"/>
 												</c:if>
 										</tr>
 

@@ -95,12 +95,12 @@ public class SharingCenterController {
 	}	
 	
 	@RequestMapping(value="/cancelSharingResume.do",method=RequestMethod.GET)
-	public ModelAndView cancelSharingResume(ResumePojo searchResumePojo,String scId,@RequestParam(required=true,defaultValue="1") Integer page) {
+	public ModelAndView cancelSharingResume(ResumePojo searchResumePojo,String scId,String scResumeId,@RequestParam(required=true,defaultValue="1") Integer page) {
 		
 		User user = GetUser.getUser();
 		try {
 			if (user != null) {
-				sharingCenterService.cancelSharingResume(scId);
+				sharingCenterService.cancelSharingResume(scId,scResumeId);
 				
 				return getSharingResumeListByCondition(searchResumePojo, page);
 				

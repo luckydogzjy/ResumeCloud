@@ -235,7 +235,7 @@ public class ResumeController {
 								model.put("msg", "插入简历信息图片插入时出错");
 								return new ModelAndView("resume/resume_error", model);
 							}
-						} else if (arr[1].equals("dox") || arr[1].equals("xls") || arr[1].equals("txt")|| arr[1].equals("docx") || arr[1].equals("xlsx")) {
+						} else if (arr[1].equals("doc") || arr[1].equals("xls") || arr[1].equals("txt")|| arr[1].equals("docx") || arr[1].equals("xlsx")) {
 							int result = resumeService.resumeAddfile(picId, resumeId, piccresteuser, filepath);
 							if (result == 0) {
 								model.put("msg", "插入简历信息图片插入时出错");
@@ -426,7 +426,7 @@ public class ResumeController {
 							model.put("msg", "更新简历信息时出错");
 							return new ModelAndView("resume/resume_error", model);
 						}
-					} else if (arr[1].equals("dox") || arr[1].equals("xls") || arr[1].equals("txt")|| arr[1].equals("docx") || arr[1].equals("xlsx")) {
+					} else if (arr[1].equals("doc") || arr[1].equals("xls") || arr[1].equals("txt")|| arr[1].equals("docx") || arr[1].equals("xlsx")) {
 						String picId = getuuid32();
 						// session 中取
 						String piccresteuser = "zhang";

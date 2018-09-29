@@ -18,7 +18,9 @@ public class InterviewPojo extends Interview {
 		this.resume = resume;
 	}
 
-	public InterviewPojo(Integer interviewId, Integer interviewResumeId, String interviewJob, Date interviewTime,
+	
+
+	public InterviewPojo(String interviewId, String interviewResumeId, String interviewJob, Date interviewTime,
 			String interviewAssociateUsername, String interviewAssociatePhone, String interviewAddress,
 			String interviewInfo, Integer interviewStatus, String interviewRecodeInfo, String interviewCreateUser,
 			Date interviewCreateTime, String interviewUpdateUser, Date interviewUpdateTime, Integer interviewDeleteFlag,
