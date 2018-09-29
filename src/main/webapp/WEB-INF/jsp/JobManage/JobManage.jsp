@@ -246,9 +246,9 @@
 						 		<input class="btn btn-info" id="button-template" type="button" value="生成模板" onClick="jsptemp(${job.JOB_ID})"/>
 							</c:if>
 							<c:if test="${job.JOB_STATUS==0}">
-								<input class="btn btn-warning" id="button-modify" type="button" disabled="disabled" value="修改" onClick="modify(${job.JOB_ID})"/>
-								<input class="btn btn-danger" id="button-delete" type="button" disabled="disabled" value="删除" onClick="jspdelete(${job.JOB_ID})"/>
-								<input class="btn btn-info" id="button-template" type="button" disabled="disabled" value="生成模板" onClick="jsptemp(${job.JOB_ID})"/>
+								<input class="btn btn-warning" id="button-modify" type="button" data-toggle="tooltip" data-placement="bottom" title="此时不允许修改" disabled="disabled" value="修改" onClick="modify(${job.JOB_ID})"/>
+								<input class="btn btn-danger" id="button-delete" type="button" data-toggle="tooltip" data-placement="bottom" title="此时不允许删除" disabled="disabled" value="删除" onClick="jspdelete(${job.JOB_ID})"/>
+								<input class="btn btn-info" id="button-template" type="button" data-toggle="tooltip" data-placement="bottom" title="此时不允许生成模板" disabled="disabled" value="生成模板" onClick="jsptemp(${job.JOB_ID})"/>
 							</c:if>
 								
 						</td>
