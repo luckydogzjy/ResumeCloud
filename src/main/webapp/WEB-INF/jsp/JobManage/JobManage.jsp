@@ -23,10 +23,6 @@
 
 		var jobId=0;
 
-	
-
-		
-
 		function showDiv(ev,jId,jDate){
 	       // alert(jDate);
         	var oEvent=ev||event;
@@ -143,9 +139,10 @@
 
 					
 				
-<!--开启-->			<div id="DivChange" style="display: none;left:0; top: 0; border:1px solid #FF0000;position: fixed; width: 140px;height: 80px;background-color: greenyellow;">
-							截止时间：<input id="jDate" type="date" value="" /><br />
-							<input type="button" value="提交"  onclick="subTime()" /><input type="button" value="取消" onclick="cancelC()" />
+<!--开启-->			<div id="DivChange" style="display: none;left:20px; top: 5px; border:1px solid #51a351; border-radius:5px; position: fixed; width: 240px;height: 100px;background-color: #51a351;margin-top:30px;">
+							<font style="color:#ffffff">截止时间：</font><input id="jDate" type="date" value="" /><br />
+							<input  class="btn btn-default" type="button" value="提交"  onclick="subTime()" />
+							<input class="btn btn-default" type="button" value="取消" onclick="cancelC()" />
 					</div>
 					
 					<div id="job-search">
@@ -228,10 +225,10 @@
 							</c:if>
 							<c:if test="${job.JOB_STATUS==0}">
 				
-								<input id="button-status0" type="button" value="关闭" onclick="showDiv(null,${job.JOB_ID},'<fmt:formatDate value="${job.JOB_END_TIME}" pattern="yyyy-MM-dd" />')"/>
+								<input class="btn btn-danger active" id="button-status0" type="button" value="关闭" onclick="showDiv(null,${job.JOB_ID},'<fmt:formatDate value="${job.JOB_END_TIME}" pattern="yyyy-MM-dd" />')"/>
 
-								<%-- location.href='${pageContext.request.contextPath}/jobChangeStatus.do?jobId=${job.JOB_ID}&jobStatus=${job.JOB_STATUS}' --%>
-								<input class="btn btn-danger active" id="button-status0" type="button" value="关闭" onClick="jspclose(${job.JOB_ID},${job.JOB_STATUS})"/>
+								
+								<%-- <input class="btn btn-danger active" id="button-status0" type="button" value="关闭" onClick="jspclose(${job.JOB_ID},${job.JOB_STATUS})"/> --%>
 
 							</c:if>
 							
@@ -259,7 +256,7 @@
 		</div>
 		
 		
-		<div id="page" class="pagination pagination-lg">
+		<div id="page" style="margin-top:350px;margin-left:700px;">
 			<span>当前第${page.pageNum}页，一共${page.pages}页</span>
 				<span>
 					<a href="${pageContext.request.contextPath}/JobManage.do?page=${page.firstPage}">首页</a>

@@ -10,6 +10,9 @@
 		<link rel="stylesheet" type="text/css" href="css/demo.css"/>
 		<link rel="stylesheet" type="text/css" href="css/jobCss/add.css">
 		
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">	
+		
 		
 		<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js"></script>
  		<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
@@ -96,8 +99,8 @@
 				</div>
 				
 				<div id="btn">
-					<input id="submit00" type="button" value="提交" onclick="sub()">
-					<input id="cancel" type="button" value="取消" onclick="backout()" />
+					<input class="btn btn-default" id="submit00" type="button" value="提交" onclick="sub()">
+					<input class="btn btn-default" id="cancel" type="button" value="取消" onclick="backout()" />
 				</div>
 			</form>
 			</div>
