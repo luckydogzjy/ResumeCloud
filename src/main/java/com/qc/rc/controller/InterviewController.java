@@ -1,14 +1,10 @@
 package com.qc.rc.controller;
 
-
-import java.io.UnsupportedEncodingException;
-import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+
 
 
 import org.apache.commons.lang3.StringUtils;
@@ -17,22 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 
-import com.github.pagehelper.PageInfo;
-import com.qc.rc.common.FormParameterUtil;
 import com.qc.rc.common.ServerResponse;
-import com.qc.rc.entity.Resume;
-import com.qc.rc.entity.User;
-import com.qc.rc.entity.UserResume;
 import com.qc.rc.entity.pojo.InterviewPojo;
 import com.qc.rc.entity.pojoView.InterviewPojoView;
 import com.qc.rc.service.InterviewService;
-import com.qc.rc.service.ResumeService;
 import com.qc.rc.utils.DateUtil;
 
 
@@ -43,12 +31,9 @@ public class InterviewController {
 	
 	private static Logger log = Logger.getLogger(InterviewController.class);
 	
-	static Integer userId = 1;	
 	@Autowired  
 	private InterviewService iInterviewService;
-	
-	@Autowired  
-	private ResumeService resumeService;
+
 
 	
 
