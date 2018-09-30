@@ -101,7 +101,19 @@
 			location.href="${pageContext.request.contextPath}/jobTemplateView.do?jobId="+id;
 		}
    		
-   		
+   		//分页按钮
+   		function page(page){
+   			if(page == firstPage){
+   				location.href="${pageContext.request.contextPath}/JobManage.do?page="+ firstPage;
+   			}else if(page == prePage){
+   				
+   			}else if(page == nextPage){
+   				
+   			}else{
+   				
+   			}
+   			
+   		}
    		
 		</script>
 
@@ -126,6 +138,7 @@
 
 	</head>
 
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<body>
 	 <div id="box">
 
@@ -259,27 +272,27 @@
 		</div>
 		
 		
-		<div id="page" style="margin-top:350px;margin-left:700px;">
-			<span>当前第${page.pageNum}页，一共${page.pages}页</span>
+		<div id="page" style="margin-top:350px;margin-left:600px;">
+			<%-- <span>当前第${page.pageNum}页，一共${page.pages}页</span>
 				<span>
 					<a href="${pageContext.request.contextPath}/JobManage.do?page=${page.firstPage}">首页</a>
 			        <a href="${pageContext.request.contextPath}/JobManage.do?page=${page.prePage}">上一页</a>
 			        <a href="${pageContext.request.contextPath}/JobManage.do?page=${page.nextPage}">下一页</a>
 			        <a href="${pageContext.request.contextPath}/JobManage.do?page=${page.lastPage}">尾页</a>			 
-           </span>  
+           </span>  --%> 
             
+            <span>当前第${page.pageNum}页，一共${page.pages}页</span>
+            <span>				
+			     <input class="btn btn-default" type="button" value="首页" onclick="page(${page.firstPage})"/>
+			     <input class="btn btn-default" type="button" value="上一页" onclick="pageChange(${page.prePage})"/>
+			     <input class="btn btn-default" type="button" value="下一页" onclick="pageChange(${page.nextPage})"/>
+			     <input class="btn btn-default" type="button" value="尾页" onclick="pageChange(${page.pages})"/>				 
+          	</span>	
 				
 		</div>
 		
-		<!--<ul class="pagination pagination-lg">
-			<li><a href="#">&laquo;</a></li>
-		    <li><a href="#">1</a></li>
-		    <li><a href="#">2</a></li>
-		    <li><a href="#">3</a></li>
-		    <li><a href="#">4</a></li>
-		    <li><a href="#">5</a></li>
-		    <li><a href="#">&raquo;</a></li>
-		</ul><br>-->
+		
+		
 		
 		
 		</div>

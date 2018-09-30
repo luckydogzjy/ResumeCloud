@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.qc.rc.common.Const;
+import com.qc.rc.common.PageMessage;
 import com.qc.rc.dao.JobMapper;
 import com.qc.rc.entity.Job;
 import com.qc.rc.service.JobService;
@@ -22,19 +24,19 @@ public class JobServiceImpl implements JobService {
 	@Override
 	public boolean jobAdd(Job job) {
 		
-		return JobMapper.jobAdd(job)==1?true:false;
+		return JobMapper.jobAdd(job)==Const.OPEN?true:false;
 	}
 
 	@Override
 	public boolean jobUpdate(Job job) {
 		
-		return JobMapper.jobUpdate(job)==1?true:false;
+		return JobMapper.jobUpdate(job)==Const.OPEN?true:false;
 	}
 
 	@Override
 	public boolean jobDelete(Integer jobId) {
 		
-		return JobMapper.jobDelete(jobId)==1?true:false;
+		return JobMapper.jobDelete(jobId)==Const.OPEN?true:false;
 	}
 
 	@Override
@@ -44,33 +46,33 @@ public class JobServiceImpl implements JobService {
 		
 		switch (jobStatus) {
 		case 1:
-			ok=JobMapper.jobChangeStatus(jobId,0);
+			ok=JobMapper.jobChangeStatus(jobId,Const.CLOSE);
 			break;
 		case 0:
-			ok=JobMapper.jobChangeStatus(jobId,1);
+			ok=JobMapper.jobChangeStatus(jobId,Const.OPEN);
 			break;
 		default:
 			break;
 		}
 		
-		return ok==1?true:false;	
+		return ok==Const.OPEN?true:false;	
 	}
 
 	@Override
 	public Map<String, Object> jobGetByName(String userId,String jobName,Integer page) {
 		
 		for (Job j : JobMapper.jobGetByName(userId,jobName)) {
-			if (new Date().compareTo(j.getJOB_END_TIME())>0) {
-				JobMapper.jobChangeStatus(j.getJOB_ID(), 0);
+			if (new Date().compareTo(j.getJOB_END_TIME())>Const.CLOSE) {
+				JobMapper.jobChangeStatus(j.getJOB_ID(), Const.CLOSE);
 			}
 		}
 		Map<String, Object> map = new HashMap<>();
-		PageHelper.startPage(page, 6);
+		PageHelper.startPage(page, PageMessage.JOBPAGESIZE);
 		List<Job> newjob = JobMapper.jobGetByName(userId,jobName);	
 		
-		System.out.println("111"+userId);
-		System.out.println("222"+jobName);
-		System.out.println("999"+newjob.size());
+		//System.out.println("111"+userId);
+		//System.out.println("222"+jobName);
+		//System.out.println("999"+newjob.size());
 		
 		PageInfo<Job> pageJob = new PageInfo<Job>(newjob);	
 		map.put("job", newjob);
@@ -89,7 +91,7 @@ public class JobServiceImpl implements JobService {
 	@Override
 	public boolean jobStatusOpen(Integer jobId, Date jobEndTime) {
 		
-		return JobMapper.jobStatusOpen(jobId, jobEndTime)==1?true:false;
+		return JobMapper.jobStatusOpen(jobId, jobEndTime)==Const.OPEN?true:false;
 		
 	}
 

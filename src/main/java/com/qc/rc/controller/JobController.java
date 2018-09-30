@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.qc.rc.common.Const;
 import com.qc.rc.common.GetUser;
 import com.qc.rc.entity.Job;
 import com.qc.rc.service.JobService;
@@ -180,15 +181,14 @@ public class JobController {
 //		System.out.println(jobId);
 //		System.out.println(jobDate);
 		try {
+			//将状态转换为开启成功
 			boolean ok = jobService.jobStatusOpen(Integer.valueOf(jobId), new SimpleDateFormat("yyyy-MM-dd").parse(jobDate));
 			if (ok) {
-				return "Success!";
+				return "suceess";
 			}
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
