@@ -188,3 +188,14 @@ a:active{
 tr{
 	text-align:center;
 }
+
+#page{
+	text-align: center;
+	margin-top: 50px;
+	margin-left: 500px;
+	width:480px;
+	height:320px;
+	position:fixed;
+	bottom: 0;
+}
+

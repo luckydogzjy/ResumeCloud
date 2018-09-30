@@ -148,11 +148,15 @@
 
 					
 				
-<!--开启-->			<div id="DivChange" style="display: none;left:20px; top: 5px; border:1px solid #51a351; border-radius:5px; position: fixed; width: 240px;height: 100px;background-color: #51a351;margin-top:30px;">
+<!--开启-->			<div id="DivChange" style="display: none;left:20px; top: 5px; border:1px solid #51a351; border-radius:5px; position: fixed; width: 240px;height: 100px;background-color: #51a351;margin-top:30px;z-index:100;">
 							<font style="color:#ffffff">截止时间：</font><input id="jDate" type="date" value="" /><br />
 							<input  class="btn btn-default" type="button" value="提交"  onclick="subTime()" />
 							<input class="btn btn-default" type="button" value="取消" onclick="cancelC()" />
+							
+				
 					</div>
+					
+				
 					
 					<div id="job-search">
 
@@ -230,11 +234,11 @@
 						<td style="text-align:center;">
 							<c:if test="${job.JOB_STATUS==1}">
 								<%-- onClick="location.href='${pageContext.request.contextPath}/jobChangeStatus.do?jobId=${job.JOB_ID}&jobStatus=${job.JOB_STATUS}'" --%>
-								<input class="btn btn-success active" id="button-status1" type="button" data-toggle="tooltip" data-placement="bottom" title="关闭该职位的招聘" value="开启" onclick="jspopen(${job.JOB_ID},${job.JOB_STATUS})" />
+								<input class="btn btn-success active" id="button-status1" type="button" data-toggle="tooltip" data-placement="bottom" title="关闭该职位的招聘" value="开启" onclick="jspopen('${job.JOB_ID}',${job.JOB_STATUS})" />
 							</c:if>
 							<c:if test="${job.JOB_STATUS==0}">
 				
-								<input class="btn btn-danger active" id="button-status0" type="button" data-toggle="tooltip" data-placement="bottom" title="开启该职位的招聘" value="关闭" onclick="showDiv(null,${job.JOB_ID},'<fmt:formatDate value="${job.JOB_END_TIME}" pattern="yyyy-MM-dd" />')"/>
+								<input  class="btn btn-danger active" id="button-status0"  type="button" data-toggle="tooltip" data-placement="bottom" title="开启该职位的招聘" value="关闭" onclick="showDiv(null,'${job.JOB_ID}','<fmt:formatDate value="${job.JOB_END_TIME}" pattern="yyyy-MM-dd" />')"/>
 
 								
 								<%-- <input class="btn btn-danger active" id="button-status0" type="button" value="关闭" onClick="jspclose(${job.JOB_ID},${job.JOB_STATUS})"/> --%>
@@ -245,16 +249,16 @@
 						<td style="text-align:center;">
 							<c:if test="${job.JOB_STATUS==1}">
 								<%-- onClick="location.href='${pageContext.request.contextPath}/jobUpdateView.do?jobId=${job.JOB_ID}'" --%>
-						 		<input class="btn btn-warning" id="button-modify" type="button" value="修改" onClick="modify(${job.JOB_ID})"/>
+						 		<input class="btn btn-warning" id="button-modify" type="button" value="修改" onClick="modify('${job.JOB_ID}')"/>
 						 		<%-- onClick="location.href='${pageContext.request.contextPath}/jobDelete.do?jobId=${job.JOB_ID}'" --%>
-						 		<input class="btn btn-danger" id="button-delete" type="button" value="删除" onClick="jspdelete(${job.JOB_ID})"/>
+						 		<input class="btn btn-danger" id="button-delete" type="button" value="删除" onClick="jspdelete('${job.JOB_ID}')"/>
 						 		<%-- onClick="location.href='${pageContext.request.contextPath}/jobTemplateView.do?jobId=${job.JOB_ID}'" --%>
-						 		<input class="btn btn-info" id="button-template" type="button" value="生成模板" onClick="jsptemp(${job.JOB_ID})"/>
+						 		<input class="btn btn-info" id="button-template" type="button" value="生成模板" onClick="jsptemp('${job.JOB_ID}')"/>
 							</c:if>
 							<c:if test="${job.JOB_STATUS==0}">
-								<input class="btn btn-warning" id="button-modify" type="button" data-toggle="tooltip" data-placement="bottom" title="此时不允许修改" disabled="disabled" value="修改" onClick="modify(${job.JOB_ID})"/>
-								<input class="btn btn-danger" id="button-delete" type="button" data-toggle="tooltip" data-placement="bottom" title="此时不允许删除" disabled="disabled" value="删除" onClick="jspdelete(${job.JOB_ID})"/>
-								<input class="btn btn-info" id="button-template" type="button" data-toggle="tooltip" data-placement="bottom" title="此时不允许生成模板" disabled="disabled" value="生成模板" onClick="jsptemp(${job.JOB_ID})"/>
+								<input class="btn btn-warning" id="button-modify" type="button" data-toggle="tooltip" data-placement="bottom" title="此时不允许修改" disabled="disabled" value="修改"/>
+								<input class="btn btn-danger" id="button-delete" type="button" data-toggle="tooltip" data-placement="bottom" title=""  value="删除" onClick="jspdelete('${job.JOB_ID}')" />
+								<input class="btn btn-info" id="button-template" type="button" data-toggle="tooltip" data-placement="bottom" title="此时不允许生成模板" disabled="disabled" value="生成模板" />
 							</c:if>
 								
 						</td>
@@ -265,7 +269,7 @@
 		</div>
 		
 		
-		<div id="page" style="margin-top:250px; margin-left:600px;">
+		<div id="page" style=" margin-left:280px;">
 			<%-- <span>当前第${page.pageNum}页，一共${page.pages}页</span>
 				<span>
 					<a href="${pageContext.request.contextPath}/JobManage.do?page=${page.firstPage}">首页</a>

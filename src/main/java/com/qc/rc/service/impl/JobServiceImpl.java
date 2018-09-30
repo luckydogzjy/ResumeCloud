@@ -24,19 +24,19 @@ public class JobServiceImpl implements JobService {
 	@Override
 	public boolean jobAdd(Job job) {
 		
-		return JobMapper.jobAdd(job)==Const.OPEN?true:false;
+		return JobMapper.jobAdd(job)==1?true:false;
 	}
 
 	@Override
 	public boolean jobUpdate(Job job) {
 		
-		return JobMapper.jobUpdate(job)==Const.OPEN?true:false;
+		return JobMapper.jobUpdate(job)==1?true:false;
 	}
 
 	@Override
 	public boolean jobDelete(String jobId) {
 		
-		return JobMapper.jobDelete(jobId)==Const.OPEN?true:false;
+		return JobMapper.jobDelete(jobId)==1?true:false;
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class JobServiceImpl implements JobService {
 			break;
 		}
 		
-		return ok==Const.OPEN?true:false;	
+		return ok==1?true:false;	
 	}
 
 	@Override
@@ -91,7 +91,7 @@ public class JobServiceImpl implements JobService {
 	@Override
 	public boolean jobStatusOpen(String jobId, Date jobEndTime) {
 		
-		return JobMapper.jobStatusOpen(jobId, jobEndTime)==Const.OPEN?true:false;
+		return JobMapper.jobStatusOpen(jobId, jobEndTime)==1?true:false;
 		
 	}
 
