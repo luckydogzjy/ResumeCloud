@@ -3,7 +3,7 @@
 <mapper namespace="com.qc.rc.dao.PersonalMapper">
 	<resultMap id="BaseResultMap" type="com.qc.rc.entity.User">
 		 <constructor>
-      <idArg column="USER_ID" javaType="java.math.BigDecimal" jdbcType="INTEGER" />
+      <idArg column="USER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="USER_PHONE" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="USER_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="USER_PASSWORD" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -33,23 +33,16 @@
 		<result column="USER_BIRTHDAY" property="userBirthday"></result>		
 		
 	</resultMap> 
-	
-<!--  	<sql id="Base_Column_List">
-		USER_ID, USER_PHONE, USER_NAME, USER_COMPANY,USER_BIRTHDAY
 		
-	</sql> -->
-	
 	<update id="updataPassword" parameterType="com.qc.rc.entity.User">
-		update RC_USER set USER_PASSWORD=#{userPassword} where USER_PHONE=#{userPhone}
-<!--  			update RC_USER set USER_PASSWORD=111 where USER_PHONE=15542431051 -->
+		update RC_USER set USER_PASSWORD=#{userPassword} where USER_ID=#{userId}
 
 	</update>
 	
 	
 	
-	<select id="getUserInfo"  resultMap="userInfo"  parameterType="java.lang.Integer">
+	<select id="getUserInfo"  resultMap="userInfo"  parameterType="java.lang.String">
 		SELECT 				
-		<!-- <include refid="Base_Column_List"/> -->
 		USER_ID, USER_PHONE, USER_NAME, USER_COMPANY,USER_BIRTHDAY
 		FROM RC_USER where USER_ID=#{userId}
 	
@@ -59,11 +52,11 @@
 	
 	<update id="updateUser"  parameterType="com.qc.rc.entity.User" >
 		update RC_USER set
-			
+			USER_PHONE=#{userPhone,jdbcType=VARCHAR},
 			USER_NAME=#{userName,jdbcType=VARCHAR},
 			USER_COMPANY=#{userCompany,jdbcType=VARCHAR},
 			USER_BIRTHDAY=#{userBirthday,jdbcType=DATE}
-		where USER_ID=#{userId,jdbcType=INTEGER}
+		where USER_ID=#{userId,jdbcType=VARCHAR}
 	</update>
 	
 	<!-- 简历兑换查询 -->
@@ -78,10 +71,6 @@
 		<result column="RESUME_EDUCATION" property="resumeEducation"></result>
 		<result column="RESUME_JOB_INTENSION" property="resumeJobIntension"></result>	
 		<result column="RESUME_CREATE_TIME" property="resumeCreateTime"></result>
-		
-			
-		
-		
 		<association property="userresume" javaType="com.qc.rc.entity.UserResume">
 		
 			<result column="UR_USER_ID" property="urUesrId"></result>
@@ -90,33 +79,22 @@
 			<result column="UR_RESUME_GETWAT" property="urResumeGetway"></result>		
 		
 		</association>
+
+		
 	</resultMap>
 	
-	<select id="getAllExchangResume" resultMap="userExResume" parameterType="java.lang.Integer" >
-		
-   <!--   SELECT RR.RESUME_ID,RR.RESUME_NAME,RR.RESUME_SEX,RR.RESUME_WORK_YEARS,
-          RR.RESUME_GRADUATE_INSTITUTION,RR.RESUME_EDUCATION,
-          RR.RESUME_JOB_INTENSION,RR.RESUME_CREATE_TIME
-     FROM RC_RESUME RR INNER JOIN RC_USER_RESUME RUR    
-     ON(RR.RESUME_ID=RUR.UR_RESUME_ID AND RUR.UR_RESUME_GETWAT!=0 AND RUR.UR_DELETE_FLAG!=1)
-     INNER JOIN RC_USER RU
-     ON (RU.user_id = RUR.UR_user_id)
-     WHERE RU.USER_ID =#{userId} and RR.REsume_ID = RUR.UR_RESume_id
-      ORDER BY RR.RESUME_CREATE_TIME DESC -->
-      
-      
+	<select id="getAllExchangResume" resultMap="userExResume" parameterType="java.lang.String" >
+    
        SELECT RR.RESUME_ID,RR.RESUME_NAME,RR.RESUME_SEX,RR.RESUME_WORK_YEARS,
           RR.RESUME_GRADUATE_INSTITUTION,RR.RESUME_EDUCATION,
           RR.RESUME_JOB_INTENSION,RR.RESUME_CREATE_TIME
      FROM RC_RESUME RR INNER JOIN RC_USER_RESUME RUR    
-     ON(RR.RESUME_ID=RUR.UR_RESUME_ID AND RUR.UR_RESUME_GETWAT!=0 AND RUR.UR_DELETE_FLAG!=1)
+     ON(RR.RESUME_ID=RUR.UR_RESUME_ID AND RUR.UR_RESUME_GETWAT!='0' AND RUR.UR_DELETE_FLAG!=1)
      INNER JOIN RC_USER RU
      ON (RU.user_id = RUR.UR_user_id)
      WHERE RU.USER_ID =#{userId} and RR.REsume_ID = RUR.UR_RESume_id
       ORDER BY RR.RESUME_CREATE_TIME DESC
-		
-	
-		
+      
 	</select>
 	
 	
