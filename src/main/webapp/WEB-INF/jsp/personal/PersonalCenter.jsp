@@ -9,13 +9,14 @@
 		<meta charset="UTF-8">
 		<title></title>
 
-		<script type="text/javascript" src="../../../../../../target/classes/bootstrap/js/bootstrap.min.js" ></script>
-		<script type="text/javascript" src="../../../../../../target/classes/bootstrap/js/jquery-3.3.1.min.js" ></script>
+		
+		<script type="text/javascript" src="../bootstrap/js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="../bootstrap/js/jquery-3.3.1.min.js" ></script>
 		
 		
-		<link rel="stylesheet" type="text/css" href="css/demo.css" />
+		<link rel="stylesheet" type="text/css" href="../css/demo.css" />
 		
-		<link rel="stylesheet" type="text/css" href="css/personal.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/personal.css"/>
 		
 	</head>
 
@@ -34,21 +35,21 @@
 					<h4 class="modal-title" id="myModalLabel">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp修改个人信息</h4>
 				</div>
 				<div id="u1836" class="ax_default line">
-					&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img id="u1837_img" class="img " src="img/u1837.png" />
+					&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img id="u1837_img" class="img " src="../img/u1837.png" />
 				</div>
 				 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span style="color:red">${msg}</span></br>
 				<div id="upInfo" class="modal-body">
-					<form method="post" action="${pageContext.request.contextPath }/select_update_info.do">
+					<form method="post" action="${pageContext.request.contextPath }/personal/select_update_info.do">
 						<c:forEach items="${userList }" var="uesr">
 
 							<label for="UserPhone" class="col-sm-2 control-label"></label>
 							<div class="col-sm-10" id="Info">
-								手机号:<input type="text" class="form-control" id="userPhone" name="userPhone" value="${uesr.userPhone}" readonly="true"/>
+								手机号:<input type="text" class="form-control" id="userPhone" name="userPhone" value="${uesr.userPhone}" />
 							</div>
 
 							<label for="UserName" class="col-sm-2 control-label"></label>
 							<div class="col-sm-10" id="Info">
-								姓&nbsp 名:<input type="text" class="form-control" id="userName" name="userName" value="${uesr.userName}"/ >
+								姓&nbsp 名:<input type="text" class="form-control" id="userName" name="userName" value="${uesr.userName}"/>
 							</div>
 
 							<label for="UserBirthday" class="col-sm-2 control-label"></label>
@@ -78,7 +79,7 @@
 				</div>
 
 				<div id="u1837" class="ax_default line">
-					&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img id="u1837_img" class="img " src="img/u1837.png" /></br>
+					&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img id="u1837_img" class="img " src="../img/u1837.png" /></br>
 				</div>
 
 				<div id="butten" >
@@ -88,14 +89,14 @@
 					</div>
 
 					<div id="buts">
-						<a href="${pageContext.request.contextPath}/modifypassword.do"><input type="button" value="修改密码" /></a>&nbsp&nbsp
+						<a href="${pageContext.request.contextPath}/personal/modifypassword.do"><input type="button" value="修改密码" /></a>&nbsp&nbsp
 						<button type="button" class="btn btn-warning">共享记录</button>
 					</div>
 
 					<div id="buts">
 						<button type="button" class="btn btn-warning">充值记录</button>&nbsp&nbsp
 						
-						<a href="${pageContext.request.contextPath}/getHrExchangeResume.do"><button type="button" class="btn btn-warning">简历兑换记录</button></a>
+						<a href="${pageContext.request.contextPath}/personal/ur_resume_exchange.do"><button type="button" class="btn btn-warning">简历兑换记录</button></a>
 					</div>
 				</div>
 			</div>
