@@ -26,14 +26,14 @@ public interface JobMapper {
 	 * @param jobId
 	 * @return
 	 */
-	public int jobDelete(Integer jobId);
+	public int jobDelete(String jobId);
 	/**
 	 * 更改职位招聘状态
 	 * @param jobId
 	 * @param jobStatus
 	 * @return
 	 */
-	public int jobChangeStatus(@Param("jobId")Integer jobId,@Param("jobStatus")Integer jobStatus);
+	public int jobChangeStatus(@Param("jobId")String jobId,@Param("jobStatus")Integer jobStatus);
 	/**
 	 * 模糊查询
 	 * @param name
@@ -45,12 +45,12 @@ public interface JobMapper {
 	 * @param jobId
 	 * @return
 	 */
-	public Job jobGetOne(Integer jobId);
+	public Job jobGetOne(String jobId);
 	/**
 	 * 开启职位重设时间
 	 * @param jobId
 	 * @param endTime
 	 * @return
 	 */
-	public int jobStatusOpen(@Param("jobId")Integer jobId,@Param("endTime") Date endTime );
+	public int jobStatusOpen(@Param("jobId")String jobId,@Param("endTime") Date endTime );
 }

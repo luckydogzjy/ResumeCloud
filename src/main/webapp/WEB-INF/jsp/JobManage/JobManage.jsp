@@ -103,16 +103,9 @@
    		
    		//分页按钮
    		function page(page){
-   			if(page == firstPage){
-   				location.href="${pageContext.request.contextPath}/JobManage.do?page="+ firstPage;
-   			}else if(page == prePage){
-   				
-   			}else if(page == nextPage){
-   				
-   			}else{
-   				
-   			}
-   			
+   			var url = "${pageContext.request.contextPath}/JobManage.do?page=" + page;
+   			location.href = url; 
+	
    		}
    		
 		</script>
@@ -272,7 +265,7 @@
 		</div>
 		
 		
-		<div id="page" style="margin-top:350px;margin-left:600px;">
+		<div id="page" style="margin-top:250px; margin-left:600px;">
 			<%-- <span>当前第${page.pageNum}页，一共${page.pages}页</span>
 				<span>
 					<a href="${pageContext.request.contextPath}/JobManage.do?page=${page.firstPage}">首页</a>
@@ -284,9 +277,9 @@
             <span>当前第${page.pageNum}页，一共${page.pages}页</span>
             <span>				
 			     <input class="btn btn-default" type="button" value="首页" onclick="page(${page.firstPage})"/>
-			     <input class="btn btn-default" type="button" value="上一页" onclick="pageChange(${page.prePage})"/>
-			     <input class="btn btn-default" type="button" value="下一页" onclick="pageChange(${page.nextPage})"/>
-			     <input class="btn btn-default" type="button" value="尾页" onclick="pageChange(${page.pages})"/>				 
+			     <input class="btn btn-default" type="button" value="上一页" onclick="page(${page.prePage})"/>
+			     <input class="btn btn-default" type="button" value="下一页" onclick="page(${page.nextPage})"/>
+			     <input class="btn btn-default" type="button" value="尾页" onclick="page(${page.pages})"/>				 
           	</span>	
 				
 		</div>
