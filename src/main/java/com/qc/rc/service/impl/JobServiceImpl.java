@@ -34,13 +34,13 @@ public class JobServiceImpl implements JobService {
 	}
 
 	@Override
-	public boolean jobDelete(Integer jobId) {
+	public boolean jobDelete(String jobId) {
 		
 		return JobMapper.jobDelete(jobId)==Const.OPEN?true:false;
 	}
 
 	@Override
-	public boolean jobChangeStatus(Integer jobId, Integer jobStatus) {
+	public boolean jobChangeStatus(String jobId, Integer jobStatus) {
 		
 		int ok=-1;
 		
@@ -83,13 +83,13 @@ public class JobServiceImpl implements JobService {
 	}
 
 	@Override
-	public Job jobGetOne(Integer jobId) {
+	public Job jobGetOne(String jobId) {
 		
 		return JobMapper.jobGetOne(jobId);
 	}
 
 	@Override
-	public boolean jobStatusOpen(Integer jobId, Date jobEndTime) {
+	public boolean jobStatusOpen(String jobId, Date jobEndTime) {
 		
 		return JobMapper.jobStatusOpen(jobId, jobEndTime)==Const.OPEN?true:false;
 		

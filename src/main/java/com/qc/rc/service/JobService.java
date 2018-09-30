@@ -23,14 +23,14 @@ public interface JobService {
 	 * @param jobId
 	 * @return
 	 */
-	public boolean jobDelete(Integer jobId);
+	public boolean jobDelete(String jobId);
 	/**
 	 * 变更状态
 	 * @param jobId
 	 * @param jobStatus
 	 * @return
 	 */
-	public boolean jobChangeStatus(Integer jobId,Integer jobStatus);
+	public boolean jobChangeStatus(String jobId,Integer jobStatus);
 	/**
 	 * 模糊查询
 	 * @param userId
@@ -43,13 +43,13 @@ public interface JobService {
 	 * @param jobId
 	 * @return
 	 */
-	public Job jobGetOne(Integer jobId);
+	public Job jobGetOne(String jobId);
 	/**
 	 * 开启职位重设时间
 	 * @param jobId
 	 * @param jobEndTime
 	 * @return 
 	 */
-	public boolean jobStatusOpen(Integer jobId,Date jobEndTime);
+	public boolean jobStatusOpen(String jobId,Date jobEndTime);
 	
 }

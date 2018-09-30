@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Job {
 	
-	private Integer JOB_ID;
+	private String JOB_ID;
 	private String JOB_USER_ID;
 	private String JOB_NAME;
 	private Integer JOB_COUNT;
@@ -16,10 +16,10 @@ public class Job {
 	private Date JOB_CREATE_TIME;
 	private Date JOB_END_TIME;
 	
-	public Integer getJOB_ID() {
+	public String getJOB_ID() {
 		return JOB_ID;
 	}
-	public void setJOB_ID(Integer jOB_ID) {
+	public void setJOB_ID(String jOB_ID) {
 		JOB_ID = jOB_ID;
 	}
 	public String getJOB_USER_ID() {

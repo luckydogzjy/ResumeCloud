@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.qc.rc.common.Const;
 import com.qc.rc.common.GetUser;
+import com.qc.rc.common.GetUuid;
 import com.qc.rc.entity.Job;
 import com.qc.rc.service.JobService;
 
@@ -74,6 +75,7 @@ public class JobController {
 		
 		Job job = new Job();
 		try {
+			job.setJOB_ID(GetUuid.getuuid32());
 			job.setJOB_USER_ID(userId);
 			job.setJOB_NAME(name);
 			job.setJOB_COUNT(count);
@@ -96,7 +98,7 @@ public class JobController {
 	}
 	
 	@RequestMapping("/jobUpdateView.do")
-	public ModelAndView jobUpdateView(Integer jobId){
+	public ModelAndView jobUpdateView(String jobId){
 		
 		Job job = jobService.jobGetOne(jobId);
 		Map<String, Object> model = new HashMap<>();
@@ -106,13 +108,14 @@ public class JobController {
 	}
 	
 	@RequestMapping("/jobUpdate.do")
-	public ModelAndView jobUpdate(Integer jobid,Integer count,Integer salary,
+	public ModelAndView jobUpdate(String jobid,Integer count,Integer salary,
 			String introduction,String condition,String endTime){
 		
 		Job job = new Job();
 			
 		try {
-			job.setJOB_ID(jobid);
+			job.setJOB_ID(GetUuid.getuuid32());
+			job.setJOB_USER_ID(userId);
 			job.setJOB_COUNT(count);
 			job.setJOB_SALARY(salary);
 			job.setJOB_INTRODUCTION(introduction);
@@ -132,7 +135,7 @@ public class JobController {
 	}
 	
 	@RequestMapping("/jobDelete.do")
-	public ModelAndView jobDelete(Integer jobId){
+	public ModelAndView jobDelete(String jobId){
 		
 		if (jobService.jobDelete(jobId)) {
 			
@@ -144,7 +147,7 @@ public class JobController {
 	}
 	
 	@RequestMapping("/jobChangeStatus.do")
-	public ModelAndView jobChangeStatus(Integer jobId,Short jobStatus){
+	public ModelAndView jobChangeStatus(String jobId,Short jobStatus){
 				
 		if (jobService.jobChangeStatus(jobId, Integer.valueOf(jobStatus))) {
 			
@@ -156,7 +159,7 @@ public class JobController {
 	}
 	
 	@RequestMapping("/jobDetails.do")
-	public ModelAndView jobGetOne(Integer jobId){	
+	public ModelAndView jobGetOne(String jobId){	
 		
 		Job job = jobService.jobGetOne(jobId);
 		Map<String, Object> model = new HashMap<>();
@@ -166,7 +169,7 @@ public class JobController {
 	}
 	
 	@RequestMapping("jobTemplateView.do")
-	public ModelAndView jobTemplateView(Integer jobId){
+	public ModelAndView jobTemplateView(String jobId){
 		
 		Job job = jobService.jobGetOne(jobId);
 		Map<String, Object> model = new HashMap<>();
@@ -182,7 +185,7 @@ public class JobController {
 //		System.out.println(jobDate);
 		try {
 			//将状态转换为开启成功
-			boolean ok = jobService.jobStatusOpen(Integer.valueOf(jobId), new SimpleDateFormat("yyyy-MM-dd").parse(jobDate));
+			boolean ok = jobService.jobStatusOpen(jobId, new SimpleDateFormat("yyyy-MM-dd").parse(jobDate));
 			if (ok) {
 				return "suceess";
 			}
