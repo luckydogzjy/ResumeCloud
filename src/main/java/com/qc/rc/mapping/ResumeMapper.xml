@@ -142,14 +142,14 @@
 		INSERT INTO RC_SHARING_CENTER
 		(SC_ID,SC_USER_ID,SC_RESUME_ID,SC_INTEGRAL,SC_DOWNLOAD_COUNT)
 		VALUES(
-		SHARING_CENTER_SEQUENCE.NEXTVAL,
-		#{scUserId,jdbcType=INTEGER },
-		#{scResumeId,jdbcType=INTEGER },
-		#{scIntegral,jdbcType=INTEGER },
+		#{scId},
+		#{scUserId},
+		#{scResumeId},
+		#{scIntegral},
 		0
 		)
 		<!--  -->
-		<selectKey keyProperty="scId" order="AFTER" resultType="java.lang.Integer">
+		<selectKey keyProperty="scId" order="AFTER" resultType="java.lang.String">
 			SELECT
 			MAX(SC_ID) FROM RC_SHARING_CENTER
 			<!-- SHARING_CENTER_SEQUENCE.NEXTVAL-1 from dual -->

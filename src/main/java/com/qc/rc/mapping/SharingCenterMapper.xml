@@ -95,17 +95,19 @@
 		<result column="DR_DELETE_FLAG" property="drDeleteFlag"></result>
 			
 	</resultMap>
-	<!-- 查找当前用户曾经兑换过的简历 -->
-	<select id="getDownloadRecordById" resultMap="getDownloadRecord">
-		SELECT 
-		DR_ID,DR_USER_ID,DR_SHARING_CENTER_ID
-		FROM RC_DOWNLOAD_RECORD
-		WHERE DR_USER_ID = #{userId }
-	</select>	
+
+
 	<!-- 兑换次数+1 -->
 	<update id="updateDownloadCount">
 		UPDATE RC_SHARING_CENTER
 		SET SC_DOWNLOAD_COUNT = SC_DOWNLOAD_COUNT + 1
+		WHERE SC_ID = #{scId }
+	</update>
+	
+	<!-- 取消共享 -->
+	<update id="cancelSharingResume">
+		UPDATE RC_SHARING_CENTER
+		SET SC_DELETE_FLAG = 1
 		WHERE SC_ID = #{scId }
 	</update>
 </mapper>

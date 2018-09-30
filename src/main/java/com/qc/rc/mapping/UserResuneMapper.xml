@@ -17,9 +17,10 @@
  	 </insert>
  	 
  	 
- 	 	 <insert id="SharingInsertUserResume" parameterType="com.qc.rc.entity.UserResume">
+ 	 <insert id="SharingInsertUserResume" parameterType="com.qc.rc.entity.UserResume">
  	  insert into RC_USER_RESUME (UR_ID,UR_USER_ID,UR_RESUME_ID,UR_RESUME_GETWAT,UR_RESUME_SHARE_FLAG,UR_DELETE_FLAG,UR_CREATE_TIME)
- 	  values (USER_RESUME_SEQUENCE.nextval,
+ 	  values (
+ 	   #{urId},
  	   #{urUesrId},
  	   #{urResumeId},
  	   #{urResumeGetway},
@@ -29,6 +30,10 @@
  	  )
  	 </insert>
  	 
-	
+	 <update id="updateFlagByResumeId">
+		update RC_USER_RESUME 
+		set UR_RESUME_SHARE_FLAG = 0
+		where UR_RESUME_ID = #{resumeId }
+	 </update>
 	
 </mapper>

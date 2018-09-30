@@ -15,5 +15,5 @@ public interface SharingCenterService {
 	public void exchangeResume(User user,ResumePojo searchResumePojo,SharingCenter sharingCenter) throws Exception;
 	
 	//取消共享
-	public void cancelSharingResume(String scId) throws Exception;
+	public void cancelSharingResume(String scId,String scResumeId) throws Exception;
 }
