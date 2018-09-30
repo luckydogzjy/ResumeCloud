@@ -183,3 +183,13 @@ button.hover {
 	font-style: normal;
 	color: #FFFFFF;
 }
+
+#rili{
+	position: absolute;
+	top:20px;
+	left:980px;
+}
+#liu-pic-rili{
+	width:70px;
+	height:70px;
+}

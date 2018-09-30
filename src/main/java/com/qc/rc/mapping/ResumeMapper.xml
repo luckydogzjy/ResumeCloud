@@ -264,7 +264,12 @@
 	
 	
 	
-	
+	<!-- liu -->
+	<update id="updateResumePhone">
+		update RC_RESUME
+		set RESUME_PHONE = #{resumePhone}
+		where RESUME_ID = #{resumeId}
+	</update>
 	
 	
 	

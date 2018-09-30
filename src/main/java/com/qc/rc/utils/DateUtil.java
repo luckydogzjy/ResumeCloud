@@ -824,16 +824,35 @@ public class DateUtil{
             return c.getTime();  
     }  
      
- /*     
-    public static void main(String [] args){  
-        try {  
-            DateUtil dateUtil = new DateUtil();  
-            System.out.println();  
-              
-        } catch (Exception e) {  
-            // TODO: handle exception  
-        }  
-          
-    }  */
+    /**
+         * 在原日期的基础上增加小时数
+         * @param date
+         * @param i
+         * @return
+         */
+    public static Date addHourOfDate(Date date,int i){
+    	Calendar c = Calendar.getInstance();
+	    c.setTime(date);
+	    c.add(Calendar.HOUR_OF_DAY, i);
+	    Date newDate = c.getTime();
+	    return newDate;
+    }
+
+
+    /**
+         * 在原日期的基础上增加天数
+         * @param date
+         * @param i
+         * @return
+         */
+    public static Date addDayOfDate(Date date,int i){
+    	
+	    Calendar c = Calendar.getInstance();
+	    c.setTime(date);
+	    c.add(Calendar.DATE, i);
+	    Date newDate = c.getTime();
+	    return newDate;
+    }
+
       
 }  

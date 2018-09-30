@@ -98,7 +98,11 @@
 							<div id="r">
 								<input type="button" id="reset_button" value="重置" onclick="resert()"/>
 							</div>
-
+							<div id="rili">
+								<a href="${pageContext.request.contextPath}/Interview/richengPage.do">
+									<img id="liu-pic-rili" src="${pageContext.request.contextPath}/img/Liu_pic_rili.png">
+								</a>
+							</div>
 							<div id="table">
 								<table cellSpacing="5" cellPadding="4">
 									<tr>
@@ -169,7 +173,7 @@
 										<tr>
 											<td class="normal">
 												<font size="2">
-													<a href="">${interview.resume.resumeName}</a>
+													<a href="showInterviewDetail.do?InterviewId=${interview.interviewId}">${interview.resume.resumeName}</a>
 												</font>
 											</td>
 											<td class="normal">
@@ -191,7 +195,7 @@
 											</td>
 											<td class="right" id="index${status.index}">
 												<input type="hidden" value ="${interview.interviewId}" id="${status.index}">
-												<a href="updateById.do?id=${interview.interviewId}"><input type="button" value="修改" id="updateBtn" /></a>
+												<a href="${pageContext.request.contextPath}/Interview/showInterviewDetailUpdate.do?InterviewId=${interview.interviewId}"><input type="button" value="修改" id="updateBtn" /></a>
 												<input type="button" value="删除" id="deleteBtn" onclick="del(${status.index})" />
 												<a href="resumeInterviews.do?resumeId=${interview.resume.resumeId}"><input type="button" value="面试结果" id="interviewBtn" /></a>
 																			

@@ -161,4 +161,39 @@
 		where i.INTERVIEW_ID = #{interviewId}
   	</update>
   	
+  	
+  	
+  	<!-- Liu -->
+  	<select id="selectInterviewsByInterviewId" resultMap="resumeAndInterviewMap">
+	select 
+	  i.INTERVIEW_ID,i.INTERVIEW_INFO,i.INTERVIEW_JOB,i.INTERVIEW_ADDRESS,i.INTERVIEW_TIME,i.INTERVIEW_STATUS,i.INTERVIEW_ASSOCIATE_USERNAME,i.INTERVIEW_ASSOCIATE_PHONE,
+	  r.RESUME_ID,r.RESUME_NAME,r.RESUME_PHONE
+    from  RC_INTERVIEW i left join  RC_RESUME r
+    on  r.RESUME_ID = i.INTERVIEW_RESUME_ID 
+    where i.INTERVIEW_ID = #{InterviewId}
+  	</select>
+  	
+  	<update id="updateInterviewsByInterviewId" parameterType="com.qc.rc.entity.pojo.InterviewPojo">
+  		update RC_INTERVIEW i
+		set i.INTERVIEW_JOB = #{interviewJob},
+		    i.INTERVIEW_TIME = #{interviewTime},
+		    i.INTERVIEW_ADDRESS = #{interviewAddress},
+		    i.INTERVIEW_ASSOCIATE_USERNAME = #{interviewAssociateUsername},
+		    i.INTERVIEW_ASSOCIATE_PHONE = #{interviewAssociatePhone},
+		    i.INTERVIEW_INFO = #{interviewInfo},
+		    i.INTERVIEW_STATUS = #{interviewStatus},
+		    i.INTERVIEW_UPDATE_TIME = sysdate,
+		    i.INTERVIEW_UPDATE_USER = 'jayne'
+		where i.INTERVIEW_ID = #{interviewId}
+  	</update>
+  	
+  	
+  	<select id="selectInterviewsByUserId" resultMap="resumeAndInterviewMap">
+		select 
+		  i.INTERVIEW_ID,i.INTERVIEW_JOB,i.INTERVIEW_TIME,
+		  r.RESUME_ID,r.RESUME_NAME
+	    from  RC_RESUME r left join RC_INTERVIEW i 
+	    on  r.RESUME_ID = i.INTERVIEW_RESUME_ID 
+	    where i.INTERVIEW_USER_ID = #{userId}
+  	</select>
 </mapper>
