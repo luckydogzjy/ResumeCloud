@@ -8,25 +8,29 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
-
-		
 		<script type="text/javascript" src="../bootstrap/js/bootstrap.min.js" ></script>
 		<script type="text/javascript" src="../bootstrap/js/jquery-3.3.1.min.js" ></script>
-		
-		
-		<link rel="stylesheet" type="text/css" href="../css/demo.css" />
-		
+		<link rel="stylesheet" type="text/css" href="../css/demo.css" />		
 		<link rel="stylesheet" type="text/css" href="../css/personal.css"/>
+		
+		<script type="text/javascript">
+		
+		
+		</script>
 		
 	</head>
 
 	<body>
+		<div id="box">
+	
 		<div id="header">
 			<jsp:include page="../common/header.jsp" flush="true" />
 		</div>
 		<div id="lefter">
 			<jsp:include page="../common/lefter.jsp" flush="true" />
 		</div>
+		
+		
 
 		<div id="right">
 
@@ -65,7 +69,7 @@
 
 						
 <!--  						<input type="hidden" name="method" value="提交更改" onClick="showValue()" />
- --> 						<button type="submit" id="but" >提交更改</button> 
+ --> 						<button type="submit" id="but" onclick="updateInfo()">提交更改</button> 
 						  
 					</c:forEach>
 					</form>
@@ -99,6 +103,7 @@
 						<a href="${pageContext.request.contextPath}/personal/ur_resume_exchange.do"><button type="button" class="btn btn-warning">简历兑换记录</button></a>
 					</div>
 				</div>
+			</div>
 			</div>
 </div>
 	</body>

@@ -45,7 +45,7 @@
 				<div id="left-item-person"  class="left-item" >
 					<div class="left-item-box">
 					<img class="left-item-pic" src="${pageContext.request.contextPath}/img/u14.png" />
-					<a class="left-item-a" href="#">个人中心</a>
+					<a class="left-item-a" href="${pageContext.request.contextPath}/personal/PersonalCenter.do">个人中心</a>
 					</div>
 				</div>
 

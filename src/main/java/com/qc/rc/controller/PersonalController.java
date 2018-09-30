@@ -89,33 +89,6 @@ public class PersonalController {
 		}
 
 	}
-	//
-	// int result = personalService.passwordUpdate(user);
-	// model.put("msg", "修改成功");
-	// return new ModelAndView("personal/modifypassword", model);
-	// model.put("msg", "修改失败");
-	// return new ModelAndView("personal/modifypassword", model);
-	// return new ModelAndView("personal/PersonalCenter", model);
-	//
-	// if (!sessionUser.getUserPassword().equals(oldpwd))
-	// {
-	//
-	// model.put("status", Boolean.FALSE);
-	// model.put("message", "原密码输入错误，请重试");
-	// return model;
-	// }
-	// if (!newpwd.equals.(confirm)) {
-	// model.put("status", Boolean.FALSE);
-	// model.put("message", "两次密码输入不一致，请重试");
-	// return model;
-	// }
-	// personalService.passwordUpdate(user)
-	// userService.updatePassword(user.getPassword(),user.getRepassword(),currentUser.getId());
-	//
-	// model.put("status", Boolean.TRUE);
-	// model.put("message", "密码修改成功，请重新登录。");
-	// return model;
-	// }
 
 	/**
 	 * 进入个人中心自动获取info

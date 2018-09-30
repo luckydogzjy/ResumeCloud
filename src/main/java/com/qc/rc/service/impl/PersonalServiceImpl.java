@@ -43,7 +43,7 @@ public class PersonalServiceImpl implements PersonalService {
 	}
 	
 	
-		public List<User> getUserInfo(Integer userId) {
+		public List<User> getUserInfo(String userId) {
 		
 		List<User> list = personalMapper.getUserInfo(userId);
 		
@@ -61,7 +61,7 @@ public class PersonalServiceImpl implements PersonalService {
 		
 		
 		//获取积分兑换的简历
-		public List<UserExchangeResumePojo> getAllExchangResume(Integer userId){
+		public List<UserExchangeResumePojo> getAllExchangResume(String userId){
 			
 			List<UserExchangeResumePojo> exchangeResumeList= personalMapper.getAllExchangResume(userId);
 			
@@ -70,7 +70,7 @@ public class PersonalServiceImpl implements PersonalService {
 
 
 		@Override
-		public List<ResumePojo> getResumeListByCondition(Integer userId, String resumeName, String resumeJobIntension,
+		public List<ResumePojo> getResumeListByCondition(String userId, String resumeName, String resumeJobIntension,
 				Integer resumeSex, Integer resumeEducation, Integer resumeWorkYears, String resumeGraduateInstitution) {
 			List<ResumePojo> list = personalMapper.getResumeListByCondition(userId,resumeName, resumeJobIntension, resumeSex, resumeEducation, resumeWorkYears, resumeGraduateInstitution);
 			
