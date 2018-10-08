@@ -185,10 +185,6 @@ a:active{
 	margin-bottom:10px;
 }
 
-tr{
-	text-align:center;
-}
-
 #page{
 	text-align: center;
 	margin-top: 50px;
@@ -199,3 +195,32 @@ tr{
 	bottom: 0;
 }
 
+.displayTable tr td{
+	text-overflow: ellipsis; /* for IE */  
+   -moz-text-overflow: ellipsis; /* for Firefox,mozilla */  
+    overflow: hidden;  
+    white-space: nowrap; 
+}
+
+
+
+th{
+	background-color: rgba(51, 153, 204, 1);
+	BORDER-LEFT: white 7px solid;
+	BORDER-RIGHT: white 7px solid;
+}
+
+#table-box{
+	BORDER-RIGHT: lightblue 1px solid;
+  	BORDER-TOP: lightblue 1px solid;
+  	BORDER-LEFT: lightblue 1px solid;
+  	BORDER-BOTTOM: lightblue 1px solid;
+  	padding:10px;
+  	margin-top:-40px;
+  	height: 380px;
+  	left: 34px;
+  	top: 110px;
+  	width: 1000px;
+  	position: absolute;
+	
+}

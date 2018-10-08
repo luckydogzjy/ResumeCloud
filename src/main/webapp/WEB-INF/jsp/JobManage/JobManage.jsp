@@ -10,12 +10,12 @@
 					
 		<link rel="stylesheet" type="text/css" href="css/demo.css"/> 
 		<!-- <link rel="stylesheet" type="text/css" href="../css/demo.css"/> -->
-		
 		<link rel="stylesheet" type="text/css" href="css/jobCss/job.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">	
 		
 		<!-- <script type="text/javascript" src="js/jquery-2.1.1.js"></script> -->
+		<!-- <script src="js/jobJs/job.js"></script> -->
 		<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js"></script>
  		<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
 		<script src="${pageContext.request.contextPath}/bootstrap/js/jquery-3.3.1.min.js"></script>
@@ -109,9 +109,6 @@
    		}
    		
 		</script>
-
-		
-		
 		
 		
 		<style type="text/css">
@@ -214,24 +211,24 @@
 					
 		
 		<div id="table-box">
-				<table class="table table-striped" >
+				<table id="displayTable" class="table table-striped"  cellSpacing="6"  cellPadding="6" >
 					<thead>
 					<tr>
-						<th style="text-align:center;">职位名称</th>
-						<th style="text-align:center;">职位数量</th>
-						<th style="text-align:center;">截止时间</th>
-						<th style="text-align:center;">状态</th>
-						<th style="text-align:center;">操作</th>
+						<th>职位名称</th>
+						<th>职位数量</th>
+						<th>截止时间</th>
+						<th>状态</th>
+						<th>操作</th>
 					</tr>
 					</thead>
 					<tbody>
 					<c:forEach items="${job}" var="job">
 					<tr>
-						<td style="text-align:center;"><a href="${pageContext.request.contextPath}/jobDetails.do?jobId=${job.JOB_ID}">${job.JOB_NAME}</a></td>
-						<td style="text-align:center;">${job.JOB_COUNT}</td>
-						<td style="text-align:center;"><fmt:formatDate value="${job.JOB_END_TIME}" pattern="yyyy年MM月dd日" /></td>
+						<td><a href="${pageContext.request.contextPath}/jobDetails.do?jobId=${job.JOB_ID}">${job.JOB_NAME}</a></td>
+						<td>${job.JOB_COUNT}</td>
+						<td><fmt:formatDate value="${job.JOB_END_TIME}" pattern="yyyy年MM月dd日" /></td>
 
-						<td style="text-align:center;">
+						<td>
 							<c:if test="${job.JOB_STATUS==1}">
 								<%-- onClick="location.href='${pageContext.request.contextPath}/jobChangeStatus.do?jobId=${job.JOB_ID}&jobStatus=${job.JOB_STATUS}'" --%>
 								<input class="btn btn-success active" id="button-status1" type="button" data-toggle="tooltip" data-placement="bottom" title="关闭该职位的招聘" value="开启" onclick="jspopen('${job.JOB_ID}',${job.JOB_STATUS})" />
@@ -246,7 +243,7 @@
 							</c:if>
 							
 						</td>
-						<td style="text-align:center;">
+						<td>
 							<c:if test="${job.JOB_STATUS==1}">
 								<%-- onClick="location.href='${pageContext.request.contextPath}/jobUpdateView.do?jobId=${job.JOB_ID}'" --%>
 						 		<input class="btn btn-warning" id="button-modify" type="button" value="修改" onClick="modify('${job.JOB_ID}')"/>
@@ -280,10 +277,10 @@
             
             <span>当前第${page.pageNum}页，一共${page.pages}页</span>
             <span>				
-			     <input class="btn btn-default" type="button" value="首页" onclick="page(${page.firstPage})"/>
-			     <input class="btn btn-default" type="button" value="上一页" onclick="page(${page.prePage})"/>
-			     <input class="btn btn-default" type="button" value="下一页" onclick="page(${page.nextPage})"/>
-			     <input class="btn btn-default" type="button" value="尾页" onclick="page(${page.pages})"/>				 
+			     <input  type="button" value="首页" onclick="page(${page.firstPage})"/>
+			     <input  type="button" value="上一页" onclick="page(${page.prePage})"/>
+			     <input  type="button" value="下一页" onclick="page(${page.nextPage})"/>
+			     <input  type="button" value="尾页" onclick="page(${page.pages})"/>				 
           	</span>	
 				
 		</div>
