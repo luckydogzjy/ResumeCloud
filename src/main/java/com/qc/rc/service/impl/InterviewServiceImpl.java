@@ -74,11 +74,11 @@ public class InterviewServiceImpl implements InterviewService {
 		
 	}
 	
-	public Integer addInterview(String interviewResumeId,String interviewJob,String interviewTime,
+	public Integer addInterview(String interviewId,String interviewResumeId,String interviewJob,String interviewTime,
 			String interviewAssociateUsername,String interviewAssociatePhone,String interviewAddress,String interviewInfo,
 			Resume resume,User user) throws ParseException {
 		InterviewPojo iPojo = new InterviewPojo();
-		iPojo.setInterviewId(GetUuid.getuuid32());
+		iPojo.setInterviewId(interviewId);
 		iPojo.setInterviewResumeId(interviewResumeId);
 		iPojo.setInterviewJob(interviewJob);
 		iPojo.setInterviewTime(InterviewDateUtil.strToDate(interviewTime));
