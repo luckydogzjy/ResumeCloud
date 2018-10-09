@@ -63,11 +63,11 @@
    		
    		$(document).ready(function(){
 			//查询职位名
-			$("#search").click(function(){
+			/* $("#search").click(function(){
 				var msg = $("#searchName").val();
 				location.href="${pageContext.request.contextPath}/JobManage.do?searchName=" + msg;
 				//$(location).attr("href","${pageContext.request.contextPath}/JobManage.do");
-			});
+			}); */
 			//添加职位
 			$("#add").click(function(){
 				location.href="${pageContext.request.contextPath}/jobAddView.do";
