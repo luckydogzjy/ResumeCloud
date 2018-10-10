@@ -19,4 +19,7 @@ public interface SharingCenterMapper {
 	//兑换次数加一
 	public Integer updateDownloadCount(@Param("scId")String scId);
 	
+	//取消共享
+	public void cancelSharingResume(@Param("scId")String scId);
+	
 }

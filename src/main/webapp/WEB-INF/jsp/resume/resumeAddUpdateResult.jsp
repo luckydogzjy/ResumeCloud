@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<title>简历详情</title>
-		<link rel="stylesheet" type="text/css" href="../css/resumeCss/resume-ww.css"/>
+		<meta charset="UTF-8">
+		<title>变动详情页面</title>
+		<link rel="stylesheet" type="text/css" href="../css/resumeCss/resume1-2.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/demo.css"/>
 	</head>
 	<body>
@@ -23,7 +24,9 @@
 			<div id="right">
 				<div id="right-box">
 					<div id="right_jiben"  style="text-align: left;" >
-						<FONT  size="6" color="#FF0000">基本信息</FONT>
+						<strong>
+						<FONT  size="6" color="#003366">基本信息</FONT>
+						</strong>
 
 						<HR size="4" width="" noshade>
 
@@ -116,13 +119,12 @@
 						 	</tr>
 
 						 </table>
-					  </div>
-					  <div id="right_fujia">
-						 <FONT size="6" color="#FF0000">附加信息</FONT>
+						<strong>
+						 <FONT id="right_fujia" size="6" color="#003366">附加信息</FONT>
+						 </strong>
 						 <HR id="hengxian"	size="4" width="300" noshade>
-
-					
-						<div id="result_wenjianxianshi">
+							
+							<div id="result_wenjianxianshi">
 							<strong>
 							<FONT  size="4" color="#003366">简历图片:</FONT>
 							</strong>
@@ -144,10 +146,14 @@
 						 	</c:forEach>
 						 	</UL>
 							</div>
+							
+							
+							
 
-				</div>
-					   <a href="javascript:history.back();"><input id="backbtn" type="button" value="返回"/></a>
-					
+						 </table>
+
+						 <a href="${pageContext.request.contextPath}/Resume/getResumeListByCondition.do"><input id="backbtn" type="button" value="返回"/></a>
+					 </div>
 					
 				</div>
 			</div>

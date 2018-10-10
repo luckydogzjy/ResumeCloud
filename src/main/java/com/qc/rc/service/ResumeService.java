@@ -13,7 +13,7 @@ public interface ResumeService {
 	public Map<String, Object> getResumeListByCondition(String userId,ResumePojo resumePojo,Integer page);
 	
 	//根据id返回resume表的全部详细信息
-	public Map<String, Object> getResumeDetailsById(String resumeId);
+	public ResumePojo getResumeDetailsById(String resumeId);
 	
 	//根据id删除resume信息
 	public void deleteResumeById(String resumeId);
@@ -49,7 +49,7 @@ public interface ResumeService {
 	 * @param resume_id
 	 * @return
 	 */
-	public Resume resumeUpdateSelect(String resume_id);
+	public Resume getResumeById(String resume_id);
 
 	/**
 	 * 文件表更新
@@ -85,6 +85,12 @@ public interface ResumeService {
 	 * @return
 	 */
 	public int resumeUpdateAddPic(Pic pic);
+	
+	public int deletePicById(String resumeId);
+	
+	public int resumeAddfile(String picId, String resumeId, String piccresteuser, String filepath);
+
+	public int deleteFileById(String resumeId);
 	
 	
 }

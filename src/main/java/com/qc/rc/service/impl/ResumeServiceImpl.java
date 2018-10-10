@@ -49,12 +49,10 @@ public class ResumeServiceImpl implements ResumeService {
 		return model;
 	}
 	//根据id查详情
-	public Map<String, Object> getResumeDetailsById(String resumeId) {
+	public ResumePojo getResumeDetailsById(String resumeId) {
 	
-		ResumePojo resumePojo = resumeMapper.getResumeDetailsById(resumeId);	
-		Map<String,Object> model = new HashMap<String,Object>(); 
-		model.put("resume", resumePojo);
-		return model;
+		return resumeMapper.getResumeDetailsById(resumeId);	
+
 	}
 	//根据id删resume
 	public void deleteResumeById(String resumeId){
@@ -98,7 +96,7 @@ public class ResumeServiceImpl implements ResumeService {
 	/*
 	 * 简历表信息查询
 	 * */
-	public Resume resumeUpdateSelect(String resumeId) {	
+	public Resume getResumeById(String resumeId) {	
 		Resume resume = resumeMapper.selectResumeById(resumeId);
 		return resume;			
 	}
@@ -141,7 +139,20 @@ public class ResumeServiceImpl implements ResumeService {
 
 	
 	
+	public int deletePicById(String resumeId) {
+		int result = picMapper.deletePicById(resumeId);	
+		return result;
+	}
 	
+
+	public int resumeAddfile(String fileId, String resumeId, String filecresteuser, String filepath) {
+		int result = picMapper.resumeAddFile(fileId,resumeId,filecresteuser,filepath);	
+		return result;
+	}
 	
+	public int deleteFileById(String resumeId) {
+		int result = picMapper.deleteFileById(resumeId);	
+		return result;
+	}
 
 }

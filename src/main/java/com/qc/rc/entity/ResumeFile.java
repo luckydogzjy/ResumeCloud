@@ -3,10 +3,10 @@ package com.qc.rc.entity;
 import java.util.Date;
 
 
-public class File {
+public class ResumeFile {
 	
-	private Integer fId;
-	private Integer fResumeId;
+	private String fId;
+	private String fResumeId;
 	private String fFile;  //文件路径
 	
 	private String fCreateUser;
@@ -14,16 +14,16 @@ public class File {
 	private String fUpdateUser;
 	private Date fUpdateTime;
 	private Date fDeleteFlag;
-	public Integer getfId() {
+	public String getfId() {
 		return fId;
 	}
-	public void setfId(Integer fId) {
+	public void setfId(String fId) {
 		this.fId = fId;
 	}
-	public Integer getfResumeId() {
+	public String getfResumeId() {
 		return fResumeId;
 	}
-	public void setfResumeId(Integer fResumeId) {
+	public void setfResumeId(String fResumeId) {
 		this.fResumeId = fResumeId;
 	}
 	public String getfFile() {
@@ -72,7 +72,7 @@ public class File {
 	 * @param fUpdateTime
 	 * @param fDeleteFlag
 	 */
-	public File(Integer fId, Integer fResumeId, String fFile, String fCreateUser, Date fCreateTime, String fUpdateUser,
+	public ResumeFile(String fId, String fResumeId, String fFile, String fCreateUser, Date fCreateTime, String fUpdateUser,
 			Date fUpdateTime, Date fDeleteFlag) {
 		super();
 		this.fId = fId;
@@ -85,7 +85,7 @@ public class File {
 		this.fDeleteFlag = fDeleteFlag;
 	}
 	
-	public File(){
+	public ResumeFile(){
 		super();
 	}
 	

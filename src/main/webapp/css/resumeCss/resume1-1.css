@@ -33,8 +33,14 @@
 #wenjian{
 	position: absolute;
 	left: 650px;
-	top: 120px;
+	top: 80px;
 	width: 300px;
+}
+#update_wenjianxianshi{
+	position: absolute;
+	left: 650px;
+	width: 360px;
+	top: 200px;
 }
 #right_wenbenyu{
 	position:absolute;
@@ -44,13 +50,13 @@
 #tableradio{
 	position: absolute;
 	left: 650px;
-	top: 200px;
+	top: 220px;
 	width: 300px;
 }
 #radioway{
 	position: absolute;
 	left: 650px;
-	top: 200px;
+	top: 110px;
 }
 #updateright_wenbenyu{
 	position:absolute;
@@ -63,13 +69,13 @@
 #s9{
 	position:absolute;
   	left:650px;
-  	top:160px;
+  	top:134px;
   	width: 400px;
 }
 #s10{
 	position:absolute;
   	left:650px;
-  	top:180px;
+  	top:154px;
   	width: 400px;
 }
 #addbutton_div {

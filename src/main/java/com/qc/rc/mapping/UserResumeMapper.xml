@@ -30,6 +30,10 @@
  	  )
  	 </insert>
  	 
-	
+	<update id="updateFlagByResumeId">
+		update RC_USER_RESUME 
+		set UR_RESUME_SHARE_FLAG = 0
+		where UR_RESUME_ID = #{resumeId }
+	</update>
 	
 </mapper>

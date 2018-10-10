@@ -28,14 +28,16 @@
 				<div id="right-box">
 
 					<div id="right_update" style="text-align: left;">
-
-						<FONT size="6" color="#FF0000">基本信息</FONT>
-
+						<strong>
+						<FONT size="6" color="#003366">基本信息</FONT>
+						</strong>
 						<HR size="4" width="590" noshade>
 
 						<%-- <form method="post" action="${pageContext.request.contextPath }/resume_update.do" enctype="multipart/form-data">  --%>
 
-						<form method="POST" action="${pageContext.request.contextPath }/Resume/resume_update.do" enctype="multipart/form-data">
+						<form method="POST" action="${pageContext.request.contextPath }/Resume/resume_update.do?page=${page}&resumeName=${resumeName}
+										&resumeJobIntension=${resumeJobIntension}&resumeSex=${resumeSex}&resumeEducation=${resumeEducation}
+										&resumeWorkYears=${resumeWorkYears}&resumeGraduateInstitution=${resumeGraduateInstitution}" enctype="multipart/form-data">
 
 							<table border="0">
 
@@ -150,36 +152,66 @@
 										<td><span>自我评价</span></td>
 									</tr>
 									<tr>
-										<td><textarea id="selfevaluation" name="resumeSelfEvaluation" style="width: 200px;" onkeyup="check(this);" onchange="check(this);">${resume.resumeSelfEvaluation}
+										<td><textarea id="selfevaluation" cols="200" name="resumeSelfEvaluation" style="width: 200px;" onkeyup="check(this);" onchange="check(this);">${resume.resumeSelfEvaluation}
   				</textarea></td>
 									</tr>
 									<tr>
 										<td><span>工作经验</span></td>
 									</tr>
 									<tr>
-										<td><textarea id="experiencetext" name="resumeWorkExperience" style="width: 200px;" onkeyup="check(this);" onchange="check(this);">${resume.resumeWorkExperience}
+										<td><textarea id="experiencetext" cols="200" name="resumeWorkExperience" style="width: 200px;" onkeyup="check(this);" onchange="check(this);">${resume.resumeWorkExperience}
   				</textarea></td>
 									</tr>
 								</table>
 
 							</table>
-
-							<FONT id="right_fujia" size="6" color="#FF0000">附加信息</FONT>
+							<strong>
+							<FONT id="right_fujia" size="6" color="#003366">附加信息</FONT>
+							</strong>
 							<HR id="hengxian" size="4" width="300" noshade>
+							
+							<div id="update_wenjianxianshi">
+							<strong>
+							<FONT  size="4" color="#003366">简历图片:</FONT>
+							</strong>
+							<br>
+							<c:forEach items="${resume.lPics }" var="resumePic">
 
-							<input id="wenjian" type="file" name="file_03" onchange="promote();" />
+								 	<img id="tu" src="${resumePic.pPic }"  width="80" height="100"/>		
+							 </c:forEach>
+							 <br>
+							 
+							<strong>
+							 <FONT  size="4" color="#003366">简历文件:</FONT>
+							 </strong>
+							 <br>
 						
-							<font id="s9" size="2" color="red"></font>
-							<font id="s10" size="2" color="red"></font>
+						 	 <UL>
+							 <c:forEach items="${resume.lFiles }" var="resumeFile" varStatus="i">				 	
+							 	 <LI> <a href="${resumeFile.fFile}">简历文件</a></LI>			 			 			
+						 	</c:forEach>
+						 	</UL>
+							</div>
+							
+							
+
+							<input id="wenjian" type="file" name="upload_file" onchange="promote();" />
+						
+					<!-- 		<font id="s9" size="2" color="red"></font>
+							<font id="s10" size="2" color="red"></font> -->
 							
 							<table border="0" id="radioway">
 								<tr>
 									<td>
-							 			   <INPUT  name="changeway" type="radio" value="替换" checked>替换原有
-										   <INPUT  name="changeway" type="radio" value="新增">新增
+							 			   <INPUT  name="changeway" type="radio" value="新增" checked>新增
+										   <INPUT  name="changeway" type="radio" value="替换">替换原有
 									</td>
-								</tr>	
+								</tr>								
 							</table>
+							<br>
+							<br>
+							<font id="s9" size="2" color="red"></font><br>
+							<font id="s10" size="2" color="red"></font>
 
 							<input id="updatebutton_div" type="submit" value="修改" onclick="return checkinput()" />
 							<a href="javascript:history.back();"><input id="updatebutton_div2" type="button" value="返回" /></a>

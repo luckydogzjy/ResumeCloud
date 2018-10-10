@@ -30,8 +30,6 @@ public class SharingCenterController {
 	@Autowired
 	private HttpSession session;
 	
-	User user = new User();
-	
 	@RequestMapping(value="/getSharingResumeListByCondition.do",method=RequestMethod.GET)
 	public ModelAndView getSharingResumeListByCondition(ResumePojo searchResumePojo,@RequestParam(required=true,defaultValue="1") Integer page) {
 	
@@ -83,6 +81,26 @@ public class SharingCenterController {
 		try {
 			if (user != null) {
 				sharingCenterService.exchangeResume(user, searchResumePojo, sharingCenter);
+				
+				return getSharingResumeListByCondition(searchResumePojo, page);
+				
+			} else {
+				System.out.println("登录");
+			}		
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}	
+	
+	@RequestMapping(value="/cancelSharingResume.do",method=RequestMethod.GET)
+	public ModelAndView cancelSharingResume(ResumePojo searchResumePojo,String scId,String scResumeId,@RequestParam(required=true,defaultValue="1") Integer page) {
+		
+		User user = GetUser.getUser();
+		try {
+			if (user != null) {
+				sharingCenterService.cancelSharingResume(scId,scResumeId);
 				
 				return getSharingResumeListByCondition(searchResumePojo, page);
 				
