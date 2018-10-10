@@ -3,7 +3,7 @@
 <mapper namespace="com.qc.rc.dao.UserMapper">
   <resultMap id="BaseResultMap" type="com.qc.rc.entity.User" > 
  <constructor>
-<idArg jdbcType="DECIMAL" javaType="java.math.BigDecimal" column="USER_ID"/>
+<idArg jdbcType="VARCHAR" javaType="java.lang.String" column="USER_ID"/>
 <arg jdbcType="VARCHAR" javaType="java.lang.String" column="USER_PHONE"/>
 <arg jdbcType="VARCHAR" javaType="java.lang.String" column="USER_PASSWORD"/>
 <arg jdbcType="VARCHAR" javaType="java.lang.String" column="USER_NAME"/>
@@ -20,8 +20,11 @@
 </resultMap> 
 	
     <select id="findUserByPhone"  parameterType="java.lang.String" resultType="com.qc.rc.entity.User">
-    
-   		 select USER_PHONE as userPhone,USER_PASSWORD as userPassword from RC_USER where USER_PHONE=#{userPhone}
+   		 select 
+   		 USER_ID as userId,USER_PHONE as userPhone,USER_PASSWORD as userPassword 
+   		 from RC_USER 
+   		 where 
+   		 USER_PHONE=#{userPhone}
  	</select>
  	
   	<insert id="insertNewUser" parameterType="com.qc.rc.entity.User" >
@@ -33,18 +36,27 @@
 		CREATE_TIME
 		) 
 		VALUES(
-		MY_TABLE_SEQ.NEXTVAL,
+		#{userId,jdbcType=VARCHAR},
 		#{userPhone,jdbcType=VARCHAR},
 		#{userPassword,jdbcType=VARCHAR},
 		SYSDATE
 		)	
-		
-		<selectKey keyProperty="userId" resultType="java.lang.Integer"
-			order="AFTER">
-			select
-			MY_TABLE_SEQ.CURRVAL AS lastId FROM DUAL
-		</selectKey> 
-	</insert> 
+		 
+	</insert>
 	
+	<update id="deleteShareById"  parameterType="java.lang.String">
+	
+		    update RC_SHARING_CENTER set SC_DELETE_FLAG = 1 where SC_ID=#{scId}
+	</update>
+	
+<!-- 	<delete id="deleteResumeById" parameterType="java.lang.Integer">
+	
+		delete from RC_RESUME where RESUME_ID=#{resumeId,jdbcType=INTEGER}
+	</delete>
+	
+	<delete id="deleteShareById" parameterType="java.lang.Integer">
+	
+		delete from RC_RECHARGE_RECORD where SC_ID=#{scId,jdbcType=INTEGER}
+	</delete> -->
 
 </mapper>

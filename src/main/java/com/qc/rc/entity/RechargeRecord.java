@@ -17,24 +17,24 @@ public class RechargeRecord {
 		"RR_UPDATE_TIME" DATE, 
 		"RR_DELETE_FLAG" NUMBER(1,0) DEFAULT 0
 	   ) */
-	private Integer RR_ID;//主键 自动生成 自增
-	private Integer RR_USER_ID;//外键 RC_USER表USER_ID
+	private String RR_ID;//主键 自动生成 自增
+	private String RR_USER_ID;//外键 RC_USER表USER_ID
 	private String RR_ORDERNO;//订单号
 	private Integer RR_TYPE;//充值类型1.微信。2支付宝
 	private Integer RR_MONEY;//充值金额
 	private Date RR_CREATE_TIME;
 	private Date RR_UPDATE_TIME;
 	private Integer RR_DELETE_FLAG;
-	public Integer getRR_ID() {
+	public String getRR_ID() {
 		return RR_ID;
 	}
-	public void setRR_ID(Integer rR_ID) {
+	public void setRR_ID(String rR_ID) {
 		RR_ID = rR_ID;
 	}
-	public Integer getRR_USER_ID() {
+	public String getRR_USER_ID() {
 		return RR_USER_ID;
 	}
-	public void setRR_USER_ID(Integer rR_USER_ID) {
+	public void setRR_USER_ID(String rR_USER_ID) {
 		RR_USER_ID = rR_USER_ID;
 	}
 	public String getRR_ORDERNO() {

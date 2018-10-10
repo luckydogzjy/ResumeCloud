@@ -3,18 +3,22 @@ package com.qc.rc.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.qc.rc.entity.RechargeRecord;
 import com.qc.rc.entity.User;
+import com.qc.rc.entity.pojo.SharingCenterPojo;
 import com.qc.rc.service.UserService;
 
 
@@ -24,56 +28,110 @@ public class UserController {
 	
 	@Autowired  
 	private UserService userService;
+	@Autowired
+	private User user;
 		
-	@RequestMapping("/login.action")
-	public String login(String userPhone,String userPassword,Model model,HttpSession session){
-		
-		User user=userService.findUserByPhone(userPhone, userPassword);
+	@RequestMapping(value="/login.action",method=RequestMethod.POST)
+	public String login(String userPhone,String userPassword,Model model,HttpSession session) throws Exception {
+		//System.out.println(userPhone+userPassword);
+		  user=userService.findUserByPhone(userPhone, userPassword);
 		if(user != null){
-			session.setAttribute("user", user);
+			//设置当前登录seesion
+			user.setUserPassword("******");
+			session.setAttribute("rcuser", user);
 			model.addAttribute("msg", "登录成功！");
-			return "interviewJsps/IVxiangqing";
+			return "user/first";
 		}
 		else{
-			model.addAttribute("msg","账号或密码错误");
+			model.addAttribute("msg","× 账号或密码错误");
 			return "user/login1";
 		}			
 	}
-		
-	@RequestMapping("/recharge.action")
-	public ModelAndView itemsList() throws Exception{
-		
-		List<RechargeRecord> rechargeList=userService.findRecord();	
-		ModelAndView modelAndView = new ModelAndView();		
-		modelAndView.addObject("rechargeList", rechargeList);
+	
+	@RequestMapping(value="/recharge.action",method=RequestMethod.GET)
+	public ModelAndView rechargeList(@RequestParam(required = false,defaultValue = "1",value = "pn")Integer pn,
+			ModelAndView modelAndView,HttpServletRequest request)throws Exception {
+		//取session
+		User user = (User)request.getSession().getAttribute("rcuser");
+        PageHelper.startPage(pn,3);
+		List<RechargeRecord> rechargeList = userService.findRecord(user.getUserId());
+	/*	for(RechargeRecord rechargeList2: rechargeList){			
+			System.out.println(rechargeList2);
+		}*/
+        PageInfo<RechargeRecord> pageInfo = new PageInfo<RechargeRecord>(rechargeList);	
+        modelAndView.addObject("rechargeList", rechargeList);
+		modelAndView.addObject("pageInfo", pageInfo);
 		modelAndView.setViewName("user/rechargeList");	
 		return modelAndView;
 		
-		}	
+		}
+	@RequestMapping(value="/searchPersonShare.action",method=RequestMethod.GET)
+	public ModelAndView personShareList(@RequestParam(required = false,defaultValue = "1",value = "pn")Integer pn,
+			ModelAndView modelAndView,HttpServletRequest request) throws Exception {
+		
+		//session获取当前用户ID
+		User user = (User)request.getSession().getAttribute("rcuser");
+		PageHelper.startPage(pn,1);
+		List<SharingCenterPojo> personShareLists = userService.getPersonShareResume(user.getUserId());
+		PageInfo<SharingCenterPojo> pageInfo = new PageInfo<SharingCenterPojo>(personShareLists);	
+		if (personShareLists != null) {
+		//	System.out.println(personShareLists.size());
+			modelAndView.addObject("personShareLists", personShareLists);
+			modelAndView.addObject("pageInfo", pageInfo);
+		} else {
+			
+			modelAndView.addObject("msg","暂无共享数据");
+		}
+		modelAndView.setViewName("user/PersonalShareRecordList");
+		return modelAndView;
+	}
 	
-/*	@RequestMapping("/registe.action")
-	public String regist(User user,Model model){
+	@RequestMapping(value="/deleteRecharge.action",method=RequestMethod.POST)
+	public String delRechargeRecord(String rrId) throws Exception {
+		//System.out.println(rrId);
 		
-		System.out.println("用户注册："+user.getName()+user.getPassword());
-		
-		user.setId(1);
-		userService.regist(user);	
-		model.addAttribute("msg", "注册成功");
-		//注册成功后跳转success.jsp页面
-		return "login";
-		
+		userService.deleteRecharge(rrId);
+		return "user/rechargeList";
+	}
 	
-	}*/
-	@RequestMapping("/registe.action")
-	public String registe(String userPhone,String userPassword,Model model,HttpSession session){
+	@RequestMapping(value="/delPersonShare.action",method=RequestMethod.POST)
+	public String delPersonShare(String scId) throws Exception {
+		System.out.println(scId);
 		
-		User user=new  User();
-		user.setUserPhone(userPhone);
-		user.setUserPassword(userPassword);
-		int lastId=userService.userRegister(user);
-		model.addAttribute("msg", "注册成功,请登录");
-		model.addAttribute("lastId",lastId);
+		userService.deleteShareById(scId);
+		return "user/PersonalShareRecordList";
+		
+	}
+
+	
+	@RequestMapping(value="/goRegiste.action")
+	public String goRegiste() throws Exception {
+		
+		return "user/registe";
+	}
+	
+	@RequestMapping(value="/gologin1.action")
+	public String goLogin1() throws Exception {
+		
 		return "user/login1";
 	}
+	
+	@RequestMapping(value="/gologin2.action")
+	public String goLogin2() throws Exception {
+		
+		return "user/login2";
 	}
+	
+	@RequestMapping(value="/gorechargerecord.action")	
+	public String gorechargerecord() throws Exception {
+		
+		return "user/rechargeList";
+	}
+	
+	@RequestMapping(value="/gopersonshare.action")
+	public String gopersonshare() throws Exception {
+		
+		return "user/PersonalShareRecordList";
+	}
+}
 	

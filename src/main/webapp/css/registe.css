@@ -57,67 +57,6 @@ body{
 	width: 444px;
 	height: 408px;
 }
-#body_right_form_phoneNum{
-	position: absolute;
-	top: 60px;
-	left: 60px;
-	width: 309px;
-    height: 47px;
-}
-
-#phoneIsEmpty{
-	position: absolute;
-	top: 113px;
-	left: 60px;
-	width: 309px;
-    height: 21px;
-    color: red;
-/*  background-color:blue;
- */ }
-#body_right_form_pass{
-	position: absolute;
-	top: 145px;
-	left: 60px;
-	width: 309px;
-    height: 47px;
-}
-
-#passIsEmpty{
-	position: absolute;
-	top: 200px;
-	left: 60px;
-	width: 309px;
-    height: 21px;
-    color: red;
-/*  	background-color:blue;
- */ }
- 
-#body_right_form_submit{
-	border:0px;
-	background-color: rgb(22,155,213);
-	width: 309px;
-    height: 50px;
-    position: absolute;
-    top: 240px;
-    left: 63px;
-    font-size: 20px;
-    color: white;
-    border-radius: 3px;
-}
-
-#body_right_form_submit:hover{
-	background-color:#00CCFF;
-}
-
-#alert{
-	position: absolute;
-	top: 290px;
-	left: 62px;
-	width: 309px;
-    height: 21px;
-    color: red;
-/*     background-color:blue;
- */}
 
 #goregisteA {
     position: absolute;
@@ -137,14 +76,14 @@ body{
 
 #gologin1A{
 	position: absolute;
-    top: 440px;
-    left: 1040px;
+    top: 460px;
+    left: 1055px;
     width: 309px;
     height: 55px;
 	
 }
 
-#phone{
+#inputphone{
 	position: absolute;
 	top: 60px;
 	left: 60px;
@@ -160,7 +99,7 @@ body{
     height: 40px;
 }
 
-#button{
+#btn_send{
 	border:0px;
 	background-color: rgb(22,155,213);
 	position: absolute;
@@ -170,10 +109,11 @@ body{
     height: 40px;
     font-size: 15px;
     color: white;
+    border-radius: 6px;
 	
 }
 
-#yanzhengma{
+#code{
 	position: absolute;
 	top: 220px;
 	left: 60px;
@@ -181,8 +121,8 @@ body{
     height: 34px;
 }
 
-#registe{
-	border:1px;
+#btn_registe{
+	border:0px;
 	background-color: rgb(22,155,213);
 	position: absolute;
 	top: 295px;
@@ -191,15 +131,90 @@ body{
     height: 40px;
     font-size: 15px;
     color: white;
+    border-radius: 3px;
 	
 }
 
-a{color:#169BD5} /*设置默认颜色*/
+#returnMessage{
+	border:0px;
+	position: absolute;
+	top: 338px;
+	left: 60px;
+	width: 309px;
+    height: 20px;
+    font-size: 12px;
+    color: red;
+    border-radius: 3px;
+    
+}
+
+#IsRegiste{
+	border:0px;
+	position: absolute;
+	top: 107px;
+	left: 60px;
+	width: 309px;
+    height: 20px;
+    font-size: 12px;
+    color: red;
+    border-radius: 3px;
+/*  	background-color:blue;
+ */  }
+ 
+ #IsEmptyPassword{
+ border:0px;
+	position: absolute;
+	top: 186px;
+	left: 60px;
+	width: 309px;
+    height: 20px;
+    font-size: 12px;
+    color: red;
+    border-radius: 3px;
+
+ }
+
+#jbPhoneTip{
+	border:0px;
+	position: absolute;
+	top: 260px;
+	left: 60px;
+	width: 309px;
+    height: 20px;
+    font-size: 12px;
+    color: red;
+    border-radius: 3px;
+  
+}
+
+#registeSuccessMessage{
+	border:0px;
+	position: absolute;
+	top: 338px;
+	left: 60px;
+	width: 309px;
+    height: 20px;
+    font-size: 12px;
+    color: red;
+    border-radius: 3px;
+     
+}
+
+
+#btn_registe:hover{
+	background-color:#00CCFF;
+}
+
+#btn_send:hover{	
+	background-color:#00CCFF;
+}
+
+a{color:#169BD5} /*隶ｾ鄂ｮ鮟倩ｮ､鬚懆牡*/
 a{text-decoration: none}
-/* a:link {color:blue;} 未访问颜色 */
-/* a:visited {color:gray;} 已访问颜色 */
-a:hover {color:#00FFFF;} /*悬浮（鼠标经过）时颜色*/
-/* a:active {color:yellow;} 点击时的颜色 */
+/* a:link {color:blue;} 譛ｪ隶ｿ髣ｮ鬚懆牡 */
+/* a:visited {color:gray;} 蟾ｲ隶ｿ髣ｮ鬚懆牡 */
+a:hover {color:#00FFFF;} /*謔ｬ豬ｮ�ｼ磯ｼ�譬�扈剰ｿ��ｼ画慮鬚懆牡*/
+/* a:active {color:yellow;} 轤ｹ蜃ｻ譌ｶ逧�鬚懆牡 */
 
 /* a {background-color: red;}
  */	

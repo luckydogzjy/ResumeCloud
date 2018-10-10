@@ -94,11 +94,11 @@
 
 					<div id="buts">
 						<a href="${pageContext.request.contextPath}/personal/modifypassword.do"><input type="button" value="修改密码" /></a>&nbsp&nbsp
-						<button type="button" class="btn btn-warning">共享记录</button>
+						<a href="${pageContext.request.contextPath }/searchPersonShare.action"><input type="button" value="共享记录" /></a>&nbsp&nbsp
 					</div>
 
 					<div id="buts">
-						<button type="button" class="btn btn-warning">充值记录</button>&nbsp&nbsp
+						<a href="${pageContext.request.contextPath}/recharge.action?pn=1"><input type="button" value="充值记录" /></a>&nbsp&nbsp
 						
 						<a href="${pageContext.request.contextPath}/personal/ur_resume_exchange.do"><button type="button" class="btn btn-warning">简历兑换记录</button></a>
 					</div>
