@@ -100,7 +100,8 @@ public  class COSUtil {
         req.setExpiration(expirationDate);
         URL downloadUrl = getCOSClient().generatePresignedUrl(req);
         String downloadUrlStr = downloadUrl.toString();
-
+        
+        getCOSClient().shutdown();
         return  downloadUrlStr;
     }
 }

@@ -152,15 +152,13 @@
 										<td><span>自我评价</span></td>
 									</tr>
 									<tr>
-										<td><textarea id="selfevaluation" cols="200" name="resumeSelfEvaluation" style="width: 200px;" onkeyup="check(this);" onchange="check(this);">${resume.resumeSelfEvaluation}
-  				</textarea></td>
+										<td><textarea id="selfevaluation" cols="200" name="resumeSelfEvaluation" style="width: 200px;" onkeyup="check(this);" onchange="check(this);">${resume.resumeSelfEvaluation}</textarea></td>
 									</tr>
 									<tr>
 										<td><span>工作经验</span></td>
 									</tr>
 									<tr>
-										<td><textarea id="experiencetext" cols="200" name="resumeWorkExperience" style="width: 200px;" onkeyup="check(this);" onchange="check(this);">${resume.resumeWorkExperience}
-  				</textarea></td>
+										<td><textarea id="experiencetext" cols="200" name="resumeWorkExperience" style="width: 200px;" onkeyup="check(this);" onchange="check(this);">${resume.resumeWorkExperience}</textarea></td>
 									</tr>
 								</table>
 

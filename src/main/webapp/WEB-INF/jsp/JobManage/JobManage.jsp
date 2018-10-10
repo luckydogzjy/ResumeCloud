@@ -63,11 +63,11 @@
    		
    		$(document).ready(function(){
 			//查询职位名
-			$("#search").click(function(){
+			/* $("#search").click(function(){
 				var msg = $("#searchName").val();
 				location.href="${pageContext.request.contextPath}/JobManage.do?searchName=" + msg;
 				//$(location).attr("href","${pageContext.request.contextPath}/JobManage.do");
-			});
+			}); */
 			//添加职位
 			$("#add").click(function(){
 				location.href="${pageContext.request.contextPath}/jobAddView.do";
@@ -158,13 +158,7 @@
 					<div id="job-search">
 
 
-					 <%-- <div id="job-search">
-
-						<img id="job-search-img" src="${pageContext.request.contextPath}/img/u607.png" />
-						<form id="search" action="${pageContext.request.contextPath}/JobManage.do" method="POST">
-							<input id="job-search-input" type="text" name="search" value="${search}"/>
-							<input id="job-search-button" type="submit" value="搜索" />
-						</form> --%>
+					
 						<div style="padding: 20px 20px 10px; float:left;">	
 							 
 									<div class="col-lg-6">
@@ -183,19 +177,26 @@
 									
 						</div>
 						
+						 <%-- <div id="job-search">
+
+						<img id="job-search-img" src="${pageContext.request.contextPath}/img/u607.png" />
+						<form id="search" action="${pageContext.request.contextPath}/JobManage.do" method="POST">
+							<input id="job-search-input" type="text" name="search" value="${search}"/>
+							<input id="job-search-button" type="submit" value="搜索" />
+						</form> --%>
 						<div style="padding: 20px 20px 10px; float:right; margin-right:50px;">	
 							 
 									<div class="col-lg-6">
 									
 										<div class="input-group">
-										
-											<input type="text" class="form-control" name="search" id="searchName" placeholder="请输入职位名称" >
+										<form id="search" action="${pageContext.request.contextPath}/JobManage.do" method="POST">
+											<input type="text" class="form-control" name="search" id="search" value="${search}" placeholder="请输入职位名称" >
 											<span class="input-group-btn">
-												<button id="search" class="btn btn-default" type="button" >
+												<button id="search" class="btn btn-default" type="submit" >
 													搜索
 												</button>
 											</span>
-										
+										</form>
 										</div><!-- /input-group -->
 										
 									</div><!-- /.col-lg-6 -->
