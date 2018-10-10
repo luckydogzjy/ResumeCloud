@@ -20,6 +20,7 @@ import com.qc.rc.entity.RechargeRecord;
 import com.qc.rc.entity.User;
 import com.qc.rc.entity.pojo.SharingCenterPojo;
 import com.qc.rc.service.UserService;
+import com.qc.rc.utils.BASE64Util;
 
 
 
@@ -37,7 +38,7 @@ public class UserController {
 		  user=userService.findUserByPhone(userPhone, userPassword);
 		if(user != null){
 			//设置当前登录seesion
-			user.setUserPassword("******");
+			user.setUserPassword(BASE64Util.getInstance().encode(userPassword));
 			session.setAttribute("rcuser", user);
 			model.addAttribute("msg", "登录成功！");
 			return "user/first";

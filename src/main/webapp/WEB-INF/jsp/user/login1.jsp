@@ -23,16 +23,16 @@
 	
 	function checkForm() {
 		var myreg = /^(((13[0-9]{1})|(14[0-9]{1})|(17[0]{1})|(15[0-3]{1})|(15[5-9]{1})|(18[0-9]{1}))+\d{8})$/;
-		var patrn=/^(\w){6,20}$/; 
-		if($("#body_right_form_phoneNum").val().length == 0){
+/* 		var patrn=/^(\w){6,20}$/; 
+ */		if($("#body_right_form_phoneNum").val().length == 0){
 			$("#phoneIsEmpty").text("× 手机号不能为空");
 			$("#phoneIsEmpty").focus();
 			return false;
 		}else if($("#body_right_form_phoneNum").val().length != 11 || !myreg.test($("#body_right_form_phoneNum").val())){
 			$("#phoneIsEmpty").text("× 请输入有效的手机号码");
 			return false;
-		}else if($("#body_right_form_pass").val().length == 0 || !patrn.test($("#body_right_form_pass").val())){
-			$("#passIsEmpty").text("× 密码只能有6-20位数字、字母、下划线组成");
+		}else if($("#body_right_form_pass").val().length == 0 ){
+			$("#passIsEmpty").text("× 密码不能为空");
 			$("#passIsEmpty").focus();
 			return false;
 		}else{
