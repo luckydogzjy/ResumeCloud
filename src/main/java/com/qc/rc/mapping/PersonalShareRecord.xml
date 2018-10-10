@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qc.rc.dao.UserMapper">	
+ 	
+ 	<resultMap type="com.qc.rc.entity.pojo.SharingCenterPojo" id="getAllSharing">
+		
+		<id column="SC_ID" property="scId"></id>
+		<result column="SC_USER_ID" property="scUserId"></result>
+		<result column="SC_RESUME_ID" property="scResumeId"></result>
+		<result column="SC_INTEGRAL" property="scIntegral"></result>
+		<result column="SC_DOWNLOAD_COUNT" property="scDownloadCount"></result>
+		<result column="SC_DELETE_FLAG" property="scDeleteFlag"></result>
+		<result column="SC_UPDATE_TIME" property="scUpdateTime"></result>
+		<result column="SC_CREATE_TIME" property="scCreateTime"></result>
+		
+		<association property="resume" javaType="com.qc.rc.entity.Resume">
+		
+			<id column="RESUME_ID" property="resumeId"></id>
+			<result column="RESUME_NAME" property="resumeName"></result>
+			<result column="RESUME_SEX" property="resumeSex"></result>
+			<result column="RESUME_BIRTHDAY" property="resumeBirthday"></result>
+			<result column="RESUME_PHONE" property="resumePhone"></result>
+			<result column="RESUME_EMAIL" property="resumeEmail"></result>
+			<result column="RESUME_ADDRESS" property="resumeAddress"></result>
+			
+			<result column="RESUME_GRADUATE_INSTITUTION" property="resumeGraduateInstitution"></result>
+			<result column="RESUME_EDUCATION" property="resumeEducation"></result>
+			<result column="RESUME_JOB_INTENSION" property="resumeJobIntension"></result>
+			<result column="RESUME_SELF_EVALUATION" property="resumeSelfEvaluation"></result>
+			<result column="RESUME_WORK_EXPERIENCE" property="resumeWorkExperience"></result>
+			<result column="RESUME_WORK_YEARS" property="resumeWorkYears"></result>
+		
+			
+		</association>
+			
+	</resultMap>
+	<!-- 查询个人共享信息，默认根据共享时间排序 -->
+	<select id="getPersonShareResume" resultMap="getAllSharing" parameterType="java.lang.String">
+		
+		SELECT 
+    RESUME_ID,RESUME_NAME,RESUME_SEX,
+    RESUME_BIRTHDAY,RESUME_PHONE,RESUME_EMAIL,
+		RESUME_ADDRESS,RESUME_GRADUATE_INSTITUTION,RESUME_EDUCATION,
+    RESUME_JOB_INTENSION,RESUME_SELF_EVALUATION,RESUME_WORK_EXPERIENCE,RESUME_WORK_YEARS,
+    SC_ID,SC_USER_ID,SC_RESUME_ID,
+    SC_INTEGRAL,SC_DOWNLOAD_COUNT,SC_CREATE_TIME	
+		FROM RC_SHARING_CENTER,RC_RESUME
+		WHERE RC_SHARING_CENTER.SC_RESUME_ID = RC_RESUME.RESUME_ID
+		AND RC_SHARING_CENTER.SC_DELETE_FLAG = 0
+    AND RC_SHARING_CENTER.SC_USER_ID = #{currentId}
+		ORDER BY SC_CREATE_TIME DESC
+	</select>
+	
+	
+<!--  	<resultMap type="com.qc.rc.entity.pojo.SharingCenterPojo" id="getPersonShareByCurrentIdMap">
+		
+		<id column="SC_ID" property="scId"></id>
+		<result column="SC_USER_ID" property="scUserId"></result>
+		<result column="SC_RESUME_ID" property="scResumeId"></result>
+		<result column="SC_INTEGRAL" property="scIntegral"></result>
+		<result column="SC_DOWNLOAD_COUNT" property="scDownloadCount"></result>
+		<result column="SC_DELETE_FLAG" property="scDeleteFlag"></result>
+		<result column="SC_UPDATE_TIME" property="scUpdateTime"></result>
+		<result column="SC_CREATE_TIME" property="scCreateTime"></result>
+		
+		<association property="resume" javaType="com.qc.rc.entity.Resume">	
+			<id column="RESUME_ID" property="resumeId"></id>
+			<result column="RESUME_NAME" property="resumeName"></result>
+			<result column="RESUME_SEX" property="resumeSex"></result>
+			<result column="RESUME_BIRTHDAY" property="resumeBirthday"></result>
+			<result column="RESUME_PHONE" property="resumePhone"></result>
+			<result column="RESUME_EMAIL" property="resumeEmail"></result>
+			<result column="RESUME_ADDRESS" property="resumeAddress"></result>
+			<result column="RESUME_GRADUATE_INSTITUTION" property="resumeGraduateInstitution"></result>
+			<result column="RESUME_EDUCATION" property="resumeEducation"></result>
+			<result column="RESUME_JOB_INTENSION" property="resumeJobIntension"></result>
+			<result column="RESUME_SELF_EVALUATION" property="resumeSelfEvaluation"></result>
+			<result column="RESUME_WORK_EXPERIENCE" property="resumeWorkExperience"></result>
+			<result column="RESUME_WORK_YEARS" property="resumeWorkYears"></result>			
+		</association>
+			
+	</resultMap>
+	查询个人共享简历的信息，根据当前用户ID查询
+	<select id="getPersonShareResume" resultMap="getPersonShareByCurrentIdMap" >
+		SELECT 
+    RESUME_ID,RESUME_NAME,RESUME_SEX,
+    RESUME_BIRTHDAY,RESUME_PHONE,RESUME_EMAIL,
+		RESUME_ADDRESS,RESUME_GRADUATE_INSTITUTION,RESUME_EDUCATION,
+    RESUME_JOB_INTENSION,RESUME_SELF_EVALUATION,RESUME_WORK_EXPERIENCE,RESUME_WORK_YEARS,
+    SC_ID,SC_USER_ID,SC_RESUME_ID,
+    SC_INTEGRAL,SC_DOWNLOAD_COUNT,SC_CREATE_TIME	
+		FROM RC_SHARING_CENTER,RC_RESUME
+		WHERE RC_SHARING_CENTER.SC_RESUME_ID = RC_RESUME.RESUME_ID
+		AND RC_SHARING_CENTER.SC_DELETE_FLAG = 0
+    AND RC_SHARING_CENTER.SC_USER_ID = 1
+		ORDER BY SC_CREATE_TIME DESC
+	</select>	 -->
+
+</mapper>

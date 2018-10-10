@@ -5,6 +5,8 @@ import java.util.Date;
 
 import org.springframework.stereotype.Component;
 
+import org.springframework.stereotype.Component;
+
 
 
 
@@ -25,6 +27,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class User {
 	
+
+
 	public User(String userId, String userPhone, String userPassword, String userName, Integer userSex,
 			String userCompany, Date userBirthday, String userPic, Integer userIntegral, Date createTime,
 			Date updateTime) {
@@ -124,6 +128,14 @@ public class User {
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
-		
+	
+	
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", userPhone=" + userPhone + ", userPassword=" + userPassword + ", userName="
+				+ userName + ", userSex=" + userSex + ", userCompany=" + userCompany + ", userBirthday=" + userBirthday
+				+ ", userPic=" + userPic + ", userIntegral=" + userIntegral + ", createTime=" + createTime
+				+ ", updateTime=" + updateTime + "]";
+	}	
 
 }
