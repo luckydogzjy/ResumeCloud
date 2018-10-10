@@ -20,7 +20,8 @@ import com.qc.rc.entity.RechargeRecord;
 import com.qc.rc.entity.User;
 import com.qc.rc.entity.pojo.SharingCenterPojo;
 import com.qc.rc.service.UserService;
-import com.qc.rc.utils.BASE64Util;
+import com.qc.rc.utils.DESUtil;
+
 
 
 
@@ -35,10 +36,9 @@ public class UserController {
 	@RequestMapping(value="/login.action",method=RequestMethod.POST)
 	public String login(String userPhone,String userPassword,Model model,HttpSession session) throws Exception {
 		//System.out.println(userPhone+userPassword);
-		  user=userService.findUserByPhone(userPhone, userPassword);
+		  user=userService.findUserByPhone(userPhone, DESUtil.getInstance().encode(userPassword));
 		if(user != null){
 			//设置当前登录seesion
-			user.setUserPassword(BASE64Util.getInstance().encode(userPassword));
 			session.setAttribute("rcuser", user);
 			model.addAttribute("msg", "登录成功！");
 			return "user/first";

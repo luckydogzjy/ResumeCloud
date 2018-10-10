@@ -1,10 +1,14 @@
 package com.qc.rc.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.qc.rc.dao.PersonalMapper;
 import com.qc.rc.entity.User;
 import com.qc.rc.entity.pojo.ResumePojo;
@@ -16,7 +20,7 @@ public class PersonalServiceImpl implements PersonalService {
 	
 	@Autowired
 	private PersonalMapper personalMapper;
-	
+	private static Integer pageShow = 8;
 	
 //	//判断用户是否存在
 //	
@@ -60,24 +64,35 @@ public class PersonalServiceImpl implements PersonalService {
 		}
 		
 		
-		//获取积分兑换的简历
-		public List<UserExchangeResumePojo> getAllExchangResume(String userId){
-			
-			List<UserExchangeResumePojo> exchangeResumeList= personalMapper.getAllExchangResume(userId);
-			
-			return exchangeResumeList;
-		}
+//		//获取积分兑换的简历
+//		public List<UserExchangeResumePojo> getAllExchangResume(String userId,Integer page){
+//			PageHelper.startPage(page,pageShow);	
+//			List<UserExchangeResumePojo> exchangeResumeList= personalMapper.getAllExchangResume(userId);
+//			PageInfo<UserExchangeResumePojo> pageInfo = new PageInfo<UserExchangeResumePojo>(exchangeResumeList);
+//			
+//			Map<String,Object> model = new HashMap<String,Object>(); 
+//			model.put("page", pageInfo);
+//			return exchangeResumeList;
+//			
+//		}
+//
 
 
 		@Override
-		public List<ResumePojo> getResumeListByCondition(String userId, String resumeName, String resumeJobIntension,
-				Integer resumeSex, Integer resumeEducation, Integer resumeWorkYears, String resumeGraduateInstitution) {
-			List<ResumePojo> list = personalMapper.getResumeListByCondition(userId,resumeName, resumeJobIntension, resumeSex, resumeEducation, resumeWorkYears, resumeGraduateInstitution);
+		public Map<String, Object> getAllExchangResume(String userId,UserExchangeResumePojo userExchangeResumePojo, Integer page) {
+			PageHelper.startPage(page,pageShow);	
 			
-			System.out.println("ResumeServiceImpl->getResumeListByCondition :::" + list.size());
+			List<UserExchangeResumePojo> list = personalMapper.getAllExchangResume(userId, userExchangeResumePojo);
 			
-			return list;
+			PageInfo<UserExchangeResumePojo> pageInfo = new PageInfo<UserExchangeResumePojo>(list);
 			
+			Map<String,Object> model = new HashMap<String,Object>(); 
+			model.put("resumeList", list);
+			model.put("page", pageInfo);
+			//返回查询条件
+			model.put("search", userExchangeResumePojo);
+			
+			return model;
 		}
 
 }

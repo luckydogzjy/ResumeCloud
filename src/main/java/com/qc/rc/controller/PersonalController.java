@@ -7,35 +7,32 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import com.github.pagehelper.PageInfo;
 import com.qc.rc.common.FormParameterUtil;
+import com.qc.rc.common.GetUser;
 import com.qc.rc.entity.User;
-import com.qc.rc.entity.pojo.ResumePojo;
 import com.qc.rc.entity.pojo.UserExchangeResumePojo;
 import com.qc.rc.service.PersonalService;
 import com.qc.rc.service.UserService;
+import com.qc.rc.utils.DESUtil;
+
 
 @Controller
-@RequestMapping("/personal")
+@RequestMapping("personal")
 public class PersonalController {
 
 	@Autowired
 	private PersonalService personalService;
-	@Autowired
-	private User user;
+
 	@Autowired
 	UserService userService;
 
@@ -48,46 +45,45 @@ public class PersonalController {
         return "personal/modifypassword";
     }
 
+    @RequestMapping("/shopping_mall.do")
+    public String selectGoods() {
+        return "personal/shopping_mall";
+    }
 	
 	@RequestMapping("/updatePassword.do")
 	@ResponseBody
-	public Map<String, Object> updataPassword(HttpSession session,String oldpwd, String newpwd, String confirm) {
-
-		log.info("修改密码" + user.getUserPassword());// 记录日志
-
+	public Map<String, Object> updataPassword(String oldpwd, String newpwd,HttpServletRequest request) {
 		Map<String, Object> model = new HashMap<String, Object>();
 		//合并有session后用
-//		String userPassword = (String) session.getAttribute("userPassword");
-//		String userId = (String) session.getAttribute("userId");
-		 String userPassword="qwer123456";
-		 String userId="1b786bc41114f67ae059cea5f1789d";
+			User user = (User)request.getSession().getAttribute("rcuser");
+			if (user == null) {
+				model.put("status", 4);
+				return  model;
+			}
+			String userPassword = DESUtil.getInstance().decode(user.getUserPassword());
+			log.debug(user.getUserPassword()+"  " +oldpwd);
+			String userId = user.getUserId();
+			if (!oldpwd.equals(userPassword)) {
+				model.put("status", 0);
+				model.put("message", "原密码输入错误，请重试");
+				return model;
+			}
+			user.setUserId(userId);
+			user.setUserPassword(DESUtil.getInstance().encode(newpwd));
+			int result = personalService.passwordUpdate(user);
+			if (result == 1) {
+				model.put("status", 1);
+				model.put("message", "密码修改成功，请重新登录。");
+			} else {
+				model.put("status", 2);
+				model.put("message", "密码修改失败");
+				return  model;
 
-		if (!userPassword.equals(oldpwd)) {
-			model.put("status", Boolean.FALSE);
-			model.put("message", "原密码输入错误，请重试");
-			return model;
-		}
-
-		if (!newpwd.equals(confirm)) {
-			model.put("status", Boolean.FALSE);
-			model.put("message", "两次密码输入不一致，请重试");
-			return model;
-
-		}
-		user.setUserPassword(confirm);
-		user.setUserId(userId);
-		int result = personalService.passwordUpdate(user);
-		if (result == 1) {
-
-			model.put("status", Boolean.TRUE);
-			model.put("message", "密码修改成功，请重新登录。");
-			return model;
-		} else {
-			model.put("status",Boolean.FALSE);
-			return  model;
-
-		}
-
+			}
+		
+		return model;
+		
+		
 	}
 
 	/**
@@ -98,13 +94,17 @@ public class PersonalController {
 	 * @return
 	 */
 	@RequestMapping("/PersonalCenter.do")
-	public ModelAndView UserInfo_show(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+	public ModelAndView UserInfo_show(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		// 获取session中的userId
 		// HttpSession session=request.getSession();
-		String userId = (String) session.getAttribute("userId");
-		// 传入一个userId，返回一个User集合
-		userId = "1b786bc41114f67ae059cea5f1789d";
+		User user = (User)request.getSession().getAttribute("rcuser");
+		
+		//如果session失效或取不到user 转发到登录
+		if (user == null) {
+			return new ModelAndView("redirect:/gologin1.action");
+		}
+		String userId = user.getUserId();
 		List<User> list = personalService.getUserInfo(userId);
 
 		Map<String, Object> model = new HashMap<String, Object>();
@@ -119,9 +119,11 @@ public class PersonalController {
 	 * @return
 	 */
 	@RequestMapping("/select_update_info.do")
-	public ModelAndView UserInfo_update(HttpSession session, String userPhone,String userName, String userCompany, String userBirthday,
-			ModelMap modelMap) throws Exception {
-
+	@ResponseBody
+	public Integer UserInfo_update( String userPhone,String userName, String userCompany, String userBirthday,HttpServletRequest request
+			){
+		User user = (User)request.getSession().getAttribute("rcuser");
+		user.setUserId(user.getUserId());
 		SimpleDateFormat birthday = new SimpleDateFormat("yyyyMMdd");// 小写的mm表示的是分钟
 		java.util.Date date_birthday; // 定义一个日期类型的date_birthday
 		try {
@@ -135,22 +137,9 @@ public class PersonalController {
 		user.setUserName(userName);
 		user.setUserCompany(userCompany);
 		user.setUserBirthday(date_birthday);
-
-		user.setUserId("1b786bc41114f67ae059cea5f1789d");
-
-		// String userId= (String) session.getAttribute("userId");
-
-		Map<String, Object> model = new HashMap<String, Object>();
-
 		int result = personalService.updateInfo(user);
-
-		if (result == 1) {
-			model.put("msg", "修改成功");
-			return new ModelAndView("personal/PersonalCenter", model);
-		} else {
-			model.put("msg", "修改失败");
-			return new ModelAndView("personal/PersonalCenter", model);
-		}
+		System.out.println(user.getUserPhone()+user.getUserName());
+		return result;
 	}
 
 	/**
@@ -160,80 +149,79 @@ public class PersonalController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping("/ur_resume_exchange.do")
-	public ModelAndView resumeExchangShow(ServletRequest session) throws Exception {
-
-		// 根据登录的hr的Id的到他兑换的简历
-		String userId = (String) session.getAttribute("userId");
-		userId = "1b786bc41114f67ae059cea5f1789d";
-		List<UserExchangeResumePojo> list = personalService.getAllExchangResume(userId);
-
-		Map<String, Object> model = new HashMap<String, Object>();
-
-		model.put("resumeList", list);
-
-		return new ModelAndView("personal/ur_resume_exchange", model);
-
-	}
+//	@RequestMapping("/ur_resume_exchange.do")
+//	public ModelAndView resumeExchangShow(ServletRequest session,@RequestParam(required=true,defaultValue="1") Integer page) throws Exception {
+//
+//		// 根据登录的hr的Id的到他兑换的简历
+//		String userId = (String) session.getAttribute("userId");
+//		userId = "2b786bc41114f67ae059cea5f1789d";
+////		User user = GetUser.getUser();
+//		Map<String, Object> list = personalService.getAllExchangResume(userId, page);
+//
+//		Map<String, Object> model = new HashMap<String, Object>();
+//
+//		model.put("resumeList", list);
+//
+//		return new ModelAndView("personal/ur_resume_exchange", model);
+//
+//	}
 
 	/**
-	 * 多种查询方式
-	 * 
-	 * @param request
-	 * @param session
+	 * 多种查询
+	 * @param userExchangeResumePojo
+	 * @param page
 	 * @return
 	 */
 
-	@RequestMapping("/getHrExchangeResume.do")
-	public ModelAndView getResumeListByCondition(HttpServletRequest request, HttpSession session, Integer page) {
 
-		String resumeName = null;
-		String resumeJobIntension = null;
-		// 性别
-		String resumeSexStr = request.getParameter("resumeSex");
-		Integer resumeSex = Integer.valueOf(resumeSexStr);
+	@RequestMapping("/ur_resume_exchange.do")
+	public ModelAndView getResumeListByCondition(HttpServletRequest request,UserExchangeResumePojo userExchangeResumePojo,@RequestParam(required=true,defaultValue="1") Integer page) {
 
-		String resumeEducationStr = request.getParameter("resumeEducation");
-		Integer resumeEducation = Integer.valueOf(resumeEducationStr);
+		
+	//	User user = (User) session.getAttribute("user");
+	//	User user = GetUser.getUser();
+		User user = (User)request.getSession().getAttribute("rcuser");
+		
+		 if (user != null) {
+			
+			if (userExchangeResumePojo.getResumeSex() == null) {
+				userExchangeResumePojo.setResumeSex(-1);
+			}
+			if (userExchangeResumePojo.getResumeEducation() == null) {
+				userExchangeResumePojo.setResumeEducation(-1);
+			}
+			if (userExchangeResumePojo.getResumeWorkYears() == null) {
+				userExchangeResumePojo.setResumeWorkYears(-1);
+			}
 
-		String resumeWorkYearsStr = request.getParameter("resumeWorkYears");
-		Integer resumeWorkYears = Integer.valueOf(resumeWorkYearsStr);
+			try {
+				if (userExchangeResumePojo.getResumeName() != null) {
+					userExchangeResumePojo.setResumeName(FormParameterUtil.changeCode(userExchangeResumePojo.getResumeName()));
+				}
+				if (userExchangeResumePojo.getResumeJobIntension() != null) {
+					userExchangeResumePojo.setResumeJobIntension(FormParameterUtil.changeCode(userExchangeResumePojo.getResumeJobIntension()));
 
-		String resumeGraduateInstitution = null;
+				}
+				if (userExchangeResumePojo.getResumeGraduateInstitution() != null) {
+					userExchangeResumePojo.setResumeGraduateInstitution(FormParameterUtil.changeCode(userExchangeResumePojo.getResumeGraduateInstitution()));
 
-		try {
-			resumeGraduateInstitution = FormParameterUtil.changeCode(request.getParameter("resumeGraduateInstitution"));
-			resumeName = FormParameterUtil.changeCode(request.getParameter("resumeName"));
-			resumeJobIntension = FormParameterUtil.changeCode(request.getParameter("resumeJobIntension"));
-		} catch (UnsupportedEncodingException e) {
-
-			e.printStackTrace();
-		}
-
-		// 获取session中的userId
-		String userId = (String) session.getAttribute("userId");
-		userId = "1b786bc41114f67ae059cea5f1789d";
-		List<ResumePojo> list = personalService.getResumeListByCondition(userId, resumeName, resumeJobIntension,
-				resumeSex, resumeEducation, resumeWorkYears, resumeGraduateInstitution);
-
-		System.out.println("getResumeListByCondition里得到的list长度为" + list.size());
-
-		Map<String, Object> model = new HashMap<String, Object>();
-
-		PageInfo<ResumePojo> pageResumePojo = new PageInfo<ResumePojo>(list);
-		model.put("page", pageResumePojo);
-
-		model.put("resumeList", list);
-
-		model.put("resumeName", resumeName);
-		model.put("resumeJobIntension", resumeJobIntension);
-		model.put("resumeSex", resumeSex);
-		model.put("resumeEducation", resumeEducation);
-		model.put("resumeWorkYears", resumeWorkYears);
-		model.put("resumeGraduateInstitution", resumeGraduateInstitution);
-
-		return new ModelAndView("personal/ur_resume_exchange", model);
-
+				}
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			
+			
+			Map<String,Object> model = new HashMap<String,Object>(); 
+			model = personalService.getAllExchangResume(user.getUserId(), userExchangeResumePojo, page);	
+			return new ModelAndView("personal/ur_resume_exchange",model);
+			
+		} else {
+			
+			
+			System.out.println("登录");
+			return new ModelAndView("redirect:/gologin1.action");
+		}	
+		
 	}
 
 }

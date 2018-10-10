@@ -21,11 +21,11 @@ public interface PersonalMapper {
 	//修改个人中心信息
 	int updateUser(User user);
 	
-	//兑换的简历信息
-	List<UserExchangeResumePojo> getAllExchangResume(String userId);
+//	//兑换的简历信息
+//	List<UserExchangeResumePojo> getAllExchangResume(String userId);
 
 	
-	List<ResumePojo> getResumeListByCondition(String userId, String resumeName, String resumeJobIntension,
-			Integer resumeSex, Integer resumeEducation, Integer resumeWorkYears, String resumeGraduateInstitution);
+	//条件查询
+	List<UserExchangeResumePojo> getAllExchangResume(@Param("userId")String userId,@Param("userExchangeResumePojo")UserExchangeResumePojo userExchangeResumePojo);
 	
 }

@@ -18,8 +18,6 @@
 <script type="text/javascript" src="../js/personalJs/messages_cn.js"></script>
 
 <script type="text/javascript" src="../js/personalJs/core.js"></script>
-
-
  
 <script type="text/javascript">
 
@@ -100,10 +98,13 @@
  			},
             success: function (data) {
                 var obj = JSON.parse(data);
-                if (obj.status) {
+                if (obj.status==1) {
                    alert(obj.message);
-                    document.location.href = "${pageContext.request.contextPath}/jsp/user/login1.do";
+                    location.href = "${pageContext.request.contextPath}/gologin1.action";
 
+                }
+         		else if(obj.status==4){
+         			 location.href = "${pageContext.request.contextPath}/gologin1.action";
                 }
                 else {
                     alert(obj.message);
@@ -120,6 +121,7 @@
 
 
 <body>
+<div id="box">
 <div id="header">
 			<jsp:include page="../common/header.jsp" flush="true" />
 		</div>
@@ -158,6 +160,7 @@
             <input type="reset" value="重置">
         </p>
 	</form>	
+</div>
 </div>
 </div>
 </body>

@@ -68,7 +68,7 @@ public class UserExchangeResumePojo extends Resume {
 	}
 	public UserExchangeResumePojo() {
 		super();
-		// TODO Auto-generated constructor stub
+	
 	}
 	public UserExchangeResumePojo(String resumeId, String resumeName, Integer resumeSex, Date resumeBirthday,
 			String resumePhone, String resumeEmail, String resumeAddress, String resumeGraduateInstitution,
@@ -78,7 +78,7 @@ public class UserExchangeResumePojo extends Resume {
 		super(resumeId, resumeName, resumeSex, resumeBirthday, resumePhone, resumeEmail, resumeAddress,
 				resumeGraduateInstitution, resumeEducation, resumeJobIntension, resumeSelfEvaluation, resumeWorkExperience,
 				resumeWorkYears, resumeCreateUser, resumeCreateTime, resumeUpdateUser, resumeUpdateTime, resumeDeleteFlag);
-		// TODO Auto-generated constructor stub
+
 	}
 
 	

@@ -83,19 +83,68 @@
 		
 	</resultMap>
 	
-	<select id="getAllExchangResume" resultMap="userExResume" parameterType="java.lang.String" >
+<!-- 	<select id="getAllExchangResume" resultMap="userExResume" parameterType="java.lang.String" >
     
        SELECT RR.RESUME_ID,RR.RESUME_NAME,RR.RESUME_SEX,RR.RESUME_WORK_YEARS,
           RR.RESUME_GRADUATE_INSTITUTION,RR.RESUME_EDUCATION,
           RR.RESUME_JOB_INTENSION,RR.RESUME_CREATE_TIME
      FROM RC_RESUME RR INNER JOIN RC_USER_RESUME RUR    
-     ON(RR.RESUME_ID=RUR.UR_RESUME_ID AND RUR.UR_RESUME_GETWAT!='0' AND RUR.UR_DELETE_FLAG!=1)
+     ON(RR.RESUME_ID=RUR.UR_RESUME_ID AND RUR.UR_RESUME_GETWAT!='0' AND RUR.UR_DELETE_FLAG=0)
      INNER JOIN RC_USER RU
      ON (RU.user_id = RUR.UR_user_id)
      WHERE RU.USER_ID =#{userId} and RR.REsume_ID = RUR.UR_RESume_id
       ORDER BY RR.RESUME_CREATE_TIME DESC
       
-	</select>
+	</select> -->
 	
+	
+	<select id="getAllExchangResume" resultMap="userExResume" >
+		SELECT RR.RESUME_ID,RR.RESUME_NAME,RR.RESUME_SEX,RR.RESUME_WORK_YEARS,
+          RR.RESUME_GRADUATE_INSTITUTION,RR.RESUME_EDUCATION,
+          RR.RESUME_JOB_INTENSION,RR.RESUME_CREATE_TIME
+     FROM RC_RESUME RR INNER JOIN RC_USER_RESUME RUR    
+     ON(RR.RESUME_ID=RUR.UR_RESUME_ID )
+     INNER JOIN RC_USER RU
+     ON (RU.user_id = RUR.UR_user_id)
+      
+		<where>
+			<if test="userExchangeResumePojo.resumeName != null and  userExchangeResumePojo.resumeName !='' ">
+				AND RESUME_NAME LIKE '%${userExchangeResumePojo.resumeName}%'
+				
+			</if>
+			<if test="userExchangeResumePojo.resumeJobIntension != null and  userExchangeResumePojo.resumeJobIntension != '' ">
+				AND RESUME_JOB_INTENSION LIKE '%${userExchangeResumePojo.resumeJobIntension}%' 
+			</if>
+			<if test="userExchangeResumePojo.resumeSex != -1">
+				AND RESUME_SEX LIKE '%${userExchangeResumePojo.resumeSex}%'  
+			</if>
+			<if test="userExchangeResumePojo.resumeEducation != -1">
+				AND RESUME_EDUCATION LIKE '%${userExchangeResumePojo.resumeEducation}%'
+			</if>
+			
+			<if test="userExchangeResumePojo.resumeWorkYears == 0">
+				AND RESUME_WORK_YEARS &gt;= 0 AND RESUME_WORK_YEARS &lt; 3
+			</if>
+			<if test="userExchangeResumePojo.resumeWorkYears == 1">
+				AND RESUME_WORK_YEARS &gt;= 3 AND RESUME_WORK_YEARS &lt; 5
+			</if>
+			<if test="userExchangeResumePojo.resumeWorkYears == 2">
+				AND RESUME_WORK_YEARS &gt;= 5 AND RESUME_WORK_YEARS &lt; 10
+			</if>
+			<if test="userExchangeResumePojo.resumeWorkYears == 3">
+				AND RESUME_WORK_YEARS &gt;= 10
+			</if>
+			
+			<if test="userExchangeResumePojo.resumeGraduateInstitution != null and  userExchangeResumePojo.resumeGraduateInstitution != '' ">
+				AND RESUME_GRADUATE_INSTITUTION LIKE '%${userExchangeResumePojo.resumeGraduateInstitution}%' 
+			</if>
+			AND RU.USER_ID =#{userId}
+			AND RUR.UR_RESUME_GETWAT!='0'
+			AND RESUME_DELETE_FLAG = 0		
+			AND RR.REsume_ID = RUR.UR_RESume_id
+			
+		</where>
+		ORDER BY RR.RESUME_CREATE_TIME DESC
+	</select>
 	
 </mapper>
