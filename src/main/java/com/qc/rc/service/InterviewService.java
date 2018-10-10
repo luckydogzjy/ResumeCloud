@@ -20,7 +20,7 @@ public interface InterviewService {
 	public PageInfo<InterviewPojo> selectByCondition(Integer pageNum, String userId, String startTime,
 			String overTime, String interviewJob, String interviewInfo,Integer sort,Integer status) throws ParseException;
 //	添加面试
-	public Integer addInterview(String interviewResumeId,String interviewJob,String interviewTime,
+	public Integer addInterview(String interviewId,String interviewResumeId,String interviewJob,String interviewTime,
 			String interviewAssociateUsername,String interviewAssociatePhone,String interviewAddress,String interviewInfo,
 			Resume resume,User user) throws ParseException;
 //	删除面试
