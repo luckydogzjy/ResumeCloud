@@ -283,7 +283,7 @@
 												<input type="button" id="NoBtn" value="已共享" disabled="disabled" />
 											</c:if>
 											<!-- 如果简历是在共享中心兑换的(1), 则按钮为不可共享 --> 
-											<c:if test="${resume.userResume.urResumeGetway != '0' &&  resume.userResume.urResumeShareFlag == 1}">
+											<c:if test="${resume.userResume.urResumeGetway != '0'}">
 												<input type="button" id="NoBtn" value="不可共享" disabled="disabled"/>
 											</c:if>
 										</td>

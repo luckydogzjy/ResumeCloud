@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +32,17 @@ public class SharingCenterController {
 	private HttpSession session;
 	
 	@RequestMapping(value="/getSharingResumeListByCondition.do",method=RequestMethod.GET)
-	public ModelAndView getSharingResumeListByCondition(ResumePojo searchResumePojo,@RequestParam(required=true,defaultValue="1") Integer page) {
+	public ModelAndView getSharingResumeListByCondition(ResumePojo searchResumePojo,@RequestParam(required=true,defaultValue="1") Integer page,HttpServletRequest request) {
 	
-		User user = GetUser.getUser();
+	//	User user = GetUser.getUser();
 		//	User user = (User) session.getAttribute("user");
+		User user = (User)request.getSession().getAttribute("rcuser");
 		
-		if (user != null) {
+		//如果session失效或取不到user 转发到登录
+		if (user == null) {
+			return new ModelAndView("redirect:/gologin1.action");
+		}
+		else {
 
 			try {
 				
@@ -67,50 +73,55 @@ public class SharingCenterController {
 			model = sharingCenterService.getSharingResumeListByCondition(user.getUserId(),searchResumePojo, page);
 
 			return new ModelAndView("resume/resumeSharingCenter",model);
-			
-		} else {
-			System.out.println("登录");
-		}
-		return null;
+		}			
+		
 	}
 	
 	@RequestMapping(value="/exchangeResume.do",method=RequestMethod.GET)
-	public ModelAndView exchangeResume(ResumePojo searchResumePojo,SharingCenter sharingCenter,@RequestParam(required=true,defaultValue="1") Integer page) {
+	public ModelAndView exchangeResume(ResumePojo searchResumePojo,SharingCenter sharingCenter,@RequestParam(required=true,defaultValue="1") Integer page,HttpServletRequest request) {
 		
-		User user = GetUser.getUser();
-		try {
-			if (user != null) {
-				sharingCenterService.exchangeResume(user, searchResumePojo, sharingCenter);
-				
-				return getSharingResumeListByCondition(searchResumePojo, page);
-				
-			} else {
-				System.out.println("登录");
-			}		
-			
-		} catch (Exception e) {
-			e.printStackTrace();
+	//	User user = GetUser.getUser();
+		
+		User user = (User)request.getSession().getAttribute("rcuser");
+		
+		//如果session失效或取不到user 转发到登录
+		if (user == null) {
+			return new ModelAndView("redirect:/gologin1.action");
 		}
+		else{
+			try {
+				sharingCenterService.exchangeResume(user, searchResumePojo, sharingCenter);
+					
+				return getSharingResumeListByCondition(searchResumePojo, page,request);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		}
+		
 		return null;
 	}	
 	
 	@RequestMapping(value="/cancelSharingResume.do",method=RequestMethod.GET)
-	public ModelAndView cancelSharingResume(ResumePojo searchResumePojo,String scId,String scResumeId,@RequestParam(required=true,defaultValue="1") Integer page) {
+	public ModelAndView cancelSharingResume(ResumePojo searchResumePojo,String scId,String scResumeId,@RequestParam(required=true,defaultValue="1") Integer page,HttpServletRequest request) {
 		
-		User user = GetUser.getUser();
-		try {
-			if (user != null) {
+	//	User user = GetUser.getUser();
+		User user = (User)request.getSession().getAttribute("rcuser");
+		
+		//如果session失效或取不到user 转发到登录
+		if (user == null) {
+			return new ModelAndView("redirect:/gologin1.action");
+		} else {
+			try {
 				sharingCenterService.cancelSharingResume(scId,scResumeId);
+					
+				return getSharingResumeListByCondition(searchResumePojo, page,request);		
 				
-				return getSharingResumeListByCondition(searchResumePojo, page);
-				
-			} else {
-				System.out.println("登录");
-			}		
-			
-		} catch (Exception e) {
-			e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		
 		return null;
 	}	
 }

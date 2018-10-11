@@ -47,12 +47,20 @@ public class ResumeController {
 	private IPictureService iPictureService;
 	
 	@RequestMapping(value="/getResumeListByCondition.do",method=RequestMethod.GET)
-	public ModelAndView getResumeListByCondition(ResumePojo searchResumePojo,@RequestParam(required=true,defaultValue="1") Integer page) {
+	public ModelAndView getResumeListByCondition(ResumePojo searchResumePojo,@RequestParam(required=true,defaultValue="1") Integer page,HttpServletRequest request) {
 
 		
 	//	User user = (User) session.getAttribute("user");
-		User user = GetUser.getUser();
-		if (user != null) {
+	//	User user = GetUser.getUser();
+		
+		User user = (User)request.getSession().getAttribute("rcuser");
+		
+		//如果session失效或取不到user 转发到登录
+		if (user == null) {
+			return new ModelAndView("redirect:/gologin1.action");
+		}
+		
+		else {
 			
 			if (searchResumePojo.getResumeSex() == null) {
 				searchResumePojo.setResumeSex(-1);
@@ -85,14 +93,7 @@ public class ResumeController {
 			model = resumeService.getResumeListByCondition(user.getUserId(),searchResumePojo,page);		
 			return new ModelAndView("resume/resumeDisplay",model);
 			
-		} else {
-			
-			//调到登录页面
-			System.out.println("登录");
-		}
-		System.out.println("空");
-		return null;
-		
+		} 		
 	}
 	
 	
@@ -118,21 +119,28 @@ public class ResumeController {
 	}
 	
 	@RequestMapping(value="/resumeDelete.do",method=RequestMethod.GET)
-	public ModelAndView resumeDelete(ResumePojo searchResumePojo,String resumeId_Delete,Integer page){
+	public ModelAndView resumeDelete(ResumePojo searchResumePojo,String resumeId_Delete,Integer page,HttpServletRequest request){
 
 		//根据id删除resume
 		resumeService.deleteResumeById(resumeId_Delete);
 		//删除之后根据刚才所输入的信息遍历resumeList
-		return getResumeListByCondition(searchResumePojo,page);
+		return getResumeListByCondition(searchResumePojo,page,request);
 		
 	}
 	
 	@RequestMapping(value="/resumeShare.do",method=RequestMethod.GET)
-	public ModelAndView resumeShare(ResumePojo searchResumePojo,SharingCenter sharingCenter,Integer page){
+	public ModelAndView resumeShare(ResumePojo searchResumePojo,SharingCenter sharingCenter,Integer page,HttpServletRequest request){
 		
-		User user = GetUser.getUser();
+		//User user = GetUser.getUser();
 		
-		if (user != null) {
+		User user = (User)request.getSession().getAttribute("rcuser");
+		
+		//如果session失效或取不到user 转发到登录
+		if (user == null) {
+			return new ModelAndView("redirect:/gologin1.action");
+		}
+		
+		else {
 			
 			sharingCenter.setScId(GetUuid.getuuid32());
 			//将从session得到的id set
@@ -142,12 +150,9 @@ public class ResumeController {
 			Integer integer = resumeService.shareResume(sharingCenter);			
 			//执行完插入后，要将RC_USER_RESUME表更新		
 			resumeService.updateUserResume(sharingCenter.getScResumeId());
-			return getResumeListByCondition(searchResumePojo,page);	
+			return getResumeListByCondition(searchResumePojo,page,request);	
 			
-		} else {
-			System.out.println("登录");
-		}
-		return null;	
+		}	
 	}
 	
 	

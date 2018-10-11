@@ -34,18 +34,20 @@ public class UserController {
 	private User user;
 		
 	@RequestMapping(value="/login.action",method=RequestMethod.POST)
-	public String login(String userPhone,String userPassword,Model model,HttpSession session) throws Exception {
+	public ModelAndView login(String userPhone,String userPassword,Model model,HttpSession session) throws Exception {
 		//System.out.println(userPhone+userPassword);
 		  user=userService.findUserByPhone(userPhone, DESUtil.getInstance().encode(userPassword));
 		if(user != null){
 			//设置当前登录seesion
 			session.setAttribute("rcuser", user);
 			model.addAttribute("msg", "登录成功！");
-			return "user/first";
+		//	return "user/first";
+			return new ModelAndView("redirect:/SharingCenter/getSharingResumeListByCondition.do");
 		}
 		else{
 			model.addAttribute("msg","× 账号或密码错误");
-			return "user/login1";
+			//return "user/login1";
+			return new ModelAndView("redirect:/gologin1.action");
 		}			
 	}
 	
