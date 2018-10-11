@@ -11,5 +11,5 @@ public class GetUser {
 		user.setUserName("cc");
 		return user;
 	}
-	
+	 
 }

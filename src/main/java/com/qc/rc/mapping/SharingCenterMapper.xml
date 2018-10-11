@@ -85,6 +85,18 @@
 	</select>
 	
 	
+	<resultMap type="com.qc.rc.entity.DownloadRecord" id="getDownloadRecord">
+		
+		<id column="DR_ID" property="drId"></id>
+		<result column="DR_USER_ID" property="drUserId"></result>
+		<result column="DR_SHARING_CENTER_ID" property="drSharingCenterId"></result>
+		<result column="DR_CREATE_TIME" property="drCreateTime"></result>
+		<result column="DR_UPDATE_TIME" property="drUpdateTime"></result>
+		<result column="DR_DELETE_FLAG" property="drDeleteFlag"></result>
+			
+	</resultMap>
+
+
 	<!-- 兑换次数+1 -->
 	<update id="updateDownloadCount">
 		UPDATE RC_SHARING_CENTER

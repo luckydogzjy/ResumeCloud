@@ -37,7 +37,7 @@
 		RESUME_EDUCATION,RESUME_JOB_INTENSION,RESUME_CREATE_TIME,INTERVIEW_ID,INTERVIEW_STATUS,
 		UR_ID,UR_USER_ID,UR_RESUME_ID,UR_RESUME_GETWAT,UR_RESUME_SHARE_FLAG
 		FROM RC_RESUME LEFT JOIN RC_INTERVIEW
-		ON RC_RESUME.RESUME_ID = RC_INTERVIEW.INTERVIEW_RESUME_ID,
+		ON RC_RESUME.RESUME_ID = RC_INTERVIEW.INTERVIEW_RESUME_ID AND INTERVIEW_DELETE_FLAG = 0,
 		RC_USER_RESUME
 		<where>
 			<if test="resumePojo.resumeName != null and  resumePojo.resumeName !='' ">
@@ -137,7 +137,7 @@
 		点击共享按钮后的操作 将信息插入共享中心表里、同时插入  
 		同时需要执行更新RC_USER_RESUME表，让其中的共享标志UR_RESUME_SHARE_FLAG设为1
 	-->
-		<insert id="shareResume" parameterType="com.qc.rc.entity.SharingCenter">
+	<insert id="shareResume" parameterType="com.qc.rc.entity.SharingCenter">
 
 		INSERT INTO RC_SHARING_CENTER
 		(SC_ID,SC_USER_ID,SC_RESUME_ID,SC_INTEGRAL,SC_DOWNLOAD_COUNT)
@@ -156,8 +156,6 @@
 		</selectKey>
 		
 	</insert>
-
-
 	<!-- 其中的共享标志UR_RESUME_SHARE_FLAG设为1 -->
 	<update id="updateUserResume">
 		UPDATE RC_USER_RESUME
@@ -251,9 +249,7 @@
 	
 
 
-
-
-		<insert id="addResume" parameterType="com.qc.rc.entity.Resume" >
+	<insert id="addResume" parameterType="com.qc.rc.entity.Resume" >
     insert into RC_RESUME (RESUME_ID,RESUME_NAME, 
       RESUME_PHONE, RESUME_JOB_INTENSION,RESUME_CREATE_USER,RESUME_CREATE_TIME,
       RESUME_DELETE_FLAG)
@@ -264,10 +260,16 @@
 	#{resumeCreateUser},
 	sysdate,0)
   	</insert>
+
 	
 	
 	
-	
+	<!-- liu -->
+	<update id="updateResumePhone">
+		update RC_RESUME
+		set RESUME_PHONE = #{resumePhone}
+		where RESUME_ID = #{resumeId}
+	</update>
 	
 	
 	

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qc.rc.dao.InterviewMapper">
-	
 	<resultMap id="resumeAndInterviewMap" type="com.qc.rc.entity.pojo.InterviewPojo">		
 		<id column="INTERVIEW_ID" property="interviewId"></id>
 		<result column="INTERVIEW_JOB" property="interviewJob"></result>
@@ -20,6 +19,19 @@
 		</association>
 	</resultMap>
 	
+	 <resultMap id="getResumeInterviewsById" type="com.qc.rc.entity.pojo.ResumeInterviews">
+		<id column="RESUMEID" property="resumeId"></id>
+		<result column="RESUME_NAME" property="resumeName"></result>
+		
+		<collection property="interviews" ofType="com.qc.rc.entity.Interview">
+			<id column="INTERVIEW_ID" property="interviewId"></id>
+			<result column="INTERVIEW_JOB" property="interviewJob"></result>
+			<result column="INTERVIEW_ADDRESS" property="interviewAddress"></result>
+			<result column="INTERVIEW_TIME" property="interviewTime"></result>
+			<result column="INTERVIEW_STATUS" property="interviewStatus"></result>
+			<result column="INTERVIEW_RECODE_INFO" property="interviewRecodeInfo"></result>
+		</collection>
+	</resultMap> 
 	<select id="selectCount" resultType="java.lang.Integer">
     select count(INTERVIEW_ID)
 	
@@ -81,7 +93,10 @@
    	ORDER BY
      	<choose>
 	        <when test="sort==1">
-				INTERVIEW_CREATE_TIME asc
+				INTERVIEW_TIME asc
+	        </when>
+	        <when test="sort==0">
+				INTERVIEW_TIME desc
 	        </when>
 	        <otherwise>
 	            INTERVIEW_CREATE_TIME desc
@@ -93,7 +108,7 @@
   	insert into RC_INTERVIEW(INTERVIEW_ID,INTERVIEW_RESUME_ID,INTERVIEW_JOB,INTERVIEW_TIME,INTERVIEW_ASSOCIATE_USERNAME
   	,INTERVIEW_ASSOCIATE_PHONE,INTERVIEW_ADDRESS,INTERVIEW_INFO,INTERVIEW_STATUS,INTERVIEW_CREATE_USER,INTERVIEW_CREATE_TIME
   	,INTERVIEW_DELETE_FLAG,INTERVIEW_USER_ID) 
-  		values(RC_INTERVIEW_SEQUENCE.nextval,#{interviewResumeId},#{interviewJob},#{interviewTime},#{interviewAssociateUsername},
+  		values(#{interviewId},#{interviewResumeId},#{interviewJob},#{interviewTime},#{interviewAssociateUsername},
   		#{interviewAssociatePhone},#{interviewAddress},#{interviewInfo},#{interviewStatus},#{interviewCreateUser},
   		#{interviewCreateTime},#{interviewDeleteFlag},#{interviewUserId})
   	</insert>
@@ -110,8 +125,8 @@
 	select 
 	  i.INTERVIEW_ID,i.INTERVIEW_INFO,i.INTERVIEW_JOB,i.INTERVIEW_ADDRESS,i.INTERVIEW_TIME,i.INTERVIEW_STATUS,i.INTERVIEW_ASSOCIATE_USERNAME,i.INTERVIEW_ASSOCIATE_PHONE,
 	  r.RESUME_ID,r.RESUME_NAME,r.RESUME_PHONE
-    from  RC_RESUME r left join RC_INTERVIEW i 
-    on  r.RESUME_ID = i.INTERVIEW_RESUME_ID 
+    from  RC_INTERVIEW i join RC_RESUME r 
+    on i.INTERVIEW_RESUME_ID = r.RESUME_ID
     where r.RESUME_ID = #{ResumeId,jdbcType=INTEGER}
   	</select>
   	
@@ -123,9 +138,62 @@
 		    i.INTERVIEW_ASSOCIATE_USERNAME = #{interviewAssociateUsername},
 		    i.INTERVIEW_ASSOCIATE_PHONE = #{interviewAssociatePhone},
 		    i.INTERVIEW_INFO = #{interviewInfo},
-		    i.INTERVIEW_STATUS = #{interviewStatus},
 		    i.INTERVIEW_UPDATE_TIME = sysdate,
 		    i.INTERVIEW_UPDATE_USER = 'jayne'
 		where i.INTERVIEW_RESUME_ID = #{interviewResumeId}
   	</update>
+
+
+	<select id="getResumeInterviewsByRId" resultMap="getResumeInterviewsById">
+    select r.RESUME_NAME,i.INTERVIEW_ID,i.INTERVIEW_JOB,i.INTERVIEW_ADDRESS,i.INTERVIEW_TIME,i.INTERVIEW_STATUS,i.INTERVIEW_RECODE_INFO
+	
+    from  RC_RESUME r join RC_INTERVIEW i
+    on  r.RESUME_ID = i.INTERVIEW_RESUME_ID
+   	where
+    		r.RESUME_ID = #{resumeId,jdbcType=INTEGER}
+		    and i.INTERVIEW_DELETE_FLAG = 0
+
+  	</select> 
+	
+	<update id="updateInteviewRecodeInfo">
+  		update RC_INTERVIEW i
+		set i.INTERVIEW_RECODE_INFO= #{interviewRecodeInfo}
+		where i.INTERVIEW_ID = #{interviewId}
+  	</update>
+  	
+  	
+  	
+  	<!-- Liu -->
+  	<select id="selectInterviewsByInterviewId" resultMap="resumeAndInterviewMap">
+	select 
+	  i.INTERVIEW_ID,i.INTERVIEW_INFO,i.INTERVIEW_JOB,i.INTERVIEW_ADDRESS,i.INTERVIEW_TIME,i.INTERVIEW_STATUS,i.INTERVIEW_ASSOCIATE_USERNAME,i.INTERVIEW_ASSOCIATE_PHONE,
+	  r.RESUME_ID,r.RESUME_NAME,r.RESUME_PHONE
+    from  RC_INTERVIEW i left join  RC_RESUME r
+    on  r.RESUME_ID = i.INTERVIEW_RESUME_ID 
+    where i.INTERVIEW_ID = #{InterviewId}
+  	</select>
+  	
+  	<update id="updateInterviewsByInterviewId" parameterType="com.qc.rc.entity.pojo.InterviewPojo">
+  		update RC_INTERVIEW i
+		set i.INTERVIEW_JOB = #{interviewJob},
+		    i.INTERVIEW_TIME = #{interviewTime},
+		    i.INTERVIEW_ADDRESS = #{interviewAddress},
+		    i.INTERVIEW_ASSOCIATE_USERNAME = #{interviewAssociateUsername},
+		    i.INTERVIEW_ASSOCIATE_PHONE = #{interviewAssociatePhone},
+		    i.INTERVIEW_INFO = #{interviewInfo},
+		    i.INTERVIEW_STATUS = #{interviewStatus},
+		    i.INTERVIEW_UPDATE_TIME = sysdate,
+		    i.INTERVIEW_UPDATE_USER = 'jayne'
+		where i.INTERVIEW_ID = #{interviewId}
+  	</update>
+  	
+  	
+  	<select id="selectInterviewsByUserId" resultMap="resumeAndInterviewMap">
+		select 
+		  i.INTERVIEW_ID,i.INTERVIEW_JOB,i.INTERVIEW_TIME,
+		  r.RESUME_ID,r.RESUME_NAME
+	    from  RC_RESUME r left join RC_INTERVIEW i 
+	    on  r.RESUME_ID = i.INTERVIEW_RESUME_ID 
+	    where i.INTERVIEW_USER_ID = #{userId}
+  	</select>
 </mapper>

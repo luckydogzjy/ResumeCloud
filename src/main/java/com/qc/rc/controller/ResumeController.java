@@ -153,16 +153,7 @@ public class ResumeController {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	

@@ -1,5 +1,6 @@
 package com.qc.rc.service;
 
+import java.util.Date;
 import java.util.Map;
 
 import com.qc.rc.entity.Job;
@@ -36,12 +37,19 @@ public interface JobService {
 	 * @param jobName
 	 * @return
 	 */
-	public Map<String, Object> jobGetByName(Integer userId,String jobName,Integer page);
+	public Map<String, Object> jobGetByName(String userId,String jobName,Integer page);
 	/**
 	 * 查看职位详情
 	 * @param jobId
 	 * @return
 	 */
 	public Job jobGetOne(Integer jobId);
+	/**
+	 * 开启职位重设时间
+	 * @param jobId
+	 * @param jobEndTime
+	 * @return 
+	 */
+	public boolean jobStatusOpen(Integer jobId,Date jobEndTime);
 	
 }

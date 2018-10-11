@@ -9,8 +9,8 @@
 		<meta charset="UTF-8">
 		<title></title>
 	</head>
-	<link rel="stylesheet" type="text/css" href="../css/demo.css"/>
-	<link rel="stylesheet" type="text/css" href="../css/interviewCss/IVxiangqing.css"/>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/demo.css"/>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/interviewCss/IVxiangqing.css"/>
 	<body>
 		<div id="box">
 			<div id="header">
@@ -27,7 +27,7 @@
 						<h2 id="right-box-font1" class="right-box-title-font">查看</h2>
 						<h2 id="right-box-font2">${interviewPojo.resume.resumeName}</h2>
 						<h2 id="right-box-font3" class="right-box-title-font">面试安排详情</h2>
-						<img id="right-box-img" src="../img/u1426.png"/>
+						<img id="right-box-img" src="${pageContext.request.contextPath}/img/u1426.png"/>
 					</div>
 					<hr id="right-box-hr1"/>
 					<div id="">
@@ -60,13 +60,13 @@
 						</div>
 						
 						<div id="right-box-text5">
-							<a href="#">点击查看（新增）本次面试结果记录</a>
+							<a href="resumeInterviews.do?resumeId=${interviewPojo.resume.resumeId}">点击查看（新增）本次面试结果记录</a>
 						</div>
 					</div>
 					<hr id="right-box-hr3"/>
 					<div id="right-box-button">
-						<input id="right-box-button-xiugai" type="button" value="修改" />
-						<input id="right-box-button-shanchu" type="button" value="删除" />
+						<a id="right-box-button-xiugai" href="${pageContext.request.contextPath}/Interview/showInterviewDetailUpdate.do?InterviewId=${interviewPojo.interviewId}">修改</a>
+						<a id="right-box-button-shanchu" href="${pageContext.request.contextPath}/Interview/selectByCondition.do">返回</a>
 					</div>
 				</div>
 			</div>

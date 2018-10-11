@@ -13,35 +13,117 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/interviewCss/IVxiugai.css"/>
 	<script src="${pageContext.request.contextPath}/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
 	<script type="text/javascript">
-		
+			var isok = true;
+			
+			function isPhone(phone){
+			    var info = document.getElementById("isphone1");	    
+			    var RegCellPhone = /^(1)([0-9]{10})?$/;
+			    var  falg=phone.search(RegCellPhone);
+			    if (falg==-1){
+			        info.innerText = "手机格式不正确";
+			        info.style.color = 'red';
+			        this.focus();
+			        isok = false;
+			    }else{
+			    	info.innerText = "ok";
+			    	info.style.color = 'green';
+			    	isok = true;
+			    }
+			}
+			
+			function isPhone2(phone){
+			    var info = document.getElementById("isphone2");	    
+			    var RegCellPhone = /^(1)([0-9]{10})?$/;
+			    var  falg=phone.search(RegCellPhone);
+			    if (falg==-1){
+			        info.innerText = "手机格式不正确";
+			        info.style.color = 'red';
+			        this.focus(); 
+			        isok = false;
+			    }else{
+			    	info.innerText = "ok";
+			    	info.style.color = 'green';
+			    	isok = true;
+			    }
+			}
+			
+			function isJob(job){
+			    var info = document.getElementById("isJob");	    
+
+			    if (job==null||job==""){
+			        info.innerText = "职位不能为空";
+			        info.style.color = 'red';
+			        this.focus();
+			        isok = false;
+			    }else{
+			    	info.innerText = "ok";
+			    	info.style.color = 'green';
+			    	isok = true;
+			    }
+			}
+			
+			function isTime(time){
+			    var info = document.getElementById("isTime");	    
+
+			    if (time==null||time==""){
+			        info.innerText = "时间不能为空";
+			        info.style.color = 'red';
+			        this.focus();
+			        isok = false;
+			    }else{
+			    	info.innerText = "ok";
+			    	info.style.color = 'green';
+			    	isok = true;
+			    }
+			}
+			
+			function isPlace(place){
+			    var info = document.getElementById("isPlace");	    
+
+			    if (place==null||place==""){
+			        info.innerText = "地点不能为空";
+			        info.style.color = 'red';
+			        this.focus();
+			        isok = false;
+			    }else{
+			    	info.innerText = "ok";
+			    	info.style.color = 'green';
+			    	isok = true;
+			    }
+			}
+			
+			function isName(name){
+			    var info = document.getElementById("isName");	    
+
+			    if (name==null||name==""){
+			        info.innerText = "姓名不能为空";
+			        info.style.color = 'red';
+			        this.focus();
+			        isok = false;
+			    }else{
+			    	info.innerText = "ok";
+			    	info.style.color = 'green';
+			    	isok = true;
+			    }
+			}
+
 	
-		function isPhone(phone){
-		    var info = document.getElementById("isphone1");	    
-		    var RegCellPhone = /^(1)([0-9]{10})?$/;
-		    var  falg=phone.search(RegCellPhone);
-		    if (falg==-1){
-		        info.innerText = "手机格式不正确";
-		        info.style.color = 'red';
-		        this.focus();
-		    }else{
-		    	info.innerText = "ok";
-		    	info.style.color = 'green';
-		    }
-		}
+		function xiugai(){
+			if(isok){
+				if(window.confirm('你确定要提交修改吗？')){
+	                 //alert("确定");
+	                 return true;
+	              }else{
+	                 //alert("取消");
+	                 return false;
+	             }
+			}else{
+				window.alert("参数错误！")
+				return false;
+			}
+			
+		} 
 		
-		function isPhone2(phone){
-		    var info = document.getElementById("isphone2");	    
-		    var RegCellPhone = /^(1)([0-9]{10})?$/;
-		    var  falg=phone.search(RegCellPhone);
-		    if (falg==-1){
-		        info.innerText = "手机格式不正确";
-		        info.style.color = 'red';
-		        this.focus();
-		    }else{
-		    	info.innerText = "ok";
-		    	info.style.color = 'green';
-		    }
-		}
 	</script>
 	<body>
 		<div id="box">
@@ -67,7 +149,7 @@
 						<div id="right-box-text">
 						
 						<form action="${pageContext.request.contextPath}/Interview/updateInterviewDetail.do"  method="post" >
-							<input type="hidden" name="interviewResumeId" value="${interviewPojo.resume.resumeId}" />
+							<input type="hidden" name="interviewId" value="${interviewPojo.interviewId}" />
 							<input type="hidden" name="ResumeId" value="${interviewPojo.resume.resumeId}" />
 							<div id="" class="right-box-text-item">
 								<p class="right-box-item">姓名</p>
@@ -89,23 +171,23 @@
 							</div>
 							<div id="" class="right-box-text-item">
 								<p class="right-box-item">面试岗位</p>
-								<input type="" name="interviewJob" id="" value="${interviewPojo.interviewJob}" />
-								<span></span>
+								<input type="" name="interviewJob" id="" value="${interviewPojo.interviewJob}" onblur="isJob(this.value)"/>
+								<span id="isJob"></span>
 							</div>
 							<div id="" class="right-box-text-item">
 								<p class="right-box-item">面试时间</p>
-								<input class="Wdate" name="StringinterviewTime" value="<fmt:formatDate value="${interviewPojo.interviewTime}" pattern="yyyy-MM-dd HH:mm:ss"/>" type="text" onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
-								<span></span>
+								<input class="Wdate" name="StringinterviewTime" value="<fmt:formatDate value="${interviewPojo.interviewTime}" pattern="yyyy-MM-dd HH:mm:ss"/>" type="text" onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" onblur="isTime(this.value)"/>
+								<span id="isTime"></span>
 							</div>
 							<div id="" class="right-box-text-item">
 								<p class="right-box-item">面试地点</p>
-								<input type="" name="interviewAddress" id="" value="${interviewPojo.interviewAddress}" />
-								<span></span>
+								<input type="" name="interviewAddress" id="" value="${interviewPojo.interviewAddress}" onblur="isPlace(this.value)"/>
+								<span id="isPlace"></span>
 							</div>
 							<div id="" class="right-box-text-item">
 								<p class="right-box-item">联系人</p>
-								<input type="" name="interviewAssociateUsername" id="" value="${interviewPojo.interviewAssociateUsername}" />
-								<span></span>
+								<input type="" name="interviewAssociateUsername" id="" value="${interviewPojo.interviewAssociateUsername}" onblur="isName(this.value)"/>
+								<span id="isName"></span>
 							</div>
 							<div id="" class="right-box-text-item">
 								<p class="right-box-item">联系人联系方式</p>
@@ -117,8 +199,8 @@
 								<p class="right-box-item1"><textarea id="right-box-item1-beizhu" name="interviewInfo">${interviewPojo.interviewInfo}</textarea></p>
 							</div>
 							<div id="right-box-button">
-								<input id="right-box-button-xiugai" type="submit" value="提交" />
-								<input id="right-box-button-shanchu" type="reset" value="取消" />
+								<input id="right-box-button-xiugai" type="submit" value="提交" onclick=" return xiugai()"/>
+								<a id="right-box-button-shanchu" href="${pageContext.request.contextPath}/Interview/selectByCondition.do">取消</a>
 							</div>
 						</form>
 

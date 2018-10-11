@@ -1,5 +1,6 @@
 package com.qc.rc.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -38,11 +39,18 @@ public interface JobMapper {
 	 * @param name
 	 * @return
 	 */
-	public List<Job> jobGetByName(@Param("userId")Integer userId,@Param("name")String name);
+	public List<Job> jobGetByName(@Param("userId")String userId,@Param("name")String name);
 	/**
 	 * 查看详情
 	 * @param jobId
 	 * @return
 	 */
 	public Job jobGetOne(Integer jobId);
+	/**
+	 * 开启职位重设时间
+	 * @param jobId
+	 * @param endTime
+	 * @return
+	 */
+	public int jobStatusOpen(@Param("jobId")Integer jobId,@Param("endTime") Date endTime );
 }

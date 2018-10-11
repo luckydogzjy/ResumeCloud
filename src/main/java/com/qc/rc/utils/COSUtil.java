@@ -82,6 +82,7 @@ public  class COSUtil {
             e.printStackTrace();
         } finally{
             // 关闭COS连接
+        	System.out.println("....6666");
             getCOSClient().shutdown();
         }
         return uploaded;
@@ -100,6 +101,8 @@ public  class COSUtil {
         req.setExpiration(expirationDate);
         URL downloadUrl = getCOSClient().generatePresignedUrl(req);
         String downloadUrlStr = downloadUrl.toString();
+        
+        getCOSClient().shutdown();
 
         return  downloadUrlStr;
     }

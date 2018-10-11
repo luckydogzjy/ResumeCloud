@@ -18,20 +18,6 @@ public class InterviewPojo extends Interview {
 		this.resume = resume;
 	}
 
-	
-
-	public InterviewPojo(String interviewId, String interviewResumeId, String interviewJob, Date interviewTime,
-			String interviewAssociateUsername, String interviewAssociatePhone, String interviewAddress,
-			String interviewInfo, Integer interviewStatus, String interviewRecodeInfo, String interviewCreateUser,
-			Date interviewCreateTime, String interviewUpdateUser, Date interviewUpdateTime, Integer interviewDeleteFlag,
-			Integer interviewUserId, Resume resume) {
-		super(interviewId, interviewResumeId, interviewJob, interviewTime, interviewAssociateUsername,
-				interviewAssociatePhone, interviewAddress, interviewInfo, interviewStatus, interviewRecodeInfo,
-				interviewCreateUser, interviewCreateTime, interviewUpdateUser, interviewUpdateTime, interviewDeleteFlag,
-				interviewUserId);
-		this.resume = resume;
-	}
-
 	public InterviewPojo() {
 
 	}

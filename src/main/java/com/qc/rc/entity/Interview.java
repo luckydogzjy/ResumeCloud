@@ -2,6 +2,7 @@ package com.qc.rc.entity;
 
 import java.util.Date;
 
+import com.qc.rc.common.Util;
 
 public class Interview {
 	private String interviewId;//id
@@ -19,7 +20,7 @@ public class Interview {
 	private String interviewUpdateUser;//面试更新人
 	private Date interviewUpdateTime;//面试更新时间
 	private Integer interviewDeleteFlag;//删除标志
-	private Integer interviewUserId;//userid
+	private String interviewUserId;//userid
 	
 	
 	public String getInterviewId() {
@@ -112,17 +113,17 @@ public class Interview {
 	public void setInterviewDeleteFlag(Integer interviewDeleteFlag) {
 		this.interviewDeleteFlag = interviewDeleteFlag;
 	}
-	public Integer getInterviewUserId() {
+	public String getInterviewUserId() {
 		return interviewUserId;
 	}
-	public void setInterviewUserId(Integer interviewUserId) {
+	public void setInterviewUserId(String interviewUserId) {
 		this.interviewUserId = interviewUserId;
 	}
 	public Interview(String interviewId, String interviewResumeId, String interviewJob, Date interviewTime,
 			String interviewAssociateUsername, String interviewAssociatePhone, String interviewAddress,
 			String interviewInfo, Integer interviewStatus, String interviewRecodeInfo, String interviewCreateUser,
 			Date interviewCreateTime, String interviewUpdateUser, Date interviewUpdateTime, Integer interviewDeleteFlag,
-			Integer interviewUserId) {
+			String interviewUserId) {
 		super();
 		this.interviewId = interviewId;
 		this.interviewResumeId = interviewResumeId;

@@ -11,5 +11,5 @@ public interface UserResumeMapper {
 	int SharingInsertUserResume(UserResume userResume);
 	
 	//将共享标志位赋值为0
-		void updateFlagByResumeId(@Param("resumeId") String resumeId);
+	void updateFlagByResumeId(@Param("resumeId") String resumeId);
 }

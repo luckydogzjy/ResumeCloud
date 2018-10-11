@@ -142,9 +142,7 @@
 										</tr>
 										<tr>
 											<td>
-												<textarea id="selfevaluation" name="resumeSelfEvaluation" style="width: 180px;" onkeyup="check(this);" onchange="check(this);">
-     		
-  				</textarea></td>
+												<textarea id="selfevaluation" name="resumeSelfEvaluation" style="width: 180px;" onkeyup="check(this);" onchange="check(this);"></textarea></td>
 
 										</tr>
 
@@ -152,8 +150,7 @@
 											<td><span>工作经验</span></td>
 											<tr>
 												<td>
-													<textarea id="experiencetext" name="resumeWorkExperience" style="width: 180px;" onkeyup="check(this);" onchange="check(this);">
-  				</textarea></td>
+													<textarea id="experiencetext" name="resumeWorkExperience" style="width: 180px;" onkeyup="check(this);" onchange="check(this);"></textarea></td>
 											</tr>
 										</tr>
 

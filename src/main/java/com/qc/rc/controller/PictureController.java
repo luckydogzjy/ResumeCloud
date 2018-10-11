@@ -25,7 +25,7 @@ public class PictureController {
 	@ResponseBody
     public  ServerResponse upload(@RequestParam(value="upload_file" ,required = false) MultipartFile file,HttpServletRequest request){
        String path =request.getSession().getServletContext().getRealPath("upload");
-//       String msg = iPictureService.upload(file,path);
+       String msg = iPictureService.upload(file,path);
        return ServerResponse.createBySuccess("成功");
        
     }

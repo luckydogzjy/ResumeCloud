@@ -117,7 +117,7 @@ public class SharingCenterServiceImpl implements SharingCenterService {
 	
 	}
 
-
+	@Override
 	public void cancelSharingResume(String scId,String scResumeId) throws Exception{
 		//将deleteFlag赋值为1
 		sharingCenterMapper.cancelSharingResume(scId);

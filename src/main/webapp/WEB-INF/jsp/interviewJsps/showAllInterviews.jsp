@@ -7,13 +7,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<link rel="stylesheet" type="text/css" href="../css/demo.css" />
-<script src="../My97DatePicker/WdatePicker.js" type="text/javascript"></script>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>显示interviews</title>
 		<link rel="stylesheet" type="text/css" href="../css/interviewCss/selectinterview.css"/>
 
 	</head>
+	<script src="../My97DatePicker/WdatePicker.js" type="text/javascript"></script>
 	<script src="../My97DatePicker/WdatePicker.js" type="text/javascript"></script>
 	<script src="../js/jquery-2.1.1.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
@@ -22,24 +22,31 @@
 			$("#actionform").submit();
 		}
 		function resert(){
-			location.href="${pageContext.request.contextPath}/Interview/selectByCondition.do?pageNum=1";
+			location.href="${pageContext.request.contextPath}/Interview/selectByCondition.do";
 		}
+		
 		function sub(){
 			$("#actionform").submit();
 		}
-		function del(interviewId){
+		function del(index){
 		var msg = "确认删除？";
 		if(confirm(msg) == true){
-			document.getElementById(interviewId).parentElement.remove();
+			var interviewId=document.getElementById(index).value;
+			var delid="index"+index;
+			document.getElementById(delid).parentElement.remove(); 
 			$.ajax({
 				type:'post',
 			    url:'${pageContext.request.contextPath}/Interview/deleteById.do',	
 				data:'id='+interviewId,
 				success:function(data){
 					if(data == 1){
-						
+						var t = ${pageInfo.total}-1;
+						var msg = "共检索到"+t+"条数据";
+						$("#total").html(msg);
 						alert("删除成功");
-						
+					}
+					else{
+						alert("删除失败");
 					}
 				} 
 			});
@@ -91,7 +98,11 @@
 							<div id="r">
 								<input type="button" id="reset_button" value="重置" onclick="resert()"/>
 							</div>
-
+							<div id="rili">
+								<a href="${pageContext.request.contextPath}/Interview/richengPage.do">
+									<img id="liu-pic-rili" src="${pageContext.request.contextPath}/img/Liu_pic_rili.png">
+								</a>
+							</div>
 							<div id="table">
 								<table cellSpacing="5" cellPadding="4">
 									<tr>
@@ -107,13 +118,20 @@
 										<th>
 											<font size="2">面试时间</font>
 											<select name="sort" onchange="sub()">
-											<c:if test = "${sort == 1}">
+											<c:if test = "${sort == 1}">													
 													<option value="1">↑</option>
+													<option value="-1">默认</option>
+													<option value="0">↓</option>												
+											</c:if>
+											<c:if test = "${sort == -1}">
+													<option value="-1">默认</option>													
+													<option value="1">↑</option>	
 													<option value="0">↓</option>												
 											</c:if>
 											<c:if test = "${sort == 0}">												
 													<option value="0">↓</option>
-													<option value="1">↑</option>	
+													<option value="-1">默认</option>
+													<option value="1">↑</option>														
 											</c:if>
 											</select>
 										</th>
@@ -151,11 +169,11 @@
 										</th>
 										<th colspan="2">操作</th>
 									</tr>
-									<c:forEach items="${pageInfo.list}" var="interview">
+									<c:forEach items="${pageInfo.list}" var="interview" begin="0" step="1" varStatus="status" >
 										<tr>
 											<td class="normal">
 												<font size="2">
-													<a href="">${interview.resume.resumeName}</a>
+													<a href="showInterviewDetail.do?InterviewId=${interview.interviewId}">${interview.resume.resumeName}</a>
 												</font>
 											</td>
 											<td class="normal">
@@ -175,10 +193,12 @@
 													<c:if test="${interview.interviewStatus==3}">失败</c:if>
 												</font>
 											</td>
-											<td class="right" id="${interview.interviewId}">
-												<a href="updateById.do?id=${interview.interviewId}"><input type="button" value="修改" id="updateBtn" /></a>
-												<input type="button" value="删除" id="deleteBtn" onclick="del(${interview.interviewId})" />
-												<a href=""><input type="button" value="面试结果" id="interviewBtn" /></a>
+											<td class="right" id="index${status.index}">
+												<input type="hidden" value ="${interview.interviewId}" id="${status.index}">
+												<a href="${pageContext.request.contextPath}/Interview/showInterviewDetailUpdate.do?InterviewId=${interview.interviewId}"><input type="button" value="修改" id="updateBtn" /></a>
+												<input type="button" value="删除" id="deleteBtn" onclick="del(${status.index})" />
+												<a href="resumeInterviews.do?resumeId=${interview.resume.resumeId}"><input type="button" value="面试结果" id="interviewBtn" /></a>
+																			
 											</td>
 										</tr>
 
@@ -190,7 +210,7 @@
 								
 							
 							<div id="message">
-								<span class="color :lightblue">
+								<span id ="total" class="color :lightblue">
 								共检索到${pageInfo.total}条数据
 								</span>
 							</div>

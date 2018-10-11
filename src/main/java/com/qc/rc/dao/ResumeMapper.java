@@ -27,14 +27,17 @@ public interface ResumeMapper {
 	
 	//ling
 	int addResume(Resume resume);
-
-
-
+	
+	
+	
 	/*    zhang   */
 	int insertResume(Resume resume);
 
 	int updateResume(Resume resume);
 
 	Resume selectResumeById(String resumeId);
+	
+	//liu
+	int updateResumePhone(@Param("resumeId")String resumeId,@Param("resumePhone")String resumePhone);
 	
 }

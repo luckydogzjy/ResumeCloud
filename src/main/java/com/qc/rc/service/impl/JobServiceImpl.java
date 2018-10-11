@@ -1,10 +1,17 @@
 package com.qc.rc.service.impl;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.qc.rc.common.Const;
+import com.qc.rc.common.PageMessage;
 import com.qc.rc.dao.JobMapper;
 import com.qc.rc.entity.Job;
 import com.qc.rc.service.JobService;
@@ -16,57 +23,76 @@ public class JobServiceImpl implements JobService {
 	
 	@Override
 	public boolean jobAdd(Job job) {
-		// TODO Auto-generated method stub
-	
-		return JobMapper.jobAdd(job)==1?true:false;
+		
+		return JobMapper.jobAdd(job)==Const.OPEN?true:false;
 	}
 
 	@Override
 	public boolean jobUpdate(Job job) {
-		// TODO Auto-generated method stub
 		
-		return JobMapper.jobUpdate(job)==1?true:false;
+		return JobMapper.jobUpdate(job)==Const.OPEN?true:false;
 	}
 
 	@Override
 	public boolean jobDelete(Integer jobId) {
-		// TODO Auto-generated method stub
 		
-		return JobMapper.jobDelete(jobId)==1?true:false;
+		return JobMapper.jobDelete(jobId)==Const.OPEN?true:false;
 	}
 
 	@Override
 	public boolean jobChangeStatus(Integer jobId, Integer jobStatus) {
-		// TODO Auto-generated method stub
 		
 		int ok=-1;
 		
 		switch (jobStatus) {
 		case 1:
-			ok=JobMapper.jobChangeStatus(jobId,0);
+			ok=JobMapper.jobChangeStatus(jobId,Const.CLOSE);
 			break;
 		case 0:
-			ok=JobMapper.jobChangeStatus(jobId,1);
+			ok=JobMapper.jobChangeStatus(jobId,Const.OPEN);
 			break;
 		default:
 			break;
 		}
 		
-		return ok==1?true:false;	
+		return ok==Const.OPEN?true:false;	
 	}
 
 	@Override
-	public List<Job> jobGetByName(Integer userId,String jobName) {
-		// TODO Auto-generated method stub
+	public Map<String, Object> jobGetByName(String userId,String jobName,Integer page) {
 		
-		return JobMapper.jobGetByName(userId,jobName);
+		for (Job j : JobMapper.jobGetByName(userId,jobName)) {
+			if (new Date().compareTo(j.getJOB_END_TIME())>Const.CLOSE) {
+				JobMapper.jobChangeStatus(j.getJOB_ID(), Const.CLOSE);
+			}
+		}
+		Map<String, Object> map = new HashMap<>();
+		PageHelper.startPage(page, PageMessage.JOBPAGESIZE);
+		List<Job> newjob = JobMapper.jobGetByName(userId,jobName);	
+		
+		//System.out.println("111"+userId);
+		//System.out.println("222"+jobName);
+		//System.out.println("999"+newjob.size());
+		
+		PageInfo<Job> pageJob = new PageInfo<Job>(newjob);	
+		map.put("job", newjob);
+		map.put("page", pageJob);
+		
+		
+		return  map;
 	}
 
 	@Override
 	public Job jobGetOne(Integer jobId) {
-		// TODO Auto-generated method stub
 		
 		return JobMapper.jobGetOne(jobId);
+	}
+
+	@Override
+	public boolean jobStatusOpen(Integer jobId, Date jobEndTime) {
+		
+		return JobMapper.jobStatusOpen(jobId, jobEndTime)==Const.OPEN?true:false;
+		
 	}
 
 	

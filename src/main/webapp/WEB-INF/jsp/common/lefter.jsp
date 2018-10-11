@@ -30,7 +30,7 @@
 				<div id="left-item-job" class="left-item">
 					<div class="left-item-box">
 					<img class="left-item-pic" src="${pageContext.request.contextPath}/img/u12.png" />
-					<a class="left-item-a" href="#">职位管理</a>
+					<a class="left-item-a" href="${pageContext.request.contextPath}/JobManage.do">职位管理</a>
 					</div>
 				</div>
 
