@@ -30,6 +30,7 @@ import com.qc.rc.entity.pojo.InterviewPojo;
 import com.qc.rc.entity.pojo.ResumeInterviews;
 import com.qc.rc.entity.pojoView.InterviewPojoView;
 import com.qc.rc.service.InterviewService;
+import com.qc.rc.service.PersonalService;
 import com.qc.rc.service.ResumeService;
 import com.qc.rc.utils.DateUtil;
 
@@ -44,9 +45,8 @@ public class InterviewController {
 	@Autowired 
 	private ResumeService resumeService;
 	
-	private static User user = GetUser.getUser();
-	
-	
+	@Autowired
+	private PersonalService personalService;
 	/**
 	 * 查询相关面试安排
 	 * @param pageNum
@@ -62,14 +62,11 @@ public class InterviewController {
 			String interviewJob,String startTime,String overTime,String sort,String status,HttpServletRequest request,HttpSession session){
 		Map<String,Object> model = new HashMap<String,Object>();
 		try {
-/*			User user = (User)session.getAttribute("user");
+			User user = (User)request.getSession().getAttribute("rcuser");
+			//如果session失效或取不到user 转发到登录
 			if (user == null) {
-				logger.debug("从session里找不到user");
-//				session里的user失效，跳转登录页面
-//				return new ModelAndView("redirect:/",model);
-				user.setUserId(1001);
-				System.out.println(user.getUserId());
-			}*/
+				return new ModelAndView("redirect:/gologin1.action");
+			}
 			Integer pn = 1;
 			Integer st = -1;
 			Integer sta = 0;
@@ -131,14 +128,22 @@ public class InterviewController {
 	public ModelAndView addNewInterview(String resumeId,HttpServletRequest request){
 		Map<String,Object> model = new HashMap<String,Object>();
 		try {
+			User user = (User)request.getSession().getAttribute("rcuser");
+			//如果session失效或取不到user 转发到登录
+			if (user == null) {
+				return new ModelAndView("redirect:/gologin1.action");
+			}
+			String company = personalService.getUserInfo(user.getUserId()).get(0).getUserCompany();
 			if (StringUtils.isNotBlank(resumeId)) {
 				Resume resume =  resumeService.getResumeById(resumeId);
 				model.put("resume", resume);
+				model.put("company", company);
 				return new ModelAndView("interviewJsps/addnewinterview",model);
 	
 			}else {
 
 //				没有resumeId 转到添加临时添加页面
+				model.put("company", company);
 				return new ModelAndView("interviewJsps/addnewTempinterview",model);
 			}
 		} catch (NumberFormatException e) {
@@ -291,7 +296,11 @@ public class InterviewController {
 			String interviewMessage,String ism,HttpServletRequest request){
 		Map<String,Object> model = new HashMap<String,Object>();
 		try {
-//			临时设置user  应从缓存中得到数据
+			User user = (User)request.getSession().getAttribute("rcuser");
+			//如果session失效或取不到user 转发到登录
+			if (user == null) {
+				return new ModelAndView("redirect:/gologin1.action");
+			}
 			
 			String errorMsg = "";
 
@@ -421,7 +430,12 @@ public class InterviewController {
 	 */
 	@RequestMapping("deleteById.do")
 	@ResponseBody
-	public Integer deleteById(String id){
+	public Integer deleteById(String id,HttpServletRequest request){
+		User user = (User)request.getSession().getAttribute("rcuser");
+		//如果session失效或取不到user 转发到登录
+		if (user == null) {
+			return -2;
+		}
 		Integer msg = -1;
 		if (StringUtils.isBlank(id)) {
 			return msg;
@@ -437,9 +451,15 @@ public class InterviewController {
 	 *@return 
 	 */
 	@RequestMapping("resumeInterviews.do")
-	public ModelAndView getResumeInterviewsByRId(String resumeId){
+	public ModelAndView getResumeInterviewsByRId(String resumeId,HttpServletRequest request){
+		
 		Map<String,Object> model = new HashMap<String,Object>();
 		try {
+			User user = (User)request.getSession().getAttribute("rcuser");
+			//如果session失效或取不到user 转发到登录
+			if (user == null) {
+				return new ModelAndView("redirect:/gologin1.action");
+			}
 			if(StringUtils.isBlank(resumeId)){
 				model.put("message", "resumeId为空");
 				return new ModelAndView("interviewJsps/error",model);
@@ -464,11 +484,16 @@ public class InterviewController {
 	 *	更新面试记录 
 	 *@param interviewId:面试id
 	 *@param recodeInfo:面试记录
-	 *@return 1成功,-1或其他失败
+	 *@return -2session失效,1成功,-1或其他失败
 	 */
 	@RequestMapping("updateRecodeInfo.do") 
 	@ResponseBody
-	public Integer updateRecodeInfo(String interviewId,String recodeInfo){ 
+	public Integer updateRecodeInfo(String interviewId,String recodeInfo,HttpServletRequest request){ 
+		User user = (User)request.getSession().getAttribute("rcuser");
+		//如果session失效或取不到user 转发到登录
+		if (user == null) {
+			return -2;
+		}
 		Integer msg = -1;
 		if (StringUtils.isNotBlank(interviewId)) { 
 			msg = iInterviewService.updateInteviewRecodeInfo(recodeInfo, interviewId);	
@@ -484,8 +509,12 @@ public class InterviewController {
 	 * @return
 	 */
 	@RequestMapping("showInterviewDetail.do")
-	public ModelAndView getInterviewByResumeId(String InterviewId){
-		
+	public ModelAndView getInterviewByResumeId(String InterviewId,HttpServletRequest request){
+		User user = (User)request.getSession().getAttribute("rcuser");
+		//如果session失效或取不到user 转发到登录
+		if (user == null) {
+			return new ModelAndView("redirect:/gologin1.action");
+		}
 		Map<String,Object> model = new HashMap<String,Object>();
 		ServerResponse<InterviewPojo> interviewPojo = iInterviewService.getInterviewByInterviewId(InterviewId);
 		model.put("interviewPojo", interviewPojo.getData());
@@ -498,8 +527,12 @@ public class InterviewController {
 	 * @return
 	 */
 	@RequestMapping(value="showInterviewDetailUpdate.do",method = RequestMethod.GET)
-	public ModelAndView getInterviewByResumeIdUpdate(String InterviewId){
-		
+	public ModelAndView getInterviewByResumeIdUpdate(String InterviewId,HttpServletRequest request){
+		User user = (User)request.getSession().getAttribute("rcuser");
+		//如果session失效或取不到user 转发到登录
+		if (user == null) {
+			return new ModelAndView("redirect:/gologin1.action");
+		}
 		Map<String,Object> model = new HashMap<String,Object>();
 		ServerResponse<InterviewPojo> interviewPojo = iInterviewService.getInterviewByInterviewId(InterviewId);
 		model.put("interviewPojo", interviewPojo.getData());
@@ -515,9 +548,15 @@ public class InterviewController {
 	 * @return
 	 */
 	@RequestMapping(value="updateInterviewDetail.do",method = RequestMethod.POST)
-	public ModelAndView updateInterviewsByResumeId(InterviewPojo interviewPojo,String StringinterviewTime,String ResumeId,String resumePhone){
+	public ModelAndView updateInterviewsByResumeId(InterviewPojo interviewPojo,String StringinterviewTime,String ResumeId,String resumePhone,HttpServletRequest request){
+		
 		Map<String,Object> model = new HashMap<String,Object>();
 		try{
+			User user = (User)request.getSession().getAttribute("rcuser");
+			//如果session失效或取不到user 转发到登录
+			if (user == null) {
+				return new ModelAndView("redirect:/gologin1.action");
+			}
 			//判断简历手机号空
 			if(StringUtils.isBlank(resumePhone)){
 				logger.info("ResumePhone为空");
@@ -579,7 +618,12 @@ public class InterviewController {
 	 * @return
 	 */
 	@RequestMapping(value="richengPage.do",method = RequestMethod.GET)
-	public ModelAndView richengPage(){
+	public ModelAndView richengPage(HttpServletRequest request){
+		User user = (User)request.getSession().getAttribute("rcuser");
+		//如果session失效或取不到user 转发到登录
+		if (user == null) {
+			return new ModelAndView("redirect:/gologin1.action");
+		}
 		return new ModelAndView("interviewJsps/IVricheng");
 	}
 }

@@ -66,7 +66,7 @@
 						<div id="body">
 
 							<form action="${pageContext.request.contextPath }/Interview/newInterview.do" onsubmit="return formcheck()">
-								<textarea id="msg" name="interviewMessage">{{username}} 您好！&#13;&#10 ${user.userCompany}公司提醒您&#13;&#10请携带简历于 {{interviewTime}}  参加面试 &#13;&#10面试职位:{{interviewJob}}&#13;&#10地址:{{interviewAddress}}&#13;&#10联系人:{{interviewAssociateUsername}}&#13;&#10手机号:{{interviewAssociatePhone}}</textarea>
+								<textarea id="msg" name="interviewMessage">{{username}} 您好！&#13;&#10${company}公司提醒您&#13;&#10请携带简历于 {{interviewTime}}  参加面试 &#13;&#10面试职位:{{interviewJob}}&#13;&#10地址:{{interviewAddress}}&#13;&#10联系人:{{interviewAssociateUsername}}&#13;&#10手机号:{{interviewAssociatePhone}}</textarea>
 								<input type="button" id="jscopy" value="点我复制信息" onclick="copy()" />
 								<input type="hidden" name="resumeId" id="resumeId" value="${resume.resumeId}" />
 								<input type="hidden" name="resumePhone" id="resumePhone" value="${resume.resumePhone}" />
