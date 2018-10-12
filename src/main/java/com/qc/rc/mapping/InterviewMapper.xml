@@ -183,7 +183,7 @@
 		    i.INTERVIEW_INFO = #{interviewInfo},
 		    i.INTERVIEW_STATUS = #{interviewStatus},
 		    i.INTERVIEW_UPDATE_TIME = sysdate,
-		    i.INTERVIEW_UPDATE_USER = 'jayne'
+		    i.INTERVIEW_UPDATE_USER = #{interviewUpdateUser}
 		where i.INTERVIEW_ID = #{interviewId}
   	</update>
   	

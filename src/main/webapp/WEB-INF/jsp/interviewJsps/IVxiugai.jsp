@@ -14,7 +14,7 @@
 	<script src="${pageContext.request.contextPath}/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
 	<script type="text/javascript">
 			var isok = true;
-			
+
 			function isPhone(phone){
 			    var info = document.getElementById("isphone1");	    
 			    var RegCellPhone = /^(1)([0-9]{10})?$/;

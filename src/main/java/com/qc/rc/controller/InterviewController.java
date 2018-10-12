@@ -601,13 +601,11 @@ public class InterviewController {
 	 */
 	@RequestMapping(value="selectAllInterviews.do",method = RequestMethod.GET)
 	@ResponseBody
-	public List<InterviewPojoView> selectAllInterviews(){
+	public List<InterviewPojoView> selectAllInterviews(HttpSession session){
 		
-		logger.info("hello log4j");
-		//TODO user登录验证，userId获取
-		String userId ="1b786bc41114f67ae059cea5f1789d";
+		User user = (User) session.getAttribute("rcuser");
 		
-		ServerResponse<List<InterviewPojoView>> InterviewPojoViews = iInterviewService.selectAllInterviews(userId);
+		ServerResponse<List<InterviewPojoView>> InterviewPojoViews = iInterviewService.selectAllInterviews(user.getUserId());
 		
 		return InterviewPojoViews.getData();
 		
