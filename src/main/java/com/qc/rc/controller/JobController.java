@@ -109,7 +109,7 @@ public class JobController {
 			return new ModelAndView("redirect:/JobManage.do");
 			
 		}else
-		
+			//错误页面
 			return null;	
 	}
 	/**
@@ -163,7 +163,7 @@ public class JobController {
 			return new ModelAndView("redirect:/JobManage.do");
 			
 		}else
-		
+			//错误页面
 			return null;
 	}
 	/**
@@ -180,7 +180,7 @@ public class JobController {
 			return new ModelAndView("redirect:/JobManage.do");
 			
 		}else
-			
+			//错误页面
 			return null;
 	}
 	/**
@@ -198,7 +198,7 @@ public class JobController {
 			return new ModelAndView("redirect:/JobManage.do");
 			
 		}else
-			
+			//错误页面
 			return null;
 	}
 	/**
