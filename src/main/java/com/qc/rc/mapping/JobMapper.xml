@@ -3,13 +3,19 @@
 <mapper namespace="com.qc.rc.dao.JobMapper">
  	
  	<insert id="jobAdd" parameterType="com.qc.rc.entity.Job">
-  		insert into RC_JOB(JOB_ID,JOB_USER_ID,JOB_NAME,JOB_COUNT,JOB_SALARY,JOB_INTRODUCTION,JOB_CONDITION,JOB_END_TIME) 
-  		values(#{JOB_ID},#{JOB_USER_ID},#{JOB_NAME},#{JOB_COUNT},#{JOB_SALARY},#{JOB_INTRODUCTION},#{JOB_CONDITION},#{JOB_END_TIME})
+  		insert into RC_JOB(
+  			JOB_ID,JOB_USER_ID,JOB_NAME,JOB_COUNT,JOB_SALARY,JOB_INTRODUCTION,JOB_CONDITION,JOB_END_TIME) 
+  		values(
+  			#{JOB_ID},#{JOB_USER_ID},#{JOB_NAME},#{JOB_COUNT},#{JOB_SALARY},#{JOB_INTRODUCTION},#{JOB_CONDITION},#{JOB_END_TIME})
   	</insert>
   	
   	<update id="jobUpdate" parameterType="com.qc.rc.entity.Job">
-  		update RC_JOB set JOB_COUNT = #{JOB_COUNT},JOB_SALARY = #{JOB_SALARY},JOB_END_TIME = #{JOB_END_TIME},
-  		JOB_INTRODUCTION = #{JOB_INTRODUCTION},JOB_CONDITION = #{JOB_CONDITION} 
+  		update RC_JOB set 
+	  		JOB_COUNT = #{JOB_COUNT},
+	  		JOB_SALARY = #{JOB_SALARY},
+	  		JOB_END_TIME = #{JOB_END_TIME},
+	  		JOB_INTRODUCTION = #{JOB_INTRODUCTION},
+	  		JOB_CONDITION = #{JOB_CONDITION} 
   		where JOB_ID = #{JOB_ID}
   	</update>
   	
@@ -19,22 +25,29 @@
   	</delete>
   	
   	<update id="jobChangeStatus">
-  		update RC_JOB set JOB_STATUS = #{jobStatus} 
+  		update RC_JOB set 
+  			JOB_STATUS = #{jobStatus} 
   		where JOB_ID = #{jobId}
   	</update>
   	
   	<select id="jobGetByName" resultType="com.qc.rc.entity.Job">
-  		select JOB_ID,JOB_NAME,JOB_COUNT,JOB_END_TIME,JOB_STATUS from RC_JOB 
-  		where JOB_USER_ID = #{userId} and JOB_NAME like '%${name}%' order by JOB_STATUS DESC,JOB_END_TIME 
+  		select 
+  			JOB_ID,JOB_NAME,JOB_COUNT,JOB_END_TIME,JOB_STATUS 
+  		from RC_JOB 
+  		where JOB_USER_ID = #{userId} and JOB_NAME like '%${name}%' 
+  		order by JOB_STATUS DESC,JOB_END_TIME 
   	</select>
   	
   	<select id="jobGetOne" resultType="com.qc.rc.entity.Job">
-  		select JOB_ID,JOB_NAME,JOB_COUNT,JOB_END_TIME,JOB_STATUS,JOB_SALARY,JOB_CREATE_TIME,JOB_INTRODUCTION,JOB_CONDITION from RC_JOB 
+  		select 
+  			JOB_ID,JOB_NAME,JOB_COUNT,JOB_END_TIME,JOB_STATUS,JOB_SALARY,JOB_CREATE_TIME,JOB_INTRODUCTION,JOB_CONDITION 
+  		from RC_JOB 
   		where JOB_ID = #{jobId}
   	</select>
   	
   	<update id="jobStatusOpen">
-  		update RC_JOB set JOB_END_TIME = #{endTime} 
+  		update RC_JOB set 
+  			JOB_END_TIME = #{endTime} 
   		where JOB_ID = #{jobId}
   	</update>
 </mapper>
