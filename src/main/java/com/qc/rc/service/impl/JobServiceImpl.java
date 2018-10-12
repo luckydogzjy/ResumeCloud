@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +17,16 @@ import com.qc.rc.dao.JobMapper;
 import com.qc.rc.entity.Job;
 import com.qc.rc.service.JobService;
 
+
 @Service
 public class JobServiceImpl implements JobService {
+	
+	Logger logging = Logger.getLogger(JobServiceImpl.class);
+	
 	@Autowired
 	private JobMapper JobMapper;
+	
+	
 	
 	@Override
 	public boolean jobAdd(Job job) {
@@ -42,16 +49,19 @@ public class JobServiceImpl implements JobService {
 	@Override
 	public boolean jobChangeStatus(String jobId, Integer jobStatus) {
 		
-		int ok=-1;
+		int ok=0;
 		
 		switch (jobStatus) {
-		case 1:
+		//当前为开启状态
+		case Const.OPEN:
 			ok=JobMapper.jobChangeStatus(jobId,Const.CLOSE);
 			break;
-		case 0:
+		//当前为关闭状态
+		case Const.CLOSE:
 			ok=JobMapper.jobChangeStatus(jobId,Const.OPEN);
 			break;
 		default:
+			logging.error("职位状态异常");
 			break;
 		}
 		
@@ -70,14 +80,9 @@ public class JobServiceImpl implements JobService {
 		PageHelper.startPage(page, PageMessage.JOBPAGESIZE);
 		List<Job> newjob = JobMapper.jobGetByName(userId,jobName);	
 		
-		//System.out.println("111"+userId);
-		//System.out.println("222"+jobName);
-		//System.out.println("999"+newjob.size());
-		
 		PageInfo<Job> pageJob = new PageInfo<Job>(newjob);	
 		map.put("job", newjob);
 		map.put("page", pageJob);
-		
 		
 		return  map;
 	}
