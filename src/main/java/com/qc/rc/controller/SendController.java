@@ -17,6 +17,8 @@ import com.qc.rc.common.GetUuid;
 import com.qc.rc.common.MessageSender;
 import com.qc.rc.entity.User;
 import com.qc.rc.service.UserService;
+import com.qc.rc.utils.DESUtil;
+
 
 
 //查找是否被注册，发送短信 ，注册
@@ -133,7 +135,7 @@ public class SendController {
 				//System.out.println(id);
 				user.setUserId(id);
 				user.setUserPhone(phone);
-				user.setUserPassword(password);
+				user.setUserPassword(DESUtil.getInstance().encode(password));
 				//调用service注册接口
 				userService.userRegister(user);
 				model.addAttribute("phone", phone);
@@ -155,8 +157,7 @@ public class SendController {
 		
 		//System.out.println(inputphone);
 		user = userService.findUserByPhone(inputphone);
-		if(user != null){//查找是否被注册
-			
+		if(user != null){//查找是否被注册    
 			m = MessageSender.batchSend(inputphone); //调用发送短信接口  
 			int  result = Integer.parseInt(m.get("result")) ;   //获取到result值  
 			if (result == HttpStatus.SC_OK) { 
