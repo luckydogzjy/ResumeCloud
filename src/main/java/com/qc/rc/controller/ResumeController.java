@@ -183,6 +183,8 @@ public class ResumeController {
 	public ModelAndView resume_add(@RequestParam(value = "upload_file", required = false) MultipartFile file,Resume resume, HttpServletRequest request, String resumeBirthdayString) {
 		Map<String, Object> model = new HashMap<String, Object>();
 		try {
+			
+			User user = (User)request.getSession().getAttribute("rcuser");
 
 			resume.setResumeSelfEvaluation(resume.getResumeSelfEvaluation().replaceAll(" ", ""));
 			resume.setResumeWorkExperience(resume.getResumeWorkExperience().replaceAll(" ", ""));
@@ -201,10 +203,8 @@ public class ResumeController {
 			}
 
 			resume.setResumeBirthday(date_Birthday);
-			// request.getSession().getAttribute("username");
-			// request.getSession().setAttribute("person", person);
 			// 需要从session中取
-			resume.setResumeCreateUser("zhang");
+			resume.setResumeCreateUser(user.getUserName());
 			if (checkResumeInFo(resume)) {
 				// 插入到resume表中
 				int resultCount = resumeService.resumeAdd(resume);
@@ -218,9 +218,7 @@ public class ResumeController {
 				// 上传文件
 
 				String picId = getuuid32();
-				// request.getSession().getAttribute("userId");
-				// request.getSession().setAttribute("person", person);
-				String piccresteuser = "zhang";
+				String piccresteuser = user.getUserName();
 
 				if (file != null) {
 					String path = request.getSession().getServletContext().getRealPath("upload");
@@ -258,9 +256,7 @@ public class ResumeController {
 
 				String userResumeId = getuuid32();
 				// Session中取用户id
-				// String userId = "1b786bc41114f67ae059cea5f1789d";
-				String userId = GetUser.getUser().getUserId();
-				// request.getSession().getAttribute("userId");
+				String userId = user.getUserId();
 				// 插入到连接表
 				int result = resumeService.resumeAddResumeUser(userResumeId, userId, resumeId);
 				if (result == 0) {
@@ -311,7 +307,9 @@ public class ResumeController {
 	@RequestMapping(value="/resume_update_show.do",method=RequestMethod.GET)
 	public ModelAndView resumeUpdateShow(String resume_id,HttpServletRequest request){		
 		Map<String,Object> model = new HashMap<String,Object>();
-		try{		
+		try{
+			
+			
 			ResumePojo resumePojo = resumeService.getResumeDetailsById(resume_id);		
 			if(resumePojo != null){
 				for (int i=0;i<resumePojo.getlPics().size();i++){
@@ -349,6 +347,7 @@ public class ResumeController {
 			Resume resume, Pic pic, String resumeBirthdayString, String changeway, HttpServletRequest request) {
 
 		Map<String, Object> model = new HashMap<String, Object>();
+		User user = (User)request.getSession().getAttribute("rcuser");
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");// 小写的mm表示的是分钟
 		java.util.Date date_Birthday;
@@ -360,8 +359,7 @@ public class ResumeController {
 		}
 
 		resume.setResumeBirthday(date_Birthday);
-		// request.getSession().getAttribute("userName");
-		resume.setResumeUpdateUser("zhang");
+		resume.setResumeUpdateUser(user.getUserName());
 		resume.setResumeSelfEvaluation(resume.getResumeSelfEvaluation().replaceAll(" ", ""));
 		resume.setResumeWorkExperience(resume.getResumeWorkExperience().replaceAll(" ", ""));
 
@@ -391,17 +389,15 @@ public class ResumeController {
 
 						pic.setpId(getuuid32());
 						pic.setpResumeId(resume.getResumeId());
-						// request.getSession().getAttribute("userName");
-						pic.setpUpdateUser("zhang");
-						pic.setpCreateUser("zhang");
+						pic.setpUpdateUser(user.getUserName());
+						pic.setpCreateUser(user.getUserName());
 						pic.setpPic(filepath);
 
 						if (changeway.equals("替换")) {
 							String picId = getuuid32();
-							// request.getSession().getAttribute("userName");
-							String piccresteuser = "username";
+							String piccresteuser = user.getUserName();
 
-							int deletepicresult = resumeService.deletePicById(resume.getResumeId());
+							resumeService.deletePicById(resume.getResumeId());
 
 							int picaddresult = resumeService.resumeAddPic(picId, resume.getResumeId(), piccresteuser,
 									filepath);
@@ -414,8 +410,7 @@ public class ResumeController {
 						} else if (changeway.equals("新增")) {
 
 							String picId = getuuid32();
-							// request.getSession().getAttribute("userName");
-							String piccresteuser = "username";
+							String piccresteuser = user.getUserName();
 
 							int picaddresult = resumeService.resumeAddPic(picId, resume.getResumeId(), piccresteuser,
 									filepath);
@@ -434,7 +429,7 @@ public class ResumeController {
 					} else if (arr[1].equals("doc") || arr[1].equals("xls") || arr[1].equals("txt")|| arr[1].equals("docx") || arr[1].equals("xlsx")) {
 						String picId = getuuid32();
 						// session 中取
-						String piccresteuser = "zhang";
+						String piccresteuser = user.getUserName();
 						if (changeway.equals("新增")) {
 
 							int fileaddresult = resumeService.resumeAddfile(picId, resume.getResumeId(), piccresteuser,
@@ -445,7 +440,7 @@ public class ResumeController {
 							}
 						} else if (changeway.equals("替换")) {
 
-							int deletefileresult = resumeService.deleteFileById(resume.getResumeId());
+							resumeService.deleteFileById(resume.getResumeId());
 							int fileupdateresult = resumeService.resumeAddfile(picId, resume.getResumeId(),piccresteuser, filepath);
 							if (fileupdateresult == 0) {
 								model.put("msg", "更新简历信息时出错");
